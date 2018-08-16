@@ -7,6 +7,7 @@ const port = process.env.PORT || 5000;
 app.get('/api/hello', (req, res) => {
     res.send({ express: 'Hello From Express' });
 });
+
 if (process.env.NODE_ENV === 'production') {
 
     // Serve any static files
