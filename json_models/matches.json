@@ -1,0 +1,262 @@
+{
+    "unique_match_id": 123456,
+    "dota_match_id": 123456,
+    "game": {
+        "title": "DOTA2"
+    },
+    "timestamp": {
+        "start": 0,
+        "end": 12345678
+    },
+    "map": {
+        "map_name": "test",
+        "map_width": 1234,
+        "map_height": 1234,
+        "map_url": "http://"
+    },
+    "units": {
+        "all": [
+            "herokunkka",
+            "herovenomancer",
+            "herotinker",
+            "herolich",
+            "herojakiro",
+            "heroobsidiandestroyer",
+            "herokunkka",
+            "herobloodseeker",
+            "herofacelessvoid",
+            "heroearthshaker",
+            "heroomniknight"
+        ],
+        "groups": {
+            "radiant": [
+                "herokunkka",
+                "herovenomancer",
+                "herotinker",
+                "herolich",
+                "herojakiro"
+            ],
+            "dire": [
+                "heroobsidiandestroyer",
+                "herokunkka",
+                "herobloodseeker",
+                "herofacelessvoid",
+                "heroearthshaker",
+                "heroomniknight"
+            ]
+        }
+    },
+    "events": {
+        "all": [
+            "death",
+            "hero_kill",
+            "neutral_creep_kill",
+            "enemy_creep_kill",
+            "ally_creep_kill",
+            "roshan_kill",
+            "courier_kill",
+            "ward_kill",
+            "enemy_structure_kill",
+            "ally_structure_kill",
+            "damage_delivered",
+            "damage_received",
+            "heal_delivered",
+            "heal_received",
+            "modifier_add",
+            "modifier_remove",
+            "ability",
+            "item_used",
+            "purchase",
+            "xp",
+            "status_update"
+        ],
+        "categories": {
+            "death": {
+                "sub_categories": null,
+                "node_content": {
+                    "unit": "herokunkka",
+                    "linked_unit": "herovenomancer",
+                    "node_id": 123456,
+                    "linked_node_id": 654321,
+                    "x": 123456,
+                    "y": 123456
+                }
+            },
+            "hero_kill": {
+                "sub_categories": null,
+                "node_content": {
+                    "unit": "herokunkka",
+                    "linked_unit": "herovenomancer",
+                    "node_id": 123456,
+                    "linked_node_id": 654321,
+                    "x": 123456,
+                    "y": 123456
+                }
+            },
+            "creep_kill": {
+                "sub_categories": [
+                    "neutral_creep_kill",
+                    "enemy_creep_kill",
+                    "ally_creep_kill",
+                    "roshan_kill",
+                    "creep_hero_kill"
+                ],
+                "node_content": {
+                    "unit": "herokunkka",
+                    "linked_unit": "herovenomancer",
+                    "node_id": 123456,
+                    "linked_node_id": 654321,
+                    "x": 123456,
+                    "y": 123456
+                }
+            },
+            "npc_kill": {
+                "sub_categories": [
+                    "courier_kill",
+                    "summons_kill",
+                    "ward_kill"
+                ],
+                "node_content": {
+                    "unit": "herokunkka",
+                    "linked_unit": "herovenomancer",
+                    "node_id": 123456,
+                    "linked_node_id": 654321,
+                    "x": 123456,
+                    "y": 123456
+                }
+            },
+            "structure_kill": {
+                "sub_categories": [
+                    "enemy_structure_kill",
+                    "ally_structure_kill"
+                ],
+                "node_content": {
+                    "unit": "herokunkka",
+                    "linked_unit": "herovenomancer",
+                    "node_id": 123456,
+                    "linked_node_id": 654321,
+                    "x": 123456,
+                    "y": 123456
+                }
+            },
+            "damage_delivered": {
+                "sub_categories": null,
+                "node_content": {
+                    "unit": "herokunkka",
+                    "linked_unit": "herovenomancer",
+                    "node_id": 123456,
+                    "linked_node_id": 654321,
+                    "inflictor_name": "item",
+                    "damage_value": 123,
+                    "x": 123456,
+                    "y": 123456
+                }
+            },
+            "damage_received": {
+                "sub_categories": null,
+                "node_content": {
+                    "unit": "herokunkka",
+                    "linked_unit": "herovenomancer",
+                    "node_id": 123456,
+                    "linked_node_id": 654321,
+                    "inflictor_name": "item",
+                    "damage_value": 123,
+                    "x": 123456,
+                    "y": 123456
+                }
+            },
+            "heal_delivered": {
+                "sub_categories": null,
+                "node_content": {
+                    "unit": "herokunkka",
+                    "linked_unit": "herovenomancer",
+                    "node_id": 123456,
+                    "linked_node_id": 654321,
+                    "inflictor_name": "item",
+                    "heal_value": 123,
+                    "x": 123456,
+                    "y": 123456
+                }
+            },
+            "heal_received": {
+                "sub_categories": null,
+                "node_content": {
+                    "unit": "herokunkka",
+                    "linked_unit": "herovenomancer",
+                    "node_id": 123456,
+                    "linked_node_id": 654321,
+                    "inflictor_name": "item",
+                    "heal_value": 123,
+                    "x": 123456,
+                    "y": 123456
+                }
+            },
+            "modifier": {
+                "sub_categories": [
+                    "modifier_add",
+                    "modifier_remove"
+                ],
+                "node_content": {
+                    "unit": "herokunkka",
+                    "linked_unit": "herovenomancer",
+                    "node_id": 123456,
+                    "linked_node_id": 654321,
+                    "inflictor_name": "item",
+                    "x": 123456,
+                    "y": 123456
+                }
+            },
+            "ability": {
+                "sub_categories": null,
+                "node_content": {
+                    "source_name": "herovenomancer",
+                    "target_name": "herokunkka",
+                    "target_node": "unique_node_id",
+                    "inflictor_name": "item",
+                    "ability_level": 123,
+                    "toggle_value": "string",
+                    "x": 123456,
+                    "y": 123456
+                }
+            },
+            "item": {
+                "sub_categories": null,
+                "node_content": {
+                    "source_name": "herovenomancer",
+                    "inflictor_name": "item",
+                    "x": 123456,
+                    "y": 123456
+                }
+            },
+            "purchase": {
+                "source_name": "herovenomancer",
+                "node_content": {
+                    "purchased": "Thing",
+                    "x": 123456,
+                    "y": 123456
+                }
+            }
+        },
+        "unit_context": {
+            "all": [
+                "role",
+                "lane_efficiency",
+                "xp_per_minute",
+                "gold_per_minute",
+                "hero_kills",
+                "final_level",
+                "structure_kills"
+            ]
+        },
+        "node_context": {
+            "all": [
+                "Gold",
+                "XP",
+                "Health",
+                "Deaths",
+                "Kills",
+                "Items"
+            ]
+        }
+    }
+}

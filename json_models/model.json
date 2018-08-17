@@ -1,0 +1,66 @@
+{
+    "damage_delivered": {
+        "source_name": "herovenomancer",
+        "target_name": "herokunkka",
+        "target_node": "unique_node_id",
+        "inflictor_name": "item",
+        "attack_damage": 123
+    },
+    "damage_received": {
+        "source_name": "herokunkka",
+        "source_node": "unique_node_id",
+        "target_name": "herovenomancer",
+        "inflictor_name": "item",
+        "attack_damage": 123
+    },
+    "heal_delivered": {
+        "source_name": "herovenomancer",
+        "target_name": "herokunkka",
+        "target_node": "unique_node_id",
+        "inflictor_name": "item",
+        "heal_value": 123
+    },
+    "heal_received": {
+        "source_name": "herokunkka",
+        "source_node": "unique_node_id",
+        "target_name": "herovenomancer",
+        "inflictor_name": "item",
+        "heal_value": 123
+    },
+    "modifier_add": {
+        "source_name": "herovenomancer",
+        "target_name": "herokunkka",
+        "target_node": "unique_node_id",
+        "inflictor_name": "herolich"
+    },
+    "death": {
+        "source_name": "herokunkka",
+        "target_name": "herovenomancer",
+        "target_node": "unique_node_id"
+    },
+    "hero_kill": {
+        "source_name": "herovenomancer",
+        "target_name": "herokunkka",
+        "target_node": "unique_node_id"
+    },
+    "ability": {
+        "source_name": "herovenomancer",
+        "target_name": "herokunkka",
+        "target_node": "unique_node_id",
+        "inflictor_name": "item",
+        "ability_level": 123,
+        "toggle_value": "string"
+    },
+    "item": {
+        "source_name": "herovenomancer",
+        "inflictor_name": "item"
+    },
+    "xp": {
+        "source_name": "herovenomancer",
+        "value": 123
+    },
+    "purchase": {
+        "source_name": "herovenomancer",
+        "purchased": "Thing"
+    }
+}

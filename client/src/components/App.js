@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import Map from './Map.js';
 import Timeline from './Timeline.js';
+import EventSelection from './EventSelection.js';
 import MapSelection from './MapSelection.js';
 import HeroSelection from './HeroSelection.js';
 import EventData from './EventData.js';
@@ -43,10 +44,11 @@ class App extends Component {
                             <Heatmap />
                             <Label />
                         </div>
-                        <div className="right-sidebar">
-                        </div>
                     </div>
-                    <Timeline />
+                    <div className="time-selection-container">
+                        <EventSelection />
+                        <Timeline />
+                    </div>
 
                 </div>
             </React.Fragment>

@@ -3,6 +3,10 @@ html, body, #root {
 	margin: 0;
 }
 
+:root {
+	--filler: lightgrey;
+}
+
 .app-container {
 	margin: auto;
 	height: 90%;
@@ -13,7 +17,7 @@ html, body, #root {
 	position: absolute;
 	width: 100%;
 	height: 100%;
-	background-color: lightgrey;
+	background-color: rgb(236, 236, 236);
 	/* background-image: url('../img/dotaminimap_7.jpg');
 	background-position: center;
 	background-repeat: no-repeat;
@@ -22,12 +26,16 @@ html, body, #root {
 	z-index: -100;
 }
 
+.map-title {
+	position: absolute;
+	top: 40%;
+	left: 50%;
+}
+
 .center-container {
 	text-align: center;
 	height: 70%;
 }
-
-/* Left Sidebar */
 
 .left-sidebar, .right-sidebar {
 	display: flex;
@@ -49,18 +57,40 @@ html, body, #root {
 	border: 1px solid black;
 	height: 100px;
 	width: 300px;
+	background-color: var(--filler);
 }
 
 .event-data-container, .heatmap-container, .label-container {
 	border: 1px solid black;
 	height: 350px;
 	width: 300px;
+	background-color: var(--filler);
 }
 
-.timeline-container {
-	text-align: center;
+.time-selection-container {
+	display: flex;
+	justify-content: space-between;
 	margin: auto;
 	width: 100%;
 	height: 300px;
+}
+
+.timeline-container {
+	display: inline-block;
+	float: right;
+	text-align: center;
+	width: 83%;
+	height: 300px;
 	border: 1px solid black;
+	background-color: var(--filler);
+}
+
+.event-selection-container {
+	display: inline-block;
+	float: left;
+	text-align: center;
+	width: 16%;
+	height: 300px;
+	border: 1px solid black;
+	background-color: var(--filler);
 }
