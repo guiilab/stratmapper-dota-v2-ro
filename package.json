@@ -1,5 +1,5 @@
 {
-    "name": "behavior-map-server",
+    "name": "stratmap-server",
     "version": "1.0.0",
     "scripts": {
         "client": "cd client && yarn start",
