@@ -53,11 +53,31 @@ html, body, #root {
 	float: right;
 }
 
-.map-selection-container, .hero-selection-container {
+.map-selection-container, .selection-container {
 	border: 1px solid black;
-	height: 100px;
 	width: 300px;
 	background-color: var(--filler);
+}
+
+.unit-selection, .group-selection {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.unit-option, .group-option {
+	border: 1px solid black;
+	display: inline-block;
+	margin: .2rem;
+	padding: .1rem;
+}
+
+.unit-option:hover, .group-option:hover {
+	background-color: green;
+}
+
+.unit-option-selected {
+	background-color: green;
 }
 
 .event-data-container, .heatmap-container, .label-container {

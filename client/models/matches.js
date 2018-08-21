@@ -14,23 +14,7 @@ var MatchSchema = new Schema({
     game: {
         type: String,
         required: true
-    },
-    coordinates: {
-        type: Number,
-        required: true
-    },
-    bottom: {
-        type: Number,
-        required: true
-    },
-    left: {
-        type: Number,
-        required: true
-    },
-    right: {
-        type: Number,
-        required: true
-    },
+    }
 });
 
-module.exports = mongoose.model('Matches', MatchSchema);
+module.exports = mongoose.model('Match', MatchSchema);

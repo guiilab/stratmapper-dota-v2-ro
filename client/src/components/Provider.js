@@ -5,19 +5,22 @@ export const Context = createContext();
 
 class Provider extends Component {
     state = {
-        data: [],
+        matchId: 4321,
+        apiMatchId: 2500623971,
         mapSettings: {
             width: null,
             height: null,
             padding: null
         },
-        x: {
-            min: null,
-            max: null
-        },
-        y: {
-            min: null,
-            max: null
+        coordinates: {
+            x: {
+                min: null,
+                max: null
+            },
+            y: {
+                min: null,
+                max: null
+            }
         },
         timeMax: null,
         play: {
@@ -26,8 +29,9 @@ class Provider extends Component {
             playSpeed: 100
         },
         mapLoading: false,
-        range: [],
-        units: ["herokunka", "heroluna"]
+        brushRange: [],
+        units: [],
+        groups: []
     };
 
     orderData = (a, b) => {
@@ -57,6 +61,28 @@ class Provider extends Component {
             <Context.Provider value={{
                 state: this.state,
 
+                getMatchData: async () => {
+                    this.setState({
+                        mapLoading: true
+                    })
+                    const response = await fetch('/api/matches', {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            matchId: this.state.matchId
+                        })
+                    });
+                    const body = await response.json();
+
+                    if (response.status !== 200) {
+                        throw Error(body.message)
+                    }
+                    return body;
+                },
+
                 getEvents: async () => {
                     this.setState({
                         mapLoading: true
@@ -79,33 +105,23 @@ class Provider extends Component {
                     return body;
                 },
 
-                loadData: (data) => {
-                    let orderedData = data.sort(this.orderData)
-                    let redData = orderedData.filter(d => d.playerID === 'Red');
-                    let blueData = orderedData.filter(d => d.playerID === 'Blue')
-
-                    //getMinMax
-                    let xMin = d3.min(orderedData, (d) => d.posX);
-                    let xMax = d3.max(orderedData, (d) => d.posX);
-                    let yMin = d3.min(orderedData, (d) => d.posY);
-                    let yMax = d3.max(orderedData, (d) => d.posY);
-                    let timeMax = orderedData.length;
-
-                    let timeMaxHalf = Math.floor(orderedData.length / 2 - 1.5);
-
+                loadMatchData: (data) => {
                     this.setState({
-                        data: orderedData,
-                        redData: redData,
-                        blueData: blueData,
-                        xMin: xMin,
-                        xMax: xMax,
-                        yMin: yMin,
-                        yMax: yMax,
-                        timeMax: timeMax,
-                        timeMaxHalf: timeMaxHalf,
-                        range: [0, timeMax],
+                        coordinates: {
+                            x: {
+                                min: data[0].coordinates.x.min,
+                                max: data[0].coordinates.x.max
+                            },
+                            y: {
+                                min: data[0].coordinates.y.min,
+                                max: data[0].coordinates.y.max
+                            }
+                        },
+                        // },
+                        groups: [...Object.keys(data[0].units.groups)],
+                        units: [...data[0].units.all],
                         mapLoading: false
-                    }, () => this.updatePlayhead(this.state.playhead))
+                    })
                 },
 
                 getXScale: () => {

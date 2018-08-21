@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const app = express();
 const port = process.env.PORT || 5000;
 const EventModel = require('./client/models/events.js');
+const MatchModel = require('./client/models/matches.js')
 
 app.use(bodyParser.urlencoded({
     limit: '500mb',
@@ -46,6 +47,16 @@ app.post('/api/events', function (req, res) {
     return EventModel
         .find({
             unit: req.body.unit
+        })
+        .exec(function (err, events) {
+            return res.send(events)
+        })
+})
+
+app.post('/api/matches', function (req, res) {
+    return MatchModel
+        .find({
+            match_id: 4321
         })
         .exec(function (err, events) {
             return res.send(events)
