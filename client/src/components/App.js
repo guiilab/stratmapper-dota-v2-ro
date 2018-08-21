@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import { Context } from './Provider.js'
 import Map from './Map.js';
 import Timeline from './Timeline.js';
 import EventSelection from './EventSelection.js';
@@ -10,14 +11,15 @@ import Heatmap from './Heatmap.js';
 import Label from './Label.js';
 
 class App extends Component {
-    state = {
-        response: ''
-    };
 
     componentDidMount() {
-        this.callApi()
-            .then(res => this.setState({ response: res.express }))
-            .catch(err => console.log(err));
+        // this.callApi()
+        //     .then(res => this.setState({ response: res.express }))
+        //     .catch(err => console.log(err));
+        this
+            .props.getEvents()
+            .then(res => console.log(res))
+
     }
 
     callApi = async () => {
@@ -56,4 +58,9 @@ class App extends Component {
     }
 }
 
-export default App;
+
+export default () => (
+    <Context.Consumer>
+        {(context) => <App {...context} />}
+    </Context.Consumer>
+);
