@@ -13,17 +13,28 @@ html, body, #root {
 	width: 90%;
 }
 
+.center-container {
+	/* text-align: center; */
+	height: 800px;
+	display: flex;
+	margin: 1rem 0;
+}
+
 .map-container {
-	position: absolute;
-	width: 100%;
-	height: 100%;
+	width: 800px;
+	height: 800px;
+	margin: auto;
+	border: 1px solid black;
 	background-color: rgb(236, 236, 236);
 	/* background-image: url('../img/dotaminimap_7.jpg');
 	background-position: center;
 	background-repeat: no-repeat;
-	background-size: cover;
-	*/
-	z-index: -100;
+	background-size: cover; */
+}
+
+.test {
+	z-index: 100 !important;
+	background-color: red;
 }
 
 .map-title {
@@ -32,14 +43,9 @@ html, body, #root {
 	left: 50%;
 }
 
-.center-container {
-	text-align: center;
-	height: 70%;
-}
-
 .left-sidebar, .right-sidebar {
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-between;
 	flex-direction: column;
 	height: 100%;
 	width: 305px;

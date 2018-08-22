@@ -28,27 +28,24 @@ class App extends Component {
             return <div>Loading</div>
         } else {
             return (
-                <React.Fragment>
-                    <Map />
-                    <div className="app-container">
-                        <div className="center-container">
-                            <div className="left-sidebar">
-                                <MapSelection />
-                                <HeroSelection />
-                                <EventData />
-                            </div>
-                            <div className="right-sidebar">
-                                <Heatmap />
-                                <Label />
-                            </div>
+                <div className="app-container">
+                    <div className="center-container">
+                        <div className="left-sidebar">
+                            <MapSelection />
+                            <HeroSelection />
+                            <EventData />
                         </div>
-                        <div className="time-selection-container">
-                            <EventSelection />
-                            <Timeline />
+                        <Map />
+                        <div className="right-sidebar">
+                            <Heatmap />
+                            <Label />
                         </div>
-
                     </div>
-                </React.Fragment>
+                    <div className="time-selection-container">
+                        <EventSelection />
+                        <Timeline />
+                    </div>
+                </div>
             );
         }
     }
