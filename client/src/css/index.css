@@ -32,11 +32,6 @@ html, body, #root {
 	background-size: cover; */
 }
 
-.test {
-	z-index: 100 !important;
-	background-color: red;
-}
-
 .map-title {
 	position: absolute;
 	top: 35%;
@@ -71,18 +66,19 @@ html, body, #root {
 	justify-content: center;
 }
 
-.unit-option, .group-option {
+.unit-option, .group-option, .event-option {
 	border: 1px solid black;
 	display: inline-block;
 	margin: .2rem;
 	padding: .1rem;
+	cursor: pointer;
 }
 
-.unit-option:hover, .group-option:hover {
+.unit-option:hover, .group-option:hover, .event-option:hover {
 	background-color: green;
 }
 
-.unit-option-selected {
+.unit-option-active, .group-option-active, .event-option-active {
 	background-color: green;
 }
 

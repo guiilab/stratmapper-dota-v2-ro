@@ -29,9 +29,17 @@ class Provider extends Component {
             playSpeed: 100
         },
         mapLoading: false,
-        brushRange: [],
-        units: [],
-        groups: []
+        events: {
+            all: [],
+            categories: []
+        },
+        units: {
+            all: [],
+            groups: []
+        },
+        selectedUnits: [],
+        selectedEvents: [],
+        brushRange: []
     };
 
     orderData = (a, b) => {
@@ -94,7 +102,7 @@ class Provider extends Component {
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({
-                            unit: this.state.units
+                            unit: this.state.units.all
                         })
                     });
                     const body = await response.json();
@@ -118,10 +126,46 @@ class Provider extends Component {
                             }
                         },
                         // },
-                        groups: [...Object.keys(data[0].units.groups)],
-                        units: [...data[0].units.all],
+                        units: {
+                            all: [...data[0].units.all],
+                            groups: [...Object.keys(data[0].units.groups)]
+                        },
+                        events: {
+                            all: [...data[0].events.all],
+                            categories: [...Object.keys(data[0].events.categories)]
+                        },
                         mapLoading: false
                     })
+                },
+
+                toggleSelectedEvent: (event) => {
+                    if (this.state.selectedEvents.includes(event)) {
+                        const array = [...this.state.selectedEvents];
+                        const index = array.indexOf(event);
+                        array.splice(index, 1);
+                        this.setState({
+                            selectedEvents: array
+                        })
+                    } else {
+                        this.setState(prevState => ({
+                            selectedEvents: [...prevState.selectedEvents, event]
+                        }))
+                    }
+                },
+
+                toggleSelectedUnit: (unit) => {
+                    if (this.state.selectedUnits.includes(unit)) {
+                        const array = [...this.state.selectedUnits];
+                        const index = array.indexOf(unit);
+                        array.splice(index, 1);
+                        this.setState({
+                            selectedUnits: array
+                        })
+                    } else {
+                        this.setState(prevState => ({
+                            selectedUnits: [...prevState.selectedUnits, unit]
+                        }))
+                    }
                 },
 
                 getXScale: () => {

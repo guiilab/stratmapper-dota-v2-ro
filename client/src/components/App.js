@@ -5,7 +5,7 @@ import Map from './Map.js';
 import Timeline from './Timeline.js';
 import EventSelection from './EventSelection.js';
 import MapSelection from './MapSelection.js';
-import HeroSelection from './HeroSelection.js';
+import UnitSelection from './UnitSelection.js';
 import EventData from './EventData.js';
 import Heatmap from './Heatmap.js';
 import Label from './Label.js';
@@ -32,7 +32,7 @@ class App extends Component {
                     <div className="center-container">
                         <div className="left-sidebar">
                             <MapSelection />
-                            <HeroSelection />
+                            <UnitSelection />
                             <EventData />
                         </div>
                         <Map />
