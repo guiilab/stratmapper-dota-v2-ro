@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import EventOption from './EventOption.js'
-import { Context } from './Provider';
+import { Context } from './Provider.js';
 
 class EventSelection extends Component {
 
@@ -12,9 +12,11 @@ class EventSelection extends Component {
     render() {
         const { events } = this.props.state;
         return (
-            <div className="event-selection-container">
-                <h3>Event Selection</h3>
-                <div className="event-selection">
+            <div className="event-select-container">
+                <div className="title-container">
+                    <h3>Event Selection</h3>
+                </div>
+                <div className="event-select">
                     {events.categories.map(event => <EventOption event={event} key={event} toggleSelectedEventLocal={(e) => this.toggleSelectedEventLocal(e)} />)}
                 </div>
             </div>

@@ -7,6 +7,11 @@ html, body, #root {
 	--filler: lightgrey;
 }
 
+h3 {
+	margin: 0;
+	padding: 0;
+}
+
 .app-container {
 	margin: auto;
 	height: 90%;
@@ -54,13 +59,21 @@ html, body, #root {
 	float: right;
 }
 
-.map-selection-container, .selection-container {
+.title-container {
+	background-color: grey;
+	padding: 0.54rem;
+	border-bottom: 1px solid black;
+	height: 20px;
+	text-align: center;
+}
+
+.map-select-container, .game-select-container, .select-container {
 	border: 1px solid black;
 	width: 300px;
 	background-color: var(--filler);
 }
 
-.unit-selection, .group-selection {
+.unit-select, .group-select {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
@@ -89,7 +102,7 @@ html, body, #root {
 	background-color: var(--filler);
 }
 
-.time-selection-container {
+.time-select-container {
 	display: flex;
 	justify-content: space-between;
 	margin: auto;
@@ -107,7 +120,7 @@ html, body, #root {
 	background-color: var(--filler);
 }
 
-.event-selection-container {
+.event-select-container {
 	display: inline-block;
 	float: left;
 	text-align: center;

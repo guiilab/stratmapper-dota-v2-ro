@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import { Context } from './Provider.js';
+
 class UnitOption extends Component {
 
     state = {
@@ -14,10 +16,15 @@ class UnitOption extends Component {
 
     render() {
 
-        const { unit, toggleSelectedUnitLocal } = this.props;
+        const { unit } = this.props;
 
         return (
-            <div className={this.state.active ? 'unit-option unit-option-active' : 'unit-option'} key={unit} onClick={() => { this.toggleClass(); toggleSelectedUnitLocal(unit); }} >{unit}</div>
+            <Context.Consumer>
+                {(context) => {
+                    return <div className={this.state.active ? 'unit-option unit-option-active' : 'unit-option'} key={unit} onClick={() => { this.toggleClass(); context.toggleSelectedUnit(unit); }} >{unit}</div>
+                }
+                }
+            </Context.Consumer>
         );
     }
 }

@@ -1,5 +1,6 @@
 import React, { Component, createContext } from 'react';
 import * as d3 from 'd3';
+// import _ from 'lodash';
 
 export const Context = createContext();
 
@@ -33,10 +34,8 @@ class Provider extends Component {
             all: [],
             categories: []
         },
-        units: {
-            all: [],
-            groups: []
-        },
+        units: [],
+        groups: [],
         selectedUnits: [],
         selectedEvents: [],
         brushRange: []
@@ -62,6 +61,12 @@ class Provider extends Component {
             .domain([this.state.y.min, this.state.y.max])
             .range([this.state.mapSettings.height - this.state.mapSettings.padding, this.state.mapSettings.padding])
         return scale(y)
+    }
+
+    setGroupState = (d, u) => {
+        this.setState({
+            [d]: u
+        })
     }
 
     render() {
@@ -102,7 +107,7 @@ class Provider extends Component {
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({
-                            unit: this.state.units.all
+                            unit: this.state.unitsAll
                         })
                     });
                     const body = await response.json();
@@ -125,16 +130,15 @@ class Provider extends Component {
                                 max: data[0].coordinates.y.max
                             }
                         },
-                        // },
-                        units: {
-                            all: [...data[0].units.all],
-                            groups: [...Object.keys(data[0].units.groups)]
-                        },
+                        groups: [...Object.keys(data[0].units.groups)],
                         events: {
                             all: [...data[0].events.all],
                             categories: [...Object.keys(data[0].events.categories)]
                         },
                         mapLoading: false
+                    }, () => {
+                        this.state.groups.forEach((d, i) => this.setGroupState(d, data[0].units.groups[d]))
+                        // data[0].units.all.forEach((d, i) => this.setUnitState(d))
                     })
                 },
 
@@ -168,80 +172,25 @@ class Provider extends Component {
                     }
                 },
 
-                getXScale: () => {
-                    return d3.scaleLinear()
-                        .domain([this.state.xMin, this.state.xMax])
-                        .range([this.state.settings.padding, (this.state.settings.width - this.state.settings.padding * 2)])
-                },
+                toggleSelectedGroup: (units, boolean) => {
+                    // if (boolean === true) {
 
-                getYScale: () => {
-                    return d3.scaleLinear()
-                        .domain([this.state.yMin, this.state.yMax])
-                        .range([this.state.settings.padding, (this.state.settings.width - this.state.settings.padding * 2)])
-                },
+                    // }
+                    // units.forEach((unit) => this.toggleSelectedUnitFunction(unit))
+                    // const duplicates = units.filter(unit => !this.state.selectedUnits.includes(unit));
+                    // const unique = units.filter(unit => !this.state.selectedUnits.includes(unit))
+                    // console.log(duplicates)
+                    // // if (duplicates) {
 
-                xScale: (x) => {
-                    const scale = d3.scaleLinear()
-                        .domain([this.state.xMin, this.state.xMax])
-                        .range([this.state.settings.padding, (this.state.settings.width - this.state.settings.padding * 2)])
-                    return scale(x);
-                },
-
-                yScale: (y) => {
-                    const scale = d3.scaleLinear()
-                        .domain([this.state.yMin, this.state.yMax])
-                        .range([(this.state.settings.height - this.state.settings.padding), this.state.settings.padding])
-                    return scale(y)
-                },
-
-                updatePlayhead: (e) => {
-                    const redPosX = this.xScale(this.state.redData[e].posX);
-                    const redPosY = this.yScale(this.state.redData[e].posY);
-                    const bluePosX = this.xScale(this.state.blueData[e].posX);
-                    const bluePosY = this.yScale(this.state.blueData[e].posY);
-                    this.setState({
-                        playhead: e,
-                        playerCoordinates: {
-                            red: [redPosX, redPosY],
-                            blue: [bluePosX, bluePosY]
-                        }
-                    })
-                },
-
-                updateRange: (e) => {
-                    this.setState({
-                        range: e
-                    })
-                },
-
-                togglePlay: () => {
-                    this.setState(prevState => ({
-                        playButtonActive: !prevState.playButtonActive
-                    }), () => {
-                        if (this.state.playButtonActive) {
-                            this.playButton(this.state.timeMaxHalf - this.state.playhead)
-                        }
-                    })
-                },
-
-                updateSpeed: (e) => {
-                    this.setState({
-                        playSpeed: e
-                    })
-                },
-
-                scaleSpeed: (x) => {
-                    const scale = d3.scaleLinear()
-                        .domain([0, 500])
-                        .range([500, 0])
-                    return scale(x)
-                },
-                test: function () {
-                    alert('working')
+                    // // }
+                    // this.setState(prevState => ({
+                    //     selectedUnits: [...prevState.selectedUnits, ...unique]
+                    // }), () => console.log(`selected units statge: ${this.state.selectedUnits}`))
                 }
-            }}>
+            }
+            }>
                 {this.props.children}
-            </Context.Provider>
+            </Context.Provider >
         )
     }
 }

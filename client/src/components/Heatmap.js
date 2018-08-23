@@ -4,7 +4,9 @@ class Heatmap extends Component {
     render() {
         return (
             <div className='heatmap-container'>
-                <h3>Heatmap</h3>
+                <div className="title-container">
+                    <h3>Heatmap</h3>
+                </div>
             </div>
         );
     }

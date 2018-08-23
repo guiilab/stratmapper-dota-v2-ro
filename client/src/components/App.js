@@ -3,9 +3,10 @@ import React, { Component } from 'react';
 import { Context } from './Provider.js'
 import Map from './Map.js';
 import Timeline from './Timeline.js';
-import EventSelection from './EventSelection.js';
-import MapSelection from './MapSelection.js';
-import UnitSelection from './UnitSelection.js';
+import EventSelect from './EventSelect.js';
+import GameSelect from './GameSelect.js';
+import MapSelect from './MapSelect.js';
+import UnitSelect from './UnitSelect.js';
 import EventData from './EventData.js';
 import Heatmap from './Heatmap.js';
 import Label from './Label.js';
@@ -22,17 +23,18 @@ class App extends Component {
 
     render() {
 
-        const { mapLoading } = this.props;
+        const { dire } = this.props.state;
 
-        if (mapLoading) {
+        if (!dire) {
             return <div>Loading</div>
         } else {
             return (
                 <div className="app-container">
                     <div className="center-container">
                         <div className="left-sidebar">
-                            <MapSelection />
-                            <UnitSelection />
+                            <GameSelect />
+                            <MapSelect />
+                            <UnitSelect />
                             <EventData />
                         </div>
                         <Map />
@@ -42,7 +44,7 @@ class App extends Component {
                         </div>
                     </div>
                     <div className="time-selection-container">
-                        <EventSelection />
+                        <EventSelect />
                         <Timeline />
                     </div>
                 </div>

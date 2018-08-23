@@ -4,7 +4,9 @@ class EventData extends Component {
     render() {
         return (
             <div className='event-data-container'>
-                <h3>Event Data</h3>
+                <div className="title-container">
+                    <h3>Event Data</h3>
+                </div>
             </div>
         );
     }

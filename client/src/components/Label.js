@@ -4,7 +4,9 @@ class Label extends Component {
     render() {
         return (
             <div className="label-container">
-                <h3>Label</h3>
+                <div className="title-container">
+                    <h3>Label</h3>
+                </div>
             </div>
         );
     }
