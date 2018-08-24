@@ -4,7 +4,7 @@ import { Context } from './Provider.js'
 
 import GroupOption from './GroupOption.js';
 
-class UnitSelection extends Component {
+class UnitSelect extends Component {
     render() {
         const { groups } = this.props.state;
         return (
@@ -22,6 +22,6 @@ class UnitSelection extends Component {
 
 export default () => (
     <Context.Consumer>
-        {(context) => <UnitSelection {...context} />}
+        {(context) => <UnitSelect {...context} />}
     </Context.Consumer>
 );

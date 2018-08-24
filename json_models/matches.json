@@ -65,6 +65,7 @@
         "all": [
             "death",
             "hero_kill",
+            "creep_hero_kill",
             "neutral_creep_kill",
             "enemy_creep_kill",
             "ally_creep_kill",

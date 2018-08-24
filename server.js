@@ -43,10 +43,11 @@ app.get('/api/hello', (req, res) => {
 });
 
 app.post('/api/events', function (req, res) {
-    console.log(req.body.unit);
+    console.log(req.body)
     return EventModel
         .find({
-            unit: req.body.unit
+            unit: req.body.unit,
+            event_type: req.body.event_type
         })
         .exec(function (err, events) {
             return res.send(events)

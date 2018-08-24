@@ -15,12 +15,12 @@ class UnitOption extends Component {
     }
 
     render() {
-
-        const { unit } = this.props;
+        let { unit } = this.props;
 
         return (
             <Context.Consumer>
                 {(context) => {
+                    // unit = context.formatHeroString(unit);
                     return <div className={this.state.active ? 'unit-option unit-option-active' : 'unit-option'} key={unit} onClick={() => { this.toggleClass(); context.toggleSelectedUnit(unit); }} >{unit}</div>
                 }
                 }

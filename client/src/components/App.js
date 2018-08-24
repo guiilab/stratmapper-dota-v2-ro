@@ -12,13 +12,10 @@ import Heatmap from './Heatmap.js';
 import Label from './Label.js';
 
 class App extends Component {
-
     componentDidMount() {
         this
             .props.getMatchData()
             .then(res => this.props.loadMatchData(res))
-        this
-            .props.getEvents()
     }
 
     render() {

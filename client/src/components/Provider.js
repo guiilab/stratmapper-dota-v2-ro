@@ -1,6 +1,5 @@
 import React, { Component, createContext } from 'react';
 import * as d3 from 'd3';
-// import _ from 'lodash';
 
 export const Context = createContext();
 
@@ -9,9 +8,9 @@ class Provider extends Component {
         matchId: 4321,
         apiMatchId: 2500623971,
         mapSettings: {
-            width: null,
-            height: null,
-            padding: null
+            width: 800,
+            height: 800,
+            padding: 500
         },
         coordinates: {
             x: {
@@ -30,6 +29,8 @@ class Provider extends Component {
             playSpeed: 100
         },
         mapLoading: false,
+        unitEventsAll: [],
+        unitEventsFiltered: [],
         events: {
             all: [],
             categories: []
@@ -41,27 +42,46 @@ class Provider extends Component {
         brushRange: []
     };
 
-    orderData = (a, b) => {
-        if (a.timestamp < b.timestamp)
-            return -1;
-        if (a.timestamp > b.timestamp)
-            return 1;
-        return 0;
+    componentDidUpdate(nextProps, prevState) {
+        if (
+            (this.state.selectedUnits !== prevState.selectedUnits) ||
+            (this.state.selectedEvents !== prevState.selectedEvents)
+        ) {
+            this
+                .getEvents()
+                .then(res => this.loadEvents(res))
+        }
     }
 
-    xScale = (x) => {
-        const scale = d3.scaleLinear()
-            .domain([this.state.x.min, this.state.x.max])
-            .range([this.state.mapSettings.padding, (this.state.mapSettings.width - this.state.mapSettings.padding * 2)])
-        return scale(x);
+    getEvents = async () => {
+        this.setState({
+            mapLoading: true
+        })
+        const response = await fetch('/api/events', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                unit: this.state.selectedUnits,
+                event_type: this.state.selectedEvents
+            })
+        });
+        const body = await response.json();
+
+        if (response.status !== 200) {
+            throw Error(body.message)
+        }
+        return body;
     }
 
-    yScale = (y) => {
-        const scale = d3.scaleLinear()
-            .domain([this.state.y.min, this.state.y.max])
-            .range([this.state.mapSettings.height - this.state.mapSettings.padding, this.state.mapSettings.padding])
-        return scale(y)
+    loadEvents = (data) => {
+        this.setState({
+            unitEventsAll: [...data]
+        }, () => console.log(this.state.unitEventsAll))
     }
+
 
     setGroupState = (d, u) => {
         this.setState({
@@ -96,30 +116,10 @@ class Provider extends Component {
                     return body;
                 },
 
-                getEvents: async () => {
-                    this.setState({
-                        mapLoading: true
-                    })
-                    const response = await fetch('/api/events', {
-                        method: 'POST',
-                        headers: {
-                            'Accept': 'application/json',
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            unit: this.state.unitsAll
-                        })
-                    });
-                    const body = await response.json();
-
-                    if (response.status !== 200) {
-                        throw Error(body.message)
-                    }
-                    return body;
-                },
-
                 loadMatchData: (data) => {
+                    // console.log(data[0])
                     this.setState({
+                        // matchId: data[0].match_id,
                         coordinates: {
                             x: {
                                 min: data[0].coordinates.x.min,
@@ -186,6 +186,49 @@ class Provider extends Component {
                     // this.setState(prevState => ({
                     //     selectedUnits: [...prevState.selectedUnits, ...unique]
                     // }), () => console.log(`selected units statge: ${this.state.selectedUnits}`))
+                },
+
+                getXScale: () => {
+                    return d3.scaleLinear()
+                        .domain([this.state.coordinates.x.min, this.state.coordinates.x.max])
+                        .range([0, this.state.mapSettings.width])
+                },
+
+                getYScale: () => {
+                    return d3.scaleLinear()
+                        .domain([this.state.coordinates.y.min, this.state.coordinates.y.max])
+                        .range([this.state.mapSettings.height, 0])
+                },
+
+                xScale: (x) => {
+                    const scale = d3.scaleLinear()
+                        .domain([this.state.coordinates.x.min, this.state.coordinates.x.max])
+                        .range([0, this.state.mapSettings.width])
+                    return scale(x)
+                },
+
+                yScale: (y) => {
+                    const scale = d3.scaleLinear()
+                        .domain([this.state.coordinates.y.min, this.state.coordinates.y.max])
+                        .range([this.state.mapSettings.height, 0])
+                    return scale(y)
+                },
+
+                formatHeroString(string) {
+                    string = string.replace(/hero/g, "")
+                    string = string.charAt(0).toUpperCase() + string.slice(1);
+                    return string;
+                },
+
+                formatEventString(string) {
+                    string = string.replace(/_/g, " ");
+                    return string
+                        .toLowerCase()
+                        .split(' ')
+                        .map(function (word) {
+                            return word[0].toUpperCase() + word.substr(1);
+                        })
+                        .join(' ');
                 }
             }
             }>

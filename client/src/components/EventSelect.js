@@ -17,7 +17,7 @@ class EventSelection extends Component {
                     <h3>Event Selection</h3>
                 </div>
                 <div className="event-select">
-                    {events.categories.map(event => <EventOption event={event} key={event} toggleSelectedEventLocal={(e) => this.toggleSelectedEventLocal(e)} />)}
+                    {events.all.map(event => <EventOption event={event} key={event} toggleSelectedEventLocal={(e) => this.toggleSelectedEventLocal(e)} />)}
                 </div>
             </div>
         );

@@ -8,8 +8,8 @@ class MapSelection extends Component {
                     <h3>Map Selection</h3>
                 </div>
                 <select name="map-select" id="map-select">
-                    <option value="Map1">Map 1</option>
-                    <option value="Map2">Map 2</option>
+                    <option value="Map1">2500623971</option>
+                    <option value="Map2">2500632973</option>
                 </select>
             </div>
         );
