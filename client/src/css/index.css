@@ -43,6 +43,10 @@ h3 {
 	left: 50%;
 }
 
+.icon {
+	transition: .2s
+}
+
 .left-sidebar, .right-sidebar {
 	display: flex;
 	justify-content: space-between;

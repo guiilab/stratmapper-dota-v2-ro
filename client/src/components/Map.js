@@ -9,6 +9,12 @@ var mapDivStyle = {
 };
 
 class Map extends Component {
+
+
+    testFunction = () => {
+        alert('yes')
+    }
+
     render() {
 
         const { xScale, yScale } = this.props;
@@ -21,7 +27,9 @@ class Map extends Component {
                 <svg className="map-svg" width="800" height="800">
                     <g className="unit-events-group">
                         {unitEventsAll.map(event => {
-                            return <UnitEvent x={xScale(event.x)} y={yScale(event.y)} d={d} key={Math.random()} />
+                            return (
+                                <UnitEvent x={xScale(event.x)} y={yScale(event.y)} d={d} key={Math.random()} />
+                            )
                         })}
                     </g>
                 </svg>

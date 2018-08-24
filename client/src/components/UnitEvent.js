@@ -1,16 +1,29 @@
 import React, { Component } from 'react';
 
 class UnitEvent extends Component {
-    render() {
-        const { x, y, d } = this.props;
+    constructor(props) {
+        super(props)
 
-        const translate = `translate(${x}, ${y}), scale(.05)`
+        this.state = {
+            translate: `translate(${this.props.x}, ${this.props.y}), scale(.05)`
+        }
+    }
+    changeScale = (s) => {
+        this.setState({
+            translate: `translate(${this.props.x}, ${this.props.y}), scale(${s})`
+        })
+    }
+    render() {
+        const { d } = this.props;
 
         return (
             <path
                 d={d}
+                className="icon"
                 fill="red"
-                transform={translate}
+                transform={this.state.translate}
+                onMouseEnter={() => this.changeScale(.06)}
+                onMouseLeave={() => this.changeScale(.05)}
             />
         );
     }
