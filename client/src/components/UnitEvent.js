@@ -49,7 +49,4 @@ class UnitEvent extends Component {
     }
 }
 
-                    /* {console.log(this.props.event)} */
-                    /* {this.props.event.tooltip_context.map((element) => <TooltipElement element={element} key={element.node_id} />)} */
-
 export default UnitEvent;
