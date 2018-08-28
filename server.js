@@ -43,7 +43,6 @@ app.get('/api/hello', (req, res) => {
 });
 
 app.post('/api/events', function (req, res) {
-    console.log(req.body)
     return EventModel
         .find({
             unit: req.body.unit,

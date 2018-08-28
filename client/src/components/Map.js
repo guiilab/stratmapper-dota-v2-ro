@@ -9,26 +9,18 @@ var mapDivStyle = {
 };
 
 class Map extends Component {
-
-
-    testFunction = () => {
-        alert('yes')
-    }
-
     render() {
-
         const { xScale, yScale } = this.props;
         const { unitEventsAll, icons } = this.props.state;
+
         return (
             <div className="map-container" style={mapDivStyle}>
-                <svg className="map-svg" width="800" height="800">
-                    <g className="unit-events-group">
-                        {unitEventsAll.map(event => {
-                            return (
-                                <UnitEvent x={xScale(event.x)} y={yScale(event.y)} d={icons[event.event_type]} key={Math.random()} />
-                            )
-                        })}
-                    </g>
+                <svg className="map-svg" height="800" width="800">
+                    {unitEventsAll.map(event => {
+                        return (
+                            <UnitEvent x={xScale(event.posX)} y={yScale(event.posY)} d={icons[event.event_type]} event={event} key={Math.random()} />
+                        )
+                    })}
                 </svg>
             </div >
         );

@@ -1,6 +1,7 @@
 html, body, #root {
 	height: 100%;
 	margin: 0;
+	font-family: sans-serif;
 }
 
 :root {
@@ -43,9 +44,23 @@ h3 {
 	left: 50%;
 }
 
-.icon {
-	transition: .2s
+.tooltip-element-wrapper {
+	padding: .3rem;
+	width: 250px;
+	font-size: 1rem;
 }
+
+.tooltip-element-key {
+	font-weight: bold;
+}
+
+.tooltip-element-value {
+	font-weight: lighter;
+}
+
+/* .icon {
+	transition: .2s
+} */
 
 .left-sidebar, .right-sidebar {
 	display: flex;

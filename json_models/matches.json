@@ -303,15 +303,5 @@
             "final_level",
             "structure_kills"
         ]
-    },
-    "node_context": {
-        "all": [
-            "Gold",
-            "XP",
-            "Health",
-            "Deaths",
-            "Kills",
-            "Items"
-        ]
     }
 }

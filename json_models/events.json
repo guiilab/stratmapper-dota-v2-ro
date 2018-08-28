@@ -1,79 +1,91 @@
 {
     "node_id": 123456,
     "linked_node_id": 654321,
-    "unit": "herokunka",
+    "unit": "herokunkka",
     "linked_unit": "heroluna",
     "event_type": "damage_delivered",
-    "timestamp": 123456,
-    "damage_value": 123,
-    "inflictor_name": "item",
-    "x": 123456,
-    "y": 123456,
-    "node_context": {
-        "gold": 123456,
-        "xp": 123456,
-        "health": 123456,
-        "deaths": 1,
-        "hero_kills": 2,
-        "items": [
-            "boots",
-            "scroll"
-        ]
-    }
-},
-{
-    "node_id": "84395",
-    "unit": "herokunkka",
-    "linked_unit": "herobloodseeker",
-    "event_type": "death",
-    "timestamp": 1420,
-    "damage_value": 6,
-    "inflictor_name": "dark_seer_ion_shell",
-    "x": 11600,
-    "y": 21900,
-    "node_context": {
-        "gold": 5073,
-        "xp": 5485,
-        "health": 302,
-        "deaths": 0,
-        "hero_kills": 0,
-        "items": [
-            "item_sobi_mask",
-            "item_tpscroll",
-            "item_phase_boots",
-            "item_stout_shield",
-            "item_quelling_blade",
-            "item_armlet"
-        ]
-    }
-}
-
-{
-    "event_type": {
-        "target_name": "heroslardar",
-        "source_name": "herojuggernaut",
-        "source_node": 66992,
-        "event": "death"
-    },
-    "kills": 1,
-    "deaths": 1,
-    "timestamp": 1496,
-    "current_item_list": [
-        "item_blink",
-        "item_quelling_blade",
-        "item_tranquil_boots",
-        "item_wind_lace",
-        "item_stout_shield"
+    "posX": 11840,
+    "posY": 21800,
+    "inflictor_name": "string",
+    "tooltip_context": [
+        {
+            "key": "event_type",
+            "formatted_key": "Event Type",
+            "value": "damage_delivered",
+            "formatted_value": "Damage Delivered"
+        },
+        {
+            "key": "unit",
+            "formatted_key": "Unit",
+            "value": "hero1",
+            "group": "radiant"
+        },
+        {
+            "key": "linked_unit",
+            "formatted_key": "Linked Unit",
+            "value": "hero2",
+            "group": "dire"
+        },
+        {
+            "key": "damage_value",
+            "formatted_key": "Damage Value",
+            "value": 123
+        },
+        {
+            "key": "inflictor_name",
+            "formatted_key": "Inflictor Name",
+            "value": "item",
+            "formatted_value": "Item"
+        },
+        {
+            "key": "timestamp",
+            "formatted_key": "Timestamp",
+            "value": 123456
+        }
     ],
-    "life_state": 0,
-    "y": 16858,
-    "team_id": 3,
-    "node_id": "66993",
-    "total_gold": 3969,
-    "assists": 1,
-    "last_hits": 45,
-    "x": 19418,
-    "total_xp": 4759,
-    "health_remaining": 0
-},
-{
+    "node_context": [
+        {
+            "key": "gold",
+            "formatted_key": "Gold",
+            "value": 123456
+        },
+        {
+            "key": "xp",
+            "formatted_key": "XP",
+            "value": 123456
+        },
+        {
+            "key": "health",
+            "formatted_key": "Health",
+            "value": 123456
+        },
+        {
+            "key": "deaths",
+            "formatted_key": "Deaths",
+            "value": 123
+        },
+        {
+            "key": "hero_kills",
+            "formatted_key": "Hero Kills",
+            "value": 123
+        },
+        {
+            "key": "items",
+            "formatted_key": "Items",
+            "value": [
+                "boots",
+                "scroll"
+            ]
+        },
+        {
+            "key": "life_state",
+            "formatted_key": "Life State",
+            "value": 0.05
+        },
+        {
+            "key": "teamfight_participation",
+            "formatted_key": "Teamfight Participation",
+            "value": 0.05
+        }
+    ]
+}
