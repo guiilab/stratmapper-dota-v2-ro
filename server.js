@@ -66,7 +66,7 @@ app.post('/api/matches', function (req, res) {
 
 if (process.env.NODE_ENV === 'production') {
 
-    app.use(wwwhisper())
+    // app.use(wwwhisper())
 
     // Serve any static files
     app.use(express.static(path.join(__dirname, 'client/build')));
