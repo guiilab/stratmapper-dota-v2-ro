@@ -94,7 +94,9 @@ class Provider extends Component {
     }
 
     setIconState = (event, icon) => {
-        this.setState(_.set(this.state.icons, event, icon))
+        this.setState(prevState => ({
+            icons: { ...prevState.icons, [event]: icon },
+        }))
     }
 
     render() {
@@ -141,12 +143,14 @@ class Provider extends Component {
                         groups: [...Object.keys(data[0].units.groups)],
                         events: {
                             all: [...data[0].events.all],
-                            categories: [...Object.keys(data[0].events.categories)]
+                            categories: [...data[0].events.categories]
                         },
                         mapLoading: false
                     }, () => {
                         this.state.groups.forEach((d, i) => this.setGroupState(d, data[0].units.groups[d]))
-                        this.setIconState('damage_delivered', 12345)
+                        this.state.events.categories.forEach((event) => {
+                            return this.setIconState(event.event_type, event.icon);
+                        })
                         // data[0].units.all.forEach((d, i) => this.setUnitState(d))
                     })
                 },
