@@ -7,6 +7,10 @@ class Provider extends Component {
     state = {
         matchId: 4321,
         apiMatchId: 2500623971,
+        windowSettings: {
+            width: null,
+            height: null
+        },
         mapSettings: {
             width: 800,
             height: 800,
@@ -43,6 +47,11 @@ class Provider extends Component {
         icons: {}
     };
 
+    componentDidMount() {
+        this.updateWindowDimensions();
+        window.addEventListener("resize", this.updateWindowDimensions);
+    }
+
     componentDidUpdate(nextProps, prevState) {
         if (
             (this.state.selectedUnits !== prevState.selectedUnits) ||
@@ -52,6 +61,10 @@ class Provider extends Component {
                 .getEvents()
                 .then(res => this.loadEvents(res))
         }
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.updateWindowDimensions);
     }
 
     getEvents = async () => {
@@ -83,7 +96,6 @@ class Provider extends Component {
         })
     }
 
-
     setGroupState = (d, unit) => {
         this.setState({
             [d]: unit
@@ -95,6 +107,15 @@ class Provider extends Component {
             icons: { ...prevState.icons, [event]: icon },
         }))
     }
+
+    updateWindowDimensions = () => {
+        this.setState({
+            windowSettings: {
+                height: window.innerHeight,
+                width: window.innerWidth
+            }
+        })
+    };
 
     render() {
         return (
@@ -124,9 +145,8 @@ class Provider extends Component {
                 },
 
                 loadMatchData: (data) => {
-                    // console.log(data[0])
+
                     this.setState({
-                        // matchId: data[0].match_id,
                         coordinates: {
                             x: {
                                 min: data[0].coordinates.x.min,
@@ -140,15 +160,12 @@ class Provider extends Component {
                         groups: [...Object.keys(data[0].units.groups)],
                         events: {
                             all: [...data[0].events.all],
-                            categories: [...data[0].events.categories]
+                            categories: [...Object.keys(data[0].events.categories)]
                         },
                         mapLoading: false
                     }, () => {
                         this.state.groups.forEach((d, i) => this.setGroupState(d, data[0].units.groups[d]))
-                        this.state.events.categories.forEach((event) => {
-                            return this.setIconState(event.event_type, event.icon);
-                        })
-                        // data[0].units.all.forEach((d, i) => this.setUnitState(d))
+                        this.state.events.categories.forEach((event) => this.setIconState(event, data[0].events.categories[event].icon))
                     })
                 },
 

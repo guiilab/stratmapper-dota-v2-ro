@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import { Context } from './Provider.js'
+
 import Map from './Map.js';
 import Timeline from './Timeline.js';
 import EventSelect from './EventSelect.js';
