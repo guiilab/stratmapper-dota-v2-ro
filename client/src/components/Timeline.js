@@ -13,11 +13,9 @@ class Timeline extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            timelineSettings: {
-                width: null,
-                height: null,
-                padding: null
-            },
+            width: null,
+            height: null,
+            padding: null,
             data: d3.range(200).map(_ => [random(), random()]),
             zoomTransform: null
         }
@@ -27,21 +25,20 @@ class Timeline extends Component {
     }
     componentDidMount() {
         this.setState({
-            timelineSettings: {
-                width: this.props.state.windowSettings.width * .65,
-                height: 300,
-                padding: 20
-            }
+            width: this.props.state.windowSettings.width * .65,
+            height: 300,
+            paddingLeft: 150,
+            padding: 50
         }, () => d3.select(this.refs.svg)
             .call(this.zoom)
         )
     }
 
     componentDidUpdate(nextProps, prevState) {
-        if (nextProps.state.windowSettings.width * .65 !== prevState.timelineSettings.width) {
-            this.setState(prevState => ({
-                timelineSettings: { ...prevState.timelineSettings, width: nextProps.state.windowSettings.width * .65 },
-            }))
+        if (nextProps.state.windowSettings.width * .65 !== prevState.width) {
+            this.setState({
+                width: nextProps.state.windowSettings.width * .65
+            })
         }
         d3.select(this.refs.svg)
             .call(this.zoom)
@@ -55,30 +52,32 @@ class Timeline extends Component {
 
     render() {
         const { events } = this.props.state;
-        const { zoomTransform, timelineSettings } = this.state;
+        const { zoomTransform, width, height, padding, paddingLeft } = this.state;
 
         let timelineContainerStyle = {
-            width: timelineSettings.width,
-            height: timelineSettings.height
-
+            width: width,
+            height: height
         };
 
         return (
             <div style={timelineContainerStyle} className="timeline-container" ref="timelineContainer">
-                <svg width={timelineSettings.width - timelineSettings.padding} height={timelineSettings.height - timelineSettings.padding} ref="svg">
+                <svg width={width} height={height} ref="svg2" className="timeline-svg-axes">
+
+                    <YAxis
+                        height={height}
+                        events={[...events.categories]}
+                    />
+                </svg>
+                <svg width={width - paddingLeft} height={height} ref="svg" className="timeline-svg-scatter">
                     <Scatterplot
                         data={this.state.data}
-                        width={timelineSettings.width}
-                        height={timelineSettings.height}
+                        width={width - paddingLeft}
+                        height={height}
                         zoomTransform={zoomTransform}
                         zoomType="detail" />
                     <XAxis
-                        width={timelineSettings.width}
+                        width={width - padding}
                         zoomTransform={zoomTransform}
-                    />
-                    <YAxis
-                        height={timelineSettings.height}
-                        events={[...events.categories]}
                     />
                 </svg>
             </div>

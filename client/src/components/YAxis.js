@@ -17,10 +17,11 @@ class YAxis extends Component {
 
         const yScale = d3.scaleLinear()
             .domain([0, 10])
-            .range([0, height]);
+            .range([20, height - 20]);
 
         const axis = d3.axisRight(yScale)
             .tickFormat((d, i) => { return events[i] })
+        // .tickPadding([50])
 
         d3.select(this.refs.yAxis)
             .call(axis);
