@@ -17,7 +17,8 @@ class Timeline extends Component {
             height: null,
             padding: null,
             data: d3.range(200).map(_ => [random(), random()]),
-            zoomTransform: null
+            zoomTransform: null,
+            percentage: 0.7995733333
         }
         this.zoom = d3.zoom()
             .scaleExtent([1, 8])
@@ -25,9 +26,9 @@ class Timeline extends Component {
     }
     componentDidMount() {
         this.setState({
-            width: this.props.state.windowSettings.width * .65,
+            width: this.props.state.windowSettings.width * this.state.percentage,
             height: 300,
-            paddingLeft: 150,
+            paddingLeft: 120,
             padding: 50
         }, () => d3.select(this.refs.svg)
             .call(this.zoom)
@@ -35,9 +36,9 @@ class Timeline extends Component {
     }
 
     componentDidUpdate(nextProps, prevState) {
-        if (nextProps.state.windowSettings.width * .65 !== prevState.width) {
+        if (nextProps.state.windowSettings.width * this.state.percentage !== prevState.width) {
             this.setState({
-                width: nextProps.state.windowSettings.width * .65
+                width: nextProps.state.windowSettings.width * this.state.percentage
             })
         }
         d3.select(this.refs.svg)
@@ -54,32 +55,34 @@ class Timeline extends Component {
         const { events } = this.props.state;
         const { zoomTransform, width, height, padding, paddingLeft } = this.state;
 
-        let timelineContainerStyle = {
-            width: width,
-            height: height
-        };
-
         return (
-            <div style={timelineContainerStyle} className="timeline-container" ref="timelineContainer">
-                <svg width={width} height={height} ref="svg2" className="timeline-svg-axes">
-
-                    <YAxis
-                        height={height}
-                        events={[...events.categories]}
-                    />
-                </svg>
-                <svg width={width - paddingLeft} height={height} ref="svg" className="timeline-svg-scatter">
-                    <Scatterplot
-                        data={this.state.data}
-                        width={width - paddingLeft}
-                        height={height}
-                        zoomTransform={zoomTransform}
-                        zoomType="detail" />
-                    <XAxis
-                        width={width - padding}
-                        zoomTransform={zoomTransform}
-                    />
-                </svg>
+            <div className="timeline-container" ref="timelineContainer">
+                <div className="event-select-container">
+                    <svg width="100" height={height} ref="svg2" className="y-axis">
+                        <YAxis
+                            height={height}
+                            events={[...events.categories]}
+                        />
+                    </svg>
+                </div>
+                <div className="timeline-chart">
+                    <svg width="100%" height="100%" ref="svg" className="timeline-svg-scatter">
+                        <Scatterplot
+                            data={this.state.data}
+                            width={width}
+                            height={height}
+                            zoomTransform={zoomTransform}
+                            zoomType="detail" />
+                    </svg>
+                    <div className="x-axis">
+                        <svg width="100%" height="100%" ref="x-axis">
+                            <XAxis
+                                width={width}
+                                zoomTransform={zoomTransform}
+                            />
+                        </svg>
+                    </div>
+                </div>
             </div>
         );
     }

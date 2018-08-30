@@ -19,16 +19,24 @@ class YAxis extends Component {
             .domain([0, 10])
             .range([20, height - 20]);
 
-        const axis = d3.axisRight(yScale)
+        const axis = d3.axisLeft(yScale)
             .tickFormat((d, i) => { return events[i] })
-        // .tickPadding([50])
+            .ticks(14)
+
 
         d3.select(this.refs.yAxis)
             .call(axis);
     }
 
     render() {
-        return <g ref="yAxis" />
+
+        const x = 100;
+        const y = 0;
+        const styles = {
+            transform: `translate(${x}px, ${y}px)`
+        };
+
+        return <g style={styles} ref="yAxis" />
     }
 }
 

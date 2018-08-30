@@ -162,6 +162,10 @@ class Provider extends Component {
                             all: [...data[0].events.all],
                             categories: [...Object.keys(data[0].events.categories)]
                         },
+                        timestamp_range: {
+                            start: null,
+                            end: null
+                        },
                         mapLoading: false
                     }, () => {
                         this.state.groups.forEach((d, i) => this.setGroupState(d, data[0].units.groups[d]))

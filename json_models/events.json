@@ -4,88 +4,60 @@
     "unit": "herokunkka",
     "linked_unit": "heroluna",
     "event_type": "damage_delivered",
+    "inflictor_name": "string",
     "posX": 11840,
     "posY": 21800,
-    "inflictor_name": "string",
-    "tooltip_context": [
-        {
-            "key": "event_type",
-            "formatted_key": "Event Type",
-            "value": "damage_delivered",
-            "formatted_value": "Damage Delivered"
-        },
-        {
-            "key": "unit",
-            "formatted_key": "Unit",
-            "value": "hero1",
-            "group": "radiant"
-        },
-        {
-            "key": "linked_unit",
-            "formatted_key": "Linked Unit",
-            "value": "hero2",
-            "group": "dire"
-        },
-        {
-            "key": "damage_value",
-            "formatted_key": "Damage Value",
-            "value": 123
-        },
-        {
-            "key": "inflictor_name",
-            "formatted_key": "Inflictor Name",
-            "value": "item",
-            "formatted_value": "Item"
-        },
-        {
-            "key": "timestamp",
-            "formatted_key": "Timestamp",
-            "value": 123456
-        }
-    ],
+    "timestamp": 123456,
+    "node_context": {
+        "gold": 123456,
+        "xp": 123456,
+        "health": 123456,
+        "deaths": 123,
+        "hero_kills": 123,
+        "current_items": [
+            "boots",
+            "scroll"
+        ],
+        "life_state": 0.05,
+        "teamfight_participation": 0.05
+    }
+}
+
+{
+    "inflictor_name": "bounty_hunter_wind_walk",
+    "event_type": "damage_delivered",
+    "linked_node_id": "1050",
+    "linked_unit": "heroeldertitan",
+    "node_id": "1049",
+    "posX": 15236,
+    "posY": 17796,
     "node_context": [
         {
-            "key": "gold",
-            "formatted_key": "Gold",
-            "value": 123456
+            "gold": 0
         },
         {
-            "key": "xp",
-            "formatted_key": "XP",
-            "value": 123456
+            "xp": 0
         },
         {
-            "key": "health",
-            "formatted_key": "Health",
-            "value": 123456
+            "health": -1
         },
         {
-            "key": "deaths",
-            "formatted_key": "Deaths",
-            "value": 123
+            "deaths": 0
         },
         {
-            "key": "hero_kills",
-            "formatted_key": "Hero Kills",
-            "value": 123
+            "hero_kills": 0
         },
         {
-            "key": "items",
-            "formatted_key": "Items",
-            "value": [
-                "boots",
-                "scroll"
+            "items": [
+                "item_ward_dispenser",
+                "item_orb_of_venom",
+                "item_tango",
+                "item_clarity"
             ]
         },
         {
-            "key": "life_state",
-            "formatted_key": "Life State",
-            "value": 0.05
-        },
-        {
-            "key": "teamfight_participation",
-            "formatted_key": "Teamfight Participation",
-            "value": 0.05
+            "life_state": 0
         }
-    ]
+    ],
+    "unit": "herobountyhunter"
 }

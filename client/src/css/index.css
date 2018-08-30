@@ -121,46 +121,38 @@ h3 {
 	background-color: var(--filler);
 }
 
-.time-select-container {
-	display: flex;
-	justify-content: space-between;
-	margin: auto;
-	width: 100%;
-	height: 300px;
-}
-
 .timeline-container {
 	display: inline-block;
-	float: right;
-	/* text-align: center; */
-	/* width: 75%;
-	height: 301px; */
-	position: relative;
-	border: 1px solid black;
-	background-color: white;
-}
-
-.timeline-svg-axes {
-	position: absolute;
-	background-color: grey;
-}
-
-.timeline-svg-scatter {
-	position: relative;
-	float: right;
-	background-color: lightgrey;
-}
-
-.x-axis {
-	position: absolute;
-	top: 100px;
+	width: 100%;
 }
 
 .event-select-container {
+	float: left;
+	width: 12%;
+	background-color: grey;
+	/* border-right: 1px black solid; */
+}
+
+.y-axis {
+	float: right;
+	border-right: 1px solid black;
+}
+
+.x-axis {
+	height: 25px;
+}
+
+.timeline-chart {
+	float: right;
+	width: 88%;
+	height: 300px;
+	background-color: lightgrey;
+}
+
+.event-select-container-backup {
 	display: inline-block;
 	float: left;
 	text-align: center;
-	width: 24%;
 	height: 300px;
 	border: 1px solid black;
 	background-color: var(--filler);

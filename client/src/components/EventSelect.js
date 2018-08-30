@@ -12,7 +12,7 @@ class EventSelection extends Component {
     render() {
         const { events } = this.props.state;
         return (
-            <div className="event-select-container">
+            <div className="event-select-container-backup">
                 <div className="title-container">
                     <h3>Event Selection</h3>
                 </div>

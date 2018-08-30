@@ -33,7 +33,8 @@ class App extends Component {
                             <GameSelect />
                             <MapSelect />
                             <UnitSelect />
-                            <EventData />
+                            <EventSelect />
+                            {/* <EventData /> */}
                         </div>
                         <Map />
                         <div className="right-sidebar">
@@ -41,10 +42,7 @@ class App extends Component {
                             <Label />
                         </div>
                     </div>
-                    <div className="time-selection-container">
-                        <EventSelect />
-                        <Timeline />
-                    </div>
+                    <Timeline />
                 </div>
             );
         }
