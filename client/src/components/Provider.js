@@ -68,9 +68,9 @@ class Provider extends Component {
     }
 
     getEvents = async () => {
-        this.setState({
-            mapLoading: true
-        })
+        // this.setState({
+        //     mapLoading: true
+        // })
         const response = await fetch('/api/events', {
             method: 'POST',
             headers: {

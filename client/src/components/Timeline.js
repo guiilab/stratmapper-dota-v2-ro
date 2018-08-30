@@ -6,6 +6,7 @@ import { Context } from './Provider.js'
 import Scatterplot from './Scatterplot.js';
 import XAxis from './XAxis.js';
 import YAxis from './YAxis.js';
+import Event from './Event.js';
 
 const random = d3.randomNormal(5, 1);
 
@@ -52,18 +53,17 @@ class Timeline extends Component {
     }
 
     render() {
+        const { zoomTransform, width, height } = this.state;
         const { events } = this.props.state;
-        const { zoomTransform, width, height, padding, paddingLeft } = this.state;
 
         return (
             <div className="timeline-container" ref="timelineContainer">
                 <div className="event-select-container">
-                    <svg width="100" height={height} ref="svg2" className="y-axis">
+                    {/* <svg width="100" height={height} ref="svg2" className="y-axis">
                         <YAxis
-                            height={height}
-                            events={[...events.categories]}
                         />
-                    </svg>
+                    </svg> */}
+                    {events.categories.map((event) => <Event event={event} key={Math.random()} />)}
                 </div>
                 <div className="timeline-chart">
                     <svg width="100%" height="100%" ref="svg" className="timeline-svg-scatter">
@@ -75,7 +75,7 @@ class Timeline extends Component {
                             zoomType="detail" />
                     </svg>
                     <div className="x-axis">
-                        <svg width="100%" height="100%" ref="x-axis">
+                        <svg width="100%" ref="x-axis">
                             <XAxis
                                 width={width}
                                 zoomTransform={zoomTransform}

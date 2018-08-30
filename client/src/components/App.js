@@ -49,7 +49,6 @@ class App extends Component {
     }
 }
 
-
 export default () => (
     <Context.Consumer>
         {(context) => <App {...context} />}

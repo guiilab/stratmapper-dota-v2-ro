@@ -27,23 +27,23 @@ class UnitEvent extends Component {
 
         return (
             <React.Fragment>
-                <foreignObject x="-375" y="-20">
+                {/* <foreignObject x="-375" y="-20">
                     <ReactTooltip id="tooltip" place="bottom">
                         {this.props.event.tooltip_context.map((element)=> <TooltipElement element={element} key={Math.random()}/>)}
                     </ReactTooltip>
-                </foreignObject>
-                    <path
-                        data-tip
-                        data-for="tooltip"
-                        className="icon"
-                        d={d}
-                        transform={this.state.translate}
-                        fill="red"
-                        stroke="black"
-                        strokeWidth="1px"
-                        onMouseEnter={() => this.changeScale(.06)}
-                        onMouseLeave={() => this.changeScale(.05)}
-                    />
+                </foreignObject> */}
+                <path
+                    data-tip
+                    data-for="tooltip"
+                    className="icon"
+                    d={d}
+                    transform={this.state.translate}
+                    fill="red"
+                    stroke="black"
+                    strokeWidth="1px"
+                    onMouseEnter={() => this.changeScale(.06)}
+                    onMouseLeave={() => this.changeScale(.05)}
+                />
             </React.Fragment>
         );
     }

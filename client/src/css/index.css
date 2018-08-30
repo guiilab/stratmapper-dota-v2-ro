@@ -20,7 +20,6 @@ h3 {
 }
 
 .center-container {
-	/* text-align: center; */
 	height: 800px;
 	display: flex;
 	margin: 1rem 0;
@@ -32,10 +31,6 @@ h3 {
 	margin: auto;
 	border: 1px solid black;
 	background-color: rgb(236, 236, 236);
-	/* background-image: url('../img/dotaminimap_7.jpg');
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: cover; */
 }
 
 .map-title {
@@ -57,10 +52,6 @@ h3 {
 .tooltip-element-value {
 	font-weight: lighter;
 }
-
-/* .icon {
-	transition: .2s
-} */
 
 .left-sidebar, .right-sidebar {
 	display: flex;
@@ -124,13 +115,33 @@ h3 {
 .timeline-container {
 	display: inline-block;
 	width: 100%;
+	border: black 1px solid;
 }
 
 .event-select-container {
 	float: left;
 	width: 12%;
+	height: 300px;
 	background-color: grey;
-	/* border-right: 1px black solid; */
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+}
+
+.event-option-container {
+	position: relative;
+	clear: left;
+}
+
+.event-component {
+	border: solid black 1px;
+	display: inline;
+	float: left;
+	font-size: .4rem;
+}
+
+.event-label {
+	float: right;
 }
 
 .y-axis {
@@ -139,7 +150,9 @@ h3 {
 }
 
 .x-axis {
-	height: 25px;
+	position: relative;
+	top: -4px;
+	height: 50px;
 }
 
 .timeline-chart {

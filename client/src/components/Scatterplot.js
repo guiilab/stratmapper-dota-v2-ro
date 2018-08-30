@@ -27,8 +27,14 @@ class Scatterplot extends Component {
     render() {
         const { data } = this.props;
 
+        const x = -190;
+        const y = -45;
+        const styles = {
+            transform: `translate(${x}px, ${y}px)`
+        };
+
         return (
-            <g ref="scatterplot">
+            <g style={styles} ref="scatterplot">
                 {data.map(([x, y]) => <circle cx={this.xScale(x)} cy={this.yScale(y)} r={4} key={Math.random()} />)}
             </g>
         )

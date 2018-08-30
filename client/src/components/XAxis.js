@@ -30,6 +30,11 @@ class XAxis extends Component {
     }
 
     render() {
+        // const x = 0;
+        // const y = 0;
+        // const styles = {
+        //     transform: `translate(${x}px, ${y}px)`
+        // };
 
         return <g ref="xAxis" />
     }
