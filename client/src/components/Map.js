@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { Context } from './Provider.js'
-import UnitEvent from './UnitEvent.js';
+import EventIcon from './EventIcon.js';
 import Background from '../img/dotaminimap_7.jpg';
 
 var mapDivStyle = {
@@ -18,7 +18,7 @@ class Map extends Component {
                 <svg className="map-svg" height="800" width="800">
                     {unitEventsAll.map(event => {
                         return (
-                            <UnitEvent x={xScale(event.posX)} y={yScale(event.posY)} d={icons[event.event_type]} event={event} key={Math.random()} />
+                            <EventIcon x={xScale(event.posX)} y={yScale(event.posY)} d={icons[event.event_type]} event={event} key={Math.random()} />
                         )
                     })}
                 </svg>
@@ -26,6 +26,7 @@ class Map extends Component {
         );
     }
 }
+
 
 export default () => (
     <Context.Consumer>

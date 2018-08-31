@@ -1,20 +1,40 @@
 import React, { Component } from 'react';
 
 class EventOption extends Component {
+    constructor(props) {
+        super(props)
 
-    state = {
-        active: false
+
+        this.state = {
+            active: null,
+            event: null
+        }
     }
 
-    toggleClass = () => {
+    componentDidMount() {
         this.setState({
-            active: !this.state.active
+            active: false,
+            event: this.props.event
         })
     }
 
-    render() {
-        let { event, toggleSelectedEventLocal } = this.props;
+    // shouldComponentUpdate(nextProps) {
+    //     console.log(nextProps)
+    //     if (this.state.event === nextProps.event) {
+    //         return false
+    //     }
+    //     return true
+    // }
 
+    toggleClass = () => {
+        this.setState(prevState => ({
+            active: !prevState.active
+        }))
+    }
+
+    render() {
+        console.count()
+        let { event, toggleSelectedEventLocal } = this.props;
         return <div className={this.state.active ? 'event-option event-option-active' : 'event-option'} value={event} key={event} onClick={() => { this.toggleClass(); toggleSelectedEventLocal(event); }}>{event}</div>
     }
 }

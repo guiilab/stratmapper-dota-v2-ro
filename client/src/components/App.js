@@ -4,7 +4,6 @@ import { Context } from './Provider.js'
 
 import Map from './Map.js';
 import Timeline from './Timeline.js';
-import EventSelect from './EventSelect.js';
 import GameSelect from './GameSelect.js';
 import MapSelect from './MapSelect.js';
 import UnitSelect from './UnitSelect.js';
@@ -33,8 +32,7 @@ class App extends Component {
                             <GameSelect />
                             <MapSelect />
                             <UnitSelect />
-                            <EventSelect />
-                            {/* <EventData /> */}
+                            <EventData />
                         </div>
                         <Map />
                         <div className="right-sidebar">

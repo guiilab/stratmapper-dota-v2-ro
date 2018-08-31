@@ -5,40 +5,56 @@ import * as d3 from 'd3';
 class Scatterplot extends Component {
     constructor(props) {
         super(props);
+
         this.renderScatterplot();
+        console.log(this.props.timestampRange)
     }
     componentDidUpdate(nextProps) {
         this.renderScatterplot(nextProps);
     }
     renderScatterplot() {
-        const { data, width, height, zoomTransform } = this.props;
+        const { width, zoomTransform, timestampRange } = this.props;
 
-        this.xScale = d3.scaleLinear()
-            .domain([0, d3.max(data, ([x, y]) => x)])
+        this.xScaleTime = d3.scaleLinear()
+            .domain([timestampRange.start, timestampRange.end])
             .range([0, width])
-        this.yScale = d3.scaleLinear()
-            .domain([0, d3.max(data, ([x, y]) => y)])
-            .range([0, height]);
 
         if (zoomTransform) {
-            this.xScale.domain(zoomTransform.rescaleX(this.xScale).domain());
+            this.xScaleTime.domain(zoomTransform.rescaleX(this.xScaleTime).domain());
         }
+
     }
     render() {
-        const { data } = this.props;
+        const { data, events } = this.props;
 
-        const x = -190;
-        const y = -45;
-        const styles = {
-            transform: `translate(${x}px, ${y}px)`
-        };
+        const yScale = d3.scaleLinear()
+            .domain([0, events.length])
+            .range([0, 400])
+        console.log(data)
 
         return (
-            <g style={styles} ref="scatterplot">
-                {data.map(([x, y]) => <circle cx={this.xScale(x)} cy={this.yScale(y)} r={4} key={Math.random()} />)}
+            <g ref="scatterplot">
+                {data.map((event) => <circle cx={this.xScaleTime(event.timestamp)} cy={yScale(data.indexOf(event.event_type))} r={4} key={Math.random()} />)}
             </g>
         )
     }
 }
 
 export default Scatterplot;
+
+// render() {
+//     const { data } = this.props;
+
+
+
+//     return (
+//         <g ref="scatterplot">
+//             {data.map((event) => {
+//                 <circle cx={this.xScaleTime(event.timestamp)} cy={100} r={4} key={Math.random()} />
+//                 // <circle cx={this.xScaleTime(event.timestamp)} cy={yScale(data.indexOf(event))} r={4} key={Math.random()} />
+//             })
+//             }
+//         </g>
+//     )
+// }
+// }

@@ -3,7 +3,7 @@ import ReactTooltip from 'react-tooltip';
 
 import TooltipElement from './TooltipElement.js';
 
-class UnitEvent extends Component {
+class EventIcon extends Component {
     constructor(props) {
         super(props)
 
@@ -49,4 +49,4 @@ class UnitEvent extends Component {
     }
 }
 
-export default UnitEvent;
+export default EventIcon;

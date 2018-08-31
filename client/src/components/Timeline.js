@@ -5,10 +5,7 @@ import { Context } from './Provider.js'
 
 import Scatterplot from './Scatterplot.js';
 import XAxis from './XAxis.js';
-import YAxis from './YAxis.js';
-import Event from './Event.js';
-
-const random = d3.randomNormal(5, 1);
+import EventOption from './EventOption.js';
 
 class Timeline extends Component {
     constructor(props) {
@@ -17,7 +14,6 @@ class Timeline extends Component {
             width: null,
             height: null,
             padding: null,
-            data: d3.range(200).map(_ => [random(), random()]),
             zoomTransform: null,
             percentage: 0.7995733333
         }
@@ -28,12 +24,12 @@ class Timeline extends Component {
     componentDidMount() {
         this.setState({
             width: this.props.state.windowSettings.width * this.state.percentage,
-            height: 300,
+            height: 400,
             paddingLeft: 120,
             padding: 50
-        }, () => d3.select(this.refs.svg)
+        })
+        d3.select(this.refs.svg)
             .call(this.zoom)
-        )
     }
 
     componentDidUpdate(nextProps, prevState) {
@@ -52,33 +48,40 @@ class Timeline extends Component {
         });
     }
 
+    toggleSelectedEventLocal = (event) => {
+        this.props.toggleSelectedEvent(event)
+    }
+
     render() {
         const { zoomTransform, width, height } = this.state;
-        const { events } = this.props.state;
+        const { events, unitEventsAll, timestampRange } = this.props.state;
 
+        if (!width) {
+            return <div>Hello</div>
+        }
         return (
             <div className="timeline-container" ref="timelineContainer">
                 <div className="event-select-container">
-                    {/* <svg width="100" height={height} ref="svg2" className="y-axis">
-                        <YAxis
-                        />
-                    </svg> */}
-                    {events.categories.map((event) => <Event event={event} key={Math.random()} />)}
+                    {/* {events.all.map((event) => <Event event={event} key={Math.random()} />)} */}
+                    {events.all.map((event) => <EventOption event={event} key={event} toggleSelectedEventLocal={(e) => this.toggleSelectedEventLocal(e)} />)}
                 </div>
                 <div className="timeline-chart">
                     <svg width="100%" height="100%" ref="svg" className="timeline-svg-scatter">
                         <Scatterplot
-                            data={this.state.data}
+                            data={unitEventsAll}
                             width={width}
                             height={height}
                             zoomTransform={zoomTransform}
-                            zoomType="detail" />
+                            timestampRange={timestampRange}
+                            events={events.all}
+                        />
                     </svg>
                     <div className="x-axis">
                         <svg width="100%" ref="x-axis">
                             <XAxis
                                 width={width}
                                 zoomTransform={zoomTransform}
+                                timestampRange={timestampRange}
                             />
                         </svg>
                     </div>

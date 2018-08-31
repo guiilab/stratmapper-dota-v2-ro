@@ -13,28 +13,23 @@ class XAxis extends Component {
     }
 
     renderAxis() {
-        const { width, zoomTransform } = this.props;
+        const { zoomTransform } = this.props;
 
-        const xScale = d3.scaleLinear()
-            .domain([0, 20])
-            .range([0, width]);
+        const xScaleTime = d3.scaleLinear()
+            .domain([this.props.timestampRange.start, this.props.timestampRange.end])
+            .range([0, this.props.width])
 
         if (zoomTransform) {
-            xScale.domain(zoomTransform.rescaleX(xScale).domain());
+            xScaleTime.domain(zoomTransform.rescaleX(xScaleTime).domain());
         }
 
-        const axis = d3.axisBottom(xScale);
+        const axis = d3.axisBottom(xScaleTime);
 
         d3.select(this.refs.xAxis)
             .call(axis);
     }
 
     render() {
-        // const x = 0;
-        // const y = 0;
-        // const styles = {
-        //     transform: `translate(${x}px, ${y}px)`
-        // };
 
         return <g ref="xAxis" />
     }

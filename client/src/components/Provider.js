@@ -145,7 +145,6 @@ class Provider extends Component {
                 },
 
                 loadMatchData: (data) => {
-
                     this.setState({
                         coordinates: {
                             x: {
@@ -162,9 +161,9 @@ class Provider extends Component {
                             all: [...data[0].events.all],
                             categories: [...Object.keys(data[0].events.categories)]
                         },
-                        timestamp_range: {
-                            start: null,
-                            end: null
+                        timestampRange: {
+                            start: data[0].timestamp_range.start,
+                            end: data[0].timestamp_range.end
                         },
                         mapLoading: false
                     }, () => {
