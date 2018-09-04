@@ -33,7 +33,6 @@ class EventOption extends Component {
     }
 
     render() {
-        console.count()
         let { event, toggleSelectedEventLocal } = this.props;
         return <div className={this.state.active ? 'event-option event-option-active' : 'event-option'} value={event} key={event} onClick={() => { this.toggleClass(); toggleSelectedEventLocal(event); }}>{event}</div>
     }

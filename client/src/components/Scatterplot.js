@@ -25,16 +25,21 @@ class Scatterplot extends Component {
 
     }
     render() {
-        const { data, events } = this.props;
+        const { data, events, width } = this.props;
 
         const yScale = d3.scaleLinear()
-            .domain([0, events.length])
-            .range([0, 400])
-        console.log(data)
+            .domain([0, events.length-1])
+            .range([10, 390])
 
         return (
             <g ref="scatterplot">
-                {data.map((event) => <circle cx={this.xScaleTime(event.timestamp)} cy={yScale(data.indexOf(event.event_type))} r={4} key={Math.random()} />)}
+                {events.map((event) => {
+                return <line x1="0" y1={yScale(events.indexOf(event))} x2={width} y2={yScale(events.indexOf(event))} stroke="grey" strokeDasharray={3}/>})
+            }
+                {data.map((event) => {
+                return <circle cx={this.xScaleTime(event.timestamp)} cy={yScale(events.indexOf(event.event_type))} r={4} key={Math.random()} />})
+            }
+                {/* {data.map((event) => <circle cx={this.xScaleTime(event.timestamp)} cy={yScale(data.indexOf(event.event_type))} r={4} key={Math.random()} />)} */}
             </g>
         )
     }

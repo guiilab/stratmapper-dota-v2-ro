@@ -62,7 +62,6 @@ class Timeline extends Component {
         return (
             <div className="timeline-container" ref="timelineContainer">
                 <div className="event-select-container">
-                    {/* {events.all.map((event) => <Event event={event} key={Math.random()} />)} */}
                     {events.all.map((event) => <EventOption event={event} key={event} toggleSelectedEventLocal={(e) => this.toggleSelectedEventLocal(e)} />)}
                 </div>
                 <div className="timeline-chart">
