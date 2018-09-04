@@ -7,7 +7,6 @@ class Scatterplot extends Component {
         super(props);
 
         this.renderScatterplot();
-        console.log(this.props.timestampRange)
     }
     componentDidUpdate(nextProps) {
         this.renderScatterplot(nextProps);
@@ -32,15 +31,22 @@ class Scatterplot extends Component {
             .range([10, 390])
 
         return (
-            <g ref="scatterplot">
-                {events.map((event) => {
-                return <line x1="0" y1={yScale(events.indexOf(event))} x2={width} y2={yScale(events.indexOf(event))} stroke="grey" strokeDasharray={3}/>})
-            }
-                {data.map((event) => {
-                return <circle cx={this.xScaleTime(event.timestamp)} cy={yScale(events.indexOf(event.event_type))} r={4} key={Math.random()} />})
-            }
-                {/* {data.map((event) => <circle cx={this.xScaleTime(event.timestamp)} cy={yScale(data.indexOf(event.event_type))} r={4} key={Math.random()} />)} */}
-            </g>
+            <React.Fragment>
+                <g ref="axes">
+                    {events.map((event) => {
+                    return <line x1="0" y1={yScale(events.indexOf(event))} x2={width} y2={yScale(events.indexOf(event))} stroke="grey" strokeDasharray={3} key={Math.random()}/>})
+                }
+                </g>
+                <g ref="scatterplot">
+                    {data.map((event) => {
+                        if (!event.timestamp) {
+                            return;
+                        }
+                    return <circle cx={this.xScaleTime(event.timestamp)} cy={yScale(events.indexOf(event.event_type))} r={4} key={Math.random()} />})
+                }
+                    {/* {data.map((event) => <circle cx={this.xScaleTime(event.timestamp)} cy={yScale(data.indexOf(event.event_type))} r={4} key={Math.random()} />)} */}
+                </g>
+            </React.Fragment>
         )
     }
 }
