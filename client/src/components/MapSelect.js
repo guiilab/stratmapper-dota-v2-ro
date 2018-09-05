@@ -5,7 +5,7 @@ class MapSelection extends Component {
         return (
             <div className="map-select-container">
                 <div className="title-container">
-                    <h3>Map Selection</h3>
+                    <h3>Match Selection</h3>
                 </div>
                 <select name="map-select" id="map-select">
                     <option value="Map1">2500623971</option>

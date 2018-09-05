@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import ReactTooltip from 'react-tooltip';
 
+import {Context } from './Provider.js'
+
 import TooltipElement from './TooltipElement.js';
 
 class EventIcon extends Component {
@@ -16,22 +18,24 @@ class EventIcon extends Component {
         ReactTooltip.rebuild()
     }
 
-    changeScale = (s) => {
+    changeScale = (scale) => {
         this.setState({
-            translate: `translate(${this.props.x}, ${this.props.y}), scale(${s})`
+            translate: `translate(${this.props.x}, ${this.props.y}), scale(${scale})`
         })
     }
 
     render() {
-        const { d } = this.props;
+        const { d, event } = this.props;
+        const {tooltips} = this.props.state;
 
         return (
             <React.Fragment>
-                {/* <foreignObject x="-375" y="-20">
+                <foreignObject x="-375" y="-20">
                     <ReactTooltip id="tooltip" place="bottom">
-                        {this.props.event.tooltip_context.map((element)=> <TooltipElement element={element} key={Math.random()}/>)}
+                        {tooltips[event.event_type].map((element) => <TooltipElement element={element} event={event} key={element} /> )}
+                        {/* {event.map((element)=> <TooltipElement element={element} event={event} key={Math.random()}/>)} */}
                     </ReactTooltip>
-                </foreignObject> */}
+                </foreignObject>
                 <path
                     data-tip
                     data-for="tooltip"
@@ -40,7 +44,7 @@ class EventIcon extends Component {
                     transform={this.state.translate}
                     fill="red"
                     stroke="black"
-                    strokeWidth="1px"
+                    strokeWidth={10}
                     onMouseEnter={() => this.changeScale(.06)}
                     onMouseLeave={() => this.changeScale(.05)}
                 />
@@ -48,5 +52,8 @@ class EventIcon extends Component {
         );
     }
 }
-
-export default EventIcon;
+export default (props) => (
+    <Context.Consumer>
+        {(context) => <EventIcon {...context} {...props}  />}
+    </Context.Consumer>
+);

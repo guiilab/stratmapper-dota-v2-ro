@@ -6,6 +6,7 @@ import { Context } from './Provider.js'
 import Scatterplot from './Scatterplot.js';
 import XAxis from './XAxis.js';
 import EventOption from './EventOption.js';
+import AxisLines from './AxisLines.js'
 
 class Timeline extends Component {
     constructor(props) {
@@ -18,7 +19,7 @@ class Timeline extends Component {
             percentage: 0.7995733333
         }
         this.zoom = d3.zoom()
-            .scaleExtent([1, 8])
+            .scaleExtent([1, 15])
             .on("zoom", this.zoomed.bind(this))
     }
     componentDidMount() {
@@ -48,13 +49,10 @@ class Timeline extends Component {
         });
     }
 
-    toggleSelectedEventLocal = (event) => {
-        this.props.toggleSelectedEvent(event)
-    }
-
     render() {
         const { zoomTransform, width, height } = this.state;
         const { events, unitEventsAll, timestampRange } = this.props.state;
+        const { yScaleTime } = this.props;
 
         if (!width) {
             return <div>Hello</div>
@@ -62,17 +60,23 @@ class Timeline extends Component {
         return (
             <div className="timeline-container" ref="timelineContainer">
                 <div className="event-select-container">
-                    {events.all.map((event) => <EventOption event={event} key={event} toggleSelectedEventLocal={(e) => this.toggleSelectedEventLocal(e)} />)}
+                    {events.all.map((event) => <EventOption event={event} key={event} />)}
                 </div>
                 <div className="timeline-chart">
                     <svg width="100%" height="100%" ref="svg" className="timeline-svg-scatter">
+                        <AxisLines
+                            events={events.all}
+                            yScaleTime={yScaleTime}
+                            width={width}
+                        />
                         <Scatterplot
                             data={unitEventsAll}
-                            width={width}
                             height={height}
+                            width={width}
                             zoomTransform={zoomTransform}
                             timestampRange={timestampRange}
                             events={events.all}
+                            yScaleTime={yScaleTime}
                         />
                     </svg>
                     <div className="x-axis">

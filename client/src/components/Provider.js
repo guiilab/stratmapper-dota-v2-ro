@@ -44,7 +44,14 @@ class Provider extends Component {
         selectedUnits: [],
         selectedEvents: [],
         brushRange: [],
-        icons: {}
+        icons: {},
+        tooltips: {
+            death: [
+                "unit",
+                "linked_unit",
+                "event_type"
+            ]
+        }
     };
 
     componentDidMount() {
@@ -105,6 +112,12 @@ class Provider extends Component {
     setIconState = (event, icon) => {
         this.setState(prevState => ({
             icons: { ...prevState.icons, [event]: icon },
+        }))
+    }
+
+    setTooltipsState = (event, array) => {
+        this.setState(prevState => ({
+            tooltips: { ...prevState.tooltips, [event]: array },
         }))
     }
 
@@ -241,6 +254,23 @@ class Provider extends Component {
                     const scale = d3.scaleLinear()
                         .domain([this.state.coordinates.y.min, this.state.coordinates.y.max])
                         .range([this.state.mapSettings.height, 0])
+                    return scale(y)
+                },
+
+                getXScaleTime: () => {
+                    return d3.scaleLinear()
+                        .domain([this.state.timestampRange.start, this.state.timestampRange.end])
+                        .range([this.state.mapSettings.height, 0])
+                },
+
+                // const xScaleTime = d3.scaleLinear()
+                // .domain([this.props.timestampRange.start, this.props.timestampRange.end])
+                // .range([0, this.props.width])
+
+                yScaleTime: (y) => {
+                    const scale = d3.scaleLinear()
+                        .domain([0, this.state.events.all.length-1])
+                        .range([10, 390])
                     return scale(y)
                 },
 

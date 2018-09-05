@@ -97,20 +97,11 @@ h3 {
 	cursor: pointer;
 }
 
-.event-option {
-	font-size: .5rem;
-	border: 1px solid black;
-	margin: 0;
-	padding: 0;
-	width: 120px;
-	float: right;
-}
-
-.unit-option:hover, .group-option:hover, .event-option:hover {
+.unit-option:hover, .group-option:hover, .event-option:hover, .solo-button:hover {
 	background-color: green;
 }
 
-.unit-option-active, .group-option-active, .event-option-active {
+.unit-option-active, .group-option-active, .event-option-active, .solo-button-active {
 	background-color: green;
 }
 
@@ -131,26 +122,35 @@ h3 {
 	float: left;
 	width: 12%;
 	height: 400px;
+	min-width: 170px;
 	background-color: grey;
 	display: flex;
-	flex-direction: column;
-	justify-content: space-around;
+	flex-direction: column;	
+	justify-content: space-between;
+	text-align: center;
 }
 
 .event-option-container {
-	position: relative;
-	clear: left;
+	margin: auto;
+	display: flex;
+	justify-content: space-around;
+	flex-direction: row;
 }
 
-.event-component {
-	border: solid black 1px;
-	display: inline;
-	float: left;
-	font-size: .7rem;
+.event-option {
+	display: inline-block;
+	font-size: .5rem;
+	border: 1px solid black;
+	width: 120px;
+	cursor: pointer;
 }
 
-.event-label {
-	float: right;
+.solo-button {
+	display: inline-block;
+	border: 1px solid black;
+	font-size: .5rem;
+	margin-right: .3rem;
+	cursor: pointer;
 }
 
 .y-axis {

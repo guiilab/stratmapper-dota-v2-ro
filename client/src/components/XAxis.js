@@ -23,7 +23,7 @@ class XAxis extends Component {
             xScaleTime.domain(zoomTransform.rescaleX(xScaleTime).domain());
         }
 
-        const axis = d3.axisBottom(xScaleTime);
+        const axis = d3.axisBottom(xScaleTime)
 
         d3.select(this.refs.xAxis)
             .call(axis);
