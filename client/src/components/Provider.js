@@ -39,7 +39,7 @@ class Provider extends Component {
             all: [],
             categories: []
         },
-        units: [],
+        units: null,
         groups: [],
         selectedUnits: [],
         selectedEvents: [],
@@ -169,11 +169,12 @@ class Provider extends Component {
                                 max: data[0].coordinates.y.max
                             }
                         },
-                        groups: [...Object.keys(data[0].units.groups)],
+                        groups: [...data[0].units2.groups],
                         events: {
                             all: [...data[0].events.all],
                             categories: [...Object.keys(data[0].events.categories)]
                         },
+                        units: [...data[0].units2.all],
                         timestampRange: {
                             start: data[0].timestamp_range.start,
                             end: data[0].timestamp_range.end
@@ -183,6 +184,10 @@ class Provider extends Component {
                         this.state.groups.forEach((d, i) => this.setGroupState(d, data[0].units.groups[d]))
                         this.state.events.categories.forEach((event) => this.setIconState(event, data[0].events.categories[event].icon))
                     })
+                },
+
+                toggleUnitActive: (event) => {
+                    alert(event)
                 },
 
                 toggleSelectedEvent: (event) => {

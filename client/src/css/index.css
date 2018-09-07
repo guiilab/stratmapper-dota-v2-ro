@@ -83,7 +83,7 @@ h3 {
 	background-color: var(--filler);
 }
 
-.unit-select, .group-select {
+.unit-select, .group-select-container {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;

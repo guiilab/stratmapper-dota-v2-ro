@@ -29,46 +29,77 @@
         "map_height": 800,
         "map_url": "http://"
     },
-    "units": [
+    "all": [
         {
-            "id": "herokunkka",
-            "group": "radiant"
+            "id":"herokunkka",
+            "group": "radiant",
+            "mute": false,
+            "solo": false,
+            "active": false
         },
         {
             "id": "herovenomancer",
-            "group": "radiant"
+            "group": "radiant",
+            "mute": false,
+            "solo": false,
+            "active": false
         },
         {
             "id": "herotinker",
-            "group": "radiant"
+            "group": "radiant",
+            "mute": false,
+            "solo": false,
+            "active": false
         },
         {
             "id": "herolich",
-            "group": "radiant"
+            "group": "radiant",
+            "mute": false,
+            "solo": false,
+            "active": false
         },
         {
             "id": "herojakiro",
-            "group": "radiant"
+            "group": "radiant",
+            "mute": false,
+            "solo": false,
+            "active": false
         },
         {
             "id": "heroobsidiandestroyer",
-            "group": "dire"
+            "group": "dire",
+            "mute": false,
+            "solo": false,
+            "active": false
         },
         {
             "id": "herobloodseeker",
-            "group": "dire"
+            "group": "dire",
+            "mute": false,
+            "solo": false,
+            "active": false
         },
         {
             "id": "herofacelessvoid",
-            "group": "dire"
+            "group": "dire",
+            "mute": false,
+            "solo": false,
+            "active": false
         },
         {
             "id": "heroearthshaker",
-            "group": "dire"
+            "group": "dire",
+            "mute": false,
+            "solo": false,
+            "active": false
         },
         {
             "id": "heroomniknight",
-            "group": "dire"
+            "group": "dire",
+            "mute": false,
+            "solo": false,
+            "active": false
+            
         }
     ],
     "events": {
