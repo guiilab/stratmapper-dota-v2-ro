@@ -97,11 +97,11 @@ h3 {
 	cursor: pointer;
 }
 
-.unit-option:hover, .group-option:hover, .event-option:hover, .solo-button:hover {
+.group-option:hover, .event-option:hover, .solo-button:hover {
 	background-color: green;
 }
 
-.unit-option-active, .group-option-active, .event-option-active, .solo-button-active {
+.group-option-active, .event-option-active, .solo-button-active {
 	background-color: green;
 }
 

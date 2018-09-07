@@ -117,6 +117,12 @@ class Provider extends Component {
         }))
     }
 
+    setUnitState = (event, icon) => {
+        this.setState(prevState => ({
+            units: { ...prevState.units, [event]: icon },
+        }))
+    }
+
     setTooltipsState = (event, array) => {
         this.setState(prevState => ({
             tooltips: { ...prevState.tooltips, [event]: array },
@@ -171,12 +177,12 @@ class Provider extends Component {
                                 max: data[0].coordinates.y.max
                             }
                         },
-                        groups: [...data[0].units2.groups],
+                        groups: ["dire", "radiant"],
                         events: {
                             all: [...data[0].events.all],
                             categories: [...Object.keys(data[0].events.categories)]
                         },
-                        units: [...data[0].units2.all],
+                        units: {...data[0].units2},
                         timestampRange: {
                             start: data[0].timestamp_range.start,
                             end: data[0].timestamp_range.end
