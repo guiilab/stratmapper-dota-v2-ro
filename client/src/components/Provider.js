@@ -75,9 +75,9 @@ class Provider extends Component {
     }
 
     getEvents = async () => {
-        // this.setState({
-        //     mapLoading: true
-        // })
+        this.setState({
+            mapLoading: true
+        })
         const response = await fetch('/api/events', {
             method: 'POST',
             headers: {
@@ -100,7 +100,9 @@ class Provider extends Component {
     loadEvents = (data) => {
         this.setState({
             unitEventsAll: [...data]
-        })
+        }, () => this.setState({
+            mapLoading: false
+        }))
     }
 
     setGroupState = (d, unit) => {
