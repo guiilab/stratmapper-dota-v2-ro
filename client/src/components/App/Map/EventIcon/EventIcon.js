@@ -28,8 +28,6 @@ class EventIcon extends Component {
         const { d, event, unit } = this.props;
         const {units, tooltips} = this.props.state;
 
-        console.log(event)
-
         return (
             <React.Fragment>
                 <foreignObject x="-375" y="-20">
