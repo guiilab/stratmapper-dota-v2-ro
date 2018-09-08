@@ -46,7 +46,7 @@ class Scatterplot extends Component {
                                 fill={units[event.unit].color}
                                 stroke="black"
                                 strokeWidth={1}
-                                key={Math.random()} 
+                                key={event.node_id} 
                                 />
                         }})
                 }

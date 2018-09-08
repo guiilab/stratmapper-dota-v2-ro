@@ -138,6 +138,10 @@ class Provider extends Component {
         })
     };
 
+    removeSelectedUnits = (original, remove) => {
+        return original.filter(value => !remove.includes(value));
+      };
+
     render() {
         return (
             <Context.Provider value={{
@@ -228,20 +232,18 @@ class Provider extends Component {
                     }
                 },
 
-                toggleSelectedGroup: (units, boolean) => {
-                    // if (boolean === true) {
-
-                    // }
-                    // units.forEach((unit) => this.toggleSelectedUnitFunction(unit))
-                    // const duplicates = units.filter(unit => !this.state.selectedUnits.includes(unit));
-                    // const unique = units.filter(unit => !this.state.selectedUnits.includes(unit))
-                    // console.log(duplicates)
-                    // // if (duplicates) {
-
-                    // // }
-                    // this.setState(prevState => ({
-                    //     selectedUnits: [...prevState.selectedUnits, ...unique]
-                    // }), () => console.log(`selected units statge: ${this.state.selectedUnits}`))
+                toggleGroup: (groupUnits) => {
+                    let newUnits = groupUnits.filter(unit => !this.state.selectedUnits.includes(unit))
+                    if (newUnits.length === 0) {
+                        let array = this.removeSelectedUnits(this.state.selectedUnits, groupUnits)
+                        this.setState({
+                            selectedUnits: array
+                        }, ()=> console.log(this.state.selectedUnits))
+                    } else {
+                       this.setState(prevState=>({
+                            selectedUnits: [...prevState.selectedUnits, ...newUnits]
+                     }), () => console.log(this.state.selectedUnits))
+                    }
                 },
 
                 getXScale: () => {

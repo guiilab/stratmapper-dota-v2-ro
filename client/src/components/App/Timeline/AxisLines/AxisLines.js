@@ -8,7 +8,7 @@ class AxisLines extends Component {
         return (
         <g ref="axis-lines">
             {events.map((event) => {
-                return <line x1="0" y1={yScaleTime(events.indexOf(event))} x2={width} y2={yScaleTime(events.indexOf(event))} stroke="grey" strokeDasharray={3} key={Math.random()}/>})
+                return <line x1="0" y1={yScaleTime(events.indexOf(event))} x2={width} y2={yScaleTime(events.indexOf(event))} stroke="grey" strokeDasharray={3} key={event}/>})
             }
         </g>
         ) 

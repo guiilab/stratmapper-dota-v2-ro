@@ -1,31 +1,23 @@
 import React, { Component } from 'react';
 
+import * as _ from 'lodash';
+
 import {Context} from '../../../Provider.js'
 
 class EventOption extends Component {
-    constructor(props) {
-        super(props)
 
-        this.state = {
-            active: null,
-            event: null
-        }
-    }
-
-    componentDidMount() {
-        this.setState({
-            active: false,
-            event: this.props.event
-        })
+    state = {
+        active: false
     }
 
     shouldComponentUpdate(nextProps, nextState) {
         if (nextState.active !== this.state.active) {
-            return true
+            return true;
         } else {
             return false;
         }
     }
+
 
     toggleClass = () => {
         this.setState(prevState => ({
@@ -46,6 +38,6 @@ class EventOption extends Component {
 
 export default (props) => (
     <Context.Consumer>
-        {(context) => <EventOption {...context} event={props.event} />}
+        {(context) => <EventOption toggleSelectedEvent={context.toggleSelectedEvent} event={props.event} />}
     </Context.Consumer>
 );

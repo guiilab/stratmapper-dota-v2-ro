@@ -5,18 +5,26 @@ import { Context } from '../../../../../Provider.js';
 class UnitOption extends Component {
     constructor(props) {
         super(props)
+    }
+        
+    state = {
+        hover: false,
+        active: false,
+        color: null,
+        units: null,
+        unit: null
+    }
 
-        this.state = {
-            hover: false,
-            active: false,
-            color: null,
-            units: null,
-            unit: null
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (nextProps.state.selectedUnits.includes(nextProps.unit)) {
+          return {
+            active: true
+          };
         }
-    }
-
-    componentDidMount() {
-    }
+    
+        // Return null to indicate no change to state.
+        return null;
+      }
 
     shouldComponentUpdate(nextProps, nextState) {
         if (this.state.hover !== nextState.hover) {
@@ -40,7 +48,7 @@ class UnitOption extends Component {
 
     render() {
         const { unit, toggleSelectedUnit } = this.props;
-        const { units } = this.props.state;
+        const { units, selectedUnits } = this.props.state;
 
         let buttonStyle;
 
