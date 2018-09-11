@@ -1,0 +1,31 @@
+{
+    "workbench.colorTheme": "One Dark Pro",
+    "gitlens.advanced.messages": {
+        "suppressShowKeyBindingsNotice": true
+    },
+    "gitlens.currentLine.enabled": false,
+    "gitlens.codeLens.recentChange.enabled": false,
+    "gitlens.codeLens.authors.enabled": false,
+    "editor.formatOnSave": true,
+    "workbench.iconTheme": "vscode-icons",
+    "terminal.integrated.cursorBlinking": true,
+    "terminal.integrated.cursorStyle": "line",
+    "terminal.integrated.cwd": "/Users/andybryant/desktop/projects",
+    "terminal.integrated.macOptionIsMeta": true,
+    "editor.fontSize": 14,
+    "workbench.statusBar.feedback.visible": false,
+    "editor.largeFileOptimizations": false,
+    "explorer.confirmDragAndDrop": false,
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "emmet.showExpandedAbbreviation": "always",
+    "emmet.showAbbreviationSuggestions": true,
+    "emmet.triggerExpansionOnTab": true,
+    "emmet.includeLanguages": {
+        // "javascript": "html",
+        "javascript": "javascriptreact"
+    },
+    "editor.scrollBeyondLastLine": false,
+    "liveServer.settings.donotShowInfoMsg": true,
+    "editor.parameterHints": false,
+    "editor.quickSuggestions": false
+}

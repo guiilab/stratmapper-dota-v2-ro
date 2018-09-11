@@ -125,7 +125,7 @@ h3 {
 	min-width: 130px;
 	background-color: grey;
 	display: flex;
-	flex-direction: column;	
+	flex-direction: column;
 	justify-content: space-between;
 	text-align: center;
 }

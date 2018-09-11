@@ -140,7 +140,7 @@ class Provider extends Component {
 
     removeSelectedUnits = (original, remove) => {
         return original.filter(value => !remove.includes(value));
-      };
+    };
 
     render() {
         return (
@@ -186,7 +186,7 @@ class Provider extends Component {
                             all: [...data[0].events.all],
                             categories: [...Object.keys(data[0].events.categories)]
                         },
-                        units: {...data[0].units2},
+                        units: { ...data[0].units2 },
                         timestampRange: {
                             start: data[0].timestamp_range.start,
                             end: data[0].timestamp_range.end
@@ -238,11 +238,11 @@ class Provider extends Component {
                         let array = this.removeSelectedUnits(this.state.selectedUnits, groupUnits)
                         this.setState({
                             selectedUnits: array
-                        }, ()=> console.log(this.state.selectedUnits))
+                        }, () => console.log(this.state.selectedUnits))
                     } else {
-                       this.setState(prevState=>({
+                        this.setState(prevState => ({
                             selectedUnits: [...prevState.selectedUnits, ...newUnits]
-                     }), () => console.log(this.state.selectedUnits))
+                        }), () => console.log(this.state.selectedUnits))
                     }
                 },
 
@@ -278,15 +278,22 @@ class Provider extends Component {
                         .range([this.state.mapSettings.height, 0])
                 },
 
+
                 // const xScaleTime = d3.scaleLinear()
                 // .domain([this.props.timestampRange.start, this.props.timestampRange.end])
                 // .range([0, this.props.width])
 
                 yScaleTime: (y) => {
                     const scale = d3.scaleLinear()
-                        .domain([0, this.state.events.all.length-1])
+                        .domain([0, this.state.events.all.length - 1])
                         .range([10, 390])
                     return scale(y)
+                },
+
+                updateBrushRange: (e) => {
+                    this.setState({
+                        brushRange: e
+                    })
                 },
 
                 formatHeroString(string) {

@@ -29,33 +29,27 @@ class Scatterplot extends Component {
     }
     render() {
         const { data, events } = this.props;
-        const {units} = this.props.state;
+        const { units } = this.props.state;
 
         const yScale = d3.scaleLinear()
-            .domain([0, events.length-1])
+            .domain([0, events.length - 1])
             .range([10, 390])
 
-        data.forEach(function(d, i) {
-            console.log(data[i])
-            // if (data[i].posX)
-        })
-
         return (
-                <g ref="scatterplot">
-                    {data.map((event) => {
-                        if (event.timestamp) {
-                            return <circle 
-                                cx={this.xScaleTime(event.timestamp)}  
-                                cy={yScale(events.indexOf(event.event_type))} 
-                                r={4} 
-                                fill={units[event.unit].color}
-                                stroke="black"
-                                strokeWidth={1}
-                                key={event.node_id} 
-                                />
-                        }})
+            <g ref="scatterplot">
+                {data.map((event) => {
+                    return <circle
+                        cx={this.xScaleTime(event.timestamp)}
+                        cy={yScale(events.indexOf(event.event_type))}
+                        r={4}
+                        fill={units[event.unit].color}
+                        stroke="black"
+                        strokeWidth={1}
+                        key={event.node_id}
+                    />
+                })
                 }
-                </g>
+            </g>
         )
     }
 }

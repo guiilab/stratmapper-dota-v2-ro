@@ -7,6 +7,7 @@ import Scatterplot from './Scatterplot/Scatterplot.js';
 import XAxis from './XAxis/XAxis.js';
 import EventOption from './EventOption/EventOption.js';
 import AxisLines from './AxisLines/AxisLines.js'
+import Brush from './Brush/Brush.js';
 
 class Timeline extends Component {
     constructor(props) {
@@ -19,6 +20,7 @@ class Timeline extends Component {
             percentage: 0.7995733333
         }
         this.zoom = d3.zoom()
+            // .xExtent([2000, 5000])
             .scaleExtent([1, 15])
             .on("zoom", this.zoomed.bind(this))
     }
@@ -68,6 +70,11 @@ class Timeline extends Component {
                             events={events.all}
                             yScaleTime={yScaleTime}
                             width={width}
+                        />
+                        <Brush
+                            width={width}
+                            timestampRange={timestampRange}
+                            zoomTransform={zoomTransform}
                         />
                         <Scatterplot
                             data={unitEventsAll}

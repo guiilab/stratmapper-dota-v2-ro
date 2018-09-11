@@ -11,7 +11,13 @@ var mapDivStyle = {
 class Map extends Component {
     render() {
         const { xScale, yScale } = this.props;
-        const { unitEventsAll, icons } = this.props.state;
+        const { unitEventsAll, icons, brushRange } = this.props.state;
+
+        if (brushRange.length !== 0) {
+            const unitEventsFiltered = unitEventsAll.filter(function (unit) {
+                brushRange[0] && unit < brushRange[1]
+            })
+        }
 
         return (
             <div className="map-container" style={mapDivStyle}>
@@ -26,7 +32,6 @@ class Map extends Component {
         );
     }
 }
-
 
 export default () => (
     <Context.Consumer>

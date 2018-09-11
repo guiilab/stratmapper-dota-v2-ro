@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import { Context } from '../../../Provider.js';
 import * as d3 from 'd3';
 
 class XAxis extends Component {
@@ -12,7 +13,7 @@ class XAxis extends Component {
         this.renderAxis(nextProps);
     }
 
-    renderAxis() {
+    renderAxis = () => {
         const { zoomTransform } = this.props;
 
         const xScaleTime = d3.scaleLinear()
@@ -24,7 +25,6 @@ class XAxis extends Component {
         }
 
         const axis = d3.axisBottom(xScaleTime)
-
         d3.select(this.refs.xAxis)
             .call(axis);
     }
@@ -35,4 +35,8 @@ class XAxis extends Component {
     }
 }
 
-export default XAxis
+export default (props) => (
+    <Context.Consumer>
+        {(context) => <XAxis {...context} {...props} />}
+    </Context.Consumer>
+);
