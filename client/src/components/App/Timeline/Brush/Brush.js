@@ -9,7 +9,8 @@ class Brush extends Component {
 
     }
     componentDidMount(props) {
-        this.renderBrush(props)
+        this.renderBrush(props);
+        this.brushed();
     }
 
     componentWillUpdate(nextProps) {
@@ -22,18 +23,23 @@ class Brush extends Component {
 
         d3.select(this.refs.brush)
             .call(brush)
-        // .call(brush.move, [200, 200])    
     }
 
     brushed = () => {
+        let s = [100, 200];
         const xScaleTime = d3.scaleLinear()
             .domain([this.props.timestampRange.start, this.props.timestampRange.end])
             .range([0, this.props.width])
 
-        let s = d3.event.selection;
+        if (d3.event.selection) {
+            s = d3.event.selection
+        }
+
         if (this.props.zoomTransform) {
             const newXScale = this.props.zoomTransform.rescaleX(xScaleTime)
             this.props.updateBrushRange([newXScale.invert(s[0]), newXScale.invert(s[1])])
+        } else {
+            this.props.updateBrushRange([xScaleTime.invert(s[0]), xScaleTime.invert(s[1])])
         }
     }
 
