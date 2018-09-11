@@ -28,12 +28,17 @@ class Scatterplot extends Component {
 
     }
     render() {
-        const { data, events, unit } = this.props;
+        const { data, events } = this.props;
         const {units} = this.props.state;
 
         const yScale = d3.scaleLinear()
             .domain([0, events.length-1])
             .range([10, 390])
+
+        data.forEach(function(d, i) {
+            console.log(data[i])
+            // if (data[i].posX)
+        })
 
         return (
                 <g ref="scatterplot">

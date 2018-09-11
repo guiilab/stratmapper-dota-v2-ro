@@ -17,17 +17,22 @@ class UnitOption extends Component {
 
     static getDerivedStateFromProps(nextProps, prevState) {
         if (nextProps.state.selectedUnits.includes(nextProps.unit)) {
-          return {
-            active: true
-          };
+            return {
+                active: true
+            };
         }
-    
-        // Return null to indicate no change to state.
+        if (!nextProps.state.selectedUnits.includes(nextProps.unit)) {
+            return {
+                active: false
+            };
+        }
         return null;
       }
 
     shouldComponentUpdate(nextProps, nextState) {
         if (this.state.hover !== nextState.hover) {
+            return true;
+        } else if (nextState.active !== this.state.active) {
             return true;
         } else {
             return false;
