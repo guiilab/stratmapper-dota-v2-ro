@@ -3,10 +3,6 @@ import React, { Component } from 'react';
 import { Context } from '../../../../../Provider.js';
 
 class UnitOption extends Component {
-    constructor(props) {
-        super(props)
-    }
-        
     state = {
         hover: false,
         active: false,
@@ -27,7 +23,7 @@ class UnitOption extends Component {
             };
         }
         return null;
-      }
+    }
 
     shouldComponentUpdate(nextProps, nextState) {
         if (this.state.hover !== nextState.hover) {
@@ -53,16 +49,17 @@ class UnitOption extends Component {
 
     render() {
         const { unit, toggleSelectedUnit } = this.props;
-        const { units, selectedUnits } = this.props.state;
+        const { units } = this.props.state;
+        // const { units, selectedUnits } = this.props.state;
 
         let buttonStyle;
 
         if (this.state.hover || this.state.active) {
-            buttonStyle = {backgroundColor: units[unit].color}
+            buttonStyle = { backgroundColor: units[unit].color }
         }
 
         return (
-            <div className={this.state.active ? 'unit-option unit-option-active' : 'unit-option'} style={buttonStyle} key={unit} onMouseEnter={()=> this.toggleHover()} onMouseLeave={()=> this.toggleHover()} onClick={() => { this.toggleActive(); toggleSelectedUnit(unit); }} >{unit}</div>
+            <div className='unit-option' style={buttonStyle} key={unit} onMouseEnter={() => this.toggleHover()} onMouseLeave={() => this.toggleHover()} onClick={() => { this.toggleActive(); toggleSelectedUnit(unit); }} >{unit}</div>
         )
     }
 }

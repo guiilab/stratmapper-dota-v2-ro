@@ -71,11 +71,11 @@ class Timeline extends Component {
                             yScaleTime={yScaleTime}
                             width={width}
                         />
-                        {/* <Brush
+                        <Brush
                             width={width}
                             timestampRange={timestampRange}
                             zoomTransform={zoomTransform}
-                        /> */}
+                        />
                         <Scatterplot
                             data={unitEventsAll}
                             height={height}

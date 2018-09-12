@@ -1,25 +1,31 @@
 import React, { Component } from 'react';
 
-import * as _ from 'lodash';
-
-import {Context} from '../../../Provider.js'
+import { Context } from '../../../Provider.js'
 
 class EventOption extends Component {
 
     state = {
-        active: false
+        active: false,
+        hover: false
     }
 
     shouldComponentUpdate(nextProps, nextState) {
         if (nextState.active !== this.state.active) {
+            return true;
+        } else if (nextState.hover !== this.state.hover) {
             return true;
         } else {
             return false;
         }
     }
 
+    toggleHover = () => {
+        this.setState({
+            hover: !this.state.hover
+        })
+    }
 
-    toggleClass = () => {
+    toggleActive = () => {
         this.setState(prevState => ({
             active: !prevState.active
         }))
@@ -27,10 +33,16 @@ class EventOption extends Component {
 
     render() {
         const { event, toggleSelectedEvent } = this.props;
-        
+
+        let buttonStyle;
+
+        if (this.state.hover || this.state.active) {
+            buttonStyle = { backgroundColor: 'lightgrey' }
+        }
+
         return (
             <div className="event-option-container">
-                <div className={this.state.active ? 'event-option event-option-active' : 'event-option'} value={event} key={event} onClick={() => { this.toggleClass(); toggleSelectedEvent(event); }}>{event}</div>
+                <div className={this.state.active ? 'event-option event-option-active' : 'event-option'} style={buttonStyle} value={event} key={event} onMouseOver={() => this.toggleHover()} onMouseLeave={() => this.toggleHover()} onClick={() => { this.toggleActive(); toggleSelectedEvent(event); }}>{event}</div>
             </div>
         )
     }

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import ReactTooltip from 'react-tooltip';
 
-import {Context } from '../../../Provider.js'
+import { Context } from '../../../Provider.js'
 
-import TooltipElement from './TooltipElement/TooltipElement.js';
+// import TooltipElement from './TooltipElement/TooltipElement.js';
 
 class EventIcon extends Component {
     constructor(props) {
@@ -25,20 +25,22 @@ class EventIcon extends Component {
     }
 
     render() {
-        const { d, event, unit } = this.props;
-        const {units, tooltips} = this.props.state;
+        const { d, unit } = this.props;
+        // const { d, event, unit } = this.props;
+        const { units } = this.props.state;
+        // const { units, tooltips } = this.props.state;
 
         return (
             <React.Fragment>
-                <foreignObject x="-375" y="-20">
-                    <ReactTooltip id="tooltip" place="bottom">
-                        {/* {tooltips[event.event_type].map((element) => <TooltipElement element={element} event={event} key={element} /> )} */}
-                        {/* {event.map((element)=> <TooltipElement element={element} event={event} key={Math.random()}/>)} */}
-                    </ReactTooltip>
-                </foreignObject>
+                {/* <foreignObject x="-375" y="-20"> */}
+                {/* <ReactTooltip id="tooltip" place="bottom"> */}
+                {/* {tooltips[event.event_type].map((element) => <TooltipElement element={element} event={event} key={element} /> )} */}
+                {/* {event.map((element)=> <TooltipElement element={element} event={event} key={Math.random()}/>)} */}
+                {/* </ReactTooltip> */}
+                {/* </foreignObject> */}
                 <path
-                    data-tip
-                    data-for="tooltip"
+                    // data-tip
+                    // data-for="tooltip"
                     className="icon"
                     d={d}
                     transform={this.state.translate}
@@ -54,6 +56,6 @@ class EventIcon extends Component {
 }
 export default (props) => (
     <Context.Consumer>
-        {(context) => <EventIcon {...context} {...props}  />}
+        {(context) => <EventIcon {...context} {...props} />}
     </Context.Consumer>
 );

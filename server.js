@@ -17,7 +17,7 @@ app.use(bodyParser.json({
     limit: '500mb'
 }));
 
-const mongoUrl = 'mongodb://admin:M4pTh3W0rld@ds123532.mlab.com:23532/stratmap';
+const mongoUrl = 'mongodb://admin:M4pTh3W0rld@ds253922.mlab.com:53922/stratmap_overmatch'
 
 mongoose.Promise = global.Promise;
 mongoose.connect(mongoUrl, {
@@ -48,7 +48,7 @@ app.post('/api/events', function (req, res) {
         .find({
             unit: req.body.unit,
             event_type: req.body.event_type
-        }).limit(75)
+        }).limit(1000)
         .exec(function (err, events) {
             return res.send(events)
         })
@@ -57,7 +57,7 @@ app.post('/api/events', function (req, res) {
 app.post('/api/matches', function (req, res) {
     return MatchModel
         .find({
-            match_id: 4321
+            match_id: 43210
         })
         .exec(function (err, events) {
             return res.send(events)

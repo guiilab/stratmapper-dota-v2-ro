@@ -5,18 +5,18 @@ export const Context = createContext();
 
 class Provider extends Component {
     state = {
-        matchId: 4321,
+        matchId: 43210,
         apiMatchId: 2500623971,
         windowSettings: {
             width: null,
             height: null
         },
         mapSettings: {
-            width: 800,
-            height: 800,
+            width: 869,
+            height: 869,
             padding: 50
         },
-        coordinates: {
+        coordinateRange: {
             x: {
                 min: null,
                 max: null
@@ -171,22 +171,35 @@ class Provider extends Component {
 
                 loadMatchData: (data) => {
                     this.setState({
-                        coordinates: {
+                        coordinateRange: {
                             x: {
-                                min: data[0].coordinates.x.min,
-                                max: data[0].coordinates.x.max
+                                min: data[0].coordinate_range.x.min,
+                                max: data[0].coordinate_range.x.max
                             },
                             y: {
-                                min: data[0].coordinates.y.min,
-                                max: data[0].coordinates.y.max
+                                min: data[0].coordinate_range.y.min,
+                                max: data[0].coordinate_range.y.max
                             }
                         },
-                        groups: ["dire", "radiant"],
+                        groups: ["red", "blue"],
+                        red: [
+                            "Chicken",
+                            "-=NoBS=-Tompha",
+                            "largsarg",
+                            "DabOnTheTaters",
+                            "Cruiser99"
+                        ],
+                        blue: [
+                            "frankof",
+                            "-=NoBS=-Reyfox_I",
+                            "-=NoBS=-Rosalie",
+                            "Tear"
+                        ],
                         events: {
                             all: [...data[0].events.all],
-                            categories: [...Object.keys(data[0].events.categories)]
+                            details: [...Object.keys(data[0].events.details)]
                         },
-                        units: { ...data[0].units2 },
+                        units: { ...data[0].units },
                         timestampRange: {
                             start: data[0].timestamp_range.start,
                             end: data[0].timestamp_range.end
@@ -194,7 +207,7 @@ class Provider extends Component {
                         mapLoading: false
                     }, () => {
                         this.state.groups.forEach((d, i) => this.setGroupState(d, data[0].units.groups[d]))
-                        this.state.events.categories.forEach((event) => this.setIconState(event, data[0].events.categories[event].icon))
+                        this.state.events.details.forEach((event) => this.setIconState(event, data[0].events.details[event].icon))
                     })
                 },
 
@@ -242,32 +255,32 @@ class Provider extends Component {
                     } else {
                         this.setState(prevState => ({
                             selectedUnits: [...prevState.selectedUnits, ...newUnits]
-                        }), () => console.log(this.state.selectedUnits))
+                        }))
                     }
                 },
 
                 getXScale: () => {
                     return d3.scaleLinear()
-                        .domain([this.state.coordinates.x.min, this.state.coordinates.x.max])
+                        .domain([this.state.coordinateRange.x.min, this.state.coordinateRange.x.max])
                         .range([0, this.state.mapSettings.width])
                 },
 
                 getYScale: () => {
                     return d3.scaleLinear()
-                        .domain([this.state.coordinates.y.min, this.state.coordinates.y.max])
+                        .domain([this.state.coordinateRange.y.min, this.state.coordinateRange.y.max])
                         .range([this.state.mapSettings.height, 0])
                 },
 
                 xScale: (x) => {
                     const scale = d3.scaleLinear()
-                        .domain([this.state.coordinates.x.min, this.state.coordinates.x.max])
+                        .domain([this.state.coordinateRange.x.min, this.state.coordinateRange.x.max])
                         .range([0, this.state.mapSettings.width])
                     return scale(x)
                 },
 
                 yScale: (y) => {
                     const scale = d3.scaleLinear()
-                        .domain([this.state.coordinates.y.min, this.state.coordinates.y.max])
+                        .domain([this.state.coordinateRange.y.min, this.state.coordinateRange.y.max])
                         .range([this.state.mapSettings.height, 0])
                     return scale(y)
                 },
@@ -277,11 +290,6 @@ class Provider extends Component {
                         .domain([this.state.timestampRange.start, this.state.timestampRange.end])
                         .range([this.state.mapSettings.height, 0])
                 },
-
-
-                // const xScaleTime = d3.scaleLinear()
-                // .domain([this.props.timestampRange.start, this.props.timestampRange.end])
-                // .range([0, this.props.width])
 
                 yScaleTime: (y) => {
                     const scale = d3.scaleLinear()
