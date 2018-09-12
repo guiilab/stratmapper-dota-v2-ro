@@ -19,6 +19,7 @@ class Map extends Component {
         let unitEventsFiltered;
         if (brushRange.length !== 0) {
             unitEventsFiltered = unitEventsAll.filter(unit => (unit.timestamp > brushRange[0]) && (unit.timestamp < brushRange[1]))
+            console.log(unitEventsFiltered)
             // (unit.timestamp > brushRange[0]) && (unit.timestamp < brushRange[1])
         }
 

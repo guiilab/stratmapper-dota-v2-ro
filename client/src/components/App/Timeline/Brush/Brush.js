@@ -4,10 +4,6 @@ import { Context } from '../../../Provider.js';
 import * as d3 from 'd3';
 
 class Brush extends Component {
-    constructor(props) {
-        super(props)
-
-    }
     componentDidMount(props) {
         this.renderBrush(props);
         // this.brushed();
