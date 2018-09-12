@@ -10,7 +10,7 @@ class Brush extends Component {
     }
     componentDidMount(props) {
         this.renderBrush(props);
-        this.brushed();
+        // this.brushed();
     }
 
     componentWillUpdate(nextProps) {
