@@ -12,8 +12,8 @@ class Provider extends Component {
             height: null
         },
         mapSettings: {
-            width: 869,
-            height: 869,
+            width: 1000,
+            height: 1000,
             padding: 50
         },
         coordinateRange: {

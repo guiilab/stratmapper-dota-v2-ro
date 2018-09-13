@@ -4,7 +4,7 @@ import * as d3 from 'd3';
 
 import { Context } from '../../Provider.js'
 import EventIcon from './EventIcon/EventIcon.js';
-import Background from '../../../img/overmatch_cropped.jpg';
+import Background from '../../../img/overmatch.png';
 
 class Map extends Component {
     constructor(props) {
