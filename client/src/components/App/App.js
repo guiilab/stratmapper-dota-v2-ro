@@ -12,6 +12,10 @@ class App extends Component {
         this
             .props.getMatchData()
             .then(res => this.props.loadMatchData(res))
+
+        // this
+        //     .props.getEvents()
+        //     .then(res => this.props.loadEvents(res))
     }
 
     render() {

@@ -40,6 +40,7 @@ class Provider extends Component {
             categories: []
         },
         units: null,
+        unitsAll: null,
         groups: [],
         selectedUnits: [],
         selectedEvents: [],
@@ -59,16 +60,16 @@ class Provider extends Component {
         window.addEventListener("resize", this.updateWindowDimensions);
     }
 
-    componentDidUpdate(nextProps, prevState) {
-        if (
-            (this.state.selectedUnits !== prevState.selectedUnits) ||
-            (this.state.selectedEvents !== prevState.selectedEvents)
-        ) {
-            this
-                .getEvents()
-                .then(res => this.loadEvents(res))
-        }
-    }
+    // componentDidUpdate(nextProps, prevState) {
+    //     if (
+    //         (this.state.selectedUnits !== prevState.selectedUnits) ||
+    //         (this.state.selectedEvents !== prevState.selectedEvents)
+    //     ) {
+    //         this
+    //             .getEvents()
+    //             .then(res => this.loadEvents(res))
+    //     }
+    // }
 
     componentWillUnmount() {
         window.removeEventListener("resize", this.updateWindowDimensions);
@@ -85,8 +86,8 @@ class Provider extends Component {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                unit: this.state.selectedUnits,
-                event_type: this.state.selectedEvents
+                unit: this.state.unitsAll,
+                event_type: this.state.events.all
             })
         });
         const body = await response.json();
@@ -99,7 +100,8 @@ class Provider extends Component {
 
     loadEvents = (data) => {
         this.setState({
-            unitEventsAll: [...data]
+            unitEventsAll: [...data],
+            selectedUnits: [...this.state.unitsAll]
         }, () => this.setState({
             mapLoading: false
         }))
@@ -200,15 +202,48 @@ class Provider extends Component {
                             details: [...Object.keys(data[0].events.details)]
                         },
                         units: { ...data[0].units },
+                        unitsAll: [...Object.keys(data[0].units)],
                         timestampRange: {
                             start: data[0].timestamp_range.start,
                             end: data[0].timestamp_range.end
                         },
                         mapLoading: false
                     }, () => {
-                        this.state.groups.forEach((d, i) => this.setGroupState(d, data[0].units.groups[d]))
+                        this.state.groups.forEach((d, i) => this.setGroupState(d, data[0].groups[d]))
                         this.state.events.details.forEach((event) => this.setIconState(event, data[0].events.details[event].icon))
+                        this.getEvents().then(res => this.loadEvents(res))
                     })
+                },
+
+                getEvents: async () => {
+                    this.setState({
+                        mapLoading: true
+                    })
+                    const response = await fetch('/api/events', {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            unit: this.state.unitsAll,
+                            event_type: this.state.events.all
+                        })
+                    });
+                    const body = await response.json();
+
+                    if (response.status !== 200) {
+                        throw Error(body.message)
+                    }
+                    return body;
+                },
+
+                loadEvents: (data) => {
+                    this.setState({
+                        unitEventsAll: [...data]
+                    }, () => this.setState({
+                        mapLoading: false
+                    }))
                 },
 
                 toggleUnitActive: (event) => {
@@ -251,7 +286,7 @@ class Provider extends Component {
                         let array = this.removeSelectedUnits(this.state.selectedUnits, groupUnits)
                         this.setState({
                             selectedUnits: array
-                        }, () => console.log(this.state.selectedUnits))
+                        })
                     } else {
                         this.setState(prevState => ({
                             selectedUnits: [...prevState.selectedUnits, ...newUnits]
@@ -294,7 +329,7 @@ class Provider extends Component {
                 yScaleTime: (y) => {
                     const scale = d3.scaleLinear()
                         .domain([0, this.state.events.all.length - 1])
-                        .range([10, 390])
+                        .range([20, 390])
                     return scale(y)
                 },
 

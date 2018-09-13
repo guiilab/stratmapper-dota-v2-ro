@@ -83,6 +83,16 @@ h3 {
 
 .match-select-container {
 	height: 100px;
+	text-align: center;
+}
+
+#map-select {
+	position: relative;
+	top: 20px;
+	width: 200px;
+	/* -webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none; */
 }
 
 .select-container {
@@ -95,12 +105,29 @@ h3 {
 	justify-content: center;
 }
 
+.group-select {
+	padding: 1rem;
+	text-align: center;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.group-option-container {
+	border: solid 1px black;
+}
+
 .unit-option, .group-option {
 	border: 1px solid black;
 	display: inline-block;
 	margin: .2rem;
 	padding: .1rem;
 	cursor: pointer;
+	text-align: center;
+}
+
+.group-option {
+	width: 100px;
 }
 
 .event-data-container, .heatmap-container, .label-container {
@@ -139,7 +166,7 @@ h3 {
 	display: inline-block;
 	font-size: .5rem;
 	border: 1px solid black;
-	width: 150px;
+	width: 170px;
 	cursor: pointer;
 	padding: .2rem;
 }

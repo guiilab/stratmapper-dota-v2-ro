@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import _ from 'lodash'
 
 import { Context } from '../../../../Provider.js';
-
 import UnitOption from './UnitOption/UnitOption.js';
 
 class GroupOption extends Component {
@@ -9,6 +9,15 @@ class GroupOption extends Component {
     state = {
         active: false,
         hover: false
+    }
+
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (_.includes(nextProps.state.selectedUnits, ...nextProps.groupUnits)) {
+            return {
+                active: true
+            };
+        }
+        return null;
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -43,14 +52,14 @@ class GroupOption extends Component {
         }
 
         return (
-            <React.Fragment>
+            <div className="group-option-container">
                 <div className='group-option' style={buttonStyle} key={group} onMouseOver={() => this.toggleHover()} onMouseLeave={() => this.toggleHover()} onClick={() => { this.toggleActive(); toggleGroup(groupUnits) }} >{group}</div>
                 <div className="unit-selection">
                     {groupUnits.map(function (unit) {
                         return <UnitOption unit={unit} key={unit} />
                     })}
                 </div>
-            </React.Fragment>
+            </div>
         );
     }
 }

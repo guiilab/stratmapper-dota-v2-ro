@@ -29,7 +29,7 @@ class Scatterplot extends Component {
 
     render() {
         const { data, events } = this.props;
-        const { units } = this.props.state;
+        const { units, selectedUnits } = this.props.state;
 
         const yScale = d3.scaleLinear()
             .domain([0, events.length - 1])
@@ -42,7 +42,7 @@ class Scatterplot extends Component {
                         cx={this.xScaleTime(event.timestamp)}
                         cy={yScale(events.indexOf(event.event_type))}
                         r={4}
-                        fill={units[event.unit].color}
+                        fill={selectedUnits.includes(event.unit) ? units[event.unit].color : 'grey'}
                         stroke="black"
                         strokeWidth={1}
                         key={event.node_id}

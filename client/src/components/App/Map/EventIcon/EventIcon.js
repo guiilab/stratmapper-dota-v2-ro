@@ -25,8 +25,7 @@ class EventIcon extends Component {
     }
 
     render() {
-        const { d, unit } = this.props;
-        // const { d, event, unit } = this.props;
+        const { d, event, unit } = this.props;
         const { units } = this.props.state;
         // const { units, tooltips } = this.props.state;
 
@@ -47,7 +46,11 @@ class EventIcon extends Component {
                     fill={units[unit].color}
                     stroke="black"
                     strokeWidth={10}
-                    onMouseEnter={() => this.changeScale(.06)}
+                    onMouseEnter={() => {
+                        console.log(`posX: ${event.posX}, posY: ${event.posY}`);
+                        this.changeScale(.06);
+                    }
+                    }
                     onMouseLeave={() => this.changeScale(.05)}
                 />
             </React.Fragment>
