@@ -25,8 +25,8 @@ class Scatterplot extends Component {
         if (zoomTransform) {
             this.xScaleTime.domain(zoomTransform.rescaleX(this.xScaleTime).domain());
         }
-
     }
+
     render() {
         const { data, events } = this.props;
         const { units } = this.props.state;
