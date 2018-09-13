@@ -33,16 +33,16 @@ class Map extends Component {
     zoomed() {
         this.setState({
             zoomTransform: d3.event.transform
-        }, () => this.state.zoomTransform);
+        }, () => console.log(this.state.zoomTransform));
     }
 
     render() {
         const { xScale, yScale } = this.props;
-        // const { unitEventsAll, icons, mapSettings } = this.props.state;
         const { unitEventsAll, icons, brushRange, mapSettings } = this.props.state;
 
 
         const mapContainerStyle = {
+            backgroundColor: 'black',
             width: mapSettings.width,
             height: mapSettings.height
         };
@@ -57,7 +57,7 @@ class Map extends Component {
             return (
                 <div className="map-container" style={mapContainerStyle} >
                     <svg className="map-svg" ref="mapsvg" height={mapSettings.height} width={mapSettings.width}>
-                        <g>
+                        <g transform={this.state.zoomTransform}>
                             <defs>
                                 <pattern id="bg" width={1} height={1}>
                                     <image href={Background} ></image>
@@ -72,7 +72,7 @@ class Map extends Component {
         return (
             <div className="map-container" style={mapContainerStyle} >
                 <svg className="map-svg" height={mapSettings.height} width={mapSettings.width}>
-                    <g>
+                    <g transform={this.state.zoomTransform}>
                         <defs>
                             <pattern id="bg" width={1} height={1}>
                                 <image href={Background} ></image>
