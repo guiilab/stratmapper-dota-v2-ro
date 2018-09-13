@@ -33,7 +33,7 @@ class Map extends Component {
     zoomed() {
         this.setState({
             zoomTransform: d3.event.transform
-        }, () => console.log(this.state.zoomTransform));
+        });
     }
 
     render() {
