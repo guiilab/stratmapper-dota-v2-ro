@@ -9,6 +9,20 @@ class EventOption extends Component {
         hover: false
     }
 
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (nextProps.state.selectedEvents.includes(nextProps.event)) {
+            return {
+                active: true
+            };
+        }
+        if (!nextProps.state.selectedEvents.includes(nextProps.event)) {
+            return {
+                active: false
+            };
+        }
+        return null;
+    }
+
     shouldComponentUpdate(nextProps, nextState) {
         if (nextState.active !== this.state.active) {
             return true;
@@ -36,13 +50,15 @@ class EventOption extends Component {
 
         let buttonStyle;
 
-        if (this.state.hover || this.state.active) {
+        if (this.state.hover) {
+            buttonStyle = { backgroundColor: 'white' }
+        } else if (this.state.active) {
             buttonStyle = { backgroundColor: 'lightgrey' }
         }
 
         return (
             <div className="event-option-container">
-                <div className={this.state.active ? 'event-option event-option-active' : 'event-option'} style={buttonStyle} value={event} key={event} onMouseOver={() => this.toggleHover()} onMouseLeave={() => this.toggleHover()} onClick={() => { this.toggleActive(); toggleSelectedEvent(event); }}>{event}</div>
+                <div className='event-option' style={buttonStyle} value={event} key={event} onMouseOver={() => this.toggleHover()} onMouseLeave={() => this.toggleHover()} onClick={() => { this.toggleActive(); toggleSelectedEvent(event); }}>{event}</div>
             </div>
         )
     }
@@ -50,6 +66,6 @@ class EventOption extends Component {
 
 export default (props) => (
     <Context.Consumer>
-        {(context) => <EventOption toggleSelectedEvent={context.toggleSelectedEvent} event={props.event} />}
+        {(context) => <EventOption {...context} {...props} />}
     </Context.Consumer>
 );

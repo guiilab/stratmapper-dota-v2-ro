@@ -38,7 +38,7 @@ class Map extends Component {
 
     render() {
         const { xScale, yScale } = this.props;
-        const { unitEventsAll, icons, brushRange, mapSettings } = this.props.state;
+        const { unitEventsAll, icons, brushRange, mapSettings, selectedEvents } = this.props.state;
 
 
         const mapContainerStyle = {
@@ -50,7 +50,8 @@ class Map extends Component {
         let unitEventsFiltered;
 
         if (brushRange.length !== 0) {
-            unitEventsFiltered = unitEventsAll.filter(unit => (unit.timestamp > brushRange[0]) && (unit.timestamp < brushRange[1]))
+            let unitEventsBrushed = unitEventsAll.filter(unit => (unit.timestamp > brushRange[0]) && (unit.timestamp < brushRange[1]))
+            unitEventsFiltered = unitEventsBrushed.filter(unit => (selectedEvents.includes(unit.event_type)))
         }
 
         if (!unitEventsFiltered) {

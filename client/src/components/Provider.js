@@ -101,7 +101,8 @@ class Provider extends Component {
     loadEvents = (data) => {
         this.setState({
             unitEventsAll: [...data],
-            selectedUnits: [...this.state.unitsAll]
+            selectedUnits: [...this.state.unitsAll],
+            selectedEvents: [...this.state.events.all]
         }, () => this.setState({
             mapLoading: false
         }))
