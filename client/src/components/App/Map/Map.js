@@ -16,7 +16,7 @@ class Map extends Component {
 
         this.zoom = d3.zoom()
             // .xExtent([2000, 5000])
-            // .scaleExtent([1, 15])
+            .scaleExtent([.8, 15])
             .on("zoom", this.zoomed.bind(this))
     }
 
@@ -38,7 +38,7 @@ class Map extends Component {
 
     render() {
         const { xScale, yScale } = this.props;
-        const { unitEventsAll, icons, brushRange, mapSettings, selectedEvents } = this.props.state;
+        const { unitEventsAll, icons, brushRange, mapSettings, selectedUnits, selectedEvents } = this.props.state;
 
 
         const mapContainerStyle = {
@@ -51,7 +51,8 @@ class Map extends Component {
 
         if (brushRange.length !== 0) {
             let unitEventsBrushed = unitEventsAll.filter(unit => (unit.timestamp > brushRange[0]) && (unit.timestamp < brushRange[1]))
-            unitEventsFiltered = unitEventsBrushed.filter(unit => (selectedEvents.includes(unit.event_type)))
+            let unitEventsSelected = unitEventsBrushed.filter(unit => (selectedUnits.includes(unit.unit)))
+            unitEventsFiltered = unitEventsSelected.filter(unit => (selectedEvents.includes(unit.event_type)))
         }
 
         if (!unitEventsFiltered) {

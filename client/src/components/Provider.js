@@ -46,13 +46,7 @@ class Provider extends Component {
         selectedEvents: [],
         brushRange: [],
         icons: {},
-        tooltips: {
-            death: [
-                "unit",
-                "linked_unit",
-                "event_type"
-            ]
-        }
+        tooltips: {}
     };
 
     componentDidMount() {
@@ -139,7 +133,7 @@ class Provider extends Component {
                 width: window.innerWidth
             }
         })
-    };
+    }
 
     removeSelectedUnits = (original, remove) => {
         return original.filter(value => !remove.includes(value));
@@ -212,6 +206,7 @@ class Provider extends Component {
                     }, () => {
                         this.state.groups.forEach((d, i) => this.setGroupState(d, data[0].groups[d]))
                         this.state.events.details.forEach((event) => this.setIconState(event, data[0].events.details[event].icon))
+                        this.state.events.details.forEach((event) => this.setTooltipsState(event, data[0].events.details[event].tooltip_context))
                         this.getEvents().then(res => this.loadEvents(res))
                     })
                 },

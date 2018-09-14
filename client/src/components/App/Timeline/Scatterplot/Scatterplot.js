@@ -28,19 +28,15 @@ class Scatterplot extends Component {
     }
 
     render() {
-        const { data, events } = this.props;
+        const { data, events, yScaleTime } = this.props;
         const { units, selectedUnits, selectedEvents } = this.props.state;
-
-        const yScale = d3.scaleLinear()
-            .domain([0, events.length - 1])
-            .range([10, 390])
 
         return (
             <g ref="scatterplot">
                 {data.map((event) => {
                     return <circle
                         cx={this.xScaleTime(event.timestamp)}
-                        cy={yScale(events.indexOf(event.event_type))}
+                        cy={yScaleTime(events.indexOf(event.event_type))}
                         r={4}
                         fill={(selectedUnits.includes(event.unit) && (selectedEvents.includes(event.event_type))) ? units[event.unit].color : 'grey'}
                         stroke="black"
