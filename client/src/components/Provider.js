@@ -5,8 +5,8 @@ export const Context = createContext();
 
 class Provider extends Component {
     state = {
-        matchId: 43210,
         apiMatchId: 2500623971,
+        brushRange: [],
         windowSettings: {
             width: null,
             height: null
@@ -26,6 +26,7 @@ class Provider extends Component {
                 max: null
             }
         },
+        matchId: 43210,
         timeMax: null,
         play: {
             playhead: 0,
@@ -44,9 +45,9 @@ class Provider extends Component {
         groups: [],
         selectedUnits: [],
         selectedEvents: [],
-        brushRange: [],
         icons: {},
-        tooltips: {}
+        tooltips: {},
+        activeNode: null
     };
 
     componentDidMount() {
@@ -332,6 +333,12 @@ class Provider extends Component {
                 updateBrushRange: (e) => {
                     this.setState({
                         brushRange: e
+                    })
+                },
+
+                toggleActiveNode: (id) => {
+                    this.setState({
+                        activeNode: id
                     })
                 },
 

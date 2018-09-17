@@ -28,7 +28,7 @@ class Scatterplot extends Component {
     }
 
     render() {
-        const { data, events, yScaleTime } = this.props;
+        const { data, events, yScaleTime, toggleActiveNode } = this.props;
         const { units, selectedUnits, selectedEvents } = this.props.state;
 
         return (
@@ -42,6 +42,8 @@ class Scatterplot extends Component {
                         stroke="black"
                         strokeWidth={1}
                         key={event.node_id}
+                        onMouseOver={() => toggleActiveNode(event.node_id)}
+                        onMouseOut={() => toggleActiveNode(null)}
                     />
                 })
                 }

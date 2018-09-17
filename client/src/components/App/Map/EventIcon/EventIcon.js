@@ -10,7 +10,8 @@ class EventIcon extends Component {
 
         this.state = {
             hover: null,
-            translate: `translate(${this.props.x}, ${this.props.y}), scale(.05)`
+            translate: null,
+            active: false
         }
     }
 
@@ -18,8 +19,26 @@ class EventIcon extends Component {
         ReactTooltip.rebuild()
     }
 
+    static getDerivedStateFromProps(nextProps, nextState) {
+        if (nextProps.state.activeNode === nextProps.event.node_id) {
+            return {
+                translate: `translate(${nextProps.x}, ${nextProps.y}), scale(.06)`,
+                active: true
+            }
+        }
+        if (nextProps.state.activeNode !== nextProps.event.node_id) {
+            return {
+                translate: `translate(${nextProps.x}, ${nextProps.y}), scale(.05)`,
+                active: false
+            }
+        }
+        return null
+    }
+
     shouldComponentUpdate(nextProps, nextState) {
         if (this.state.hover !== nextState.hover) {
+            return true;
+        } else if (this.state.active !== nextState.active) {
             return true;
         } else {
             return false;
@@ -39,7 +58,7 @@ class EventIcon extends Component {
     }
 
     render() {
-        const { d, event, unit } = this.props;
+        const { d, event, unit, toggleActiveNode } = this.props;
         const { units, tooltips } = this.props.state;
 
         return (
@@ -58,8 +77,10 @@ class EventIcon extends Component {
                     fill={units[unit].color}
                     stroke="black"
                     strokeWidth={10}
-                    onMouseEnter={() => this.changeScale(.06)}
-                    onMouseLeave={() => this.changeScale(.05)}
+                    onMouseEnter={()=> toggleActiveNode(event.node_id)}
+                    onMouseLeave={()=> toggleActiveNode(null)}
+                    // onMouseEnter={() => this.changeScale(.06)}
+                    // onMouseLeave={() => this.changeScale(.05)}
                 />
             </React.Fragment>
         );
