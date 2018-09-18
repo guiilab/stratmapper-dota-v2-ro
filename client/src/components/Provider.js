@@ -35,7 +35,6 @@ class Provider extends Component {
         },
         mapLoading: false,
         unitEventsAll: [],
-        unitEventsFiltered: [],
         events: {
             all: [],
             categories: []
@@ -70,6 +69,14 @@ class Provider extends Component {
         window.removeEventListener("resize", this.updateWindowDimensions);
     }
 
+    compare = (a, b) => {
+        if (a.timestamp < b.timestamp)
+            return -1;
+        if (a.timestamp > b.timestamp)
+            return 1;
+        return 0;
+    }
+
     getEvents = async () => {
         this.setState({
             mapLoading: true
@@ -90,7 +97,7 @@ class Provider extends Component {
         if (response.status !== 200) {
             throw Error(body.message)
         }
-        return body;
+        return body.sort(this.compare)
     }
 
     loadEvents = (data) => {
@@ -333,7 +340,7 @@ class Provider extends Component {
                 updateBrushRange: (e) => {
                     this.setState({
                         brushRange: e
-                    }, () => console.log(this.state.brushRange))
+                    })
                 },
 
                 toggleActiveNode: (id) => {

@@ -7,12 +7,18 @@ import { Context } from '../../../Provider.js'
 class Scatterplot extends Component {
     constructor(props) {
         super(props);
-
         this.renderScatterplot();
     }
 
-    componentDidUpdate(nextProps) {
-        this.renderScatterplot(nextProps);
+    // shouldComponentUpdate(nextProps) {
+    //     if (nextProps.data !== this.props.data) {
+    //         return true
+    //     }
+    //     return false
+    // }
+
+    componentDidUpdate() {
+        this.renderScatterplot();
     }
 
     renderScatterplot() {

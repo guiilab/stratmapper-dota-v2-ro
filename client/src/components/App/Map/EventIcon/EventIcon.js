@@ -57,11 +57,11 @@ class EventIcon extends Component {
 
         return (
             <React.Fragment>
-                <foreignObject x="-375" y="-20">
+                {/* <foreignObject x="-375" y="-20">
                     <ReactTooltip id="tooltip" place="bottom">
                         {tooltips[event.event_type].map((element) => <TooltipElement event={event} elementKey={element.key} elementLabel={element.label} key={Math.random()} />)}
                     </ReactTooltip>
-                </foreignObject>
+                </foreignObject> */}
                 <path
                     style={{ zIndex: this.state.zIndex }}
                     data-tip

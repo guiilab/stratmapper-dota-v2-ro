@@ -4,6 +4,7 @@ import * as d3 from 'd3';
 
 import { Context } from '../../Provider.js'
 import EventIcon from './EventIcon/EventIcon.js';
+import UnitLine from './UnitLine/UnitLine.js'
 import Background from '../../../img/overmatch.png';
 
 class Map extends Component {
@@ -81,9 +82,24 @@ class Map extends Component {
                             </pattern>
                         </defs>
                         <rect height={mapSettings.height} width={mapSettings.width} fill="url(#bg)"></rect>
+                        {selectedUnits.map(unit => {
+                            return (
+                                <UnitLine
+                                    unit={unit}
+                                    key={Math.random()}
+                                />
+                            )
+                        })
+                        }
                         {unitEventsFiltered.map(event => {
                             return (
-                                <EventIcon x={xScale(event.posX)} y={yScale(event.posY)} d={icons[event.event_type]} unit={event.unit} event={event} key={event.node_id} />
+                                <EventIcon
+                                    x={xScale(event.posX)}
+                                    y={yScale(event.posY)}
+                                    d={icons[event.event_type]}
+                                    unit={event.unit}
+                                    event={event}
+                                    key={event.node_id} />
                             )
                         })}
                     </g>

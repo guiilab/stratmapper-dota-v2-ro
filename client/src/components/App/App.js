@@ -17,7 +17,7 @@ class App extends Component {
 
     render() {
 
-        const { timestampRange, groups, mapSettings, mapLoading } = this.props.state;
+        const { mapSettings, mapLoading } = this.props.state;
 
         const centerContainerStyle = {
             width: mapSettings.width,
