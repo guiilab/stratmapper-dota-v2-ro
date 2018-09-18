@@ -9,8 +9,8 @@ class EventIcon extends Component {
         super(props)
 
         this.state = {
-            hover: null,
             translate: null,
+            zIndex: null,
             active: false
         }
     }
@@ -23,12 +23,14 @@ class EventIcon extends Component {
         if (nextProps.state.activeNode === nextProps.event.node_id) {
             return {
                 translate: `translate(${nextProps.x}, ${nextProps.y}), scale(.06)`,
-                active: true
+                active: true,
+                zIndex: 100
             }
         }
         if (nextProps.state.activeNode !== nextProps.event.node_id) {
             return {
                 translate: `translate(${nextProps.x}, ${nextProps.y}), scale(.05)`,
+                zIndex: 1,
                 active: false
             }
         }
@@ -36,19 +38,11 @@ class EventIcon extends Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        if (this.state.hover !== nextState.hover) {
-            return true;
-        } else if (this.state.active !== nextState.active) {
+        if (this.state.active !== nextState.active) {
             return true;
         } else {
             return false;
         }
-    }
-
-    toggleHover = () => {
-        this.setState({
-            hover: !this.state.hover
-        })
     }
 
     changeScale = (scale) => {
@@ -69,6 +63,7 @@ class EventIcon extends Component {
                     </ReactTooltip>
                 </foreignObject>
                 <path
+                    style={{ zIndex: this.state.zIndex }}
                     data-tip
                     data-for="tooltip"
                     className="icon"
@@ -77,10 +72,8 @@ class EventIcon extends Component {
                     fill={units[unit].color}
                     stroke="black"
                     strokeWidth={10}
-                    onMouseEnter={()=> toggleActiveNode(event.node_id)}
-                    onMouseLeave={()=> toggleActiveNode(null)}
-                    // onMouseEnter={() => this.changeScale(.06)}
-                    // onMouseLeave={() => this.changeScale(.05)}
+                    onMouseEnter={() => toggleActiveNode(event.node_id)}
+                    onMouseLeave={() => toggleActiveNode(null)}
                 />
             </React.Fragment>
         );

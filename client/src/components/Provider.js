@@ -333,7 +333,7 @@ class Provider extends Component {
                 updateBrushRange: (e) => {
                     this.setState({
                         brushRange: e
-                    })
+                    }, () => console.log(this.state.brushRange))
                 },
 
                 toggleActiveNode: (id) => {

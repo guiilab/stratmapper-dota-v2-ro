@@ -137,25 +137,26 @@ h3 {
 }
 
 .select-container {
-	height: 300px;
+	height: 420px;
 }
 
-.unit-select, .group-select-container {
+.unit-selection {
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: center;
+	flex-direction: column;
+	justify-content: space-around;
+	margin: 0;
 }
 
 .group-select {
 	padding: 1rem;
 	text-align: center;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between;
+	vertical-align: middle;
 }
 
 .group-option-container {
-	border: solid 1px black;
+	height: 150px;
+	margin-bottom: 2rem;
 }
 
 .unit-option, .group-option {
@@ -169,6 +170,9 @@ h3 {
 
 .group-option {
 	width: 100px;
+	height: 100%;
+	line-height: 150px;
+	float: left;
 }
 
 .event-data-container, .heatmap-container, .label-container {
