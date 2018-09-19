@@ -4,6 +4,10 @@ html, body, #root {
 	font-family: sans-serif;
 }
 
+div:focus {
+	outline: 0;
+}
+
 :root {
 	--filler: lightgrey;
 }

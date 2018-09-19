@@ -60,7 +60,7 @@ class Timeline extends PureComponent {
         if (e.shiftKey) {
             this.setState({
                 shiftKeyActive: !this.state.shiftKeyActive
-            }, () => console.log(this.state.shiftKeyActive))
+            })
         }
     }
 
