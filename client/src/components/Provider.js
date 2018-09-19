@@ -47,7 +47,8 @@ class Provider extends Component {
         icons: {},
         tooltips: {},
         activeNode: null,
-        statusEventsFilteredByUnit: {}
+        statusEventsFilteredByUnit: {},
+        keypress: null
     };
 
     componentDidMount() {

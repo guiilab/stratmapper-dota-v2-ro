@@ -13,6 +13,7 @@ class Timeline extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
+            shiftKey: false,
             width: null,
             height: null,
             padding: null,
@@ -51,9 +52,17 @@ class Timeline extends PureComponent {
         });
     }
 
-    // panned() {
-    //     console.log(d3.event.wheelDeltaX)
-    // }
+    panned() {
+        console.log('working')
+    }
+
+    toggleShiftKey(e) {
+        if (e.shiftKey) {
+            this.setState({
+                shiftKeyActive: !this.state.shiftKeyActive
+            }, () => console.log(this.state.shiftKeyActive))
+        }
+    }
 
     render() {
         const { zoomTransform, width, height } = this.state;
@@ -68,18 +77,20 @@ class Timeline extends PureComponent {
                 <div className="event-select-container">
                     {events.timeline.map((event) => <EventOption event={event} key={event} />)}
                 </div>
-                <div className="timeline-chart">
+                <div className="timeline-chart" onKeyDown={(e) => this.toggleShiftKey(e)} onKeyUp={(e) => this.toggleShiftKey(e)} tabIndex="0">
                     <svg width="100%" height="100%" ref="svg" className="timeline-svg-scatter">
                         <AxisLines
                             events={events.timeline}
                             yScaleTime={yScaleTime}
                             width={width}
                         />
-                        <Brush
-                            width={width}
-                            timestampRange={timestampRange}
-                            zoomTransform={zoomTransform}
-                        />
+                        {this.state.shiftKeyActive ?
+                            <Brush
+                                width={width}
+                                timestampRange={timestampRange}
+                                zoomTransform={zoomTransform}
+                            /> : <g>Empty</g>
+                        }
                         <Scatterplot
                             data={unitEventsTimeline}
                             height={height}

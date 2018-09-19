@@ -10,7 +10,8 @@ class Brush extends Component {
     }
 
     // shouldComponentUpdate(nextProps, nextState) {
-    //     if (nextProps === this.props) {
+    //     if (nextProps.active === false) {
+    //         console.log('false?')
     //         return false
     //     }
     //     return true

@@ -5,17 +5,12 @@ import { Context } from '../../../Provider.js'
 class EventOption extends Component {
 
     state = {
-        active: false,
+        active: true,
         hover: false
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
-        if (nextProps.state.selectedEvents.includes(nextProps.event)) {
-            return {
-                active: true
-            };
-        }
-        if (!nextProps.state.selectedEvents.includes(nextProps.event)) {
+        if (!nextProps.selectedEvents.includes(nextProps.event)) {
             return {
                 active: false
             };
@@ -49,7 +44,6 @@ class EventOption extends Component {
         const { event, toggleSelectedEvent } = this.props;
 
         let buttonStyle;
-
         if (this.state.hover) {
             buttonStyle = { backgroundColor: 'white' }
         } else if (this.state.active) {
@@ -66,6 +60,6 @@ class EventOption extends Component {
 
 export default (props) => (
     <Context.Consumer>
-        {(context) => <EventOption {...context} {...props} />}
+        {(context) => <EventOption event={props.event} toggleSelectedEvent={context.toggleSelectedEvent} selectedEvents={context.state.selectedEvents} />}
     </Context.Consumer>
 );

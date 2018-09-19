@@ -12,8 +12,7 @@ class Map extends Component {
         super(props)
 
         this.state = {
-            zoomTransform: null,
-            origin: null
+            zoomTransform: null
         }
 
         this.zoom = d3.zoom()
@@ -24,9 +23,6 @@ class Map extends Component {
     componentDidMount() {
         d3.select(this.refs.mapsvg)
             .call(this.zoom)
-        this.setState({
-            origin: d3.zoomIdentity
-        })
     }
 
     componentDidUpdate(nextProps, prevState) {

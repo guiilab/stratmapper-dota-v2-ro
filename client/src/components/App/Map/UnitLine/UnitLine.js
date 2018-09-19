@@ -4,6 +4,7 @@ import { line } from 'd3';
 import { Context } from '../../../Provider.js'
 
 class UnitLine extends Component {
+
     render() {
         const { xScale, yScale, unit } = this.props;
         const { units, brushRange, statusEventsFilteredByUnit } = this.props.state;
