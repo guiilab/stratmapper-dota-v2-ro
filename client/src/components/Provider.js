@@ -12,9 +12,8 @@ class Provider extends Component {
             height: null
         },
         mapSettings: {
-            width: 1000,
-            height: 1000,
-            padding: 50
+            width: null,
+            height: null
         },
         coordinateRange: {
             x: {
@@ -213,6 +212,10 @@ class Provider extends Component {
                             start: data[0].timestamp_range.start,
                             end: data[0].timestamp_range.end
                         },
+                        mapSettings: {
+                            width: data[0].map.map_width,
+                            height: data[0].map.map_height
+                        },
                         mapLoading: false
                     }, () => {
                         // this.state.groups.forEach((d, i) => this.setGroupState(d, data[0].groups[d]))
@@ -305,7 +308,7 @@ class Provider extends Component {
                 yScaleTime: (y) => {
                     const scale = d3.scaleLinear()
                         .domain([0, this.state.events.timeline.length - 1])
-                        .range([20, 380])
+                        .range([15, 285])
                     return scale(y)
                 },
 

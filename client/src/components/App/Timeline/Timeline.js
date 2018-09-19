@@ -27,7 +27,7 @@ class Timeline extends PureComponent {
     componentDidMount() {
         this.setState({
             width: this.props.state.windowSettings.width * this.state.percentage,
-            height: 400,
+            height: 300,
             paddingLeft: 120,
             padding: 50
         })
@@ -50,6 +50,10 @@ class Timeline extends PureComponent {
             zoomTransform: d3.event.transform
         });
     }
+
+    // panned() {
+    //     console.log(d3.event.wheelDeltaX)
+    // }
 
     render() {
         const { zoomTransform, width, height } = this.state;
