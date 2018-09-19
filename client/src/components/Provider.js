@@ -35,6 +35,7 @@ class Provider extends Component {
         },
         mapLoading: false,
         unitEventsAll: [],
+        unitEventsStatus: [],
         events: {
             all: [],
             categories: []
@@ -46,24 +47,15 @@ class Provider extends Component {
         selectedEvents: [],
         icons: {},
         tooltips: {},
-        activeNode: null
+        activeNode: null,
+        // mapZoomTransform: false,
+        statusEventsFilteredByUnit: {}
     };
 
     componentDidMount() {
         this.updateWindowDimensions();
         window.addEventListener("resize", this.updateWindowDimensions);
     }
-
-    // componentDidUpdate(nextProps, prevState) {
-    //     if (
-    //         (this.state.selectedUnits !== prevState.selectedUnits) ||
-    //         (this.state.selectedEvents !== prevState.selectedEvents)
-    //     ) {
-    //         this
-    //             .getEvents()
-    //             .then(res => this.loadEvents(res))
-    //     }
-    // }
 
     componentWillUnmount() {
         window.removeEventListener("resize", this.updateWindowDimensions);
@@ -101,13 +93,28 @@ class Provider extends Component {
     }
 
     loadEvents = (data) => {
+        let unitEventsTimeline = [];
+        let unitEventsStatus = []
+        data.forEach((d) => {
+            if (d.event_type === "status_update") {
+                unitEventsStatus.push(d)
+            } else {
+                unitEventsTimeline.push(d)
+            }
+        })
         this.setState({
-            unitEventsAll: [...data],
+            // unitEventsAll: [...data],
+            unitEventsTimeline: [...unitEventsTimeline],
+            unitEventsStatus: [...unitEventsStatus],
             selectedUnits: [...this.state.unitsAll],
             selectedEvents: [...this.state.events.all]
-        }, () => this.setState({
-            mapLoading: false
-        }))
+        }, () => {
+            this.state.selectedUnits.forEach((unit) => this.setFilteredEventsByUnit(unit, this.state.unitEventsStatus))
+            this.setState({
+                mapLoading: false
+            })
+        }
+        )
     }
 
     setGroupState = (d, unit) => {
@@ -125,6 +132,13 @@ class Provider extends Component {
     setUnitState = (event, icon) => {
         this.setState(prevState => ({
             units: { ...prevState.units, [event]: icon },
+        }))
+    }
+
+    setFilteredEventsByUnit = (unit, events) => {
+        let filteredEvents = events.filter((event) => event.unit === unit)
+        this.setState(prevState => ({
+            statusEventsFilteredByUnit: { ...prevState.statusEventsFilteredByUnit, [unit]: [...filteredEvents] },
         }))
     }
 
@@ -186,22 +200,12 @@ class Provider extends Component {
                                 max: data[0].coordinate_range.y.max
                             }
                         },
-                        groups: ["red", "blue"],
-                        red: [
-                            "Chicken",
-                            "-=NoBS=-Tompha",
-                            "largsarg",
-                            "DabOnTheTaters",
-                            "Cruiser99"
-                        ],
-                        blue: [
-                            "frankof",
-                            "-=NoBS=-Reyfox_I",
-                            "-=NoBS=-Rosalie",
-                            "Tear"
-                        ],
+                        groups: [...Object.keys(data[0].groups)],
+                        red: [...data[0].groups.red],
+                        blue: [...data[0].groups.blue],
                         events: {
                             all: [...data[0].events.all],
+                            timeline: [...data[0].events.timeline],
                             details: [...Object.keys(data[0].events.details)]
                         },
                         units: { ...data[0].units },
@@ -212,42 +216,11 @@ class Provider extends Component {
                         },
                         mapLoading: false
                     }, () => {
-                        this.state.groups.forEach((d, i) => this.setGroupState(d, data[0].groups[d]))
+                        // this.state.groups.forEach((d, i) => this.setGroupState(d, data[0].groups[d]))
                         this.state.events.details.forEach((event) => this.setIconState(event, data[0].events.details[event].icon))
                         this.state.events.details.forEach((event) => this.setTooltipsState(event, data[0].events.details[event].tooltip_context))
                         this.getEvents().then(res => this.loadEvents(res))
                     })
-                },
-
-                getEvents: async () => {
-                    this.setState({
-                        mapLoading: true
-                    })
-                    const response = await fetch('/api/events', {
-                        method: 'POST',
-                        headers: {
-                            'Accept': 'application/json',
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            unit: this.state.unitsAll,
-                            event_type: this.state.events.all
-                        })
-                    });
-                    const body = await response.json();
-
-                    if (response.status !== 200) {
-                        throw Error(body.message)
-                    }
-                    return body;
-                },
-
-                loadEvents: (data) => {
-                    this.setState({
-                        unitEventsAll: [...data]
-                    }, () => this.setState({
-                        mapLoading: false
-                    }))
                 },
 
                 toggleUnitActive: (event) => {
@@ -332,8 +305,8 @@ class Provider extends Component {
 
                 yScaleTime: (y) => {
                     const scale = d3.scaleLinear()
-                        .domain([0, this.state.events.all.length - 1])
-                        .range([20, 390])
+                        .domain([0, this.state.events.timeline.length - 1])
+                        .range([20, 380])
                     return scale(y)
                 },
 
@@ -348,6 +321,14 @@ class Provider extends Component {
                         activeNode: id
                     })
                 },
+
+                // updateMapZoomTransform: () => {
+                //     this.setState({
+                //         mapZoomTransform: true
+                //     }, () => this.setState({
+                //         mapZoomTransform: false
+                //     }))
+                // },
 
                 formatHeroString(string) {
                     string = string.replace(/hero/g, "")

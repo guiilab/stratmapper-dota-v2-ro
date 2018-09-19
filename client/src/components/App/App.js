@@ -5,10 +5,11 @@ import { Context } from '../Provider.js'
 import LeftSidebar from './LeftSidebar/LeftSidebar.js'
 import Map from './Map/Map.js';
 import LoadingIcon from './LoadingIcon/LoadingIcon.js'
-// import RightSidebar from './RightSidebar/RightSidebar.js';
+import RightSidebar from './RightSidebar/RightSidebar.js';
 import Timeline from './Timeline/Timeline.js';
 
 class App extends Component {
+
     componentDidMount() {
         this
             .props.getMatchData()
@@ -32,7 +33,7 @@ class App extends Component {
                     <div className="center-container" style={centerContainerStyle}>
                         <LeftSidebar />
                         <Map />
-                        {/* <RightSidebar /> */}
+                        <RightSidebar />
                     </div>
                     <Timeline />
                 </div>

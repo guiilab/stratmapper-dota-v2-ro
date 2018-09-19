@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import * as d3 from 'd3';
 
 import { Context } from '../../Provider.js'
@@ -9,7 +9,7 @@ import EventOption from './EventOption/EventOption.js';
 import AxisLines from './AxisLines/AxisLines.js'
 import Brush from './Brush/Brush.js';
 
-class Timeline extends Component {
+class Timeline extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -53,7 +53,7 @@ class Timeline extends Component {
 
     render() {
         const { zoomTransform, width, height } = this.state;
-        const { events, unitEventsAll, timestampRange } = this.props.state;
+        const { events, unitEventsTimeline, timestampRange } = this.props.state;
         const { yScaleTime } = this.props;
 
         if (!width) {
@@ -62,12 +62,12 @@ class Timeline extends Component {
         return (
             <div className="timeline-container" ref="timelineContainer">
                 <div className="event-select-container">
-                    {events.all.map((event) => <EventOption event={event} key={event} />)}
+                    {events.timeline.map((event) => <EventOption event={event} key={event} />)}
                 </div>
                 <div className="timeline-chart">
                     <svg width="100%" height="100%" ref="svg" className="timeline-svg-scatter">
                         <AxisLines
-                            events={events.all}
+                            events={events.timeline}
                             yScaleTime={yScaleTime}
                             width={width}
                         />
@@ -77,12 +77,12 @@ class Timeline extends Component {
                             zoomTransform={zoomTransform}
                         />
                         <Scatterplot
-                            data={unitEventsAll}
+                            data={unitEventsTimeline}
                             height={height}
                             width={width}
                             zoomTransform={zoomTransform}
                             timestampRange={timestampRange}
-                            events={events.all}
+                            events={events.timeline}
                             yScaleTime={yScaleTime}
                         />
                     </svg>

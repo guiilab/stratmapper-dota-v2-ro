@@ -116,10 +116,21 @@ h3 {
 	text-align: center;
 }
 
-.match-select-container, .game-select-container, .select-container {
+.match-select-container, .game-select-container, .select-container, .map-control-container {
 	border: 1px solid black;
 	width: 300px;
 	background-color: var(--filler);
+}
+
+.map-control-options {
+	padding: 1rem;
+}
+
+.center-map-button {
+	text-align: center;
+	border: 1px black solid;
+	width: 100px;
+	margin: auto;
 }
 
 .match-select-container {

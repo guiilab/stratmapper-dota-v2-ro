@@ -12,11 +12,10 @@ class Map extends Component {
         super(props)
 
         this.state = {
-            zoomTransform: null
+            zoomTransform: null,
         }
 
         this.zoom = d3.zoom()
-            // .xExtent([2000, 5000])
             .scaleExtent([.8, 15])
             .on("zoom", this.zoomed.bind(this))
     }
@@ -26,7 +25,7 @@ class Map extends Component {
             .call(this.zoom)
     }
 
-    componentDidUpdate(nextProps, prevState) {
+    componentDidUpdate() {
         d3.select(this.refs.mapsvg)
             .call(this.zoom)
     }
@@ -34,13 +33,12 @@ class Map extends Component {
     zoomed() {
         this.setState({
             zoomTransform: d3.event.transform
-        });
+        }, () => console.log(this.state.zoomTransform));
     }
 
     render() {
         const { xScale, yScale } = this.props;
-        const { unitEventsAll, icons, brushRange, mapSettings, selectedUnits, selectedEvents } = this.props.state;
-
+        const { unitEventsTimeline, mapSettings, brushRange, selectedUnits, icons } = this.props.state;
 
         const mapContainerStyle = {
             backgroundColor: 'black',
@@ -48,64 +46,49 @@ class Map extends Component {
             height: mapSettings.height
         };
 
-        let unitEventsFiltered;
-
-        if (brushRange.length !== 0) {
-            let unitEventsBrushed = unitEventsAll.filter(unit => (unit.timestamp > brushRange[0]) && (unit.timestamp < brushRange[1]))
-            let unitEventsSelected = unitEventsBrushed.filter(unit => (selectedUnits.includes(unit.unit)))
-            unitEventsFiltered = unitEventsSelected.filter(unit => (selectedEvents.includes(unit.event_type)))
+        if (!unitEventsTimeline) {
+            return (
+                <div>Loading</div>
+            )
         }
-
-        if (!unitEventsFiltered) {
+        if (unitEventsTimeline) {
+            let unitEventsBrushed = unitEventsTimeline.filter(event => (event.timestamp > brushRange[0]) && (event.timestamp < brushRange[1]))
             return (
                 <div className="map-container" style={mapContainerStyle} >
-                    <svg className="map-svg" ref="mapsvg" height={mapSettings.height} width={mapSettings.width}>
+                    <svg className="map-svg" height={mapSettings.height} width={mapSettings.width}>
                         <g transform={this.state.zoomTransform}>
+                            {/* <g transform={this.props.state.mapZoomTransform}> */}
                             <defs>
                                 <pattern id="bg" width={1} height={1}>
                                     <image href={Background} ></image>
                                 </pattern>
                             </defs>
                             <rect height={mapSettings.height} width={mapSettings.width} fill="url(#bg)"></rect>
+                            {selectedUnits.map(unit => {
+                                return (
+                                    <UnitLine
+                                        unit={unit}
+                                        key={Math.random()}
+                                    />
+                                )
+                            })
+                            }
+                            {unitEventsBrushed.map(event => {
+                                return (
+                                    <EventIcon
+                                        x={xScale(event.posX)}
+                                        y={yScale(event.posY)}
+                                        d={icons[event.event_type]}
+                                        unit={event.unit}
+                                        event={event}
+                                        key={event.node_id} />
+                                )
+                            })}
                         </g>
                     </svg>
                 </div >
-            )
+            );
         }
-        return (
-            <div className="map-container" style={mapContainerStyle} >
-                <svg className="map-svg" height={mapSettings.height} width={mapSettings.width}>
-                    <g transform={this.state.zoomTransform}>
-                        <defs>
-                            <pattern id="bg" width={1} height={1}>
-                                <image href={Background} ></image>
-                            </pattern>
-                        </defs>
-                        <rect height={mapSettings.height} width={mapSettings.width} fill="url(#bg)"></rect>
-                        {selectedUnits.map(unit => {
-                            return (
-                                <UnitLine
-                                    unit={unit}
-                                    key={Math.random()}
-                                />
-                            )
-                        })
-                        }
-                        {unitEventsFiltered.map(event => {
-                            return (
-                                <EventIcon
-                                    x={xScale(event.posX)}
-                                    y={yScale(event.posY)}
-                                    d={icons[event.event_type]}
-                                    unit={event.unit}
-                                    event={event}
-                                    key={event.node_id} />
-                            )
-                        })}
-                    </g>
-                </svg>
-            </div >
-        );
     }
 }
 
