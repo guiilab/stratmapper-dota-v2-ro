@@ -116,14 +116,33 @@ h3 {
 	text-align: center;
 }
 
-.match-select-container, .game-select-container, .select-container, .map-control-container {
+.match-select-container, .game-select-container, .select-container {
 	border: 1px solid black;
 	width: 300px;
 	background-color: var(--filler);
 }
 
-.map-control-options {
-	padding: 1rem;
+.map-controls {
+	position: absolute;
+	top: 20px;
+	width: 200px;
+	height: 30px;
+	background-color: rgba(250, 250, 250, .3);
+	border: 1px solid black;
+	padding: .2rem;
+}
+
+.map-center {
+	margin: auto;
+	width: 60px;
+	border: black solid 1px;
+	background-color: grey;
+	text-align: center;
+	padding: .2rem;
+}
+
+.map-center:hover {
+	background-color: lightgrey;
 }
 
 .center-map-button {

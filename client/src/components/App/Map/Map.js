@@ -13,6 +13,7 @@ class Map extends Component {
 
         this.state = {
             zoomTransform: null,
+            origin: null
         }
 
         this.zoom = d3.zoom()
@@ -23,9 +24,12 @@ class Map extends Component {
     componentDidMount() {
         d3.select(this.refs.mapsvg)
             .call(this.zoom)
+        this.setState({
+            origin: d3.zoomIdentity
+        })
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(nextProps, prevState) {
         d3.select(this.refs.mapsvg)
             .call(this.zoom)
     }
@@ -34,6 +38,11 @@ class Map extends Component {
         this.setState({
             zoomTransform: d3.event.transform
         }, () => console.log(this.state.zoomTransform));
+    }
+
+    centerMap() {
+        d3.select(this.refs.mapsvg)
+            .call(this.zoom.transform, d3.zoomIdentity)
     }
 
     render() {
@@ -55,7 +64,7 @@ class Map extends Component {
             let unitEventsBrushed = unitEventsTimeline.filter(event => (event.timestamp > brushRange[0]) && (event.timestamp < brushRange[1]))
             return (
                 <div className="map-container" style={mapContainerStyle} >
-                    <svg className="map-svg" height={mapSettings.height} width={mapSettings.width}>
+                    <svg className="map-svg" ref="mapsvg" height={mapSettings.height} width={mapSettings.width}>
                         <g transform={this.state.zoomTransform}>
                             {/* <g transform={this.props.state.mapZoomTransform}> */}
                             <defs>
@@ -68,7 +77,7 @@ class Map extends Component {
                                 return (
                                     <UnitLine
                                         unit={unit}
-                                        key={Math.random()}
+                                        key={unit}
                                     />
                                 )
                             })
@@ -86,6 +95,9 @@ class Map extends Component {
                             })}
                         </g>
                     </svg>
+                    <div className="map-controls">
+                        <div className="map-center" onClick={() => this.centerMap()}>Center</div>
+                    </div>
                 </div >
             );
         }

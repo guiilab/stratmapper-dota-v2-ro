@@ -48,7 +48,6 @@ class Provider extends Component {
         icons: {},
         tooltips: {},
         activeNode: null,
-        // mapZoomTransform: false,
         statusEventsFilteredByUnit: {}
     };
 
@@ -321,14 +320,6 @@ class Provider extends Component {
                         activeNode: id
                     })
                 },
-
-                // updateMapZoomTransform: () => {
-                //     this.setState({
-                //         mapZoomTransform: true
-                //     }, () => this.setState({
-                //         mapZoomTransform: false
-                //     }))
-                // },
 
                 formatHeroString(string) {
                     string = string.replace(/hero/g, "")
