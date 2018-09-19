@@ -37,11 +37,14 @@ class Map extends Component {
     zoomed() {
         this.setState({
             zoomTransform: d3.event.transform
-        }, () => console.log(this.state.zoomTransform));
+        });
     }
 
     centerMap() {
         d3.select(this.refs.mapsvg)
+            .transition()
+            .duration(200)
+            .ease(d3.easeLinear)
             .call(this.zoom.transform, d3.zoomIdentity)
     }
 
