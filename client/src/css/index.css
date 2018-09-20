@@ -29,7 +29,7 @@ h3 {
 	justify-content: space-between;
 	min-width: 1250px;
 	max-width: 1400px;
-	margin: 1rem auto;
+	margin: .5rem auto;
 }
 
 .map-container {
@@ -99,9 +99,9 @@ h3 {
 }
 
 .left-sidebar, .right-sidebar {
-	display: flex;
+	/* display: flex;
 	justify-content: space-between;
-	flex-direction: column;
+	flex-direction: column; */
 	height: 600px;
 }
 
@@ -125,6 +125,22 @@ h3 {
 	border: 1px solid black;
 	width: 300px;
 	background-color: var(--filler);
+}
+
+.brush-button-container {
+	background: var(--filler);
+	width: 12%;
+	position: absolute;
+	top: -22px;
+	left: -1px;
+	border: 1px black solid;
+}
+
+.brush-button {
+	font-size: .7rem;
+	font-weight: 700;
+	text-align: center;
+	padding: .2rem;
 }
 
 .map-controls {
@@ -161,6 +177,7 @@ h3 {
 .match-select-container {
 	height: 100px;
 	text-align: center;
+	margin-bottom: 3rem;
 }
 
 #map-select {
@@ -225,6 +242,7 @@ h3 {
 .timeline-container {
 	/* display: inline-block; */
 	/* width: 100%; */
+	position: relative;
 	min-width: 1250px;
 	max-width: 1400px;
 	border: black 1px solid;

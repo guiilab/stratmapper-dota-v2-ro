@@ -8,6 +8,7 @@ import XAxis from './XAxis/XAxis.js';
 import EventOption from './EventOption/EventOption.js';
 import AxisLines from './AxisLines/AxisLines.js'
 import Brush from './Brush/Brush.js';
+import BrushButton from './BrushButton/BrushButton.js'
 
 class Timeline extends PureComponent {
     constructor(props) {
@@ -63,18 +64,10 @@ class Timeline extends PureComponent {
         console.log('working')
     }
 
-    toggleShiftKey(e) {
-        if (e.shiftKey) {
-            this.setState({
-                shiftKeyActive: !this.state.shiftKeyActive
-            })
-        }
-    }
-
     render() {
         const { zoomTransform, width, height } = this.state;
         const { events, unitEventsTimeline, timestampRange, timelineSettings } = this.props.state;
-        const { yScaleTime } = this.props;
+        const { yScaleTime, toggleBrushActive } = this.props;
 
         const heightStyle = {
             height: timelineSettings.height
@@ -86,16 +79,17 @@ class Timeline extends PureComponent {
         return (
             <div className="timeline-container" ref="timelineContainer">
                 <div className="event-select-container" style={heightStyle}>
+                    <BrushButton />
                     {events.timeline.map((event) => <EventOption event={event} key={event} />)}
                 </div>
-                <div className="timeline-chart" style={heightStyle} onKeyDown={(e) => this.toggleShiftKey(e)} onKeyUp={(e) => this.toggleShiftKey(e)} tabIndex="0">
+                <div className="timeline-chart" style={heightStyle} onKeyDown={(e) => toggleBrushActive(e)} onKeyUp={(e) => toggleBrushActive(e)} tabIndex="0">
                     <svg width="100%" height="100%" ref="svg" className="timeline-svg-scatter">
                         <AxisLines
                             events={events.timeline}
                             yScaleTime={yScaleTime}
                             width={width}
                         />
-                        {this.state.shiftKeyActive ?
+                        {this.props.state.brushActive ?
                             <Brush
                                 width={width}
                                 timestampRange={timestampRange}

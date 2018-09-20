@@ -51,7 +51,8 @@ class Provider extends Component {
         tooltips: {},
         activeNode: null,
         statusEventsFilteredByUnit: {},
-        keypress: null
+        keypress: null,
+        brushActive: false
     };
 
     componentDidMount() {
@@ -322,6 +323,19 @@ class Provider extends Component {
                     this.setState({
                         activeNode: node
                     })
+                },
+
+                toggleBrushActive: (e) => {
+                    if (e.shiftKey) {
+                        this.setState({
+                            brushActive: !this.state.brushActive
+                        })
+                    }
+                    if (e === 'toggle') {
+                        this.setState({
+                            brushActive: !this.state.brushActive
+                        })
+                    }
                 },
 
                 formatHeroString(string) {
