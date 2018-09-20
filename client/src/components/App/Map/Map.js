@@ -61,6 +61,7 @@ class Map extends Component {
         }
         if (unitEventsTimeline) {
             let unitEventsBrushed = unitEventsTimeline.filter(event => (event.timestamp > brushRange[0]) && (event.timestamp < brushRange[1]))
+
             return (
                 <div className="map-container" style={mapContainerStyle} >
                     <svg className="map-svg" ref="mapsvg" height={mapSettings.height} width={mapSettings.width}>

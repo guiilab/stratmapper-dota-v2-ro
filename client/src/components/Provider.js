@@ -15,6 +15,9 @@ class Provider extends Component {
             width: null,
             height: null
         },
+        timelineSettings: {
+            height: 250
+        },
         coordinateRange: {
             x: {
                 min: null,
@@ -309,7 +312,7 @@ class Provider extends Component {
                 yScaleTime: (y) => {
                     const scale = d3.scaleLinear()
                         .domain([0, this.state.events.timeline.length - 1])
-                        .range([15, 285])
+                        .range([14, this.state.timelineSettings.height - 12])
                     return scale(y)
                 },
 

@@ -5,7 +5,7 @@ import { Context } from '../Provider.js'
 import LeftSidebar from './LeftSidebar/LeftSidebar.js'
 import Map from './Map/Map.js';
 import LoadingIcon from './LoadingIcon/LoadingIcon.js'
-// import RightSidebar from './RightSidebar/RightSidebar.js';
+import RightSidebar from './RightSidebar/RightSidebar.js';
 import Timeline from './Timeline/Timeline.js';
 
 class App extends Component {
@@ -18,22 +18,17 @@ class App extends Component {
 
     render() {
 
-        const { mapSettings, mapLoading } = this.props.state;
-
-        const centerContainerStyle = {
-            width: mapSettings.width,
-            height: mapSettings.height
-        }
+        const { mapLoading } = this.props.state;
 
         if (mapLoading) {
             return <LoadingIcon />
         } else {
             return (
                 <div className="app-container">
-                    <div className="center-container" style={centerContainerStyle}>
+                    <div className="center-container" >
                         <LeftSidebar />
                         <Map />
-                        {/* <RightSidebar /> */}
+                        <RightSidebar />
                     </div>
                     <Timeline />
                 </div>

@@ -18,7 +18,8 @@ class Timeline extends PureComponent {
             height: null,
             padding: null,
             zoomTransform: null,
-            percentage: 0.7995733333
+            // percentage: 0.7995733333
+            percentage: .7
         }
         this.zoom = d3.zoom()
             // .xExtent([2000, 5000])
@@ -26,9 +27,15 @@ class Timeline extends PureComponent {
             .on("zoom", this.zoomed.bind(this))
     }
     componentDidMount() {
+        let calculatedWidth;
+        if ((this.props.state.windowSettings.width * this.state.percentage) < 1000) {
+            calculatedWidth = 1300
+        } else {
+            calculatedWidth = this.props.state.windowSettings.width * this.state.percentage
+        }
         this.setState({
-            width: this.props.state.windowSettings.width * this.state.percentage,
-            height: 300,
+            width: calculatedWidth,
+            height: 250,
             paddingLeft: 120,
             padding: 50
         })
@@ -37,7 +44,7 @@ class Timeline extends PureComponent {
     }
 
     componentDidUpdate(nextProps, prevState) {
-        if (nextProps.state.windowSettings.width * this.state.percentage !== prevState.width) {
+        if ((nextProps.state.windowSettings.width > 1600) && (nextProps.state.windowSettings.width * this.state.percentage !== prevState.width)) {
             this.setState({
                 width: nextProps.state.windowSettings.width * this.state.percentage
             })
@@ -66,18 +73,22 @@ class Timeline extends PureComponent {
 
     render() {
         const { zoomTransform, width, height } = this.state;
-        const { events, unitEventsTimeline, timestampRange } = this.props.state;
+        const { events, unitEventsTimeline, timestampRange, timelineSettings } = this.props.state;
         const { yScaleTime } = this.props;
+
+        const heightStyle = {
+            height: timelineSettings.height
+        }
 
         if (!width) {
             return <div>Hello</div>
         }
         return (
             <div className="timeline-container" ref="timelineContainer">
-                <div className="event-select-container">
+                <div className="event-select-container" style={heightStyle}>
                     {events.timeline.map((event) => <EventOption event={event} key={event} />)}
                 </div>
-                <div className="timeline-chart" onKeyDown={(e) => this.toggleShiftKey(e)} onKeyUp={(e) => this.toggleShiftKey(e)} tabIndex="0">
+                <div className="timeline-chart" style={heightStyle} onKeyDown={(e) => this.toggleShiftKey(e)} onKeyUp={(e) => this.toggleShiftKey(e)} tabIndex="0">
                     <svg width="100%" height="100%" ref="svg" className="timeline-svg-scatter">
                         <AxisLines
                             events={events.timeline}
@@ -93,7 +104,6 @@ class Timeline extends PureComponent {
                         }
                         <Scatterplot
                             data={unitEventsTimeline}
-                            height={height}
                             width={width}
                             zoomTransform={zoomTransform}
                             timestampRange={timestampRange}

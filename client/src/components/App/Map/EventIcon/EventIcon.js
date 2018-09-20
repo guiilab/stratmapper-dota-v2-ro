@@ -68,6 +68,7 @@ class EventIcon extends Component {
                     data-for="tooltip"
                     className="icon"
                     d={d}
+                    display={this.props.state.selectedUnits.includes(unit) ? 'inherit' : 'none'}
                     transform={this.state.translate}
                     fill={units[unit].color}
                     stroke="black"
