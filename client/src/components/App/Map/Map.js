@@ -46,7 +46,7 @@ class Map extends Component {
 
     render() {
         const { xScale, yScale } = this.props;
-        const { unitEventsTimeline, mapSettings, brushRange, selectedUnits, icons } = this.props.state;
+        const { unitEventsTimeline, mapSettings, brushRange, selectedUnits, icons, brushActive, selectedEvents } = this.props.state;
 
         const mapContainerStyle = {
             backgroundColor: 'black',
@@ -62,6 +62,7 @@ class Map extends Component {
         if (unitEventsTimeline) {
             let unitEventsBrushed = unitEventsTimeline.filter(event => (event.timestamp > brushRange[0]) && (event.timestamp < brushRange[1]))
             let unitEventsFiltered = unitEventsBrushed.filter(event => (selectedUnits.includes(event.unit)))
+            let unitEventsFinal = unitEventsFiltered.filter(event => (selectedEvents.includes(event.event_type)))
 
             return (
                 <div className="map-container" style={mapContainerStyle} >
@@ -74,16 +75,16 @@ class Map extends Component {
                                 </pattern>
                             </defs>
                             <rect height={mapSettings.height} width={mapSettings.width} fill="url(#bg)"></rect>
-                            {selectedUnits.map(unit => {
+                            {brushActive ? selectedUnits.map(unit => {
                                 return (
                                     <UnitLine
                                         unit={unit}
                                         key={unit}
                                     />
                                 )
-                            })
+                            }) : <g>empty</g>
                             }
-                            {unitEventsFiltered.map(event => {
+                            {brushActive ? unitEventsFinal.map(event => {
                                 return (
                                     <EventIcon
                                         x={xScale(event.posX)}
@@ -93,7 +94,8 @@ class Map extends Component {
                                         event={event}
                                         key={event.node_id} />
                                 )
-                            })}
+                            }) : <g>empty</g>
+                            }
                         </g>
                     </svg>
                     <div className="map-controls">

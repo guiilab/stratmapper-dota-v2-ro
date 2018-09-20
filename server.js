@@ -38,10 +38,6 @@ db.once('open', function callback() {
     console.log('Initialized Connection with MongoDB.\n');
 });
 
-// API calls
-app.get('/api/hello', (req, res) => {
-    res.send({ express: 'Hello From Express' });
-});
 
 app.post('/api/events', function (req, res) {
     return EventModel
@@ -59,13 +55,13 @@ app.post('/api/matches', function (req, res) {
         .find({
             match_id: 43210
         })
-        .exec(function (err, events) {
-            return res.send(events)
+        .exec(function (err, match) {
+            return res.send(match)
         })
 })
 
 setInterval(function () {
-    https.get("https://sheltered-scrubland-24409.herokuapp.com");
+    http.get("http://sheltered-scrubland-24409.herokuapp.com");
 }, 1740000);
 
 if (process.env.NODE_ENV === 'production') {
