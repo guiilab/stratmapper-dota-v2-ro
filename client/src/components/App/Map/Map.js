@@ -97,7 +97,7 @@ class Map extends Component {
                         </g>
                     </svg>
                     <div className="map-controls">
-                        <div className="map-center" onClick={() => this.centerMap()}>Center</div>
+                        <div className="map-center-button" onClick={() => this.centerMap()}>Center</div>
                     </div>
                 </div >
             );
