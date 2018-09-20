@@ -65,7 +65,7 @@ app.post('/api/matches', function (req, res) {
 })
 
 setInterval(function () {
-    http.get("https://sheltered-scrubland-24409.herokuapp.com");
+    https.get("https://sheltered-scrubland-24409.herokuapp.com");
 }, 1740000);
 
 if (process.env.NODE_ENV === 'production') {
