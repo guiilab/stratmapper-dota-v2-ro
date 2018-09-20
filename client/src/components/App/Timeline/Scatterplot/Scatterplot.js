@@ -37,8 +37,6 @@ class Scatterplot extends Component {
         const { data, events, yScaleTime, toggleActiveNode } = this.props;
         const { units, selectedUnits, selectedEvents } = this.props.state;
 
-        console.log()
-
         return (
             <g ref="scatterplot">
                 {data.map((event) => {
@@ -50,7 +48,7 @@ class Scatterplot extends Component {
                         stroke="black"
                         strokeWidth={1}
                         key={event.node_id}
-                        onMouseOver={() => {toggleActiveNode(event); console.log(event)}}
+                        onMouseOver={() => toggleActiveNode(event)}
                         onMouseOut={() => toggleActiveNode(null)}
                     />
                 })

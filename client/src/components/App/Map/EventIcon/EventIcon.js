@@ -78,7 +78,7 @@ class EventIcon extends Component {
                     fill={units[unit].color}
                     stroke="black"
                     strokeWidth={10}
-                    onMouseEnter={() => toggleActiveNode(event.node_id)}
+                    onMouseEnter={() => toggleActiveNode(event)}
                     onMouseLeave={() => toggleActiveNode(null)}
                 />
             </React.Fragment>
