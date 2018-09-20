@@ -172,6 +172,10 @@ h3 {
 	appearance: none; */
 }
 
+.tooltipsidebar-inner-container {
+	padding: 1rem;
+}
+
 .select-container {
 	height: 420px;
 }
