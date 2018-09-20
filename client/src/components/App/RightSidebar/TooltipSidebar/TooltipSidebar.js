@@ -4,6 +4,18 @@ import { Context } from '../../../Provider.js';
 import TooltipElement from './TooltipElement/TooltipElement.js';
 
 class TooltipSidebar extends Component {
+
+    shouldComponentUpdate(nextProps) {
+        if (nextProps.state.activeNode) {
+            if (nextProps.state.activeNode !== this.props.state.activeNode) {
+                return true
+
+            } else if (nextProps.state.activeNode !== null) {
+                return true
+            }
+        }
+        return false
+    }
     render() {
         const { tooltips, activeNode } = this.props.state;
 

@@ -51,7 +51,7 @@ class Scatterplot extends Component {
                         strokeWidth={1}
                         key={event.node_id}
                         onMouseOver={() => {toggleActiveNode(event); console.log(event)}}
-                        // onMouseOut={() => toggleActiveNode(null)}
+                        onMouseOut={() => toggleActiveNode(null)}
                     />
                 })
                 }

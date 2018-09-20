@@ -79,7 +79,7 @@ class EventIcon extends Component {
                     stroke="black"
                     strokeWidth={10}
                     onMouseEnter={() => toggleActiveNode(event.node_id)}
-                    onMouseLeave={() => console.log('nothing')}
+                    onMouseLeave={() => toggleActiveNode(null)}
                 />
             </React.Fragment>
         );
