@@ -53,7 +53,8 @@ class EventIcon extends Component {
 
     render() {
         const { d, event, unit, toggleActiveNode } = this.props;
-        const { units, tooltips } = this.props.state;
+        const { units, tooltips, selectedUnits } = this.props.state;
+
 
         return (
             <React.Fragment>

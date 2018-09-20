@@ -26,6 +26,7 @@ class Map extends Component {
     }
 
     componentDidUpdate(nextProps, prevState) {
+        console.count()
         d3.select(this.refs.mapsvg)
             .call(this.zoom)
     }
@@ -61,6 +62,7 @@ class Map extends Component {
         }
         if (unitEventsTimeline) {
             let unitEventsBrushed = unitEventsTimeline.filter(event => (event.timestamp > brushRange[0]) && (event.timestamp < brushRange[1]))
+            let unitEventsFiltered = unitEventsBrushed.filter(event => (selectedUnits.includes(event.unit)))
 
             return (
                 <div className="map-container" style={mapContainerStyle} >
@@ -82,7 +84,7 @@ class Map extends Component {
                                 )
                             })
                             }
-                            {unitEventsBrushed.map(event => {
+                            {unitEventsFiltered.map(event => {
                                 return (
                                     <EventIcon
                                         x={xScale(event.posX)}
