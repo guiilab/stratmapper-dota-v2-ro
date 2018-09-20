@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import ReactTooltip from 'react-tooltip';
 
 import { Context } from '../../../Provider.js';
-import TooltipElement from './TooltipElement/TooltipElement.js';
+// import TooltipElement from './TooltipElement/TooltipElement.js';
 
 class EventIcon extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            translate: null,
+            translate: `translate(${this.props.x}, ${this.props.y}), scale(.05)`,
             zIndex: null,
             active: false
         }
@@ -20,24 +20,28 @@ class EventIcon extends Component {
     }
 
     static getDerivedStateFromProps(nextProps, nextState) {
-        if (nextProps.state.activeNode === nextProps.event.node_id) {
-            return {
-                translate: `translate(${nextProps.x}, ${nextProps.y}), scale(.06)`,
-                active: true,
-                zIndex: 100
+        if (nextProps.state.activeNode) {
+            if (nextProps.state.activeNode.node_id === nextProps.event.node_id) {
+                return {
+                    translate: `translate(${nextProps.x}, ${nextProps.y}), scale(.06)`,
+                    active: true,
+                    zIndex: 100
+                }
             }
-        }
-        if (nextProps.state.activeNode !== nextProps.event.node_id) {
-            return {
-                translate: `translate(${nextProps.x}, ${nextProps.y}), scale(.05)`,
-                zIndex: 1,
-                active: false
+            if (nextProps.state.activeNode.node_id !== nextProps.event.node_id) {
+                return {
+                    translate: `translate(${nextProps.x}, ${nextProps.y}), scale(.05)`,
+                    zIndex: 1,
+                    active: false
+                }
             }
         }
         return null
+
     }
 
     shouldComponentUpdate(nextProps, nextState) {
+
         if (this.state.active !== nextState.active) {
             return true;
         } else {
@@ -53,7 +57,7 @@ class EventIcon extends Component {
 
     render() {
         const { d, event, unit, toggleActiveNode } = this.props;
-        const { units, tooltips, selectedUnits } = this.props.state;
+        const { units, tooltips } = this.props.state;
 
 
         return (
@@ -75,7 +79,7 @@ class EventIcon extends Component {
                     stroke="black"
                     strokeWidth={10}
                     onMouseEnter={() => toggleActiveNode(event.node_id)}
-                    onMouseLeave={() => toggleActiveNode(null)}
+                    onMouseLeave={() => console.log('nothing')}
                 />
             </React.Fragment>
         );

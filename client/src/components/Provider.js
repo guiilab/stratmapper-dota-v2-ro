@@ -229,10 +229,6 @@ class Provider extends Component {
                     })
                 },
 
-                toggleUnitActive: (event) => {
-                    alert(event)
-                },
-
                 toggleSelectedEvent: (event) => {
                     if (this.state.selectedEvents.includes(event)) {
                         const array = [...this.state.selectedEvents];
@@ -322,9 +318,9 @@ class Provider extends Component {
                     })
                 },
 
-                toggleActiveNode: (id) => {
+                toggleActiveNode: (node) => {
                     this.setState({
-                        activeNode: id
+                        activeNode: node
                     })
                 },
 

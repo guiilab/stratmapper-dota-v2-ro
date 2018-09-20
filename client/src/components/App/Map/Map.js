@@ -26,7 +26,6 @@ class Map extends Component {
     }
 
     componentDidUpdate(nextProps, prevState) {
-        console.count()
         d3.select(this.refs.mapsvg)
             .call(this.zoom)
     }
