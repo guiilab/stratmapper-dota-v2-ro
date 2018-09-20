@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const wwwhisper = require("connect-wwwhisper");
+const http = require('http')
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -64,9 +64,11 @@ app.post('/api/matches', function (req, res) {
         })
 })
 
-if (process.env.NODE_ENV === 'production') {
+setInterval(function () {
+    http.get("https://sheltered-scrubland-24409.herokuapp.com");
+}, 1740000);
 
-    // app.use(wwwhisper())
+if (process.env.NODE_ENV === 'production') {
 
     // Serve any static files
     app.use(express.static(path.join(__dirname, 'client/build')));
