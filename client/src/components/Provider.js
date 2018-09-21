@@ -38,7 +38,6 @@ class Provider extends Component {
             playSpeed: 100
         },
         mapLoading: false,
-        unitEventsAll: [],
         unitEventsStatus: [],
         events: {
             all: [],

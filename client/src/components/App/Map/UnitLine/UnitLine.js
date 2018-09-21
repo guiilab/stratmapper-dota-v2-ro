@@ -21,6 +21,9 @@ class UnitLine extends Component {
                 return yScale(d.posY)
             })
 
+        if (!unitLine) {
+            return <div>Loading</div>
+        }
         return (
             <path
                 d={unitLine(dataBrushed)}
