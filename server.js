@@ -6,8 +6,12 @@ const http = require('http')
 
 const app = express();
 const port = process.env.PORT || 5000;
-const EventModel = require('./client/models/events.js');
-const MatchModel = require('./client/models/matches.js')
+// const EventModel = require('./client/models/events.js');
+const createEventModel = require('./client/models/dynamicEvents.js');
+const MatchModel = require('./client/models/matches.js');
+
+var suffix;
+var EventModel;
 
 app.use(bodyParser.urlencoded({
     limit: '500mb',
@@ -38,8 +42,30 @@ db.once('open', function callback() {
     console.log('Initialized Connection with MongoDB.\n');
 });
 
+app.get('/api/matchentries', function (req, res) {
+    return MatchModel
+        .find({})
+        .exec(function (err, entries) {
+            return res.send(entries)
+        })
+})
+
+app.post('/api/matches', function (req, res) {
+    return MatchModel
+        .find({
+            file_name: req.body.matchId
+        })
+        .exec(function (err, match) {
+            return res.send(match)
+        })
+})
 
 app.post('/api/events', function (req, res) {
+    if (EventModel) {
+        delete db.models.Event;
+    }
+    suffix = req.body.matchId;
+    EventModel = createEventModel(suffix)
     return EventModel
         .find({
             unit: req.body.unit,
@@ -50,15 +76,6 @@ app.post('/api/events', function (req, res) {
         })
 })
 
-app.post('/api/matches', function (req, res) {
-    return MatchModel
-        .find({
-            match_id: 43210
-        })
-        .exec(function (err, match) {
-            return res.send(match)
-        })
-})
 
 setInterval(function () {
     http.get("http://sheltered-scrubland-24409.herokuapp.com");

@@ -5,6 +5,8 @@ export const Context = createContext();
 
 class Provider extends Component {
     state = {
+        matches: [],
+        currentMatch: '3_ESP',
         apiMatchId: 2500623971,
         brushRange: [],
         windowSettings: {
@@ -28,7 +30,7 @@ class Provider extends Component {
                 max: null
             }
         },
-        matchId: 43210,
+        matchId: null,
         timeMax: null,
         play: {
             playhead: 0,
@@ -83,6 +85,7 @@ class Provider extends Component {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
+                matchId: this.state.currentMatch,
                 unit: this.state.unitsAll,
                 event_type: this.state.events.all
             })
@@ -169,7 +172,29 @@ class Provider extends Component {
             <Context.Provider value={{
                 state: this.state,
 
-                getMatchData: async () => {
+                getMatchEntries: async () => {
+                    const response = await fetch('/api/matchentries', {
+                        method: 'GET',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                    });
+                    const body = await response.json();
+
+                    if (response.status !== 200) {
+                        throw Error(body.message)
+                    }
+                    let matches = [];
+                    body.forEach((match) => matches.push(match.file_name))
+                    this.setState({
+                        matches: [...matches]
+                    }, () => this.setState({
+                        currentMatch: this.state.matches[0]
+                    }))
+                },
+
+                getMatchData: async (match) => {
                     this.setState({
                         mapLoading: true
                     })
@@ -180,7 +205,7 @@ class Provider extends Component {
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({
-                            matchId: this.state.matchId
+                            matchId: match
                         })
                     });
                     const body = await response.json();
@@ -217,6 +242,7 @@ class Provider extends Component {
                             start: data[0].timestamp_range.start,
                             end: data[0].timestamp_range.end
                         },
+                        matchId: data[0].match_id,
                         mapSettings: {
                             width: data[0].map.map_width,
                             height: data[0].map.map_height
@@ -336,6 +362,12 @@ class Provider extends Component {
                             brushActive: !this.state.brushActive
                         })
                     }
+                },
+
+                setCurrentMatch: (e) => {
+                    this.setState({
+                        currentMatch: e
+                    })
                 },
 
                 formatHeroString(string) {

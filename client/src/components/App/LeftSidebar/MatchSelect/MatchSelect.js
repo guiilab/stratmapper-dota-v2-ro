@@ -1,20 +1,36 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const MatchSelection = () => {
-    return (
-        <div className="match-select-container">
-            <div className="title-container">
-                <h3>Match Selection</h3>
+import { Context } from '../../../Provider.js'
+
+import MatchOption from './MatchOption/MatchOption.js'
+
+class MatchSelection extends Component {
+
+    handleChange = (e) => {
+        this.props.setCurrentMatch(e.target.value)
+        this
+            .props.getMatchData(e.target.value)
+            .then(res => this.props.loadMatchData(res))
+    }
+
+    render() {
+
+        const { matches } = this.props.state
+        return (
+            <div className="match-select-container" >
+                <div className="title-container">
+                    <h3>Match Selection</h3>
+                </div>
+                <select name="map-select" id="map-select" value={this.props.state.currentMatch} onChange={(e) => this.handleChange(e)}>
+                    {matches.map((map) => <MatchOption option={map} key={map} />)}
+                </select>
             </div>
-            <select name="map-select" id="map-select">
-                <option value="Map1">3_esp</option>
-                <option value="Map2">3_esp</option>
-                <option value="Map2">5_esp</option>
-                <option value="Map2">6_esp</option>
-                <option value="Map2">7_esp</option>
-            </select>
-        </div>
-    );
+        );
+    }
 }
 
-export default MatchSelection;
+export default (props) => (
+    <Context.Consumer>
+        {(context) => <MatchSelection {...context} {...props} />}
+    </Context.Consumer>
+);

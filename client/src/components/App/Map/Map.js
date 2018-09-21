@@ -12,7 +12,7 @@ class Map extends Component {
         super(props)
 
         this.state = {
-            zoomTransformScaled: .05,
+            zoomTransformScaled: .04,
             zoomTransform: null
         }
 
@@ -50,7 +50,7 @@ class Map extends Component {
     zoomScale(num) {
         const scale = d3.scaleLog()
             .domain([1, 15])
-            .range([.05, .006])
+            .range([.04, .006])
         return scale(num)
     }
 

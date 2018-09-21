@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import ReactTooltip from 'react-tooltip';
-import * as d3 from 'd3';
+// import ReactTooltip from 'react-tooltip';
 
 import { Context } from '../../../Provider.js';
 // import TooltipElement from './TooltipElement/TooltipElement.js';
@@ -15,15 +14,11 @@ class EventIcon extends Component {
             active: false,
             color: undefined
         }
-
-        this.zoomScale = d3.scaleLinear()
-            .domain([.8, 15])
-            .range([.05, .005])
     }
 
-    componentDidMount() {
-        ReactTooltip.rebuild()
-    }
+    // componentDidMount() {
+    //     ReactTooltip.rebuild()
+    // }
 
     static getDerivedStateFromProps(nextProps, nextState) {
         if (nextProps.state.activeNode) {
@@ -63,7 +58,7 @@ class EventIcon extends Component {
 
     render() {
         const { d, event, unit, toggleActiveNode, zoomTransform, x, y } = this.props;
-        const { units, tooltips, selectedUnits } = this.props.state;
+        const { units, selectedUnits } = this.props.state;
 
         return (
             <React.Fragment>
@@ -79,7 +74,7 @@ class EventIcon extends Component {
                     className="icon"
                     d={d}
                     display={selectedUnits.includes(unit) ? 'inherit' : 'none'}
-                    transform={zoomTransform ? `translate(${x}, ${y}), scale(${zoomTransform})` : `translate(${x}, ${y}), scale(.05)`}
+                    transform={zoomTransform ? `translate(${x}, ${y}), scale(${zoomTransform})` : `translate(${x}, ${y}), scale(.04)`}
                     fill={this.state.color ? this.state.color : units[unit].color}
                     stroke="black"
                     strokeWidth={10}

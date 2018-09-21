@@ -65,7 +65,7 @@ class Timeline extends PureComponent {
     }
 
     render() {
-        const { zoomTransform, width, height } = this.state;
+        const { zoomTransform, width } = this.state;
         const { events, unitEventsTimeline, timestampRange, timelineSettings } = this.props.state;
         const { yScaleTime, toggleBrushActive } = this.props;
 
