@@ -363,8 +363,10 @@ class Provider extends Component {
                     }
                 },
 
+                //disable brush before match changes to destroy map data
                 setCurrentMatch: (e) => {
                     this.setState({
+                        brushActive: false,
                         currentMatch: e
                     })
                 },

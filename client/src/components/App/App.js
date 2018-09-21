@@ -12,7 +12,16 @@ class App extends Component {
 
     componentDidMount() {
         this
-            .props.getMatchEntries()
+            .props.getMatchEntries().then(this.loadNewData())
+    }
+
+    componentDidUpdate(nextProps, nextState) {
+        if (nextProps.state.currentMatch !== this.props.state.currentMatch) {
+            this.loadNewData()
+        }
+    }
+
+    loadNewData() {
         this
             .props.getMatchData(this.props.state.currentMatch)
             .then(res => this.props.loadMatchData(res))

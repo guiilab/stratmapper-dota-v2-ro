@@ -21,6 +21,7 @@ class BrushButton extends Component {
         return null;
     }
 
+
     toggleHover = () => {
         this.setState({
             hover: !this.state.hover

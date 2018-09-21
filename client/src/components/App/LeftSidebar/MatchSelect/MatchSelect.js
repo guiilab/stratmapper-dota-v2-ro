@@ -8,9 +8,6 @@ class MatchSelection extends Component {
 
     handleChange = (e) => {
         this.props.setCurrentMatch(e.target.value)
-        this
-            .props.getMatchData(e.target.value)
-            .then(res => this.props.loadMatchData(res))
     }
 
     render() {
