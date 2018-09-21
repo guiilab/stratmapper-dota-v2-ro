@@ -24,10 +24,7 @@ class Timeline extends PureComponent {
         }
 
         this.zoom = d3.zoom()
-            // .xExtent([2000, 5000])
-            .scaleExtent([1, 15])
             .translateExtent([[0, 65721], [1180, 66208]])
-            // .extent([this.state.width, this.state.width + 200])
             .on("zoom", this.zoomed.bind(this))
     }
     componentDidMount() {

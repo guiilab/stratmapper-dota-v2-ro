@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactTooltip from 'react-tooltip';
+import * as d3 from 'd3';
 
 import { Context } from '../../../Provider.js';
 // import TooltipElement from './TooltipElement/TooltipElement.js';
@@ -11,8 +12,13 @@ class EventIcon extends Component {
         this.state = {
             translate: `translate(${this.props.x}, ${this.props.y}), scale(.05)`,
             zIndex: null,
-            active: false
+            active: false,
+            color: undefined
         }
+
+        this.zoomScale = d3.scaleLinear()
+            .domain([.8, 15])
+            .range([.05, .005])
     }
 
     componentDidMount() {
@@ -23,31 +29,29 @@ class EventIcon extends Component {
         if (nextProps.state.activeNode) {
             if (nextProps.state.activeNode.node_id === nextProps.event.node_id) {
                 return {
-                    translate: `translate(${nextProps.x}, ${nextProps.y}), scale(.06)`,
-                    active: true,
-                    zIndex: 100
+                    color: 'white',
+                    active: true
                 }
             }
             if (nextProps.state.activeNode.node_id !== nextProps.event.node_id) {
                 return {
-                    translate: `translate(${nextProps.x}, ${nextProps.y}), scale(.05)`,
-                    zIndex: 1,
+                    color: undefined,
                     active: false
                 }
             }
         }
         return null
-
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
-
-        if (this.state.active !== nextState.active) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     if (this.state.active !== nextState.active) {
+    //         return true;
+    //     } else if (nextProps.zoomTransform !== this.props.zoomTransform) {
+    //         return true
+    //     } else {
+    //         return false;
+    //     }
+    // }
 
     changeScale = (scale) => {
         this.setState({
@@ -55,10 +59,11 @@ class EventIcon extends Component {
         })
     }
 
-    render() {
-        const { d, event, unit, toggleActiveNode } = this.props;
-        const { units, tooltips } = this.props.state;
 
+
+    render() {
+        const { d, event, unit, toggleActiveNode, zoomTransform, x, y } = this.props;
+        const { units, tooltips, selectedUnits } = this.props.state;
 
         return (
             <React.Fragment>
@@ -73,9 +78,9 @@ class EventIcon extends Component {
                     data-for="tooltip"
                     className="icon"
                     d={d}
-                    display={this.props.state.selectedUnits.includes(unit) ? 'inherit' : 'none'}
-                    transform={this.state.translate}
-                    fill={units[unit].color}
+                    display={selectedUnits.includes(unit) ? 'inherit' : 'none'}
+                    transform={zoomTransform ? `translate(${x}, ${y}), scale(${zoomTransform})` : `translate(${x}, ${y}), scale(.05)`}
+                    fill={this.state.color ? this.state.color : units[unit].color}
                     stroke="black"
                     strokeWidth={10}
                     onMouseEnter={() => toggleActiveNode(event)}

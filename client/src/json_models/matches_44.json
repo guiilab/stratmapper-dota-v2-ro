@@ -1,28 +1,21 @@
 {
-    "_id": {
-        "$oid": "5b991258fb6fc01dae437319"
-    },
-    "match_id": 43210,
+    "match_id": 543210,
     "game": {
         "title": "Overmatch"
     },
-    "score": {
-        "red": 31,
-        "blue": 35
-    },
-    "winning_group": "red",
+    "winning_group": null,
     "timestamp_range": {
-        "start": 65721,
-        "end": 66208
+        "start": 70381,
+        "end": 70971
     },
     "coordinate_range": {
         "x": {
-            "min": -57500,
-            "max": 57500
+            "min": -10055.245117,
+            "max": 99999.5
         },
         "y": {
-            "min": 56752.5,
-            "max": -58247.5
+            "min": -100250.78125,
+            "max": 99720.507813
         }
     },
     "map": {
@@ -32,15 +25,15 @@
         "map_url": "http://"
     },
     "units": {
-        "Chicken": {
+        "frankof": {
             "group": "red",
             "color": "#cc327a"
         },
-        "DabOnTheTaters": {
+        "Maclobster": {
             "group": "red",
             "color": "#ec642b"
         },
-        "Cruiser99": {
+        "|-[U||S||A]-DannyBoy|": {
             "group": "red",
             "color": "#f19d38"
         },
@@ -48,40 +41,40 @@
             "group": "red",
             "color": "#fadd4b"
         },
-        "largsarg": {
-            "group": "red",
-            "color": "#fffe54"
+        "Chicken": {
+            "group": "blue",
+            "color": "lightblue"
         },
-        "frankof": {
+        "largsarg": {
             "group": "blue",
             "color": "#7cd742"
         },
-        "-=NoBS=-Reyfox_I": {
+        "-=SnakeEyes=-": {
             "group": "blue",
             "color": "#3f92d7"
         },
-        "-=NoBS=-Rosalie": {
+        "Tear": {
             "group": "blue",
             "color": "#631bc8"
         },
-        "Tear": {
+        "{4F}Harrier": {
             "group": "blue",
             "color": "#9321a6"
         }
     },
     "groups": {
         "red": [
-            "Chicken",
-            "-=NoBS=-Tompha",
-            "largsarg",
-            "DabOnTheTaters",
-            "Cruiser99"
+            "frankof",
+            "Maclobster",
+            "|-[U||S||A]-DannyBoy|",
+            "-=NoBS=-Tompha"
         ],
         "blue": [
-            "frankof",
-            "-=NoBS=-Reyfox_I",
-            "-=NoBS=-Rosalie",
-            "Tear"
+            "Chicken",
+            "largsarg",
+            "-=SnakeEyes=-",
+            "Tear",
+            "{4F}Harrier"
         ]
     },
     "events": {

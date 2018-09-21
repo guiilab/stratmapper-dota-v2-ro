@@ -12,6 +12,7 @@ class Map extends Component {
         super(props)
 
         this.state = {
+            zoomTransformScaled: .05,
             zoomTransform: null
         }
 
@@ -31,9 +32,11 @@ class Map extends Component {
     }
 
     zoomed() {
+        // console.log(this.zoomScale(this.state.zoomTransform.k))
         this.setState({
+            zoomTransformScaled: this.zoomScale(d3.event.transform.k),
             zoomTransform: d3.event.transform
-        });
+        }, () => console.log(this.state.zoomTransformScaled));
     }
 
     centerMap() {
@@ -42,6 +45,13 @@ class Map extends Component {
             .duration(200)
             .ease(d3.easeLinear)
             .call(this.zoom.transform, d3.zoomIdentity)
+    }
+
+    zoomScale(num) {
+        const scale = d3.scaleLog()
+            .domain([1, 15])
+            .range([.05, .006])
+        return scale(num)
     }
 
     render() {
@@ -53,6 +63,8 @@ class Map extends Component {
             width: mapSettings.width,
             height: mapSettings.height
         };
+
+
 
         if (!unitEventsTimeline) {
             return (
@@ -87,6 +99,7 @@ class Map extends Component {
                             {brushActive ? unitEventsFinal.map(event => {
                                 return (
                                     <EventIcon
+                                        zoomTransform={this.state.zoomTransformScaled}
                                         x={xScale(event.posX)}
                                         y={yScale(event.posY)}
                                         d={icons[event.event_type]}
