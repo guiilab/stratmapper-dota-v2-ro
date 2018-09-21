@@ -36,7 +36,7 @@ class Map extends Component {
         this.setState({
             zoomTransformScaled: this.zoomScale(d3.event.transform.k),
             zoomTransform: d3.event.transform
-        }, () => console.log(this.state.zoomTransformScaled));
+        });
     }
 
     centerMap() {
@@ -63,8 +63,6 @@ class Map extends Component {
             width: mapSettings.width,
             height: mapSettings.height
         };
-
-
 
         if (!unitEventsTimeline) {
             return (
