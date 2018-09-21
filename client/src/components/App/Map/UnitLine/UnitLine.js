@@ -29,7 +29,7 @@ class UnitLine extends Component {
                 d={unitLine(dataBrushed)}
                 fill="none"
                 stroke={units[unit].color}
-                strokeWidth={2}
+                strokeWidth={1}
             />
         );
     }
