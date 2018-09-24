@@ -1,12 +1,17 @@
 {
-    "file_name": "43_ESP",
-    "match_id": 90249044,
+    "file_name": "1_ESP",
+    "match_id": 9872398,
     "game": {
         "title": "Overmatch"
     },
+    "score": {
+        "red": 31,
+        "blue": 35
+    },
+    "winning_group": "red",
     "timestamp_range": {
-        "start": 71063,
-        "end": 71378
+        "start": 67220,
+        "end": 67735
     },
     "coordinate_range": {
         "x": {
@@ -25,51 +30,56 @@
         "map_url": "http://"
     },
     "units": {
-        "frankof": {
+        "Chicken": {
             "group": "red",
             "color": "#cc327a"
         },
-        "|-[U||S||A]-DannyBoy|": {
+        "largsarg": {
             "group": "red",
             "color": "#ec642b"
         },
-        "largsarg": {
+        "-=NoBS=-Rosalie": {
+            "group": "red",
+            "color": "#f19d38"
+        },
+        "frankof": {
             "group": "red",
             "color": "#fadd4b"
         },
-        "Tear": {
+        "Cruiser99": {
             "group": "red",
             "color": "#fffe54"
         },
-        "Maclobster": {
+        "-=NoBS=-Tompha": {
             "group": "blue",
             "color": "#7cd742"
         },
-        "Chicken": {
+        "-=NoBS=-Reyfox_I": {
             "group": "blue",
             "color": "#3f92d7"
         },
-        "-=NoBS=-Tompha": {
+        "Keebler750": {
             "group": "blue",
             "color": "#631bc8"
         },
-        "{4F}Harrier": {
+        "Tear": {
             "group": "blue",
             "color": "#9321a6"
         }
     },
     "groups": {
         "red": [
+            "Chicken",
             "frankof",
-            "|-[U||S||A]-DannyBoy|",
             "largsarg",
-            "Tear"
+            "-=NoBS=-Rosalie",
+            "Cruiser99"
         ],
         "blue": [
-            "Maclobster",
-            "Chicken",
+            "Keebler750",
+            "-=NoBS=-Reyfox_I",
             "-=NoBS=-Tompha",
-            "{4F}Harrier"
+            "Tear"
         ]
     },
     "events": {

@@ -198,7 +198,7 @@ h3 {
 }
 
 .select-container {
-	height: 420px;
+	height: 440px;
 }
 
 .unit-selection {
@@ -216,7 +216,7 @@ h3 {
 }
 
 .group-option-container {
-	height: 150px;
+	height: 180px;
 	margin-bottom: 2rem;
 }
 
@@ -229,9 +229,12 @@ h3 {
 	text-align: center;
 }
 
+.unit-option {
+	font-size: .6rem;
+}
+
 .group-option {
 	width: 100px;
-	height: 138px;
 	line-height: 150px;
 	float: left;
 }

@@ -1,12 +1,12 @@
 {
-    "file_name": "43_ESP",
-    "match_id": 90249044,
+    "file_name": "222_ESP",
+    "match_id": 9372523,
     "game": {
         "title": "Overmatch"
     },
     "timestamp_range": {
-        "start": 71063,
-        "end": 71378
+        "start": 68702,
+        "end": 69057
     },
     "coordinate_range": {
         "x": {
@@ -29,31 +29,39 @@
             "group": "red",
             "color": "#cc327a"
         },
-        "|-[U||S||A]-DannyBoy|": {
+        "Tear": {
             "group": "red",
             "color": "#ec642b"
+        },
+        "LDV_Ice_man": {
+            "group": "red",
+            "color": "#f19d38"
+        },
+        "cavably": {
+            "group": "red",
+            "color": "coral"
         },
         "largsarg": {
             "group": "red",
             "color": "#fadd4b"
         },
-        "Tear": {
-            "group": "red",
-            "color": "#fffe54"
-        },
         "Maclobster": {
             "group": "blue",
-            "color": "#7cd742"
+            "color": "#fffe54"
         },
-        "Chicken": {
+        "(-n00b-)Bones": {
+            "group": "blue",
+            "color": "lightblue"
+        },
+        "TheTots": {
             "group": "blue",
             "color": "#3f92d7"
         },
-        "-=NoBS=-Tompha": {
+        "|-[U||S||A]-DannyBoy|": {
             "group": "blue",
             "color": "#631bc8"
         },
-        "{4F}Harrier": {
+        "Cosmo": {
             "group": "blue",
             "color": "#9321a6"
         }
@@ -61,15 +69,17 @@
     "groups": {
         "red": [
             "frankof",
-            "|-[U||S||A]-DannyBoy|",
-            "largsarg",
-            "Tear"
+            "LDV_Ice_man",
+            "Tear",
+            "cavably",
+            "largsarg"
         ],
         "blue": [
             "Maclobster",
-            "Chicken",
-            "-=NoBS=-Tompha",
-            "{4F}Harrier"
+            "(-n00b-)Bones",
+            "TheTots",
+            "Cosmo",
+            "|-[U||S||A]-DannyBoy|"
         ]
     },
     "events": {

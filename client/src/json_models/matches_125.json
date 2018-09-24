@@ -1,12 +1,12 @@
 {
-    "file_name": "43_ESP",
-    "match_id": 90249044,
+    "file_name": "125_ESP",
+    "match_id": 215158,
     "game": {
         "title": "Overmatch"
     },
     "timestamp_range": {
-        "start": 71063,
-        "end": 71378
+        "start": 71309,
+        "end": 71829
     },
     "coordinate_range": {
         "x": {
@@ -29,31 +29,35 @@
             "group": "red",
             "color": "#cc327a"
         },
-        "|-[U||S||A]-DannyBoy|": {
+        "Tear": {
             "group": "red",
             "color": "#ec642b"
         },
-        "largsarg": {
+        "acka": {
+            "group": "red",
+            "color": "#f19d38"
+        },
+        "caterpillar": {
             "group": "red",
             "color": "#fadd4b"
         },
-        "Tear": {
-            "group": "red",
+        "Keebler750": {
+            "group": "blue",
             "color": "#fffe54"
         },
-        "Maclobster": {
+        "cavably": {
             "group": "blue",
             "color": "#7cd742"
         },
-        "Chicken": {
+        "jmcguire_aegistg": {
             "group": "blue",
             "color": "#3f92d7"
         },
-        "-=NoBS=-Tompha": {
+        "|-[U||S||A]-DannyBoy|": {
             "group": "blue",
             "color": "#631bc8"
         },
-        "{4F}Harrier": {
+        "Aranjah": {
             "group": "blue",
             "color": "#9321a6"
         }
@@ -61,15 +65,16 @@
     "groups": {
         "red": [
             "frankof",
-            "|-[U||S||A]-DannyBoy|",
-            "largsarg",
-            "Tear"
+            "Tear",
+            "acka",
+            "caterpillar"
         ],
         "blue": [
-            "Maclobster",
-            "Chicken",
-            "-=NoBS=-Tompha",
-            "{4F}Harrier"
+            "Keebler750",
+            "cavably",
+            "jmcguire_aegistg",
+            "|-[U||S||A]-DannyBoy|",
+            "Aranjah"
         ]
     },
     "events": {

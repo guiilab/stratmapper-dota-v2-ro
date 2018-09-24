@@ -1,12 +1,12 @@
 {
-    "file_name": "43_ESP",
-    "match_id": 90249044,
+    "file_name": "320_ESP",
+    "match_id": 1871235987,
     "game": {
         "title": "Overmatch"
     },
     "timestamp_range": {
-        "start": 71063,
-        "end": 71378
+        "start": 49125,
+        "end": 49420
     },
     "coordinate_range": {
         "x": {
@@ -29,47 +29,85 @@
             "group": "red",
             "color": "#cc327a"
         },
-        "|-[U||S||A]-DannyBoy|": {
+        "jmcguire_aegistg": {
             "group": "red",
             "color": "#ec642b"
         },
-        "largsarg": {
+        "TheTots": {
+            "group": "red",
+            "color": "#f19d38"
+        },
+        "|-[U||S||A]-DannyBoy|": {
             "group": "red",
             "color": "#fadd4b"
         },
-        "Tear": {
+        "Chicken": {
             "group": "red",
+            "color": "#cc327a"
+        },
+        "DP KNOX": {
+            "group": "red",
+            "color": "#ec642b"
+        },
+        "iSoldier_": {
+            "group": "red",
+            "color": "#f19d38"
+        },
+        "acka": {
+            "group": "red",
+            "color": "#fadd4b"
+        },
+        "[WORK] Zuko": {
+            "group": "blue",
             "color": "#fffe54"
+        },
+        "LDV_Ice_man": {
+            "group": "red",
+            "color": "lightblue"
         },
         "Maclobster": {
             "group": "blue",
-            "color": "#7cd742"
+            "color": "#631bc8"
         },
-        "Chicken": {
+        "Tear": {
+            "group": "blue",
+            "color": "#9321a6"
+        },
+        "Rawrster": {
+            "group": "blue",
+            "color": "blue"
+        },
+        "caterpillar": {
             "group": "blue",
             "color": "#3f92d7"
         },
-        "-=NoBS=-Tompha": {
-            "group": "blue",
-            "color": "#631bc8"
-        },
-        "{4F}Harrier": {
+        "{4F}Harrier,": {
             "group": "blue",
             "color": "#9321a6"
+        },
+        "Aranjah": {
+            "group": "blue",
+            "color": "blue"
         }
     },
     "groups": {
         "red": [
             "frankof",
+            "Chicken",
+            "TheTots",
+            "DP KNOX",
+            "iSoldier_",
             "|-[U||S||A]-DannyBoy|",
-            "largsarg",
-            "Tear"
+            "jmcguire_aegistg",
+            "acka"
         ],
         "blue": [
             "Maclobster",
-            "Chicken",
-            "-=NoBS=-Tompha",
-            "{4F}Harrier"
+            "Tear",
+            "Rawrster",
+            "{4F}Harrier",
+            "Aranjah",
+            "caterpillar"
         ]
     },
     "events": {

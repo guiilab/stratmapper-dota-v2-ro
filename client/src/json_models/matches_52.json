@@ -1,12 +1,12 @@
 {
-    "file_name": "43_ESP",
-    "match_id": 90249044,
+    "file_name": "52_ESP",
+    "match_id": 137987124,
     "game": {
         "title": "Overmatch"
     },
     "timestamp_range": {
-        "start": 71063,
-        "end": 71378
+        "start": 71161,
+        "end": 71560
     },
     "coordinate_range": {
         "x": {
@@ -25,51 +25,87 @@
         "map_url": "http://"
     },
     "units": {
-        "frankof": {
+        "-=NoBS=-Reyfox_I": {
             "group": "red",
             "color": "#cc327a"
         },
-        "|-[U||S||A]-DannyBoy|": {
+        "[WORK] Zuko": {
             "group": "red",
             "color": "#ec642b"
         },
-        "largsarg": {
+        "Aranjah": {
+            "group": "red",
+            "color": "#f19d38"
+        },
+        "-=NoBS=-Tompha": {
             "group": "red",
             "color": "#fadd4b"
         },
-        "Tear": {
+        "|-[U||S||A]-DannyBoy|": {
             "group": "red",
+            "color": "#fadd4b"
+        },
+        "DP KNOX": {
+            "group": "red",
+            "color": "#cc327a"
+        },
+        "|-[U||S||A]-DominoSugar|": {
+            "group": "red",
+            "color": "#f19d38"
+        },
+        "frankof": {
+            "group": "blue",
             "color": "#fffe54"
         },
-        "Maclobster": {
-            "group": "blue",
-            "color": "#7cd742"
+        "Keebler750": {
+            "group": "red",
+            "color": "lightblue"
         },
-        "Chicken": {
+        "iSoldier_": {
             "group": "blue",
             "color": "#3f92d7"
         },
-        "-=NoBS=-Tompha": {
+        "acka": {
             "group": "blue",
             "color": "#631bc8"
         },
-        "{4F}Harrier": {
+        "Tear": {
             "group": "blue",
             "color": "#9321a6"
+        },
+        "TheTots": {
+            "group": "blue",
+            "color": "#9321a6"
+        },
+        "Rawrster": {
+            "group": "blue",
+            "color": "#9321a6"
+        },
+        "cavably": {
+            "group": "blue",
+            "color": "blue"
         }
     },
     "groups": {
         "red": [
-            "frankof",
+            "-=NoBS=-Reyfox_I",
+            "[WORK] Zuko",
             "|-[U||S||A]-DannyBoy|",
-            "largsarg",
-            "Tear"
+            "-=NoBS=-Tompha",
+            "DP KNOX",
+            "Aranjah",
+            "|-[U||S||A]-DominoSugar|",
+            "Cosmo"
         ],
         "blue": [
-            "Maclobster",
-            "Chicken",
-            "-=NoBS=-Tompha",
-            "{4F}Harrier"
+            "frankof",
+            "Keebler750",
+            "iSoldier_",
+            "Tear",
+            "TheTots",
+            "acka",
+            "Rawrster",
+            "cavably"
         ]
     },
     "events": {

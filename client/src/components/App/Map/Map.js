@@ -17,7 +17,7 @@ class Map extends Component {
         }
 
         this.zoom = d3.zoom()
-            .scaleExtent([.8, 15])
+            .scaleExtent([.4, 15])
             .on("zoom", this.zoomed.bind(this))
     }
 
