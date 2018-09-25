@@ -34,7 +34,7 @@ class Map extends Component {
     zoomed() {
         // console.log(this.zoomScale(this.state.zoomTransform.k))
         this.setState({
-            zoomTransformScaled: this.zoomScale(d3.event.transform.k),
+            zoomTransformScaled: this.zoomScaleIcon(d3.event.transform.k),
             zoomTransform: d3.event.transform
         });
     }
@@ -47,7 +47,7 @@ class Map extends Component {
             .call(this.zoom.transform, d3.zoomIdentity)
     }
 
-    zoomScale(num) {
+    zoomScaleIcon(num) {
         const scale = d3.scaleLog()
             .domain([1, 15])
             .range([.04, .006])
@@ -88,6 +88,7 @@ class Map extends Component {
                             {brushActive ? selectedUnits.map(unit => {
                                 return (
                                     <UnitLine
+                                        zoomTransform={this.state.zoomTransformScaled}
                                         unit={unit}
                                         key={unit}
                                     />
