@@ -285,7 +285,7 @@ class Provider extends Component {
                         this.state.events.all.forEach((event) => {
                             this.setIconState(event.event_type, event.icon)
                         })
-                        // this.state.events.details.forEach((event) => this.setTooltipsState(event, data[0].events.details[event].tooltip_context))
+                        this.state.events.all.forEach((event) => this.setTooltipsState(event.event_type, event.tooltip_context))
                         this.getEvents().then(res => this.loadEvents(res))
                     })
                 },
