@@ -7,7 +7,7 @@ class UnitLine extends Component {
 
     render() {
         const { xScale, yScale, unit, zoomTransform, getUnit } = this.props;
-        const { units, brushRange, statusEventsFilteredByUnit } = this.props.state;
+        const { brushRange, statusEventsFilteredByUnit } = this.props.state;
 
         let dataBrushed = statusEventsFilteredByUnit[unit].filter(event => (event.timestamp > brushRange[0]) && (event.timestamp < brushRange[1]))
         let unitObject = getUnit(unit)

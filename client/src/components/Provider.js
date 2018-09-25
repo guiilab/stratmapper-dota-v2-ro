@@ -40,11 +40,10 @@ class Provider extends Component {
         mapLoading: false,
         unitEventsStatus: [],
         events: {
-            all: [],
+            allTypes: [],
             categories: []
         },
         units: null,
-        units2: [],
         unitsAll: null,
         groups: [],
         selectedUnits: [],
@@ -86,7 +85,7 @@ class Provider extends Component {
             body: JSON.stringify({
                 matchId: this.state.currentMatch,
                 unit: this.state.unitsAll,
-                event_type: this.state.events.all
+                event_type: this.state.events.allTypes
             })
         });
         const body = await response.json();
@@ -112,7 +111,7 @@ class Provider extends Component {
             unitEventsTimeline: [...unitEventsTimeline],
             unitEventsStatus: [...unitEventsStatus],
             selectedUnits: [...this.state.unitsAll],
-            selectedEvents: [...this.state.events.all]
+            selectedEvents: [...this.state.events.allTypes]
         }, () => {
             this.state.selectedUnits.forEach((unit) => this.setFilteredEventsByUnit(unit, this.state.unitEventsStatus))
             this.setState({
@@ -123,12 +122,13 @@ class Provider extends Component {
     }
 
     setGroupState = (d, unit) => {
-        this.setState({
-            [d]: unit
-        })
+        this.setState(prevState => ({
+            [d]: [...prevState[d], unit]
+        }))
     }
 
     setIconState = (event, icon) => {
+        console.log(event, icon)
         this.setState(prevState => ({
             icons: { ...prevState.icons, [event]: icon },
         }))
@@ -189,7 +189,8 @@ class Provider extends Component {
                     this.setState({
                         matches: [...matches]
                     }, () => this.setState({
-                        currentMatch: this.state.matches[0]
+                        //change this when amount of matches changes, andy
+                        currentMatch: this.state.matches[11]
                     }))
                 },
 
@@ -217,8 +218,27 @@ class Provider extends Component {
 
                 loadMatchData: (data) => {
                     let unitsAll = [];
+                    let groups = [];
                     data[0].units.forEach((d) => {
                         unitsAll.push(d.name)
+                        if (!groups.includes(d.group)) {
+                            groups.push(d.group)
+                        }
+                    })
+                    let eventsAllTypes = [];
+                    let eventsTimeline = [];
+                    let eventsStatus = [];
+                    let eventsMap = [];
+                    data[0].events.forEach((d) => {
+                        if (!eventsAllTypes.includes(d.event_type)) {
+                            eventsAllTypes.push(d.event_type)
+                        }
+                        if (d.timeline === true) {
+                            eventsTimeline.push(d.event_type)
+                        }
+                        if (d.status === true) {
+                            eventsStatus.push(d.event_type)
+                        }
                     })
                     this.setState({
                         coordinateRange: {
@@ -231,15 +251,17 @@ class Provider extends Component {
                                 max: data[0].coordinate_range.y.max
                             }
                         },
-                        groups: [...Object.keys(data[0].groups)],
-                        red: [...data[0].groups.red],
-                        blue: [...data[0].groups.blue],
+                        groups: [...groups],
+                        // red: [...data[0].groups.red],
+                        // blue: [...data[0].groups.blue],
+                        red: [],
+                        blue: [],
                         events: {
-                            all: [...data[0].events.all],
-                            timeline: [...data[0].events.timeline],
-                            details: [...Object.keys(data[0].events.details)]
+                            all: [...data[0].events],
+                            allTypes: [...eventsAllTypes],
+                            timeline: [...eventsTimeline],
+                            status: [...eventsStatus]
                         },
-                        units2: { ...data[0].units2 },
                         units: [...data[0].units],
                         unitsAll: [...unitsAll],
                         timestampRange: {
@@ -253,9 +275,17 @@ class Provider extends Component {
                         },
                         mapLoading: false
                     }, () => {
-                        // this.state.groups.forEach((d, i) => this.setGroupState(d, data[0].groups[d]))
-                        this.state.events.details.forEach((event) => this.setIconState(event, data[0].events.details[event].icon))
-                        this.state.events.details.forEach((event) => this.setTooltipsState(event, data[0].events.details[event].tooltip_context))
+                        this.state.groups.forEach((d, i) => {
+                            data[0].units.forEach((e) => {
+                                if (e.group === d) {
+                                    this.setGroupState(d, e.name)
+                                }
+                            })
+                        })
+                        this.state.events.all.forEach((event) => {
+                            this.setIconState(event.event_type, event.icon)
+                        })
+                        // this.state.events.details.forEach((event) => this.setTooltipsState(event, data[0].events.details[event].tooltip_context))
                         this.getEvents().then(res => this.loadEvents(res))
                     })
                 },

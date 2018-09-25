@@ -58,7 +58,7 @@ class EventIcon extends Component {
 
     render() {
         const { d, event, unit, toggleActiveNode, zoomTransform, x, y, getUnit } = this.props;
-        const { units, selectedUnits } = this.props.state;
+        const { selectedUnits } = this.props.state;
 
         let unitObject = getUnit(unit)
 

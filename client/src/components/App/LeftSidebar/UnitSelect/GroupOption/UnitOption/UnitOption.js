@@ -49,8 +49,6 @@ class UnitOption extends Component {
 
     render() {
         const { unit, toggleSelectedUnit, getUnit } = this.props;
-        const { units } = this.props.state;
-        // const { units, selectedUnits } = this.props.state;
 
         let buttonStyle;
         let unitObject = getUnit(unit);
