@@ -5,7 +5,7 @@ import * as d3 from 'd3';
 import { Context } from '../../Provider.js'
 import EventIcon from './EventIcon/EventIcon.js';
 import UnitLine from './UnitLine/UnitLine.js'
-import Background from '../../../img/overmatch.png';
+import Background from '../../../img/overmatch2.jpg';
 
 class Map extends Component {
     constructor(props) {

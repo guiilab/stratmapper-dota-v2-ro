@@ -57,8 +57,10 @@ class EventIcon extends Component {
 
 
     render() {
-        const { d, event, unit, toggleActiveNode, zoomTransform, x, y } = this.props;
+        const { d, event, unit, toggleActiveNode, zoomTransform, x, y, getUnit } = this.props;
         const { units, selectedUnits } = this.props.state;
+
+        let unitObject = getUnit(unit)
 
         return (
             <React.Fragment>
@@ -75,7 +77,7 @@ class EventIcon extends Component {
                     d={d}
                     display={selectedUnits.includes(unit) ? 'inherit' : 'none'}
                     transform={zoomTransform ? `translate(${x}, ${y}), scale(${zoomTransform})` : `translate(${x}, ${y}), scale(.04)`}
-                    fill={this.state.color ? this.state.color : units[unit].color}
+                    fill={this.state.color ? this.state.color : unitObject.color}
                     stroke="black"
                     strokeWidth={10}
                     onMouseEnter={() => toggleActiveNode(event)}

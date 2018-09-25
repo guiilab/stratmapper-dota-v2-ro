@@ -48,14 +48,15 @@ class UnitOption extends Component {
     }
 
     render() {
-        const { unit, toggleSelectedUnit } = this.props;
+        const { unit, toggleSelectedUnit, getUnit } = this.props;
         const { units } = this.props.state;
         // const { units, selectedUnits } = this.props.state;
 
         let buttonStyle;
+        let unitObject = getUnit(unit);
 
         if (this.state.hover || this.state.active) {
-            buttonStyle = { backgroundColor: units[unit].color }
+            buttonStyle = { backgroundColor: unitObject.color }
         }
 
         return (

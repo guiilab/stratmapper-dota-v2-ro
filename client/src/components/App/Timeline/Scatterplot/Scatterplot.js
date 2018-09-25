@@ -34,17 +34,19 @@ class Scatterplot extends Component {
     }
 
     render() {
-        const { data, events, yScaleTime, toggleActiveNode } = this.props;
+        const { data, events, yScaleTime, toggleActiveNode, getUnit } = this.props;
         const { units, selectedUnits, selectedEvents } = this.props.state;
+
 
         return (
             <g ref="scatterplot">
                 {data.map((event) => {
+                    let unitObject = getUnit(event.unit)
                     return <circle
                         cx={this.xScaleTime(event.timestamp)}
                         cy={yScaleTime(events.indexOf(event.event_type))}
                         r={4}
-                        fill={(selectedUnits.includes(event.unit) && (selectedEvents.includes(event.event_type))) ? units[event.unit].color : 'grey'}
+                        fill={(selectedUnits.includes(event.unit) && (selectedEvents.includes(event.event_type))) ? unitObject.color : 'grey'}
                         stroke="black"
                         strokeWidth={1}
                         key={event.node_id}

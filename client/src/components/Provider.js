@@ -44,6 +44,7 @@ class Provider extends Component {
             categories: []
         },
         units: null,
+        units2: [],
         unitsAll: null,
         groups: [],
         selectedUnits: [],
@@ -52,7 +53,6 @@ class Provider extends Component {
         tooltips: {},
         activeNode: null,
         statusEventsFilteredByUnit: {},
-        keypress: null,
         brushActive: false
     };
 
@@ -99,7 +99,7 @@ class Provider extends Component {
 
     loadEvents = (data) => {
         let unitEventsTimeline = [];
-        let unitEventsStatus = []
+        let unitEventsStatus = [];
         data.forEach((d) => {
             if (d.event_type === "status_update") {
                 unitEventsStatus.push(d)
@@ -216,6 +216,10 @@ class Provider extends Component {
                 },
 
                 loadMatchData: (data) => {
+                    let unitsAll = [];
+                    data[0].units.forEach((d) => {
+                        unitsAll.push(d.name)
+                    })
                     this.setState({
                         coordinateRange: {
                             x: {
@@ -235,8 +239,9 @@ class Provider extends Component {
                             timeline: [...data[0].events.timeline],
                             details: [...Object.keys(data[0].events.details)]
                         },
-                        units: { ...data[0].units },
-                        unitsAll: [...Object.keys(data[0].units)],
+                        units2: { ...data[0].units2 },
+                        units: [...data[0].units],
+                        unitsAll: [...unitsAll],
                         timestampRange: {
                             start: data[0].timestamp_range.start,
                             end: data[0].timestamp_range.end
@@ -369,6 +374,16 @@ class Provider extends Component {
                         brushActive: false,
                         currentMatch: e
                     })
+                },
+
+                getUnit: (unit) => {
+                    let unitObject;
+                    this.state.units.forEach((d) => {
+                        if (d.name === unit) {
+                            unitObject = d
+                        }
+                    })
+                    return unitObject
                 },
 
                 formatHeroString(string) {

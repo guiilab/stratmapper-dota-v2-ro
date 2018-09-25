@@ -6,13 +6,13 @@ import { Context } from '../../../Provider.js'
 class UnitLine extends Component {
 
     render() {
-        const { xScale, yScale, unit, zoomTransform } = this.props;
+        const { xScale, yScale, unit, zoomTransform, getUnit } = this.props;
         const { units, brushRange, statusEventsFilteredByUnit } = this.props.state;
 
         let dataBrushed = statusEventsFilteredByUnit[unit].filter(event => (event.timestamp > brushRange[0]) && (event.timestamp < brushRange[1]))
+        let unitObject = getUnit(unit)
 
         const unitLine = line()
-        console.log(zoomTransform)
 
         unitLine
             .x(function (d, i) {
@@ -29,7 +29,7 @@ class UnitLine extends Component {
             <path
                 d={unitLine(dataBrushed)}
                 fill="none"
-                stroke={units[unit].color}
+                stroke={unitObject.color}
                 strokeWidth={zoomTransform < .022 ? .5 : 1}
             />
         );
