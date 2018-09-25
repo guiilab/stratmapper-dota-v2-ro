@@ -128,7 +128,6 @@ class Provider extends Component {
     }
 
     setIconState = (event, icon) => {
-        console.log(event, icon)
         this.setState(prevState => ({
             icons: { ...prevState.icons, [event]: icon },
         }))

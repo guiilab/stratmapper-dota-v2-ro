@@ -60,10 +60,6 @@ class Timeline extends PureComponent {
         });
     }
 
-    panned() {
-        console.log('working')
-    }
-
     render() {
         const { zoomTransform, width } = this.state;
         const { events, unitEventsTimeline, timestampRange, timelineSettings } = this.props.state;
