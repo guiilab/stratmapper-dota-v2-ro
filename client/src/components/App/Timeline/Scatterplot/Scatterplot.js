@@ -10,13 +10,6 @@ class Scatterplot extends Component {
         this.renderScatterplot();
     }
 
-    // shouldComponentUpdate(nextProps) {
-    //     if (nextProps.data !== this.props.data) {
-    //         return true
-    //     }
-    //     return false
-    // }
-
     componentDidUpdate() {
         this.renderScatterplot();
     }
@@ -36,7 +29,6 @@ class Scatterplot extends Component {
     render() {
         const { data, events, yScaleTime, toggleActiveNode, getUnit } = this.props;
         const { selectedUnits, selectedEvents } = this.props.state;
-
 
         return (
             <g ref="scatterplot">

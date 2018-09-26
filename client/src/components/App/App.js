@@ -29,9 +29,9 @@ class App extends Component {
 
     render() {
 
-        const { mapLoading } = this.props.state;
+        const { mapLoading, timestampRange } = this.props.state;
 
-        if (mapLoading) {
+        if (mapLoading || !timestampRange) {
             return <LoadingIcon />
         } else {
             return (
