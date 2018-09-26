@@ -9,8 +9,6 @@ class EventIcon extends Component {
         super(props)
 
         this.state = {
-            translate: `translate(${this.props.x}, ${this.props.y}), scale(.05)`,
-            zIndex: null,
             active: false,
             color: undefined
         }
@@ -38,23 +36,6 @@ class EventIcon extends Component {
         return null
     }
 
-    // shouldComponentUpdate(nextProps, nextState) {
-    //     if (this.state.active !== nextState.active) {
-    //         return true;
-    //     } else if (nextProps.zoomTransform !== this.props.zoomTransform) {
-    //         return true
-    //     } else {
-    //         return false;
-    //     }
-    // }
-
-    changeScale = (scale) => {
-        this.setState({
-            translate: `translate(${this.props.x}, ${this.props.y}), scale(${scale})`
-        })
-    }
-
-
 
     render() {
         const { d, event, unit, toggleActiveNode, zoomTransform, x, y, getUnit } = this.props;
@@ -76,7 +57,7 @@ class EventIcon extends Component {
                     className="icon"
                     d={d}
                     display={selectedUnits.includes(unit) ? 'inherit' : 'none'}
-                    transform={zoomTransform ? `translate(${x}, ${y}), scale(${zoomTransform})` : `translate(${x}, ${y}), scale(.04)`}
+                    transform={zoomTransform ? `translate(${x}, ${y}) scale(${zoomTransform}) translate(-${x}, -${y})` : `translate(${x}, ${y}) scale(.04) translate(-${x}, -${y})`}
                     fill={this.state.color ? this.state.color : unitObject.color}
                     stroke="black"
                     strokeWidth={10}
