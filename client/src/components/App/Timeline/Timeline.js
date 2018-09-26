@@ -75,7 +75,7 @@ class Timeline extends PureComponent {
             <div className="timeline-container" ref="timelineContainer">
                 <div className="event-select-container" style={heightStyle}>
                     <BrushButton />
-                    {events.timeline.map((event) => <EventOption event={event} key={event} />)}
+                    {events.timelineObj.map((event) => <EventOption event={event} key={event.event_type} />)}
                 </div>
                 <div className="timeline-chart" ref={this.chart} style={heightStyle} onKeyDown={(e) => toggleBrushActive(e)} onKeyUp={(e) => toggleBrushActive(e)} tabIndex="0">
                     <svg width="100%" height="100%" ref="svg" className="timeline-svg-scatter">

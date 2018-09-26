@@ -10,7 +10,7 @@ class EventOption extends Component {
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
-        if (!nextProps.selectedEvents.includes(nextProps.event)) {
+        if (!nextProps.selectedEvents.includes(nextProps.event.event_type)) {
             return {
                 active: false
             };
@@ -52,7 +52,7 @@ class EventOption extends Component {
 
         return (
             <div className="event-option-container">
-                <div className='event-option' style={buttonStyle} value={event} key={event} onMouseOver={() => this.toggleHover()} onMouseLeave={() => this.toggleHover()} onClick={() => { this.toggleActive(); toggleSelectedEvent(event); }}>{event}</div>
+                <div className='event-option' style={buttonStyle} value={event.event_type} key={event.event_type} onMouseOver={() => this.toggleHover()} onMouseLeave={() => this.toggleHover()} onClick={() => { this.toggleActive(); toggleSelectedEvent(event.event_type); }}>{event.formatted_name}</div>
             </div>
         )
     }

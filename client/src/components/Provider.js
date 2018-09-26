@@ -226,6 +226,7 @@ class Provider extends Component {
                     })
                     let eventsAllTypes = [];
                     let eventsTimeline = [];
+                    let eventsTimelineObj = [];
                     let eventsStatus = [];
                     let eventsMap = [];
                     data[0].events.forEach((d) => {
@@ -234,6 +235,7 @@ class Provider extends Component {
                         }
                         if (d.timeline === true) {
                             eventsTimeline.push(d.event_type)
+                            eventsTimelineObj.push(d)
                         }
                         if (d.status === true) {
                             eventsStatus.push(d.event_type)
@@ -259,6 +261,7 @@ class Provider extends Component {
                             all: [...data[0].events],
                             allTypes: [...eventsAllTypes],
                             timeline: [...eventsTimeline],
+                            timelineObj: [...eventsTimelineObj],
                             status: [...eventsStatus]
                         },
                         units: [...data[0].units],
