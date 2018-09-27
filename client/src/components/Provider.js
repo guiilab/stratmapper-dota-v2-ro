@@ -107,13 +107,13 @@ class Provider extends Component {
             }
         })
         this.setState({
-            // unitEventsAll: [...data],
+            unitEventsAll: [...data],
             unitEventsTimeline: [...unitEventsTimeline],
             unitEventsStatus: [...unitEventsStatus],
             selectedUnits: [...this.state.unitsAll],
             selectedEvents: [...this.state.events.allTypes]
         }, () => {
-            this.state.selectedUnits.forEach((unit) => this.setFilteredEventsByUnit(unit, this.state.unitEventsStatus))
+            this.state.selectedUnits.forEach((unit) => this.setFilteredEventsByUnit(unit, this.state.unitEventsAll))
             this.setState({
                 mapLoading: false
             })

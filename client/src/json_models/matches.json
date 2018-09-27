@@ -1,17 +1,9 @@
 {
-    "_id": {
-        "$oid": "5baa5417fb6fc011c0093e5a"
-    },
     "file_name": "3_ESP",
     "match_id": 43210,
     "game": {
         "title": "Overmatch"
     },
-    "score": {
-        "red": 31,
-        "blue": 35
-    },
-    "winning_group": "red",
     "timestamp_range": {
         "start": 65721,
         "end": 66208
@@ -30,7 +22,7 @@
         "map_name": "Overmatch",
         "map_width": 600,
         "map_height": 600,
-        "map_url": "http://"
+        "map_url": null
     },
     "units": [
         {
