@@ -42,7 +42,6 @@ class EventIcon extends Component {
         const { selectedUnits } = this.props.state;
 
         let unitObject = getUnit(unit)
-        console.log(x, y)
 
         return (
             <React.Fragment>
