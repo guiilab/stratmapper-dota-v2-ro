@@ -64,7 +64,7 @@ class Provider extends Component {
         window.removeEventListener("resize", this.updateWindowDimensions);
     }
 
-    compare = (a, b) => {
+    compareTime = (a, b) => {
         if (a.timestamp < b.timestamp)
             return -1;
         if (a.timestamp > b.timestamp)
@@ -93,7 +93,7 @@ class Provider extends Component {
         if (response.status !== 200) {
             throw Error(body.message)
         }
-        return body.sort(this.compare)
+        return body.sort(this.compareTime)
     }
 
     loadEvents = (data) => {
@@ -185,12 +185,13 @@ class Provider extends Component {
                     }
                     let matches = [];
                     body.forEach((match) => matches.push(match.file_name))
+                    matches.sort(function (a, b) {
+                        return a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' });
+                    });
                     this.setState({
-                        matches: [...matches]
-                    }, () => this.setState({
-                        //change this when amount of matches changes, andy
-                        currentMatch: this.state.matches[11]
-                    }))
+                        matches: [...matches],
+                        currentMatch: matches[2]
+                    })
                 },
 
                 getMatchData: async (match) => {
@@ -228,7 +229,6 @@ class Provider extends Component {
                     let eventsTimeline = [];
                     let eventsTimelineObj = [];
                     let eventsStatus = [];
-                    let eventsMap = [];
                     data[0].events.forEach((d) => {
                         if (!eventsAllTypes.includes(d.event_type)) {
                             eventsAllTypes.push(d.event_type)

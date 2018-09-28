@@ -42,6 +42,7 @@ class EventIcon extends Component {
         const { selectedUnits } = this.props.state;
 
         let unitObject = getUnit(unit)
+        console.log(x, y)
 
         return (
             <React.Fragment>
@@ -57,7 +58,9 @@ class EventIcon extends Component {
                     className="icon"
                     d={d}
                     display={selectedUnits.includes(unit) ? 'inherit' : 'none'}
-                    transform={zoomTransform ? `translate(${x}, ${y}) scale(${zoomTransform}) translate(-${x}, -${y})` : `translate(${x}, ${y}) scale(.04) translate(-${x}, -${y})`}
+                    transform={zoomTransform ? `translate(${x}, ${y}), scale(${zoomTransform})` : `translate(${x}, ${y}), scale(.04)`}
+                    //causing some icons to grow,NaN trailing garbage
+                    // transform={zoomTransform ? `translate(${x}, ${y}) scale(${zoomTransform}) translate(-${x}, -${y})` : `translate(${x}, ${y}) scale(.04) translate(-${x}, -${y})`}
                     fill={this.state.color ? this.state.color : unitObject.color}
                     stroke="black"
                     strokeWidth={10}

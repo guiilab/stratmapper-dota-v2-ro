@@ -6,7 +6,6 @@ import * as d3 from 'd3';
 class Brush extends Component {
     componentDidMount(props) {
         this.renderBrush(props);
-        // this.brushed();
     }
 
     // shouldComponentUpdate(nextProps, nextState) {
