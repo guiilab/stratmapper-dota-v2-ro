@@ -6,7 +6,7 @@ export const Context = createContext();
 class Provider extends Component {
     state = {
         matches: [],
-        currentMatch: '3_ESP',
+        currentMatch: '2500623971',
         apiMatchId: 2500623971,
         brushRange: [],
         windowSettings: {
@@ -190,7 +190,7 @@ class Provider extends Component {
                     });
                     this.setState({
                         matches: [...matches],
-                        currentMatch: matches[2]
+                        currentMatch: matches[0]
                     })
                 },
 
@@ -217,6 +217,7 @@ class Provider extends Component {
                 },
 
                 loadMatchData: (data) => {
+                    console.log(data)
                     let unitsAll = [];
                     let groups = [];
                     data[0].units.forEach((d) => {
@@ -257,6 +258,8 @@ class Provider extends Component {
                         // blue: [...data[0].groups.blue],
                         red: [],
                         blue: [],
+                        dire: [],
+                        radiant: [],
                         events: {
                             all: [...data[0].events],
                             allTypes: [...eventsAllTypes],

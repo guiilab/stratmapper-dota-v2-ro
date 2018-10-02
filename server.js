@@ -21,7 +21,8 @@ app.use(bodyParser.json({
     limit: '500mb'
 }));
 
-const mongoUrl = 'mongodb://admin:M4pTh3W0rld@ds253922.mlab.com:53922/stratmap_overmatch'
+// const mongoUrl = 'mongodb://admin:M4pTh3W0rld@ds253922.mlab.com:53922/stratmap_overmatch'
+const mongoUrl = 'mongodb://admin:M4pTh3W0rld@ds121373.mlab.com:21373/stratmap_dota_dev'
 
 mongoose.Promise = global.Promise;
 mongoose.connect(mongoUrl, {
