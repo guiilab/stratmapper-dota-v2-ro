@@ -14,7 +14,7 @@ class UnitSelect extends Component {
                 </div>
                 <div className="group-select">
                     {groups.map((group) => {
-                        return <GroupOption group={group} key={group} groupUnits={[...this.props.state[group]]} />
+                        return <GroupOption group={group} key={group.name} groupUnits={[...this.props.state[group.name]]} />
                     })}
                 </div>
             </div>

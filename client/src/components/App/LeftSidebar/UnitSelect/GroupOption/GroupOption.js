@@ -48,12 +48,12 @@ class GroupOption extends Component {
         let buttonStyle;
 
         if (this.state.hover || this.state.active) {
-            buttonStyle = { backgroundColor: group }
+            buttonStyle = { backgroundColor: group.color }
         }
 
         return (
             <div className="group-option-container">
-                <div className='group-option' style={buttonStyle} key={group} onMouseOver={() => this.toggleHover()} onMouseLeave={() => this.toggleHover()} onClick={() => { this.toggleActive(); toggleGroup(groupUnits) }} >{group}</div>
+                <div className='group-option' style={buttonStyle} key={group.name} onMouseOver={() => this.toggleHover()} onMouseLeave={() => this.toggleHover()} onClick={() => { this.toggleActive(); toggleGroup(groupUnits) }} >{group.name}</div>
                 <div className="unit-selection">
                     {groupUnits.map(function (unit) {
                         return <UnitOption unit={unit} key={unit} />

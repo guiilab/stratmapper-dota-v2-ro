@@ -123,7 +123,7 @@ class Provider extends Component {
 
     setGroupState = (d, unit) => {
         this.setState(prevState => ({
-            [d]: [...prevState[d], unit]
+            [d.name]: [...prevState[d.name], unit]
         }))
     }
 
@@ -217,14 +217,13 @@ class Provider extends Component {
                 },
 
                 loadMatchData: (data) => {
-                    console.log(data)
                     let unitsAll = [];
                     let groups = [];
                     data[0].units.forEach((d) => {
                         unitsAll.push(d.name)
-                        if (!groups.includes(d.group)) {
-                            groups.push(d.group)
-                        }
+                    })
+                    data[0].groups.forEach((d) => {
+                        groups.push(d.name)
                     })
                     let eventsAllTypes = [];
                     let eventsTimeline = [];
@@ -253,7 +252,7 @@ class Provider extends Component {
                                 max: data[0].coordinate_range.y.max
                             }
                         },
-                        groups: [...groups],
+                        groups: [...data[0].groups],
                         // red: [...data[0].groups.red],
                         // blue: [...data[0].groups.blue],
                         red: [],
@@ -282,7 +281,7 @@ class Provider extends Component {
                     }, () => {
                         this.state.groups.forEach((d, i) => {
                             data[0].units.forEach((e) => {
-                                if (e.group === d) {
+                                if (e.group === d.name) {
                                     this.setGroupState(d, e.name)
                                 }
                             })

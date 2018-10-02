@@ -81,6 +81,16 @@
             "color": "#FF1B00"
         }
     ],
+    "groups": [
+        {
+            "name": "radiant",
+            "color": "blue"
+        },
+        {
+            "name": "dire",
+            "color": "red"
+        }
+    ],
     "events": [
         {
             "event_type": "death",
@@ -492,6 +502,17 @@
             "icon": null
         }
     ],
+    "load_settings": {
+        "incremental_timeline": true,
+        "selected_units": [
+            "herobountyhunter"
+        ],
+        "selected_groups": null,
+        "selected_events": [
+            "death",
+            "hero_kill"
+        ]
+    },
     "node_context": {
         "all": [
             "Gold",
