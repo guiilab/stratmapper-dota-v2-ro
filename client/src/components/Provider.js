@@ -73,6 +73,7 @@ class Provider extends Component {
     }
 
     getEvents = async () => {
+        console.log('get events ran')
         this.setState({
             mapLoading: true
         })
