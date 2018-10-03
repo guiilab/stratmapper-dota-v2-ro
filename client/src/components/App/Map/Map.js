@@ -5,7 +5,7 @@ import * as d3 from 'd3';
 import { Context } from '../../Provider.js'
 import EventIcon from './EventIcon/EventIcon.js';
 import UnitLine from './UnitLine/UnitLine.js'
-import Background from '../../../img/overmatch2.jpg';
+import Background from '../../../img/dotaminimap_7.jpg';
 
 class Map extends Component {
     constructor(props) {
@@ -32,7 +32,6 @@ class Map extends Component {
     }
 
     zoomed() {
-        // console.log(this.zoomScale(this.state.zoomTransform.k))
         this.setState({
             zoomTransformScaled: this.zoomScaleIcon(d3.event.transform.k),
             zoomTransform: d3.event.transform
