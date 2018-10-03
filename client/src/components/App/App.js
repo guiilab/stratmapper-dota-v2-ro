@@ -36,11 +36,9 @@ class App extends Component {
         } else {
             return (
                 <div className="app-container">
-                    <div className="center-container" >
-                        <LeftSidebar />
-                        <Map />
-                        <RightSidebar />
-                    </div>
+                    <LeftSidebar />
+                    <Map />
+                    <RightSidebar />
                     <Timeline />
                 </div>
             );

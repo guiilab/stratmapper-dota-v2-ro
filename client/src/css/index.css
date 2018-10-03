@@ -35,9 +35,12 @@ h3 {
 .map-container {
 	border: 1px solid black;
 	background-color: rgb(236, 236, 236);
-	position: relative;
-	/* position: absolute; */
-	/* z-index: -100; */
+	position: absolute;
+	left: 40%;
+}
+
+.xAxis {
+	color: white;
 }
 
 .loading-icon-container {
@@ -102,21 +105,16 @@ h3 {
 }
 
 .left-sidebar, .right-sidebar {
-	/* display: flex;
-	justify-content: space-between;
-	flex-direction: column; */
+	position: absolute;
 	height: 600px;
 }
 
-.left-sidebar {
-	float: left;
+.right-sidebar {
+	right: -10px;
 }
 
-.right-sidebar {
-	display: flex;
-	justify-content: space-between;
-	flex-direction: column;
-	float: right;
+.left-sidebar {
+	left: -10px;
 }
 
 .title-container {
@@ -148,10 +146,6 @@ h3 {
 	font-weight: 700;
 	text-align: center;
 	padding: .2rem;
-}
-
-.map-svg {
-	background-size: 1000px;
 }
 
 .map-controls {
@@ -258,8 +252,8 @@ h3 {
 	/* position: relative;
 	min-width: 1250px;
 	max-width: 1400px; */
-	position: absolute;
-	width: 100%;
+	position: fixed;
+	width: 95%;
 	bottom: 40px;
 	border: black 1px solid;
 	height: 250px;

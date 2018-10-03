@@ -5,7 +5,7 @@ import * as d3 from 'd3';
 import { Context } from '../../Provider.js'
 import EventIcon from './EventIcon/EventIcon.js';
 import UnitLine from './UnitLine/UnitLine.js'
-import Background from '../../../img/dotaminimap_7.jpg';
+import Background from '../../../img/dota2.jpg';
 
 class Map extends Component {
     constructor(props) {
@@ -55,11 +55,11 @@ class Map extends Component {
 
     render() {
         const { xScale, yScale } = this.props;
-        const { unitEventsTimeline, mapSettings, brushRange, selectedUnits, icons, brushActive, selectedEvents, windowSettings } = this.props.state;
+        const { unitEventsTimeline, brushRange, selectedUnits, icons, brushActive, selectedEvents, mapSettings } = this.props.state;
 
         const mapContainerStyle = {
             backgroundColor: 'black',
-            width: mapSettings.width,
+            width: mapSettings.height,
             height: mapSettings.height
         };
 
@@ -75,14 +75,14 @@ class Map extends Component {
 
             return (
                 <div className="map-container" style={mapContainerStyle} >
-                    <svg className="map-svg" ref="mapsvg" height={mapSettings.height} width={mapSettings.width}>
+                    <svg className="map-svg" ref="mapsvg" width={mapSettings.height} height={mapSettings.height} >
                         <g transform={this.state.zoomTransform}>
                             <defs>
                                 <pattern id="bg" width={1} height={1}>
                                     <image href={Background} width={mapSettings.height} height={mapSettings.height}></image>
                                 </pattern>
                             </defs>
-                            <rect height={mapSettings.height} width={mapSettings.width} fill="url(#bg)"></rect>
+                            <rect width={mapSettings.height} height={mapSettings.height} fill="url(#bg)"></rect>
                             {brushActive ? selectedUnits.map(unit => {
                                 return (
                                     <UnitLine
