@@ -21,7 +21,8 @@ app.use(bodyParser.json({
     limit: '500mb'
 }));
 
-const mongoUrl = 'mongodb://admin:M4pTh3W0rld@ds253922.mlab.com:53922/stratmap_overmatch'
+// const mongoUrl = 'mongodb://admin:M4pTh3W0rld@ds253922.mlab.com:53922/stratmap_overmatch'
+const mongoUrl = 'mongodb://admin:M4pTh3W0rld@ds121373.mlab.com:21373/stratmap_dota_dev'
 
 mongoose.Promise = global.Promise;
 mongoose.connect(mongoUrl, {
@@ -71,11 +72,11 @@ app.post('/api/events', function (req, res) {
             unit: req.body.unit,
             event_type: req.body.event_type
         })
+        .limit(2000)
         .exec(function (err, events) {
             return res.send(events)
         })
 })
-
 
 setInterval(function () {
     http.get("http://sheltered-scrubland-24409.herokuapp.com");

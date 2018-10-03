@@ -6,7 +6,7 @@ export const Context = createContext();
 class Provider extends Component {
     state = {
         matches: [],
-        currentMatch: '3_ESP',
+        currentMatch: '2500623971',
         apiMatchId: 2500623971,
         brushRange: [],
         windowSettings: {
@@ -73,6 +73,7 @@ class Provider extends Component {
     }
 
     getEvents = async () => {
+        console.log('get events ran')
         this.setState({
             mapLoading: true
         })
@@ -123,7 +124,7 @@ class Provider extends Component {
 
     setGroupState = (d, unit) => {
         this.setState(prevState => ({
-            [d]: [...prevState[d], unit]
+            [d.name]: [...prevState[d.name], unit]
         }))
     }
 
@@ -190,7 +191,7 @@ class Provider extends Component {
                     });
                     this.setState({
                         matches: [...matches],
-                        currentMatch: matches[2]
+                        currentMatch: matches[0]
                     })
                 },
 
@@ -221,9 +222,9 @@ class Provider extends Component {
                     let groups = [];
                     data[0].units.forEach((d) => {
                         unitsAll.push(d.name)
-                        if (!groups.includes(d.group)) {
-                            groups.push(d.group)
-                        }
+                    })
+                    data[0].groups.forEach((d) => {
+                        groups.push(d.name)
                     })
                     let eventsAllTypes = [];
                     let eventsTimeline = [];
@@ -252,11 +253,13 @@ class Provider extends Component {
                                 max: data[0].coordinate_range.y.max
                             }
                         },
-                        groups: [...groups],
+                        groups: [...data[0].groups],
                         // red: [...data[0].groups.red],
                         // blue: [...data[0].groups.blue],
                         red: [],
                         blue: [],
+                        dire: [],
+                        radiant: [],
                         events: {
                             all: [...data[0].events],
                             allTypes: [...eventsAllTypes],
@@ -279,7 +282,7 @@ class Provider extends Component {
                     }, () => {
                         this.state.groups.forEach((d, i) => {
                             data[0].units.forEach((e) => {
-                                if (e.group === d) {
+                                if (e.group === d.name) {
                                     this.setGroupState(d, e.name)
                                 }
                             })

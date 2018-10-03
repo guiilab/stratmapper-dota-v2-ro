@@ -83,11 +83,19 @@
     ],
     "groups": [
         {
+<<<<<<< HEAD
             "name": "blue",
             "color": "blue"
         },
         {
             "name": "red",
+=======
+            "name": "radiant",
+            "color": "blue"
+        },
+        {
+            "name": "dire",
+>>>>>>> dev
             "color": "red"
         }
     ],
