@@ -72,7 +72,7 @@ app.post('/api/events', function (req, res) {
             unit: req.body.unit,
             event_type: req.body.event_type
         })
-        .limit(40000)
+        .limit(5000)
         .exec(function (err, events) {
             return res.send(events)
         })
