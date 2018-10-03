@@ -78,7 +78,6 @@ app.post('/api/events', function (req, res) {
         })
 })
 
-
 setInterval(function () {
     http.get("http://sheltered-scrubland-24409.herokuapp.com");
 }, 1740000);

@@ -55,7 +55,9 @@ class Map extends Component {
 
     render() {
         const { xScale, yScale } = this.props;
-        const { unitEventsTimeline, mapSettings, brushRange, selectedUnits, icons, brushActive, selectedEvents } = this.props.state;
+        const { unitEventsTimeline, mapSettings, brushRange, selectedUnits, icons, brushActive, selectedEvents, windowSettings } = this.props.state;
+
+        console.log(windowSettings)
 
         const mapContainerStyle = {
             backgroundColor: 'black',
@@ -77,10 +79,9 @@ class Map extends Component {
                 <div className="map-container" style={mapContainerStyle} >
                     <svg className="map-svg" ref="mapsvg" height={mapSettings.height} width={mapSettings.width}>
                         <g transform={this.state.zoomTransform}>
-                            {/* <g transform={this.props.state.mapZoomTransform}> */}
                             <defs>
                                 <pattern id="bg" width={1} height={1}>
-                                    <image href={Background} ></image>
+                                    <image href={Background} width={mapSettings.height} height={mapSettings.height}></image>
                                 </pattern>
                             </defs>
                             <rect height={mapSettings.height} width={mapSettings.width} fill="url(#bg)"></rect>
