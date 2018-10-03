@@ -1,14 +1,18 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
-import * as d3 from 'd3';
+import { scaleLinear } from 'd3';
 
 import { Context } from '../../../Provider.js'
 
-class Scatterplot extends Component {
+class Scatterplot extends PureComponent {
     constructor(props) {
         super(props);
         this.renderScatterplot();
     }
+
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     return false
+    // }
 
     componentDidUpdate() {
         this.renderScatterplot();
@@ -17,7 +21,7 @@ class Scatterplot extends Component {
     renderScatterplot() {
         const { width, zoomTransform, timestampRange } = this.props;
 
-        this.xScaleTime = d3.scaleLinear()
+        this.xScaleTime = scaleLinear()
             .domain([timestampRange.start, timestampRange.end])
             .range([0, width])
 
@@ -29,7 +33,6 @@ class Scatterplot extends Component {
     render() {
         const { data, events, yScaleTime, toggleActiveNode, getUnit } = this.props;
         const { selectedUnits, selectedEvents } = this.props.state;
-
 
         return (
             <g ref="scatterplot">

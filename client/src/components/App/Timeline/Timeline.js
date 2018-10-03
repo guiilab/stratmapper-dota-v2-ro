@@ -19,7 +19,6 @@ class Timeline extends PureComponent {
             width: null,
             zoomTransform: null,
         }
-
     }
 
     getZoom = () => {
