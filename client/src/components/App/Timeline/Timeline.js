@@ -55,13 +55,12 @@ class Timeline extends PureComponent {
 
     render() {
         const { zoomTransform, width } = this.state;
-        const { events, unitEventsTimeline, timestampRange, timelineSettings, selectedEvents } = this.props.state;
+        const { events, unitEventsTimeline, timestampRange, timelineSettings, selectedEvents, loadSettings, brushActive } = this.props.state;
         const { yScaleTime, toggleBrushActive } = this.props;
 
         const heightStyle = {
             height: timelineSettings.height
         }
-
         if (!width) {
             return (
                 <div className="timeline-container" ref="timelineContainer">
@@ -71,8 +70,10 @@ class Timeline extends PureComponent {
             )
         }
 
-
-        const unitEventsTimelineFiltered = unitEventsTimeline.filter((d) => selectedEvents.includes(d.event_type))
+        let unitEventsTimelineFiltered = unitEventsTimeline;
+        if (loadSettings.incremental_timeline === true) {
+            unitEventsTimelineFiltered = unitEventsTimeline.filter((d) => selectedEvents.includes(d.event_type))
+        }
 
         return (
             <div className="timeline-container" ref="timelineContainer">
@@ -87,7 +88,7 @@ class Timeline extends PureComponent {
                             yScaleTime={yScaleTime}
                             width={width}
                         />
-                        {this.props.state.brushActive ?
+                        {brushActive ?
                             <Brush
                                 width={width}
                                 timestampRange={timestampRange}
