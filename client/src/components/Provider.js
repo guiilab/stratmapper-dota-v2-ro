@@ -110,7 +110,7 @@ class Provider extends Component {
             unitEventsAll: [...data],
             unitEventsTimeline: [...unitEventsTimeline],
             unitEventsStatus: [...unitEventsStatus],
-            selectedUnits: [...this.state.unitsAll],
+            selectedUnits: [...this.state.loadSettings.selected_units],
             selectedEvents: [...this.state.loadSettings.selected_events]
         }, () => {
             this.state.selectedUnits.forEach((unit) => this.setFilteredEventsByUnit(unit, this.state.unitEventsAll))
