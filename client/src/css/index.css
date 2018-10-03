@@ -19,8 +19,8 @@ h3 {
 
 .app-container {
 	margin: auto;
-	height: 90%;
-	width: 80%;
+	height: 100%;
+	width: 95%;
 }
 
 .center-container {
@@ -255,12 +255,14 @@ h3 {
 .timeline-container {
 	/* display: inline-block; */
 	/* width: 100%; */
-	position: relative;
+	/* position: relative;
 	min-width: 1250px;
-	max-width: 1400px;
+	max-width: 1400px; */
+	position: absolute;
+	width: 100%;
+	bottom: 40px;
 	border: black 1px solid;
 	height: 250px;
-	margin: auto;
 }
 
 .event-select-container {

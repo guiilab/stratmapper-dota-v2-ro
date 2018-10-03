@@ -61,6 +61,7 @@ class Timeline extends PureComponent {
         const heightStyle = {
             height: timelineSettings.height
         }
+
         if (!width) {
             return (
                 <div className="timeline-container" ref="timelineContainer">
