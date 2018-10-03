@@ -73,7 +73,6 @@ class Provider extends Component {
     }
 
     getEvents = async () => {
-        console.log('get events ran')
         this.setState({
             mapLoading: true
         })
@@ -101,7 +100,7 @@ class Provider extends Component {
         let unitEventsTimeline = [];
         let unitEventsStatus = [];
         data.forEach((d) => {
-            if (d.event_type === "status_update") {
+            if (d.status === true) {
                 unitEventsStatus.push(d)
             } else {
                 unitEventsTimeline.push(d)
@@ -112,7 +111,7 @@ class Provider extends Component {
             unitEventsTimeline: [...unitEventsTimeline],
             unitEventsStatus: [...unitEventsStatus],
             selectedUnits: [...this.state.unitsAll],
-            selectedEvents: [...this.state.events.allTypes]
+            selectedEvents: [...this.state.load_settings.selected_events]
         }, () => {
             this.state.selectedUnits.forEach((unit) => this.setFilteredEventsByUnit(unit, this.state.unitEventsAll))
             this.setState({
@@ -260,6 +259,7 @@ class Provider extends Component {
                         blue: [],
                         dire: [],
                         radiant: [],
+                        load_settings: data[0].load_settings,
                         events: {
                             all: [...data[0].events],
                             allTypes: [...eventsAllTypes],

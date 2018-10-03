@@ -55,7 +55,7 @@ class Timeline extends PureComponent {
 
     render() {
         const { zoomTransform, width } = this.state;
-        const { events, unitEventsTimeline, timestampRange, timelineSettings } = this.props.state;
+        const { events, unitEventsTimeline, timestampRange, timelineSettings, selectedEvents } = this.props.state;
         const { yScaleTime, toggleBrushActive } = this.props;
 
         const heightStyle = {
@@ -70,6 +70,10 @@ class Timeline extends PureComponent {
                 </div>
             )
         }
+
+
+        const unitEventsTimelineFiltered = unitEventsTimeline.filter((d) => selectedEvents.includes(d.event_type))
+
         return (
             <div className="timeline-container" ref="timelineContainer">
                 <div className="event-select-container" style={heightStyle}>
@@ -91,7 +95,7 @@ class Timeline extends PureComponent {
                             /> : <g>Empty</g>
                         }
                         <Scatterplot
-                            data={unitEventsTimeline}
+                            data={unitEventsTimelineFiltered}
                             width={width}
                             zoomTransform={zoomTransform}
                             timestampRange={timestampRange}

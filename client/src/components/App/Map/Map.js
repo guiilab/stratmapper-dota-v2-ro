@@ -57,8 +57,6 @@ class Map extends Component {
         const { xScale, yScale } = this.props;
         const { unitEventsTimeline, mapSettings, brushRange, selectedUnits, icons, brushActive, selectedEvents, windowSettings } = this.props.state;
 
-        console.log(windowSettings)
-
         const mapContainerStyle = {
             backgroundColor: 'black',
             width: mapSettings.width,

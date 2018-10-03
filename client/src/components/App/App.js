@@ -22,7 +22,6 @@ class App extends Component {
     }
 
     loadNewData() {
-        console.log(this.props.state.currentMatch)
         this
             .props.getMatchData(this.props.state.currentMatch)
             .then(res => this.props.loadMatchData(res))
