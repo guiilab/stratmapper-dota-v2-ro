@@ -9,6 +9,9 @@ import RightSidebar from './RightSidebar/RightSidebar.js';
 import Timeline from './Timeline/Timeline.js';
 
 class App extends Component {
+    constructor(props) {
+        super(props);
+    }
 
     componentDidMount() {
         this
@@ -19,6 +22,7 @@ class App extends Component {
         if (nextProps.state.currentMatch !== this.props.state.currentMatch) {
             this.loadNewData()
         }
+
     }
 
     loadNewData() {
@@ -28,19 +32,21 @@ class App extends Component {
     }
 
     render() {
-
         const { mapLoading, timestampRange } = this.props.state;
 
         if (mapLoading || !timestampRange) {
             return <LoadingIcon />
         } else {
             return (
-                <div className="app-container">
-                    <LeftSidebar />
-                    <Map />
-                    <RightSidebar />
-                    <Timeline />
-                </div>
+                <React.Fragment>
+
+                    <div className="app-container" >
+                        <LeftSidebar />
+                        <Map />
+                        <RightSidebar />
+                        <Timeline />
+                    </div>
+                </React.Fragment>
             );
         }
     }

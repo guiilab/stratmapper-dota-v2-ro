@@ -343,33 +343,33 @@ class Provider extends Component {
                 getXScale: () => {
                     return d3.scaleLinear()
                         .domain([this.state.coordinateRange.x.min * this.state.minFactor, this.state.coordinateRange.x.max * this.state.maxFactor])
-                        .range([0, this.state.mapSettings.width])
+                        .range([0, this.state.windowSettings.width])
                 },
 
                 getYScale: () => {
                     return d3.scaleLinear()
                         .domain([this.state.coordinateRange.y.min * this.state.minFactor, this.state.coordinateRange.y.max * this.state.maxFactor])
-                        .range([this.state.mapSettings.height, 0])
+                        .range([this.state.windowSettings.width, 0])
                 },
 
                 xScale: (x) => {
                     const scale = d3.scaleLinear()
                         .domain([this.state.coordinateRange.x.min * this.state.minFactor, this.state.coordinateRange.x.max * this.state.maxFactor])
-                        .range([0, this.state.mapSettings.width])
+                        .range([0, this.state.windowSettings.width])
                     return scale(x)
                 },
 
                 yScale: (y) => {
                     const scale = d3.scaleLinear()
                         .domain([this.state.coordinateRange.y.min * this.state.minFactor, this.state.coordinateRange.y.max * this.state.maxFactor])
-                        .range([this.state.mapSettings.height, 0])
+                        .range([this.state.windowSettings.width, 0])
                     return scale(y)
                 },
 
                 getXScaleTime: () => {
                     return d3.scaleLinear()
                         .domain([this.state.timestampRange.start, this.state.timestampRange.end])
-                        .range([this.state.mapSettings.height, 0])
+                        .range([this.state.windowSettings.width, 0])
                 },
 
                 yScaleTime: (y) => {

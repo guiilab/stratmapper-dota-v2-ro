@@ -55,13 +55,18 @@ class Map extends Component {
 
     render() {
         const { xScale, yScale } = this.props;
-        const { unitEventsTimeline, brushRange, selectedUnits, icons, brushActive, selectedEvents, mapSettings } = this.props.state;
+        const { unitEventsTimeline, brushRange, selectedUnits, icons, brushActive, selectedEvents, mapSettings, windowSettings } = this.props.state;
 
         const mapContainerStyle = {
-            backgroundColor: 'black',
-            width: mapSettings.height,
-            height: mapSettings.height
+            backgroundColor: 'black'
         };
+
+        let mapSvgStyle = {
+            width: windowSettings.width,
+            height: windowSettings.width,
+            display: 'block',
+            margin: 'auto'
+        }
 
         if (!unitEventsTimeline) {
             return (
@@ -75,14 +80,14 @@ class Map extends Component {
 
             return (
                 <div className="map-container" style={mapContainerStyle} >
-                    <svg className="map-svg" ref="mapsvg" width={mapSettings.height} height={mapSettings.height} >
+                    <svg className="map-svg" ref="mapsvg" style={mapSvgStyle} >
                         <g transform={this.state.zoomTransform}>
                             <defs>
                                 <pattern id="bg" width={1} height={1}>
-                                    <image href={Background} width={mapSettings.height} height={mapSettings.height}></image>
+                                    <image href={Background} width={windowSettings.width} height={windowSettings.width}></image>
                                 </pattern>
                             </defs>
-                            <rect width={mapSettings.height} height={mapSettings.height} fill="url(#bg)"></rect>
+                            <rect width={windowSettings.width} height={windowSettings.width} fill="url(#bg)"></rect>
                             {brushActive ? selectedUnits.map(unit => {
                                 return (
                                     <UnitLine
