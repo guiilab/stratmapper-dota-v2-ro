@@ -52,7 +52,9 @@ class Provider extends Component {
         tooltips: {},
         activeNode: null,
         statusEventsFilteredByUnit: {},
-        brushActive: false
+        brushActive: false,
+        minFactor: .93,
+        maxFactor: 1.04
     };
 
     componentDidMount() {
@@ -85,7 +87,8 @@ class Provider extends Component {
             body: JSON.stringify({
                 matchId: this.state.currentMatch,
                 unit: this.state.unitsAll,
-                event_type: this.state.events.allTypes
+                event_type: this.state.events.allTypes,
+                timestampRange: this.state.timestampRange
             })
         });
         const body = await response.json();
@@ -253,8 +256,6 @@ class Provider extends Component {
                             }
                         },
                         groups: [...data[0].groups],
-                        // red: [...data[0].groups.red],
-                        // blue: [...data[0].groups.blue],
                         red: [],
                         blue: [],
                         dire: [],
@@ -341,26 +342,26 @@ class Provider extends Component {
 
                 getXScale: () => {
                     return d3.scaleLinear()
-                        .domain([this.state.coordinateRange.x.min, this.state.coordinateRange.x.max])
+                        .domain([this.state.coordinateRange.x.min * this.state.minFactor, this.state.coordinateRange.x.max * this.state.maxFactor])
                         .range([0, this.state.mapSettings.width])
                 },
 
                 getYScale: () => {
                     return d3.scaleLinear()
-                        .domain([this.state.coordinateRange.y.min, this.state.coordinateRange.y.max])
+                        .domain([this.state.coordinateRange.y.min * this.state.minFactor, this.state.coordinateRange.y.max * this.state.maxFactor])
                         .range([this.state.mapSettings.height, 0])
                 },
 
                 xScale: (x) => {
                     const scale = d3.scaleLinear()
-                        .domain([this.state.coordinateRange.x.min, this.state.coordinateRange.x.max])
+                        .domain([this.state.coordinateRange.x.min * this.state.minFactor, this.state.coordinateRange.x.max * this.state.maxFactor])
                         .range([0, this.state.mapSettings.width])
                     return scale(x)
                 },
 
                 yScale: (y) => {
                     const scale = d3.scaleLinear()
-                        .domain([this.state.coordinateRange.y.min, this.state.coordinateRange.y.max])
+                        .domain([this.state.coordinateRange.y.min * this.state.minFactor, this.state.coordinateRange.y.max * this.state.maxFactor])
                         .range([this.state.mapSettings.height, 0])
                     return scale(y)
                 },

@@ -5,7 +5,7 @@ import * as d3 from 'd3';
 import { Context } from '../../Provider.js'
 import EventIcon from './EventIcon/EventIcon.js';
 import UnitLine from './UnitLine/UnitLine.js'
-import Background from '../../../img/dota2.jpg';
+import Background from '../../../img/dotamini2.png';
 
 class Map extends Component {
     constructor(props) {

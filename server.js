@@ -70,9 +70,9 @@ app.post('/api/events', function (req, res) {
     return EventModel
         .find({
             unit: req.body.unit,
-            event_type: req.body.event_type
+            event_type: req.body.event_type,
+            timestamp: { $gte: req.body.timestampRange.start, $lte: req.body.timestampRange.end }
         })
-        .limit(5000)
         .exec(function (err, events) {
             return res.send(events)
         })
