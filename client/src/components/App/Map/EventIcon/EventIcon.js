@@ -56,9 +56,9 @@ class EventIcon extends PureComponent {
                     className="icon"
                     d={d}
                     display={selectedUnits.includes(unit) ? 'inherit' : 'none'}
-                    transform={zoomTransform ? `translate(${x}, ${y}), scale(${zoomTransform})` : `translate(${x}, ${y}), scale(.06)`}
+                    // transform={zoomTransform ? `translate(${x}, ${y}), scale(${zoomTransform})` : `translate(${x}, ${y}), scale(.06)`}
                     //causing some icons to grow,NaN trailing garbage
-                    // transform={zoomTransform ? `translate(${x}, ${y}) scale(${zoomTransform}) translate(-${x}, -${y})` : `translate(${x}, ${y}) scale(.04) translate(-${x}, -${y})`}
+                    transform={zoomTransform ? `translate(${x}, ${y}) scale(${zoomTransform}) translate(-160, -160)` : `translate(${x}, ${y}) scale(.06) translate(-160, -160)`}
                     fill={this.state.color ? this.state.color : unitObject.color}
                     stroke="black"
                     strokeWidth={10}

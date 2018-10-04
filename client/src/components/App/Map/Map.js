@@ -12,12 +12,12 @@ class Map extends Component {
         super(props)
 
         this.state = {
-            zoomTransformScaled: .04,
+            zoomTransformScaled: .06,
             zoomTransform: null
         }
 
         this.zoom = d3.zoom()
-            .scaleExtent([.4, 15])
+            .scaleExtent([.4, 10])
             .on("zoom", this.zoomed.bind(this))
     }
 
@@ -48,8 +48,8 @@ class Map extends Component {
 
     zoomScaleIcon(num) {
         const scale = d3.scaleLog()
-            .domain([1, 15])
-            .range([.06, .01])
+            .domain([.4, 10])
+            .range([.08, .01])
         return scale(num)
     }
 
