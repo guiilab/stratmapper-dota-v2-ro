@@ -43,13 +43,18 @@ class Brush extends Component {
             this.props.updateBrushRange([newXScale.invert(s[0]), newXScale.invert(s[1])])
         } else {
             this.props.updateBrushRange([xScaleTime.invert(s[0]), xScaleTime.invert(s[1])])
+
         }
+
     }
 
     render() {
         return (
-            <g ref="brush">
-            </g>
+            <React.Fragment>
+                <div>hello</div>
+                <g ref="brush">
+                </g>
+            </React.Fragment>
         )
     }
 }

@@ -9,6 +9,7 @@ import EventOption from './EventOption/EventOption.js';
 import AxisLines from './AxisLines/AxisLines.js'
 import Brush from './Brush/Brush.js';
 import BrushButton from './BrushButton/BrushButton.js'
+import TimestampIndicator from './TimestampIndicator/TimestampIndicator.js'
 
 class Timeline extends PureComponent {
     constructor(props) {
@@ -79,6 +80,7 @@ class Timeline extends PureComponent {
 
         return (
             <div className="timeline-container" ref="timelineContainer">
+                <TimestampIndicator />
                 <div className="event-select-container" style={heightStyle}>
                     <BrushButton />
                     {events.timelineObj.map((event) => <EventOption event={event} key={event.event_type} />)}

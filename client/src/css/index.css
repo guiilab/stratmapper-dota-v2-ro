@@ -23,6 +23,16 @@ h3 {
 	overflow-x: hidden;
 }
 
+.timestamp-container {
+	width: 240px;
+	height: 30px;
+	position: absolute;
+	border: 1px solid black;
+	right: 100px;
+	top: -32px;
+	background-color: lightgrey;
+}
+
 .map-container {
 	border: 1px solid black;
 	background-color: rgb(236, 236, 236);
