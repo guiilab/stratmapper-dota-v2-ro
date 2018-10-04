@@ -6,7 +6,7 @@ export const Context = createContext();
 class Provider extends Component {
     state = {
         matches: [],
-        currentMatch: '2500623971',
+        currentMatch: 'early',
         apiMatchId: 2500623971,
         brushRange: [],
         windowSettings: {

@@ -18,25 +18,17 @@ h3 {
 }
 
 .app-container {
-	margin: auto;
+	position: relative;
 	height: 100%;
 	width: 95%;
-}
-
-.center-container {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	min-width: 1250px;
-	max-width: 1400px;
-	margin: .5rem auto;
+	margin: auto;
 }
 
 .map-container {
 	border: 1px solid black;
 	background-color: rgb(236, 236, 236);
 	position: absolute;
-	left: 25%;
+	left: 35%;
 }
 
 /* .xAxis {
@@ -110,11 +102,11 @@ h3 {
 }
 
 .right-sidebar {
-	right: -10px;
+	right: 0px;
 }
 
 .left-sidebar {
-	left: -10px;
+	left: 0px;
 }
 
 .title-container {
@@ -252,9 +244,9 @@ h3 {
 	/* position: relative;
 	min-width: 1250px;
 	max-width: 1400px; */
-	position: fixed;
-	width: 95%;
-	bottom: 40px;
+	position: absolute;
+	bottom: 3%;
+	width: 100%;
 	border: black 1px solid;
 	height: 250px;
 }

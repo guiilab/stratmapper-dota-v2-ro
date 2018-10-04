@@ -107,7 +107,7 @@ class Timeline extends PureComponent {
                         />
                     </svg>
                     <div className="x-axis">
-                        <svg width="100%" ref="x-axis">
+                        <svg width="100%" height={20} ref="x-axis">
                             <XAxis
                                 width={width}
                                 zoomTransform={zoomTransform}
