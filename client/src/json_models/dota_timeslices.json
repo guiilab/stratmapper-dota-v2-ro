@@ -28,17 +28,17 @@
     },
     "units": [
         {
-            "name": "heroslardar",
+            "name": "herolion",
             "group": "radiant",
             "color": "#BF00FF"
         },
         {
-            "name": "herophoenix",
+            "name": "herodarkseer",
             "group": "radiant",
             "color": "#260CE8"
         },
         {
-            "name": "herodarkseer",
+            "name": "herobountyhunter",
             "group": "radiant",
             "color": "#007DFF"
         },
@@ -68,12 +68,12 @@
             "color": "#FF9400"
         },
         {
-            "name": "herolion",
+            "name": "herophoenix",
             "group": "dire",
             "color": "#E8570C"
         },
         {
-            "name": "herobountyhunter",
+            "name": "slardar",
             "group": "dire",
             "color": "#FF1B00"
         }
