@@ -32,13 +32,18 @@ class App extends Component {
     }
 
     render() {
-        const { mapLoading, timestampRange } = this.props.state;
+        const { mapLoading, timestampRange, windowSettings } = this.props.state;
+
+        const appContainerStyle = {
+            width: windowSettings.width,
+            height: windowSettings.height
+        }
 
         if (mapLoading || !timestampRange) {
             return <LoadingIcon />
         } else {
             return (
-                <div className="app-container" >
+                <div className="app-container" style={appContainerStyle}>
                     <Map />
                     <LeftSidebar />
                     <RightSidebar />

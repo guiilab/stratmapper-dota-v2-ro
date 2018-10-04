@@ -49,23 +49,23 @@ class Map extends Component {
     zoomScaleIcon(num) {
         const scale = d3.scaleLog()
             .domain([1, 15])
-            .range([.04, .006])
+            .range([.06, .01])
         return scale(num)
     }
 
     render() {
         const { xScale, yScale } = this.props;
-        const { unitEventsTimeline, brushRange, selectedUnits, icons, brushActive, selectedEvents, mapSettings, windowSettings } = this.props.state;
+        const { unitEventsTimeline, brushRange, selectedUnits, icons, brushActive, selectedEvents, windowSettings } = this.props.state;
 
         const mapContainerStyle = {
+            width: windowSettings.width,
+            height: windowSettings.height,
             backgroundColor: 'black'
         };
 
         let mapSvgStyle = {
             width: windowSettings.width,
             height: windowSettings.width,
-            display: 'block',
-            margin: 'auto'
         }
 
         if (!unitEventsTimeline) {

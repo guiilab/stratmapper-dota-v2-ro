@@ -36,7 +36,6 @@ class EventIcon extends PureComponent {
         return null
     }
 
-
     render() {
         const { d, event, unit, toggleActiveNode, zoomTransform, x, y, getUnit } = this.props;
         const { selectedUnits } = this.props.state;
@@ -57,7 +56,7 @@ class EventIcon extends PureComponent {
                     className="icon"
                     d={d}
                     display={selectedUnits.includes(unit) ? 'inherit' : 'none'}
-                    transform={zoomTransform ? `translate(${x}, ${y}), scale(${zoomTransform})` : `translate(${x}, ${y}), scale(.04)`}
+                    transform={zoomTransform ? `translate(${x}, ${y}), scale(${zoomTransform})` : `translate(${x}, ${y}), scale(.06)`}
                     //causing some icons to grow,NaN trailing garbage
                     // transform={zoomTransform ? `translate(${x}, ${y}) scale(${zoomTransform}) translate(-${x}, -${y})` : `translate(${x}, ${y}) scale(.04) translate(-${x}, -${y})`}
                     fill={this.state.color ? this.state.color : unitObject.color}

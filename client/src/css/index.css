@@ -1,5 +1,6 @@
 html, body, #root {
 	height: 100%;
+	width: 100%;
 	margin: 0;
 	font-family: sans-serif;
 }
@@ -19,8 +20,6 @@ h3 {
 
 .app-container {
 	position: relative;
-	height: 100%;
-	width: 100%;
 }
 
 .map-container {
@@ -98,7 +97,7 @@ h3 {
 
 .left-sidebar, .right-sidebar {
 	position: absolute;
-	height: 600px;
+	height: 500px;
 	z-index: 100;
 	top: 0;
 }
