@@ -79,7 +79,7 @@ app.post('/api/events', function (req, res) {
 })
 
 setInterval(function () {
-    http.get("http://sheltered-scrubland-24409.herokuapp.com");
+    http.get("https://polar-forest-80084.herokuapp.com/");
 }, 1740000);
 
 if (process.env.NODE_ENV === 'production') {

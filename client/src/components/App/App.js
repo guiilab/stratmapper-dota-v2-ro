@@ -38,15 +38,12 @@ class App extends Component {
             return <LoadingIcon />
         } else {
             return (
-                <React.Fragment>
-
-                    <div className="app-container" >
-                        <LeftSidebar />
-                        <Map />
-                        <RightSidebar />
-                        <Timeline />
-                    </div>
-                </React.Fragment>
+                <div className="app-container" >
+                    <Map />
+                    <LeftSidebar />
+                    <RightSidebar />
+                    <Timeline />
+                </div>
             );
         }
     }
