@@ -43,7 +43,7 @@ class GroupOption extends Component {
     }
 
     render() {
-        const { groupUnits, group, toggleGroup } = this.props;
+        const { groupUnits, group, toggleGroup, formatFirstString } = this.props;
 
         let buttonStyle;
 
@@ -54,7 +54,7 @@ class GroupOption extends Component {
         return (
             <React.Fragment>
                 <div className="unit-selection">
-                    <div className='group-option' style={buttonStyle} key={group.name} onMouseOver={() => this.toggleHover()} onMouseLeave={() => this.toggleHover()} onClick={() => { this.toggleActive(); toggleGroup(groupUnits) }} >{group.name}</div>
+                    <div className='group-option' style={buttonStyle} key={group.name} onMouseOver={() => this.toggleHover()} onMouseLeave={() => this.toggleHover()} onClick={() => { this.toggleActive(); toggleGroup(groupUnits) }} >{formatFirstString(group.name)}</div>
                     <React.Fragment>
                         {groupUnits.map(function (unit) {
                             return <UnitOption unit={unit} key={unit} />

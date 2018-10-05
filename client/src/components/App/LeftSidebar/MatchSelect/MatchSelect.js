@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
+import { Context } from '../../../Provider.js';
 
-import { Context } from '../../../Provider.js'
-
-import MatchOption from './MatchOption/MatchOption.js'
+import MatchOption from './MatchOption/MatchOption.js';
 
 class MatchSelection extends Component {
 
@@ -14,9 +13,12 @@ class MatchSelection extends Component {
         const { matches } = this.props.state
 
         return (
-            <select name="map-select" id="map-select" value={this.props.state.currentMatch} onChange={(e) => this.handleChange(e)}>
-                {matches.map((map) => <MatchOption option={map} key={map} />)}
-            </select>
+            <div className="match-select-container">
+                <span className="match-select-font">Match:</span>
+                <select name="map-select" id="map-select" value={this.props.state.currentMatch} onChange={(e) => this.handleChange(e)}>
+                    {matches.map((map) => <MatchOption option={map} key={map} />)}
+                </select>
+            </div>
         );
     }
 }

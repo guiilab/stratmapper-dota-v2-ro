@@ -48,7 +48,7 @@ class UnitOption extends Component {
     }
 
     render() {
-        const { unit, toggleSelectedUnit, getUnit } = this.props;
+        const { unit, toggleSelectedUnit, getUnit, formatFirstString } = this.props;
 
         let buttonStyle;
         let unitObject = getUnit(unit);
@@ -58,7 +58,7 @@ class UnitOption extends Component {
         }
 
         return (
-            <div className='unit-option' style={buttonStyle} key={unit} onMouseEnter={() => this.toggleHover()} onMouseLeave={() => this.toggleHover()} onClick={() => { this.toggleActive(); toggleSelectedUnit(unit); }} >{unit}</div>
+            <div className='unit-option' style={buttonStyle} key={unit} onMouseEnter={() => this.toggleHover()} onMouseLeave={() => this.toggleHover()} onClick={() => { this.toggleActive(); toggleSelectedUnit(unit); }} >{formatFirstString(unit)}</div>
         )
     }
 }

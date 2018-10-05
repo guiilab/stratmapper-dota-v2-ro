@@ -13,6 +13,10 @@ div:focus {
 	--filler: lightgrey;
 }
 
+h3 {
+	margin: 0;
+}
+
 .app-container {
 	position: relative;
 	overflow: hidden;
@@ -72,9 +76,10 @@ div:focus {
 }
 
 .tooltip-element-wrapper {
-	padding: .3rem;
+	padding: .5rem;
 	width: 250px;
-	font-size: .8rem;
+	font-size: 1rem;
+	text-align: left;
 }
 
 .tooltip-element-key {
@@ -88,6 +93,7 @@ div:focus {
 .left-sidebar, .right-sidebar {
 	position: absolute;
 	z-index: 100;
+	text-align: center;
 }
 
 .right-sidebar {
@@ -100,6 +106,7 @@ div:focus {
 	width: 200px;
 	left: 0px;
 	top: 0;
+	padding: .6rem;
 	background-color: lightgrey;
 	border-right: 1px black solid;
 	border-bottom: 1px black solid;
@@ -110,10 +117,25 @@ div:focus {
 	text-align: center;
 }
 
+.match-select-container {
+	text-align: center;
+}
+
+.match-select-font {
+	font-weight: 700;
+	font-size: .7rem;
+	margin-right: .5rem;
+}
+
 .unit-select-container {
 	margin-top: 1rem;
-	padding: .5rem;
-	border-top: black solid 1px;
+}
+
+.center {
+	color: grey;
+	display: inline-block;
+	margin-bottom: .5rem;
+	height: 0;
 }
 
 .title-container {
@@ -121,6 +143,7 @@ div:focus {
 	border-bottom: 1px solid black;
 	height: 20px;
 	text-align: center;
+	padding: .3rem;
 }
 
 .map-controls {
@@ -177,6 +200,8 @@ div:focus {
 
 .group-option {
 	width: 90%;
+	height: 25px;
+	line-height: 25px;
 }
 
 .unit-option {
@@ -215,17 +240,17 @@ div:focus {
 	height: 22px;
 	position: absolute;
 	border: 1px solid black;
-	right: 100px;
-	top: -24px;
+	right: 0px;
+	top: -33px;
 	text-align: middle;
 	background-color: lightgrey;
 	line-height: 22px;
+	padding: .3rem;
 }
 
 .timestamp-font {
 	font-weight: 700;
 	font-size: .7rem;
-	padding: .2rem;
 }
 
 .timeline-container {

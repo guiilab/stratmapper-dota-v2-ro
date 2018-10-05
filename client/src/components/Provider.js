@@ -6,7 +6,7 @@ export const Context = createContext();
 class Provider extends Component {
     state = {
         matches: [],
-        currentMatch: 'early',
+        currentMatch: 'early-game',
         apiMatchId: 2500623971,
         brushRange: [],
         windowSettings: {
@@ -263,6 +263,7 @@ class Provider extends Component {
                         dire: [],
                         radiant: [],
                         loadSettings: data[0].load_settings,
+                        brushRange: [],
                         events: {
                             all: [...data[0].events],
                             allTypes: [...eventsAllTypes],
@@ -421,7 +422,9 @@ class Provider extends Component {
                     return unitObject
                 },
 
-                formatHeroString(string) {
+                formatFirstString(string) {
+                    string = string.replace(/_/g, " ")
+                    string = string.replace(/npcdota/g, "")
                     string = string.replace(/hero/g, "")
                     string = string.charAt(0).toUpperCase() + string.slice(1);
                     return string;
