@@ -98,8 +98,8 @@ h3 {
 
 .right-sidebar {
 	position: absolute;
-	right: 0px;
-	top: 0
+	right: 30px;
+	top: 30px;
 }
 
 .left-sidebar {
@@ -148,15 +148,15 @@ h3 {
 
 .map-controls {
 	position: absolute;
-	top: 3px;
-	left: 3px;
+	top: 10px;
+	left: 230px;
 	background-color: rgba(250, 250, 250, .3);
 	border: 1px solid black;
 	padding: .2rem;
 }
 
 .map-center-button {
-	width: 60px;
+	width: 80px;
 	border: black solid 1px;
 	background-color: grey;
 	text-align: center;

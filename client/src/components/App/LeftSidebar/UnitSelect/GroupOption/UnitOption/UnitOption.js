@@ -54,7 +54,12 @@ class UnitOption extends Component {
         let unitObject = getUnit(unit);
 
         if (this.state.hover || this.state.active) {
-            buttonStyle = { backgroundColor: unitObject.color }
+            buttonStyle = {
+                backgroundColor: unitObject.color
+            }
+
+        } else {
+            buttonStyle = { backgroundColor: "grey" }
         }
 
         return (

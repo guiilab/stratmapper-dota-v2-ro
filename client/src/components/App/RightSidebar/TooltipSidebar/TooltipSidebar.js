@@ -25,7 +25,7 @@ class TooltipSidebar extends Component {
                     <h3>Tooltip</h3>
                 </div>
                 <div className="tooltipsidebar-inner-container">
-                    {activeNode ? tooltips[activeNode.event_type].map((element) => <TooltipElement event={activeNode} elementKey={element.key} elementLabel={element.label} key={Math.random()} />) : null}
+                    {activeNode ? tooltips[activeNode.event_type].map((element) => <TooltipElement event={activeNode} elementKey={element.key} elementLabel={element.label} key={Math.random()} />) : <div>(Hover Over Node to View Tooltip)</div>}
                 </div>
             </div>
         );

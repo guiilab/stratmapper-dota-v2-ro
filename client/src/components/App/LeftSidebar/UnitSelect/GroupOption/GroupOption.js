@@ -48,7 +48,12 @@ class GroupOption extends Component {
         let buttonStyle;
 
         if (this.state.hover || this.state.active) {
-            buttonStyle = { backgroundColor: group.color }
+            buttonStyle = {
+                backgroundColor: group.color,
+                fontWeight: 700,
+            }
+        } else {
+            buttonStyle = { backgroundColor: "grey" }
         }
 
         return (
