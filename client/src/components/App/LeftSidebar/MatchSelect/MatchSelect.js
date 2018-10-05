@@ -11,17 +11,12 @@ class MatchSelection extends Component {
     }
 
     render() {
-
         const { matches } = this.props.state
+
         return (
-            <div className="match-select-container" >
-                <div className="title-container">
-                    <h3>Match Selection</h3>
-                </div>
-                <select name="map-select" id="map-select" value={this.props.state.currentMatch} onChange={(e) => this.handleChange(e)}>
-                    {matches.map((map) => <MatchOption option={map} key={map} />)}
-                </select>
-            </div>
+            <select name="map-select" id="map-select" value={this.props.state.currentMatch} onChange={(e) => this.handleChange(e)}>
+                {matches.map((map) => <MatchOption option={map} key={map} />)}
+            </select>
         );
     }
 }

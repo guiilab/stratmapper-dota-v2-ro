@@ -13,44 +13,15 @@ div:focus {
 	--filler: lightgrey;
 }
 
-h3 {
-	margin: 0;
-	padding: 0;
-}
-
 .app-container {
 	position: relative;
-	overflow-x: hidden;
-}
-
-.timestamp-container {
-	width: 200px;
-	height: 22px;
-	position: absolute;
-	border: 1px solid black;
-	right: 100px;
-	top: -24px;
-	text-align: middle;
-	background-color: lightgrey;
-	line-height: 22px;
-}
-
-.timestamp-font {
-	font-weight: 700;
-	font-size: .7rem;
-	padding: .2rem;
+	overflow: hidden;
 }
 
 .map-container {
 	border: 1px solid black;
 	background-color: rgb(236, 236, 236);
 	position: relative;
-	/* width: 100%;
-	height: 100%; */
-}
-
-.xAxis {
-	color: white;
 }
 
 .loading-icon-container {
@@ -116,17 +87,33 @@ h3 {
 
 .left-sidebar, .right-sidebar {
 	position: absolute;
-	height: 500px;
 	z-index: 100;
-	top: 0;
 }
 
 .right-sidebar {
+	position: absolute;
 	right: 0px;
+	top: 0
 }
 
 .left-sidebar {
+	width: 200px;
 	left: 0px;
+	top: 0;
+	background-color: lightgrey;
+	border-right: 1px black solid;
+	border-bottom: 1px black solid;
+}
+
+.app-title {
+	margin: auto;
+	text-align: center;
+}
+
+.unit-select-container {
+	margin-top: 1rem;
+	padding: .5rem;
+	border-top: black solid 1px;
 }
 
 .title-container {
@@ -134,29 +121,6 @@ h3 {
 	border-bottom: 1px solid black;
 	height: 20px;
 	text-align: center;
-}
-
-.match-select-container, .game-select-container, .select-container {
-	border: 1px solid black;
-	width: 300px;
-	background-color: var(--filler);
-}
-
-.brush-button-container {
-	background: var(--filler);
-	width: 12%;
-	position: absolute;
-	top: -22px;
-	left: -1px;
-	border: 1px black solid;
-	cursor: pointer;
-}
-
-.brush-button {
-	font-size: .7rem;
-	font-weight: 700;
-	text-align: center;
-	padding: .2rem;
 }
 
 .map-controls {
@@ -189,22 +153,8 @@ h3 {
 	margin: auto;
 }
 
-.match-select-container {
-	height: 50px;
-	text-align: center;
-	margin-bottom: 2rem;
-}
-
-#map-select {
-	width: 200px;
-}
-
 .tooltipsidebar-inner-container {
 	padding: 1rem;
-}
-
-.select-container {
-	height: 380px;
 }
 
 .unit-selection {
@@ -212,51 +162,73 @@ h3 {
 	flex-wrap: wrap;
 	flex-direction: column;
 	justify-content: space-around;
-	margin: 0;
-}
-
-.group-select {
-	padding: 1rem;
-	text-align: center;
-	vertical-align: middle;
-}
-
-.group-option-container {
-	height: 180px;
+	margin: 0 0 1rem 0;
+	width: 100%;
 }
 
 .unit-option, .group-option {
 	border: 1px solid black;
 	display: inline-block;
-	margin: .2rem;
+	margin: .2rem auto;
 	padding: .1rem;
 	cursor: pointer;
 	text-align: center;
 }
 
-.unit-option {
-	font-size: .6rem;
-}
-
 .group-option {
-	width: 100px;
-	line-height: 150px;
-	float: left;
+	width: 90%;
 }
 
-.event-data-container, .heatmap-container, .label-container, .tooltipsidebar-container {
+.unit-option {
+	font-size: .8rem;
+	width: 75%;
+}
+
+.tooltipsidebar-container {
 	border: 1px solid black;
 	height: 290px;
 	width: 300px;
 	background-color: var(--filler);
 }
 
+/* timeline */
+
+.brush-button-container {
+	background: var(--filler);
+	width: 12%;
+	position: absolute;
+	top: -22px;
+	left: -1px;
+	border: 1px black solid;
+	cursor: pointer;
+}
+
+.brush-button {
+	font-size: .7rem;
+	font-weight: 700;
+	text-align: center;
+	padding: .2rem;
+}
+
+.timestamp-container {
+	width: 200px;
+	height: 22px;
+	position: absolute;
+	border: 1px solid black;
+	right: 100px;
+	top: -24px;
+	text-align: middle;
+	background-color: lightgrey;
+	line-height: 22px;
+}
+
+.timestamp-font {
+	font-weight: 700;
+	font-size: .7rem;
+	padding: .2rem;
+}
+
 .timeline-container {
-	/* display: inline-block; */
-	/* width: 100%; */
-	/* position: relative;
-	min-width: 1250px;
-	max-width: 1400px; */
 	position: absolute;
 	bottom: 3%;
 	width: 100%;
@@ -307,7 +279,8 @@ h3 {
 .x-axis {
 	position: relative;
 	top: -4px;
-	height: 50px;
+	height: 15px;
+	color: white;
 }
 
 .timeline-chart {

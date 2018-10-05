@@ -31,7 +31,7 @@ class XAxis extends Component {
 
     render() {
 
-        return <g ref="xAxis" className="xAxis" />
+        return <g ref="xAxis" />
     }
 }
 

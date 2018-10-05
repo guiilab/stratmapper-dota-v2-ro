@@ -52,14 +52,16 @@ class GroupOption extends Component {
         }
 
         return (
-            <div className="group-option-container">
-                <div className='group-option' style={buttonStyle} key={group.name} onMouseOver={() => this.toggleHover()} onMouseLeave={() => this.toggleHover()} onClick={() => { this.toggleActive(); toggleGroup(groupUnits) }} >{group.name}</div>
+            <React.Fragment>
                 <div className="unit-selection">
-                    {groupUnits.map(function (unit) {
-                        return <UnitOption unit={unit} key={unit} />
-                    })}
+                    <div className='group-option' style={buttonStyle} key={group.name} onMouseOver={() => this.toggleHover()} onMouseLeave={() => this.toggleHover()} onClick={() => { this.toggleActive(); toggleGroup(groupUnits) }} >{group.name}</div>
+                    <React.Fragment>
+                        {groupUnits.map(function (unit) {
+                            return <UnitOption unit={unit} key={unit} />
+                        })}
+                    </React.Fragment>
                 </div>
-            </div>
+            </React.Fragment>
         );
     }
 }
