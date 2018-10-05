@@ -24,13 +24,21 @@ h3 {
 }
 
 .timestamp-container {
-	width: 240px;
-	height: 30px;
+	width: 200px;
+	height: 22px;
 	position: absolute;
 	border: 1px solid black;
 	right: 100px;
-	top: -32px;
+	top: -24px;
+	text-align: middle;
 	background-color: lightgrey;
+	line-height: 22px;
+}
+
+.timestamp-font {
+	font-weight: 700;
+	font-size: .7rem;
+	padding: .2rem;
 }
 
 .map-container {

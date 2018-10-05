@@ -6,19 +6,11 @@ class TimestampIndicator extends Component {
     render() {
         const { brushRange } = this.props.state;
 
-        if (brushRange[0] === isNaN) {
-            return (
-                <div className="timestamp-container">
-                    <span>Timestamps: </span>
-                </div>
-            )
-        }
-
         return (
             <div className="timestamp-container" >
-                <span>Timestamps: </span>
-                <span>{Math.round(brushRange[0]).toString()}, </span>
-                <span>{Math.round(brushRange[1]).toString()}</span>
+                <span className="timestamp-font">Brush Selection: </span>
+                <span>{brushRange[0] ? Math.round(brushRange[0]).toString() : 0}, </span>
+                <span>{brushRange[1] ? Math.round(brushRange[1]).toString() : 0}</span>
             </div>
         )
     }

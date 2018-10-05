@@ -392,6 +392,7 @@ class Provider extends Component {
                 toggleBrushActive: (e) => {
                     if (e.shiftKey) {
                         this.setState({
+                            brushRange: [],
                             brushActive: !this.state.brushActive
                         })
                     }
@@ -425,17 +426,6 @@ class Provider extends Component {
                     string = string.charAt(0).toUpperCase() + string.slice(1);
                     return string;
                 },
-
-                formatEventString(string) {
-                    string = string.replace(/_/g, " ");
-                    return string
-                        .toLowerCase()
-                        .split(' ')
-                        .map(function (word) {
-                            return word[0].toUpperCase() + word.substr(1);
-                        })
-                        .join(' ');
-                }
             }
             }>
                 {this.props.children}
