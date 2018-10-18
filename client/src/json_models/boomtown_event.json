@@ -1,0 +1,16 @@
+{ 
+    "event_type" : "use_item", 
+    "timestamp" : 1324,
+    "node_id" : 12345, 
+    "posX" : 35, 
+    "posY" : 23, 
+    "node_context": {
+        "unit_gold": 200, 
+        "team_gold": 800,
+        "inventory" : [
+            "dynamite", 
+            "black_powder"
+        ]
+    }, 
+    "unit" : "treep"
+}
