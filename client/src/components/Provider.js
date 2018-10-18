@@ -128,6 +128,7 @@ class Provider extends Component {
     }
 
     getLabels = async () => {
+        console.log('getlabels ran')
         const response = await fetch('/api/labels', {
             method: 'POST',
             headers: {
@@ -149,7 +150,7 @@ class Provider extends Component {
     loadLabels = (data) => {
         this.setState({
             labels: [...data]
-        })
+        }, () => console.log(this.state.labels))
     }
 
     setGroupState = (d, unit) => {

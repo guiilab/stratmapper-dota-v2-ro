@@ -95,7 +95,7 @@ app.post('/api/add-label', function (req, res) {
             id: req.body.id,
             behavior: req.body.behavior,
             author: 'andy',
-            description: req.body.behavior,
+            description: req.body.description,
             events: req.body.events,
             units: req.body.units,
             event_ids: [1, 2, 3, 4, 5, 6]

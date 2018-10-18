@@ -26,11 +26,13 @@ class LabelPanel extends Component {
         let height;
         let opacity;
         let angle;
+        let color;
 
         this.state.isOpen ? width = '400px' : width = '30px';
         this.state.isOpen ? height = '65%' : height = '120px';
         this.state.isOpen ? opacity = 100 : opacity = 0;
         this.state.isOpen ? angle = '0deg' : angle = '270deg';
+        this.state.isOpen ? color = 'coral' : color = 'green'
 
         let labelPanelStyle = {
             height: height,
@@ -40,7 +42,7 @@ class LabelPanel extends Component {
             transform: `rotate(${angle})`
         }
         let closeButtonStyle = {
-            opacity: opacity
+            backgroundColor: color
         }
         if (!this.props.state.labels) {
             return <div>loading</div>
@@ -51,7 +53,7 @@ class LabelPanel extends Component {
                 {/* <div style={labelPanelStyle} className="label-panel"> */}
                 <AddLabel isOpen={this.state.isOpen} opacity={opacity} />
                 {this.props.state.labels.map((label) => <Label label={label} key={label.id} opacity={opacity} />)}
-                <div style={closeButtonStyle} className="close-button" onClick={() => this.toggleOpen()}>Close</div>
+                <div style={closeButtonStyle} className="close-button" onClick={() => this.toggleOpen()}>{this.state.isOpen ? 'Close' : 'Open'}</div>
             </div >
         )
     }

@@ -184,6 +184,7 @@ h3 {
     bottom: -30px;
     left: -1px;
     padding: .3rem;
+    cursor: pointer;
 }
 
 .left-sidebar, .right-sidebar {
