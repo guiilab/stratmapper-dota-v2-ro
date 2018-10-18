@@ -9,6 +9,7 @@ const port = process.env.PORT || 5000;
 // const EventModel = require('./client/models/events.js');
 const createEventModel = require('./client/models/dynamicEvents.js');
 const MatchModel = require('./client/models/matches.js');
+const LabelModel = require('./client/models/labels.js');
 
 var suffix;
 var EventModel;
@@ -75,6 +76,18 @@ app.post('/api/events', function (req, res) {
         })
         .exec(function (err, events) {
             return res.send(events)
+        })
+})
+
+app.post('/api/labels', function (req, res) {
+    console.log(req.body.author)
+    return LabelModel
+        .find({
+            author: req.body.author
+        })
+        .exec(function (err, label) {
+            console.log(label)
+            return res.send(label)
         })
 })
 

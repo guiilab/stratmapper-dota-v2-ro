@@ -6,6 +6,7 @@ import LeftSidebar from './LeftSidebar/LeftSidebar.js'
 import Map from './Map/Map.js';
 import LoadingIcon from './LoadingIcon/LoadingIcon.js'
 import RightSidebar from './RightSidebar/RightSidebar.js';
+import LabelPanel from './LabelPanel/LabelPanel.js'
 import Timeline from './Timeline/Timeline.js';
 
 class App extends Component {
@@ -47,6 +48,7 @@ class App extends Component {
                     <Map />
                     <LeftSidebar />
                     <RightSidebar />
+                    <LabelPanel />
                     <Timeline />
                 </div>
             );

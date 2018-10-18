@@ -90,6 +90,49 @@ h3 {
     font-weight: lighter;
 }
 
+.label-panel {
+    height: 65%;
+    background-color: lightgrey;
+    border-left: black 1px solid;
+    border-bottom: black 1px solid;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transition: .5s;
+}
+
+.add-label {
+    transition: .5s;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.label-input, .add-label-button {
+    border: none;
+    outline: none;
+    height: 15px;
+    margin: .2rem 0;
+    padding: .3rem;
+}
+
+.textarea {
+    resize: none;
+    height: 40px;
+}
+
+.add-label-button {
+    width: 60px;
+    background-color: white;
+    color: grey;
+    font-size: .8rem;
+    cursor: pointer;
+}
+
+.add-label-button:hover {
+    background-color: rgb(240, 240, 240);
+}
+
 .left-sidebar, .right-sidebar {
     position: absolute;
     z-index: 100;
@@ -98,7 +141,7 @@ h3 {
 
 .right-sidebar {
     position: absolute;
-    right: 30px;
+    right: 500px;
     top: 30px;
 }
 
