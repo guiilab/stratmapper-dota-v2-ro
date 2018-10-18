@@ -1,315 +1,315 @@
 html, body, #root {
-	height: 100%;
-	width: 100%;
-	margin: 0;
-	font-family: sans-serif;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    font-family: sans-serif;
 }
 
 div:focus {
-	outline: 0;
+    outline: 0;
 }
 
 :root {
-	--filler: lightgrey;
+    --filler: lightgrey;
 }
 
 h3 {
-	margin: 0;
+    margin: 0;
 }
 
 .app-container {
-	position: relative;
-	overflow: hidden;
+    position: relative;
+    overflow: hidden;
 }
 
 .map-container {
-	border: 1px solid black;
-	background-color: rgb(236, 236, 236);
-	position: relative;
+    border: 1px solid black;
+    background-color: rgb(236, 236, 236);
+    position: relative;
 }
 
 .loading-icon-container {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	margin-top: -50px;
-	margin-left: -50px;
-	width: 100px;
-	height: 100px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -50px;
+    width: 100px;
+    height: 100px;
 }
 
 .loading-icon {
-	border: 16px solid #f3f3f3;
-	border-radius: 50%;
-	border-top: 16px solid #3498db;
-	width: 120px;
-	height: 120px;
-	-webkit-animation: spin 2s linear infinite;
-	/* Safari */
-	animation: spin 2s linear infinite;
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite;
+    /* Safari */
+    animation: spin 2s linear infinite;
 }
 
 /* Safari */
 
 @-webkit-keyframes spin {
-	0% {
-		-webkit-transform: rotate(0deg);
-	}
-	100% {
-		-webkit-transform: rotate(360deg);
-	}
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
 }
 
 @keyframes spin {
-	0% {
-		transform: rotate(0deg);
-	}
-	100% {
-		transform: rotate(360deg);
-	}
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 .map-title {
-	position: absolute;
-	top: 35%;
-	left: 50%;
+    position: absolute;
+    top: 35%;
+    left: 50%;
 }
 
 .tooltip-element-wrapper {
-	padding: .5rem;
-	width: 250px;
-	font-size: 1rem;
-	text-align: left;
+    padding: .5rem;
+    width: 250px;
+    font-size: 1rem;
+    text-align: left;
 }
 
 .tooltip-element-key {
-	font-weight: bold;
+    font-weight: bold;
 }
 
 .tooltip-element-value {
-	font-weight: lighter;
+    font-weight: lighter;
 }
 
 .left-sidebar, .right-sidebar {
-	position: absolute;
-	z-index: 100;
-	text-align: center;
+    position: absolute;
+    z-index: 100;
+    text-align: center;
 }
 
 .right-sidebar {
-	position: absolute;
-	right: 30px;
-	top: 30px;
+    position: absolute;
+    right: 30px;
+    top: 30px;
 }
 
 .left-sidebar {
-	width: 200px;
-	left: 0px;
-	top: 0;
-	padding: .6rem;
-	background-color: lightgrey;
-	border-right: 1px black solid;
-	border-bottom: 1px black solid;
+    width: 200px;
+    left: 0px;
+    top: 0;
+    padding: .6rem;
+    background-color: lightgrey;
+    border-right: 1px black solid;
+    border-bottom: 1px black solid;
 }
 
 .app-title {
-	margin: auto;
-	text-align: center;
+    margin: auto;
+    text-align: center;
 }
 
 .match-select-container {
-	text-align: center;
+    text-align: center;
 }
 
 .match-select-font {
-	font-weight: 700;
-	font-size: .7rem;
-	margin-right: .5rem;
+    font-weight: 700;
+    font-size: .7rem;
+    margin-right: .5rem;
 }
 
 .unit-select-container {
-	margin-top: 1rem;
+    margin-top: 1rem;
 }
 
 .center {
-	color: grey;
-	display: inline-block;
-	margin-bottom: .5rem;
-	height: 0;
+    color: grey;
+    display: inline-block;
+    margin-bottom: .5rem;
+    height: 0;
 }
 
 .title-container {
-	background-color: grey;
-	border-bottom: 1px solid black;
-	height: 20px;
-	text-align: center;
-	padding: .3rem;
+    background-color: grey;
+    border-bottom: 1px solid black;
+    height: 20px;
+    text-align: center;
+    padding: .3rem;
 }
 
 .map-controls {
-	position: absolute;
-	top: 10px;
-	left: 230px;
-	background-color: rgba(250, 250, 250, .3);
-	border: 1px solid black;
-	padding: .2rem;
+    position: absolute;
+    top: 10px;
+    left: 230px;
+    background-color: rgba(250, 250, 250, .3);
+    border: 1px solid black;
+    padding: .2rem;
 }
 
 .map-center-button {
-	width: 80px;
-	border: black solid 1px;
-	background-color: grey;
-	text-align: center;
-	padding: .2rem;
-	font-size: .8rem;
-	cursor: pointer;
+    width: 80px;
+    border: black solid 1px;
+    background-color: grey;
+    text-align: center;
+    padding: .2rem;
+    font-size: .8rem;
+    cursor: pointer;
 }
 
 .map-center:hover {
-	background-color: lightgrey;
+    background-color: lightgrey;
 }
 
 .center-map-button {
-	text-align: center;
-	border: 1px black solid;
-	width: 100px;
-	margin: auto;
+    text-align: center;
+    border: 1px black solid;
+    width: 100px;
+    margin: auto;
 }
 
 .tooltipsidebar-inner-container {
-	padding: 1rem;
+    padding: 1rem;
 }
 
 .unit-selection {
-	display: flex;
-	flex-wrap: wrap;
-	flex-direction: column;
-	justify-content: space-around;
-	margin: 0 0 1rem 0;
-	width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-around;
+    margin: 0 0 1rem 0;
+    width: 100%;
 }
 
 .unit-option, .group-option {
-	border: 1px solid black;
-	display: inline-block;
-	margin: .2rem auto;
-	padding: .1rem;
-	cursor: pointer;
-	text-align: center;
+    border: 1px solid black;
+    display: inline-block;
+    margin: .2rem auto;
+    padding: .1rem;
+    cursor: pointer;
+    text-align: center;
 }
 
 .group-option {
-	width: 90%;
-	height: 25px;
-	line-height: 25px;
+    width: 90%;
+    height: 25px;
+    line-height: 25px;
 }
 
 .unit-option {
-	font-size: .8rem;
-	width: 75%;
+    font-size: .8rem;
+    width: 75%;
 }
 
 .tooltipsidebar-container {
-	border: 1px solid black;
-	height: 290px;
-	width: 300px;
-	background-color: var(--filler);
+    border: 1px solid black;
+    height: 290px;
+    width: 300px;
+    background-color: var(--filler);
 }
 
 /* timeline */
 
 .brush-button-container {
-	background: var(--filler);
-	width: 12%;
-	position: absolute;
-	top: -22px;
-	left: -1px;
-	border: 1px black solid;
-	cursor: pointer;
+    background: var(--filler);
+    width: 12%;
+    position: absolute;
+    top: -22px;
+    left: -1px;
+    border: 1px black solid;
+    cursor: pointer;
 }
 
 .brush-button {
-	font-size: .7rem;
-	font-weight: 700;
-	text-align: center;
-	padding: .2rem;
+    font-size: .7rem;
+    font-weight: 700;
+    text-align: center;
+    padding: .2rem;
 }
 
 .timestamp-container {
-	width: 200px;
-	height: 22px;
-	position: absolute;
-	border: 1px solid black;
-	right: 0px;
-	top: -34px;
-	text-align: middle;
-	background-color: lightgrey;
-	line-height: 22px;
-	padding: .3rem;
+    width: 200px;
+    height: 22px;
+    position: absolute;
+    border: 1px solid black;
+    right: 0px;
+    top: -33px;
+    text-align: middle;
+    background-color: lightgrey;
+    line-height: 22px;
+    padding: .3rem;
 }
 
 .timestamp-font {
-	font-weight: 700;
-	font-size: .7rem;
+    font-weight: 700;
+    font-size: .7rem;
 }
 
 .timeline-container {
-	position: absolute;
-	bottom: 3%;
-	width: 100%;
-	border: black 1px solid;
-	height: 250px;
+    position: absolute;
+    bottom: 3%;
+    width: 100%;
+    border: black 1px solid;
+    height: 250px;
 }
 
 .event-select-container {
-	float: left;
-	width: 12%;
-	min-width: 130px;
-	background-color: grey;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	text-align: center;
+    float: left;
+    width: 12%;
+    min-width: 130px;
+    background-color: grey;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
 }
 
 .event-option-container {
-	margin: auto;
-	display: flex;
-	justify-content: space-around;
-	flex-direction: row;
+    margin: auto;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
 }
 
 .event-option {
-	display: inline-block;
-	font-size: .5rem;
-	border: 1px solid black;
-	width: 120px;
-	cursor: pointer;
-	padding: .2rem;
+    display: inline-block;
+    font-size: .5rem;
+    border: 1px solid black;
+    width: 120px;
+    cursor: pointer;
+    padding: .2rem;
 }
 
 .solo-button {
-	display: inline-block;
-	border: 1px solid black;
-	font-size: .5rem;
-	margin-right: .3rem;
-	cursor: pointer;
+    display: inline-block;
+    border: 1px solid black;
+    font-size: .5rem;
+    margin-right: .3rem;
+    cursor: pointer;
 }
 
 .y-axis {
-	float: right;
-	border-right: 1px solid black;
+    float: right;
+    border-right: 1px solid black;
 }
 
 .x-axis {
-	position: relative;
-	top: -4px;
-	height: 15px;
-	color: white;
+    position: relative;
+    top: -4px;
+    height: 15px;
+    color: white;
 }
 
 .timeline-chart {
-	float: right;
-	width: 88%;
-	background-color: lightgrey;
+    float: right;
+    width: 88%;
+    background-color: lightgrey;
 }
