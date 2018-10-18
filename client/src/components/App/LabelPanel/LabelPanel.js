@@ -7,37 +7,11 @@ import Label from './Label/Label.js';
 class LabelPanel extends Component {
 
     state = {
-        isOpen: true,
-        labels: null
+        isOpen: true
     }
 
     componentDidMount() {
-        this.getLabels().then(res => this.loadLabels(res))
-    }
-
-    getLabels = async () => {
-        const response = await fetch('/api/labels', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                author: 'andy'
-            })
-        });
-        const body = await response.json();
-
-        if (response.status !== 200) {
-            throw Error(body.message)
-        }
-        return body
-    }
-
-    loadLabels = (data) => {
-        this.setState({
-            labels: [...data]
-        })
+        this.props.getLoadLabels()
     }
 
     toggleOpen = () => {
@@ -53,14 +27,14 @@ class LabelPanel extends Component {
         let labelPanelStyle = {
             width: '400px'
         }
-        if (!this.state.labels) {
+        if (!this.props.state.labels) {
             return <div>loading</div>
         }
         return (
             // <div style={labelPanelStyle} className="label-panel" onClick={() => this.toggleOpen()}>
             <div style={labelPanelStyle} className="label-panel">
                 <AddLabel isOpen={this.state.isOpen} />
-                {this.state.labels.map((label) => <Label label={label} key={label.id} />)}
+                {this.props.state.labels.map((label) => <Label label={label} key={label.id} />)}
             </div>
         )
     }

@@ -91,6 +91,28 @@ app.post('/api/labels', function (req, res) {
         })
 })
 
+app.post('/api/add-label', function (req, res) {
+    LabelModel
+        .create({
+            id: req.body.id,
+            behavior: req.body.behavior,
+            author: 'andy',
+            description: req.body.behavior,
+            events: req.body.events,
+            units: req.body.units,
+            event_ids: [1, 2, 3, 4, 5, 6]
+        }, function (err) {
+            if (err) return handleError(err)
+        })
+})
+
+app.post('/api/delete-label', function (req, res) {
+    LabelModel
+        .find({
+            id: req.body.id
+        }).remove().exec()
+})
+
 setInterval(function () {
     http.get("https://polar-forest-80084.herokuapp.com/");
 }, 1740000);

@@ -164,6 +164,7 @@ h3 {
     padding: .1rem .3rem;
     background-color: red;
     font-size: .8rem;
+    cursor: pointer;
 }
 
 .left-sidebar, .right-sidebar {

@@ -56,7 +56,8 @@ class Provider extends Component {
         minFactor: .93,
         maxFactor: 1.04,
         mapPaddingY: 120,
-        mapPaddingX: 80
+        mapPaddingX: 80,
+        labels: null
     };
 
     componentDidMount() {
@@ -124,6 +125,31 @@ class Provider extends Component {
             })
         }
         )
+    }
+
+    getLabels = async () => {
+        const response = await fetch('/api/labels', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                author: 'andy'
+            })
+        });
+        const body = await response.json();
+
+        if (response.status !== 200) {
+            throw Error(body.message)
+        }
+        return body
+    }
+
+    loadLabels = (data) => {
+        this.setState({
+            labels: [...data]
+        })
     }
 
     setGroupState = (d, unit) => {
@@ -314,6 +340,42 @@ class Provider extends Component {
                     }
                 },
 
+                getLoadLabels: () => {
+                    this.getLabels().then(res => this.loadLabels(res))
+                },
+
+                addLabel: (label) => {
+                    return fetch('api/add-label', {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            id: Math.floor(Math.random() * 1000000000),
+                            behavior: label.behavior,
+                            author: 'andy',
+                            description: label.description,
+                            events: this.state.selectedEvents,
+                            units: this.state.selectedUnits,
+                            event_ids: [1, 2, 3, 4, 5, 6]
+                        })
+                    }).then(this.getLabels().then(res => this.loadLabels(res)))
+                },
+
+                deleteLabel: (id) => {
+                    return fetch('api/delete-label', {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            id: id
+                        })
+                    }).then(this.getLabels().then(res => this.loadLabels(res)))
+                },
+
                 toggleSelectedUnit: (unit) => {
                     if (this.state.selectedUnits.includes(unit)) {
                         const array = [...this.state.selectedUnits];
@@ -342,20 +404,6 @@ class Provider extends Component {
                         }))
                     }
                 },
-
-                // xScale: (x) => {
-                //     const scale = d3.scaleLinear()
-                //         .domain([this.state.coordinateRange.x.min * this.state.minFactor, this.state.coordinateRange.x.max * this.state.maxFactor])
-                //         .range([0, this.state.windowSettings.width])
-                //     return scale(x)
-                // },
-
-                // yScale: (y) => {
-                //     const scale = d3.scaleLinear()
-                //         .domain([this.state.coordinateRange.y.min * this.state.minFactor, this.state.coordinateRange.y.max * this.state.maxFactor])
-                //         .range([this.state.windowSettings.width, 0])
-                //     return scale(y)
-                // },
 
                 xScale: (x) => {
                     const scale = d3.scaleLinear()
