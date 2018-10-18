@@ -7,7 +7,9 @@ class Label extends Component {
         const { label } = this.props
         return (
             <div className="label">
-                <span>{label.behavior}</span>
+                <div className="label-title">{label.behavior}</div>
+                <div className="label-description">{label.description}</div>
+                <div className="label-delete">Delete</div>
             </div>
         )
     }

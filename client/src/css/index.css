@@ -99,13 +99,14 @@ h3 {
     top: 0;
     right: 0;
     transition: .5s;
+    padding: 1rem;
 }
 
 .add-label {
     transition: .5s;
-    padding: 1rem;
     display: flex;
     flex-direction: column;
+    margin-bottom: 2rem;
 }
 
 .label-input, .add-label-button {
@@ -131,6 +132,38 @@ h3 {
 
 .add-label-button:hover {
     background-color: rgb(240, 240, 240);
+}
+
+.label {
+    border: 1px solid black;
+    padding: .5rem;
+    display: block;
+    position: relative;
+    background-color: white;
+}
+
+.label-title {
+    display: block;
+    font-weight: 600;
+    margin: .2rem 0;
+}
+
+.label-description {
+    display: block;
+    font-size: .8rem;
+    max-height: 50px;
+    overflow: auto;
+    margin: .5rem 0;
+}
+
+.label-delete {
+    position: absolute;
+    right: 3px;
+    top: 3px;
+    border: 1px solid black;
+    padding: .1rem .3rem;
+    background-color: red;
+    font-size: .8rem;
 }
 
 .left-sidebar, .right-sidebar {
