@@ -10,9 +10,6 @@ import LabelPanel from './LabelPanel/LabelPanel.js';
 import Timeline from './Timeline/Timeline.js';
 
 class App extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     componentDidMount() {
         this

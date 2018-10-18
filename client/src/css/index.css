@@ -11,6 +11,8 @@ div:focus {
 
 :root {
     --filler: lightgrey;
+    --fast-trans: .3s;
+    --slow-trans: .5s;
 }
 
 h3 {
@@ -82,27 +84,27 @@ h3 {
     position: absolute;
     top: 200px;
     right: 0;
-    transition: .5s;
+    transition: var(--slow-trans);
     padding: 1rem;
 }
 
 .label-container {
     overflow: auto;
     max-height: 50%;
-    transition: .5s;
+    transition: var(--fast-trans);
 }
 
 .label-header {
     position: absolute;
     font-size: 1.5rem;
     font-weight: 600;
-    transition: .5s;
+    transition: var(--fast-trans);
     right: -5px;
     top: 60px;
 }
 
 .add-label {
-    transition: .5s;
+    transition: var(--fast-trans);
     display: flex;
     flex-direction: column;
     margin-bottom: 2rem;
@@ -139,7 +141,7 @@ h3 {
     display: block;
     position: relative;
     background-color: white;
-    transition: .5s;
+    transition: var(--fast-trans);
     margin-bottom: .5rem;
 }
 
