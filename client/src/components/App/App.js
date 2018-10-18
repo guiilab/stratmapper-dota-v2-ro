@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 
 import { Context } from '../Provider.js'
 
-import LeftSidebar from './LeftSidebar/LeftSidebar.js'
+import LeftSidebar from './LeftSidebar/LeftSidebar.js';
 import Map from './Map/Map.js';
-import LoadingIcon from './LoadingIcon/LoadingIcon.js'
-import RightSidebar from './RightSidebar/RightSidebar.js';
-import LabelPanel from './LabelPanel/LabelPanel.js'
+import LoadingIcon from './LoadingIcon/LoadingIcon.js';
+import TooltipSidebar from './TooltipSidebar/TooltipSidebar.js';
+import LabelPanel from './LabelPanel/LabelPanel.js';
 import Timeline from './Timeline/Timeline.js';
 
 class App extends Component {
@@ -47,7 +47,7 @@ class App extends Component {
                 <div className="app-container" style={appContainerStyle}>
                     <Map />
                     <LeftSidebar />
-                    <RightSidebar />
+                    <TooltipSidebar />
                     <LabelPanel />
                     <Timeline />
                 </div>

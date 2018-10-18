@@ -75,31 +75,21 @@ h3 {
     left: 50%;
 }
 
-.tooltip-element-wrapper {
-    padding: .5rem;
-    width: 250px;
-    font-size: 1rem;
-    text-align: left;
-}
-
-.tooltip-element-key {
-    font-weight: bold;
-}
-
-.tooltip-element-value {
-    font-weight: lighter;
-}
-
 .label-panel {
-    height: 65%;
     background-color: lightgrey;
-    border-left: black 1px solid;
-    border-bottom: black 1px solid;
+    border: black 1px solid;
+    border-right: none;
     position: absolute;
-    top: 0;
+    top: 200px;
     right: 0;
     transition: .5s;
     padding: 1rem;
+}
+
+.label-container {
+    overflow: auto;
+    max-height: 50%;
+    transition: .5s;
 }
 
 .label-header {
@@ -150,6 +140,7 @@ h3 {
     position: relative;
     background-color: white;
     transition: .5s;
+    margin-bottom: .5rem;
 }
 
 .label-title {
@@ -187,16 +178,10 @@ h3 {
     cursor: pointer;
 }
 
-.left-sidebar, .right-sidebar {
+.left-sidebar {
     position: absolute;
     z-index: 100;
     text-align: center;
-}
-
-.right-sidebar {
-    position: absolute;
-    right: 500px;
-    top: 30px;
 }
 
 .left-sidebar {
@@ -273,8 +258,34 @@ h3 {
     margin: auto;
 }
 
+.tooltipsidebar-container {
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
+    height: 195px;
+    width: 250px;
+    background-color: var(--filler);
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
 .tooltipsidebar-inner-container {
-    padding: 1rem;
+    padding: .6rem;
+}
+
+.tooltip-element-wrapper {
+    padding: .4rem;
+    width: 250px;
+    font-size: .8rem;
+    text-align: left;
+}
+
+.tooltip-element-key {
+    font-weight: bold;
+}
+
+.tooltip-element-value {
+    font-weight: lighter;
 }
 
 .unit-selection {
@@ -304,13 +315,6 @@ h3 {
 .unit-option {
     font-size: .8rem;
     width: 75%;
-}
-
-.tooltipsidebar-container {
-    border: 1px solid black;
-    height: 290px;
-    width: 300px;
-    background-color: var(--filler);
 }
 
 /* timeline */
