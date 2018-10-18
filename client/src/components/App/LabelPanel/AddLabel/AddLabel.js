@@ -19,12 +19,8 @@ class AddLabel extends Component {
     }
 
     render() {
-        let width;
-        let opacity;
-        this.props.isOpen ? width = '400px' : width = '100px';
-        this.props.isOpen ? opacity = 100 : opacity = 0;
         let addLabelStyle = {
-            opacity: opacity
+            opacity: this.props.opacity
         }
 
         return (

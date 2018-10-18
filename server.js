@@ -80,13 +80,11 @@ app.post('/api/events', function (req, res) {
 })
 
 app.post('/api/labels', function (req, res) {
-    console.log(req.body.author)
     return LabelModel
         .find({
             author: req.body.author
         })
         .exec(function (err, label) {
-            console.log(label)
             return res.send(label)
         })
 })

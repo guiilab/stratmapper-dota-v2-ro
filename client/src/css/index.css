@@ -102,6 +102,15 @@ h3 {
     padding: 1rem;
 }
 
+.label-header {
+    position: absolute;
+    font-size: 1.5rem;
+    font-weight: 600;
+    transition: .5s;
+    right: -5px;
+    top: 60px;
+}
+
 .add-label {
     transition: .5s;
     display: flex;
@@ -140,6 +149,7 @@ h3 {
     display: block;
     position: relative;
     background-color: white;
+    transition: .5s;
 }
 
 .label-title {
@@ -165,6 +175,15 @@ h3 {
     background-color: red;
     font-size: .8rem;
     cursor: pointer;
+}
+
+.close-button {
+    position: absolute;
+    border: 1px solid black;
+    background-color: coral;
+    bottom: -30px;
+    left: -1px;
+    padding: .3rem;
 }
 
 .left-sidebar, .right-sidebar {

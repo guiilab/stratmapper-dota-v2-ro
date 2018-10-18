@@ -7,7 +7,7 @@ import Label from './Label/Label.js';
 class LabelPanel extends Component {
 
     state = {
-        isOpen: true
+        isOpen: false
     }
 
     componentDidMount() {
@@ -23,19 +23,36 @@ class LabelPanel extends Component {
     render() {
 
         let width;
-        // this.state.isOpen ? width = '400px' : width = '100px';
+        let height;
+        let opacity;
+        let angle;
+
+        this.state.isOpen ? width = '400px' : width = '30px';
+        this.state.isOpen ? height = '65%' : height = '120px';
+        this.state.isOpen ? opacity = 100 : opacity = 0;
+        this.state.isOpen ? angle = '0deg' : angle = '270deg';
+
         let labelPanelStyle = {
-            width: '400px'
+            height: height,
+            width: width
+        }
+        let labelHeaderStyle = {
+            transform: `rotate(${angle})`
+        }
+        let closeButtonStyle = {
+            opacity: opacity
         }
         if (!this.props.state.labels) {
             return <div>loading</div>
         }
         return (
-            // <div style={labelPanelStyle} className="label-panel" onClick={() => this.toggleOpen()}>
-            <div style={labelPanelStyle} className="label-panel">
-                <AddLabel isOpen={this.state.isOpen} />
-                {this.props.state.labels.map((label) => <Label label={label} key={label.id} />)}
-            </div>
+            <div style={labelPanelStyle} className="label-panel" onClick={this.state.isOpen ? null : () => this.toggleOpen()}>
+                {this.state.isOpen ? null : <div style={labelHeaderStyle} className="label-header">Labels</div>}
+                {/* <div style={labelPanelStyle} className="label-panel"> */}
+                <AddLabel isOpen={this.state.isOpen} opacity={opacity} />
+                {this.props.state.labels.map((label) => <Label label={label} key={label.id} opacity={opacity} />)}
+                <div style={closeButtonStyle} className="close-button" onClick={() => this.toggleOpen()}>Close</div>
+            </div >
         )
     }
 }
