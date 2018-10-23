@@ -32,7 +32,7 @@ class Scatterplot extends PureComponent {
 
     render() {
         const { data, events, yScaleTime, toggleActiveNode, getUnit } = this.props;
-        const { selectedUnits, selectedEvents } = this.props.state;
+        const { selectedUnits, selectedEventTypes } = this.props.state;
 
         return (
             <g ref="scatterplot">
@@ -42,7 +42,7 @@ class Scatterplot extends PureComponent {
                         cx={this.xScaleTime(event.timestamp)}
                         cy={yScaleTime(events.indexOf(event.event_type))}
                         r={4}
-                        fill={(selectedUnits.includes(event.unit) && (selectedEvents.includes(event.event_type))) ? unitObject.color : 'grey'}
+                        fill={(selectedUnits.includes(event.unit) && (selectedEventTypes.includes(event.event_type))) ? unitObject.color : 'grey'}
                         stroke="black"
                         strokeWidth={1}
                         key={event.node_id}

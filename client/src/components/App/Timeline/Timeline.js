@@ -56,7 +56,7 @@ class Timeline extends PureComponent {
 
     render() {
         const { zoomTransform, width } = this.state;
-        const { events, unitEventsTimeline, timestampRange, timelineSettings, selectedEvents, loadSettings, brushActive, selectedUnits } = this.props.state;
+        const { events, unitEventsTimeline, timestampRange, timelineSettings, selectedEventTypes, loadSettings, brushActive, selectedUnits } = this.props.state;
         const { yScaleTime, toggleBrushActive } = this.props;
 
         const heightStyle = {
@@ -75,8 +75,9 @@ class Timeline extends PureComponent {
         let unitEventsTimelineFiltered = unitEventsTimeline;
         if (loadSettings.incremental_timeline === true) {
             let unitEventsSelectedUnits = unitEventsTimeline.filter((d) => selectedUnits.includes(d.unit))
-            unitEventsTimelineFiltered = unitEventsSelectedUnits.filter((d) => selectedEvents.includes(d.event_type))
+            unitEventsTimelineFiltered = unitEventsSelectedUnits.filter((d) => selectedEventTypes.includes(d.event_type))
         }
+
 
         return (
             <div className="timeline-container" ref="timelineContainer">

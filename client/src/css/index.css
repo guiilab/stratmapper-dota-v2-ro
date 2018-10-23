@@ -90,7 +90,7 @@ h3 {
 
 .label-container {
     overflow: auto;
-    max-height: 50%;
+    height: 55%;
     transition: var(--fast-trans);
 }
 

@@ -10,7 +10,7 @@ class EventOption extends Component {
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
-        if (!nextProps.selectedEvents.includes(nextProps.event.event_type)) {
+        if (!nextProps.selectedEventTypes.includes(nextProps.event.event_type)) {
             return {
                 active: false
             };
@@ -60,6 +60,6 @@ class EventOption extends Component {
 
 export default (props) => (
     <Context.Consumer>
-        {(context) => <EventOption event={props.event} toggleSelectedEvent={context.toggleSelectedEvent} selectedEvents={context.state.selectedEvents} />}
+        {(context) => <EventOption event={props.event} toggleSelectedEvent={context.toggleSelectedEvent} selectedEventTypes={context.state.selectedEventTypes} />}
     </Context.Consumer>
 );

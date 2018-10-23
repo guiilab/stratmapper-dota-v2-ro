@@ -1,5 +1,6 @@
 import React, { Component, createContext } from 'react';
 import * as d3 from 'd3';
+import * as _ from 'lodash';
 
 export const Context = createContext();
 
@@ -31,23 +32,22 @@ class Provider extends Component {
             }
         },
         matchId: null,
-        timeMax: null,
         play: {
             playhead: 0,
             playButtonActive: false,
             playSpeed: 100
         },
         mapLoading: false,
-        unitEventsStatus: [],
         events: {
             allTypes: [],
             categories: []
         },
         units: null,
         unitsAll: null,
+        unitEventsFinal: null,
         groups: [],
         selectedUnits: [],
-        selectedEvents: [],
+        selectedEventTypes: [],
         icons: {},
         tooltips: {},
         activeNode: null,
@@ -104,31 +104,34 @@ class Provider extends Component {
 
     loadEvents = (data) => {
         let unitEventsTimeline = [];
-        let unitEventsStatus = [];
         data.forEach((d) => {
-            if (d.status === true) {
-                unitEventsStatus.push(d)
-            } else {
+            if (this.state.events.timeline.includes(d.event_type)) {
                 unitEventsTimeline.push(d)
             }
         })
         this.setState({
             unitEventsAll: [...data],
             unitEventsTimeline: [...unitEventsTimeline],
-            unitEventsStatus: [...unitEventsStatus],
             selectedUnits: [...this.state.loadSettings.selected_units],
-            selectedEvents: [...this.state.loadSettings.selected_events]
+            selectedEventTypes: [...this.state.loadSettings.selected_events]
         }, () => {
             this.state.selectedUnits.forEach((unit) => this.setFilteredEventsByUnit(unit, this.state.unitEventsAll))
+            let unitEventsFiltered = this.filterEvents()
             this.setState({
+                unitEventsFiltered: unitEventsFiltered,
                 mapLoading: false
             })
         }
         )
     }
 
+    filterEvents = () => {
+        console.log(this.state.unitEventsTimeline)
+        let unitEvents = this.state.unitEventsTimeline.filter(event => this.state.selectedUnits.includes(event.unit))
+        return unitEvents.filter(event => (this.state.selectedEventTypes.includes(event.event_type)))
+    }
+
     getLabels = async () => {
-        console.log('getlabels ran')
         const response = await fetch('/api/labels', {
             method: 'POST',
             headers: {
@@ -326,17 +329,37 @@ class Provider extends Component {
                     })
                 },
 
+                filterEvents: () => {
+                    let unitEventsFinal;
+                    let test = new Promise(function (resolve, reject) {
+                        if (this.state.brushRange.length = 0) {
+                            let unitEventsFiltered = this.state.unitEventsTimeline.filter(event => this.state.selectedUnits.includes(event.unit))
+                            unitEventsFinal = unitEventsFiltered.filter(event => (this.state.selectedEventTypes.includes(event.event_type)))
+                        }
+                        else {
+                            let unitEventsBrushed = this.state.unitEventsTimeline.filter(event => (event.timestamp > this.state.brushRange[0]) && (event.timestamp < this.state.brushRange[1]))
+                            let unitEventsFiltered = unitEventsBrushed.filter(event => (this.state.selectedUnits.includes(event.unit)))
+                            unitEventsFinal = unitEventsFiltered.filter(event => (this.state.selectedEventTypes.includes(event.event_type)))
+                        }
+                        resolve('Success!');
+                    });
+
+                    test.then(() => this.setState({
+                        unitEventsFinal: unitEventsFinal
+                    }))
+                },
+
                 toggleSelectedEvent: (event) => {
-                    if (this.state.selectedEvents.includes(event)) {
-                        const array = [...this.state.selectedEvents];
+                    if (this.state.selectedEventTypes.includes(event)) {
+                        const array = [...this.state.selectedEventTypes];
                         const index = array.indexOf(event);
                         array.splice(index, 1);
                         this.setState({
-                            selectedEvents: array
+                            selectedEventTypes: array
                         })
                     } else {
                         this.setState(prevState => ({
-                            selectedEvents: [...prevState.selectedEvents, event]
+                            selectedEventTypes: [...prevState.selectedEventTypes, event]
                         }))
                     }
                 },
@@ -346,6 +369,7 @@ class Provider extends Component {
                 },
 
                 addLabel: (label) => {
+                    let event_ids = [];
                     return fetch('api/add-label', {
                         method: 'POST',
                         headers: {
@@ -357,7 +381,7 @@ class Provider extends Component {
                             behavior: label.behavior,
                             author: 'andy',
                             description: label.description,
-                            events: this.state.selectedEvents,
+                            events: this.state.selectedEventTypes,
                             units: this.state.selectedUnits,
                             event_ids: [1, 2, 3, 4, 5, 6]
                         })
@@ -479,9 +503,9 @@ class Provider extends Component {
                     return string;
                 },
             }
-            }>
+            } >
                 {this.props.children}
-            </Context.Provider >
+            </ Context.Provider >
         )
     }
 }
