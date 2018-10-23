@@ -126,9 +126,16 @@ class Provider extends Component {
     }
 
     filterEvents = () => {
-        console.log(this.state.unitEventsTimeline)
-        let unitEvents = this.state.unitEventsTimeline.filter(event => this.state.selectedUnits.includes(event.unit))
-        return unitEvents.filter(event => (this.state.selectedEventTypes.includes(event.event_type)))
+        if (this.state.brushRange.length === 0) {
+            let unitEvents = this.state.unitEventsTimeline.filter(event => this.state.selectedUnits.includes(event.unit))
+            return unitEvents.filter(event => (this.state.selectedEventTypes.includes(event.event_type)))
+        }
+        else if (this.state.brushRange.length !== 0) {
+            let unitEventsFinal;
+            let unitEventsBrushed = this.state.unitEventsTimeline.filter(event => (event.timestamp > this.state.brushRange[0]) && (event.timestamp < this.state.brushRange[1]))
+            let unitEventsFiltered = unitEventsBrushed.filter(event => (this.state.selectedUnits.includes(event.unit)))
+            return unitEventsFinal = unitEventsFiltered.filter(event => (this.state.selectedEventTypes.includes(event.event_type)))
+        }
     }
 
     getLabels = async () => {
@@ -330,23 +337,10 @@ class Provider extends Component {
                 },
 
                 filterEvents: () => {
-                    let unitEventsFinal;
-                    let test = new Promise(function (resolve, reject) {
-                        if (this.state.brushRange.length = 0) {
-                            let unitEventsFiltered = this.state.unitEventsTimeline.filter(event => this.state.selectedUnits.includes(event.unit))
-                            unitEventsFinal = unitEventsFiltered.filter(event => (this.state.selectedEventTypes.includes(event.event_type)))
-                        }
-                        else {
-                            let unitEventsBrushed = this.state.unitEventsTimeline.filter(event => (event.timestamp > this.state.brushRange[0]) && (event.timestamp < this.state.brushRange[1]))
-                            let unitEventsFiltered = unitEventsBrushed.filter(event => (this.state.selectedUnits.includes(event.unit)))
-                            unitEventsFinal = unitEventsFiltered.filter(event => (this.state.selectedEventTypes.includes(event.event_type)))
-                        }
-                        resolve('Success!');
-                    });
-
-                    test.then(() => this.setState({
-                        unitEventsFinal: unitEventsFinal
-                    }))
+                    let unitEventsFiltered = this.filterEvents()
+                    this.setState({
+                        unitEventsFiltered: unitEventsFiltered
+                    })
                 },
 
                 toggleSelectedEvent: (event) => {

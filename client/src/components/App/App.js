@@ -20,6 +20,9 @@ class App extends Component {
         if (nextProps.state.currentMatch !== this.props.state.currentMatch) {
             this.loadNewData()
         }
+        if ((nextProps.state.selectedUnits !== this.props.state.selectedUnits) || (nextProps.state.selectedEventTypes !== this.props.state.selectedEventTypes)) {
+            this.props.filterEvents()
+        }
 
     }
 
