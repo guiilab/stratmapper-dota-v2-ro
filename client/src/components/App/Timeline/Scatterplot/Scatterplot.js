@@ -10,10 +10,6 @@ class Scatterplot extends PureComponent {
         this.renderScatterplot();
     }
 
-    // shouldComponentUpdate(nextProps, nextState) {
-    //     return false
-    // }
-
     componentDidUpdate() {
         this.renderScatterplot();
     }

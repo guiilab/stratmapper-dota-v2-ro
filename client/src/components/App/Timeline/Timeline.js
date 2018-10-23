@@ -56,7 +56,7 @@ class Timeline extends PureComponent {
 
     render() {
         const { zoomTransform, width } = this.state;
-        const { events, unitEventsTimeline, timestampRange, timelineSettings, selectedEventTypes, loadSettings, brushActive, selectedUnits } = this.props.state;
+        const { events, timestampRange, timelineSettings, brushActive, unitEventsFiltered, unitEventsTimeline } = this.props.state;
         const { yScaleTime, toggleBrushActive } = this.props;
 
         const heightStyle = {
@@ -72,13 +72,11 @@ class Timeline extends PureComponent {
             )
         }
 
-        let unitEventsTimelineFiltered = unitEventsTimeline;
-        if (loadSettings.incremental_timeline === true) {
-            let unitEventsSelectedUnits = unitEventsTimeline.filter((d) => selectedUnits.includes(d.unit))
-            unitEventsTimelineFiltered = unitEventsSelectedUnits.filter((d) => selectedEventTypes.includes(d.event_type))
-        }
-
-
+        // let unitEventsTimelineFiltered = unitEventsTimeline;
+        // if (loadSettings.incremental_timeline === true) {
+        //     let unitEventsSelectedUnits = unitEventsTimeline.filter((d) => selectedUnits.includes(d.unit))
+        //     unitEventsTimelineFiltered = unitEventsSelectedUnits.filter((d) => selectedEventTypes.includes(d.event_type))
+        // }
         return (
             <div className="timeline-container" ref="timelineContainer">
                 <TimestampIndicator />
@@ -101,7 +99,7 @@ class Timeline extends PureComponent {
                             /> : <g>Empty</g>
                         }
                         <Scatterplot
-                            data={unitEventsTimelineFiltered}
+                            data={unitEventsTimeline}
                             width={width}
                             zoomTransform={zoomTransform}
                             timestampRange={timestampRange}

@@ -55,7 +55,7 @@ class Map extends Component {
 
     render() {
         const { xScale, yScale } = this.props;
-        const { unitEventsTimeline, brushRange, selectedUnits, icons, brushActive, selectedEvents, windowSettings } = this.props.state;
+        const { brushRange, selectedUnits, icons, brushActive, windowSettings, unitEventsFiltered } = this.props.state;
 
         const mapContainerStyle = {
             width: windowSettings.width,
@@ -68,16 +68,12 @@ class Map extends Component {
             height: windowSettings.width,
         }
 
-        if (!unitEventsTimeline) {
+        if (!unitEventsFiltered) {
             return (
                 <div>Loading</div>
             )
         }
-        if (unitEventsTimeline) {
-            let unitEventsBrushed = unitEventsTimeline.filter(event => (event.timestamp > brushRange[0]) && (event.timestamp < brushRange[1]))
-            let unitEventsFiltered = unitEventsBrushed.filter(event => (selectedUnits.includes(event.unit)))
-            let unitEventsFinal = unitEventsFiltered.filter(event => (selectedEvents.includes(event.event_type)))
-
+        if (unitEventsFiltered) {
             return (
                 <div className="map-container" style={mapContainerStyle} >
                     <svg className="map-svg" ref="mapsvg" style={mapSvgStyle} >
@@ -98,7 +94,7 @@ class Map extends Component {
                                 )
                             }) : <g>empty</g>
                             }
-                            {brushActive ? unitEventsFinal.map(event => {
+                            {brushRange.length !== 0 ? unitEventsFiltered.map(event => {
                                 return (
                                     <EventIcon
                                         zoomTransform={this.state.zoomTransformScaled}

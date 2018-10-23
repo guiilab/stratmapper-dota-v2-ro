@@ -126,6 +126,7 @@ class Provider extends Component {
     }
 
     filterEvents = () => {
+
         if (this.state.brushRange.length === 0) {
             let unitEvents = this.state.unitEventsTimeline.filter(event => this.state.selectedUnits.includes(event.unit))
             return unitEvents.filter(event => (this.state.selectedEventTypes.includes(event.event_type)))
