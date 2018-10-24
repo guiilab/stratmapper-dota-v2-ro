@@ -1,21 +1,23 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Context } from '../../../Provider.js';
 
 import MatchOption from './MatchOption/MatchOption.js';
 
-class MatchSelection extends Component {
+class MatchSelect extends PureComponent {
+    
+    static contextType = Context;
 
     handleChange = (e) => {
-        this.props.setCurrentMatch(e.target.value)
+        this.context.setCurrentMatch(e.target.value)
     }
 
     render() {
-        const { matches } = this.props.state
+        const { matches } = this.context.state
 
         return (
             <div className="match-select-container">
                 <span className="match-select-font">Match:</span>
-                <select name="map-select" id="map-select" value={this.props.state.currentMatch} onChange={(e) => this.handleChange(e)}>
+                <select name="map-select" id="map-select" value={this.context.state.currentMatch} onChange={(e) => this.handleChange(e)}>
                     {matches.map((map) => <MatchOption option={map} key={map} />)}
                 </select>
             </div>
@@ -23,8 +25,4 @@ class MatchSelection extends Component {
     }
 }
 
-export default (props) => (
-    <Context.Consumer>
-        {(context) => <MatchSelection {...context} {...props} />}
-    </Context.Consumer>
-);
+export default MatchSelect;

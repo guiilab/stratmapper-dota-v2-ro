@@ -65,6 +65,9 @@ class Provider extends Component {
         window.addEventListener("resize", this.updateWindowDimensions);
     }
 
+
+
+
     componentWillUnmount() {
         window.removeEventListener("resize", this.updateWindowDimensions);
     }

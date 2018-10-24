@@ -6,7 +6,7 @@ const http = require('http')
 
 const app = express();
 const port = process.env.PORT || 5000;
-// const EventModel = require('./client/models/events.js');
+
 const createEventModel = require('./client/models/dynamicEvents.js');
 const MatchModel = require('./client/models/matches.js');
 const LabelModel = require('./client/models/labels.js');
@@ -22,7 +22,6 @@ app.use(bodyParser.json({
     limit: '500mb'
 }));
 
-// const mongoUrl = 'mongodb://admin:M4pTh3W0rld@ds253922.mlab.com:53922/stratmap_overmatch'
 const mongoUrl = 'mongodb://admin:M4pTh3W0rld@ds121373.mlab.com:21373/stratmap_dota_dev'
 
 mongoose.Promise = global.Promise;

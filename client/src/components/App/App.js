@@ -11,32 +11,37 @@ import Timeline from './Timeline/Timeline.js';
 
 class App extends Component {
 
+    static contextType = Context;
+
     componentDidMount() {
-        this
-            .props.getMatchEntries().then(this.loadNewData())
+        this.context.getMatchEntries().then(this.loadNewData())
     }
 
+    // shouldComponentUpdate(nextProps, nextState, nextContext) {
+    //     console.log(nextContext)
+    // }
+
     componentDidUpdate(nextProps, nextState) {
-        if (nextProps.state.currentMatch !== this.props.state.currentMatch) {
-            this.loadNewData()
-        }
-        if ((nextProps.state.selectedUnits !== this.props.state.selectedUnits) || (nextProps.state.selectedEventTypes !== this.props.state.selectedEventTypes)) {
-            this.props.filterEvents()
-        }
-        if ((nextProps.state.brushRange !== this.props.state.brushRange) && nextProps.state.brushRange.length !== 0) {
-            this.props.filterEvents()
-        }
+        // if (nextProps.state.currentMatch !== this.context.state.currentMatch) {
+        //     this.loadNewData()
+        // }
+        // if ((nextProps.state.selectedUnits !== this.context.state.selectedUnits) || (nextProps.state.selectedEventTypes !== this.context.state.selectedEventTypes || ((nextProps.state.brushRange !== this.context.state.brushRange) && nextProps.state.brushRange.length !== 0))) {
+        //     this.context.filterEvents()
+        // }
+        // if ((nextProps.state.brushRange !== this.context.state.brushRange) && nextProps.state.brushRange.length !== 0) {
+        //     this.context.filterEvents()
+        // }
 
     }
 
     loadNewData() {
         this
-            .props.getMatchData(this.props.state.currentMatch)
-            .then(res => this.props.loadMatchData(res))
+            .context.getMatchData(this.context.state.currentMatch)
+            .then(res => this.context.loadMatchData(res))
     }
 
     render() {
-        const { mapLoading, timestampRange, windowSettings } = this.props.state;
+        const { mapLoading, timestampRange, windowSettings } = this.context.state;
 
         const appContainerStyle = {
             width: windowSettings.width,
@@ -59,8 +64,4 @@ class App extends Component {
     }
 }
 
-export default () => (
-    <Context.Consumer>
-        {(context) => <App {...context} />}
-    </Context.Consumer>
-);
+export default App;
