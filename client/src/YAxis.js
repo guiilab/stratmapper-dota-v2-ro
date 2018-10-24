@@ -41,10 +41,10 @@ class YAxis extends Component {
     }
 }
 
-export default () => (
-    <Context.Consumer>
-        {(context) => <YAxis {...context} />}
-    </Context.Consumer>
-);
+// export default () => (
+//     <Context.Consumer>
+//         {(context) => <YAxis {...context} />}
+//     </Context.Consumer>
+// );
 
 // export default YAxis;

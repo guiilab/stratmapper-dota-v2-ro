@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import * as d3 from 'd3';
 
-import { Context } from '../../Provider.js'
+import { Context } from '../Provider.js'
 
 import Scatterplot from './Scatterplot/Scatterplot.js';
 import XAxis from './XAxis/XAxis.js';

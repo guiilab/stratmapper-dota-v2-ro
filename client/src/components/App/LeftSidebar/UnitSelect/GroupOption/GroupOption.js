@@ -1,18 +1,20 @@
-import React, { Component } from 'react';
-import _ from 'lodash'
+import React, { PureComponent } from 'react';
+import includes from 'lodash';
 
-import { Context } from '../../../../Provider.js';
+import { Context } from '../../../Provider.js';
 import UnitOption from './UnitOption/UnitOption.js';
 
-class GroupOption extends Component {
+class GroupOption extends PureComponent {
+
+    static contextType = Context;
 
     state = {
         active: false,
         hover: false
     }
 
-    static getDerivedStateFromProps(nextProps, prevState) {
-        if (_.includes(nextProps.state.selectedUnits, ...nextProps.groupUnits)) {
+    static getDerivedStateFromProps(nextProps) {
+        if (includes(nextProps.selectedUnits, ...nextProps.groupUnits)) {
             return {
                 active: true
             };
@@ -43,7 +45,8 @@ class GroupOption extends Component {
     }
 
     render() {
-        const { groupUnits, group, toggleGroup, formatFirstString } = this.props;
+        const { toggleGroup, formatFirstString } = this.context;
+        const { groupUnits, group } = this.props;
 
         let buttonStyle;
 
@@ -57,22 +60,16 @@ class GroupOption extends Component {
         }
 
         return (
-            <React.Fragment>
-                <div className="unit-selection">
-                    <div className='group-option' style={buttonStyle} key={group.name} onMouseOver={() => this.toggleHover()} onMouseLeave={() => this.toggleHover()} onClick={() => { this.toggleActive(); toggleGroup(groupUnits) }} >{formatFirstString(group.name)}</div>
-                    <React.Fragment>
-                        {groupUnits.map(function (unit) {
-                            return <UnitOption unit={unit} key={unit} />
-                        })}
-                    </React.Fragment>
-                </div>
-            </React.Fragment>
+            <div className="unit-selection">
+                <div className='group-option' style={buttonStyle} key={group.name} onMouseOver={() => this.toggleHover()} onMouseLeave={() => this.toggleHover()} onClick={() => { this.toggleActive(); toggleGroup(groupUnits) }} >{formatFirstString(group.name)}</div>
+                <React.Fragment>
+                    {groupUnits.map(function (unit) {
+                        return <UnitOption unit={unit} key={unit} />
+                    })}
+                </React.Fragment>
+            </div>
         );
     }
 }
 
-export default (props) => (
-    <Context.Consumer>
-        {(context) => <GroupOption {...context} {...props} />}
-    </Context.Consumer>
-);
+export default GroupOption;

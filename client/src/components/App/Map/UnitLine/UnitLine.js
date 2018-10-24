@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { line } from 'd3';
 
-import { Context } from '../../../Provider.js'
+import { Context } from '../../Provider.js'
 
 class UnitLine extends Component {
 

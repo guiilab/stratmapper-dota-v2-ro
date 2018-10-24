@@ -1,23 +1,25 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
-import { Context } from '../../Provider.js';
+import { Context } from '../Provider.js';
 import TooltipElement from './TooltipElement/TooltipElement.js';
 
-class TooltipSidebar extends Component {
+class TooltipSidebar extends PureComponent {
 
-    shouldComponentUpdate(nextProps) {
-        if (nextProps.state.activeNode) {
-            if (nextProps.state.activeNode !== this.props.state.activeNode) {
-                return true
+    static contextType = Context;
 
-            } else if (nextProps.state.activeNode !== null) {
-                return true
-            }
-        }
-        return false
-    }
+    // shouldComponentUpdate(nextProps) {
+    //     if (this.context.state.activeNode) {
+    //         if (this.context.state.activeNode !== this.props.state.activeNode) {
+    //             return true
+
+    //         } else if (nextProps.state.activeNode !== null) {
+    //             return true
+    //         }
+    //     }
+    //     return false
+    // }
     render() {
-        const { tooltips, activeNode } = this.props.state;
+        const { tooltips, activeNode } = this.context.state;
 
         return (
             <div className="tooltipsidebar-container">
@@ -29,8 +31,4 @@ class TooltipSidebar extends Component {
     }
 }
 
-export default (props) => (
-    <Context.Consumer>
-        {(context) => <TooltipSidebar {...context} {...props} />}
-    </Context.Consumer>
-);
+export default TooltipSidebar;

@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 
 import { scaleLinear } from 'd3';
 
-import { Context } from '../../../Provider.js'
+import { Context } from '../../Provider.js'
 
 class Scatterplot extends PureComponent {
     constructor(props) {

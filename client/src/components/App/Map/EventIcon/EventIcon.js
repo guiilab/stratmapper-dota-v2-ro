@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 // import ReactTooltip from 'react-tooltip';
 
-import { Context } from '../../../Provider.js';
+import { Context } from '../../Provider.js';
 // import TooltipElement from './TooltipElement/TooltipElement.js';
 
 class EventIcon extends PureComponent {

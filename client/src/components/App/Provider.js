@@ -37,7 +37,7 @@ class Provider extends Component {
             playButtonActive: false,
             playSpeed: 100
         },
-        mapLoading: false,
+        mapLoading: true,
         events: {
             allTypes: [],
             categories: []
@@ -63,27 +63,157 @@ class Provider extends Component {
     componentDidMount() {
         this.updateWindowDimensions();
         window.addEventListener("resize", this.updateWindowDimensions);
+
+        this.getMatchEntries().then(this.loadNewData())
     }
 
+    componentDidUpdate(nextProps, nextState) {
+        if (nextState.currentMatch !== this.state.currentMatch) {
+            this.loadNewData()
+        }
+        if ((nextState.selectedUnits !== this.state.selectedUnits) || (nextState.selectedEventTypes !== this.state.selectedEventTypes || ((nextState.brushRange !== this.state.brushRange) && nextState.brushRange.length !== 0))) {
+            let unitEventsFiltered = this.filterEvents()
+            this.setState({
+                unitEventsFiltered: unitEventsFiltered,
+                mapLoading: false
+            })
+        }
+        if ((nextState.brushRange !== this.state.brushRange) && nextState.brushRange.length !== 0) {
+            this.filterEvents()
+        }
 
-
+    }
 
     componentWillUnmount() {
         window.removeEventListener("resize", this.updateWindowDimensions);
     }
 
-    compareTime = (a, b) => {
-        if (a.timestamp < b.timestamp)
-            return -1;
-        if (a.timestamp > b.timestamp)
-            return 1;
-        return 0;
+    loadNewData = () => {
+        this.getMatchData(this.state.currentMatch)
+            .then(res => this.loadMatchData(res))
+    }
+
+    getMatchEntries = async () => {
+        const response = await fetch('/api/matchentries', {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+        });
+        const body = await response.json();
+
+        if (response.status !== 200) {
+            throw Error(body.message)
+        }
+        let matches = [];
+        body.forEach((match) => matches.push(match.file_name))
+        matches.sort(function (a, b) {
+            return a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' });
+        });
+        this.setState({
+            matches: [...matches],
+            currentMatch: matches[0]
+        })
+    }
+
+    getMatchData = async (match) => {
+        const response = await fetch('/api/matches', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                matchId: match
+            })
+        });
+        const body = await response.json();
+
+        if (response.status !== 200) {
+            throw Error(body.message)
+        }
+        return body;
+    }
+
+    loadMatchData = (data) => {
+        let unitsAll = [];
+        let groups = [];
+        data[0].units.forEach((d) => {
+            unitsAll.push(d.name)
+        })
+        data[0].groups.forEach((d) => {
+            groups.push(d.name)
+        })
+        let eventsAllTypes = [];
+        let eventsTimeline = [];
+        let eventsTimelineObj = [];
+        let eventsStatus = [];
+        data[0].events.forEach((d) => {
+            if (!eventsAllTypes.includes(d.event_type)) {
+                eventsAllTypes.push(d.event_type)
+            }
+            if (d.timeline === true) {
+                eventsTimeline.push(d.event_type)
+                eventsTimelineObj.push(d)
+            }
+            if (d.status === true) {
+                eventsStatus.push(d.event_type)
+            }
+        })
+        this.setState({
+            coordinateRange: {
+                x: {
+                    min: data[0].coordinate_range.x.min,
+                    max: data[0].coordinate_range.x.max
+                },
+                y: {
+                    min: data[0].coordinate_range.y.min,
+                    max: data[0].coordinate_range.y.max
+                }
+            },
+            groups: [...data[0].groups],
+            red: [],
+            blue: [],
+            dire: [],
+            radiant: [],
+            loadSettings: data[0].load_settings,
+            brushRange: [],
+            events: {
+                all: [...data[0].events],
+                allTypes: [...eventsAllTypes],
+                timeline: [...eventsTimeline],
+                timelineObj: [...eventsTimelineObj],
+                status: [...eventsStatus]
+            },
+            units: [...data[0].units],
+            unitsAll: [...unitsAll],
+            timestampRange: {
+                start: data[0].timestamp_range.start,
+                end: data[0].timestamp_range.end
+            },
+            matchId: data[0].match_id,
+            mapSettings: {
+                width: data[0].map.map_width,
+                height: data[0].map.map_height
+            }
+        }, () => {
+            this.state.groups.forEach((d, i) => {
+                data[0].units.forEach((e) => {
+                    if (e.group === d.name) {
+                        this.setGroupState(d, e.name)
+                    }
+                })
+            })
+            this.state.events.all.forEach((event) => {
+                this.setIconState(event.event_type, event.icon)
+            })
+            this.state.events.all.forEach((event) => this.setTooltipsState(event.event_type, event.tooltip_context))
+            this.getEvents().then(res => this.loadEvents(res))
+        })
     }
 
     getEvents = async () => {
-        this.setState({
-            mapLoading: true
-        })
         const response = await fetch('/api/events', {
             method: 'POST',
             headers: {
@@ -122,14 +252,14 @@ class Provider extends Component {
             let unitEventsFiltered = this.filterEvents()
             this.setState({
                 unitEventsFiltered: unitEventsFiltered,
-                mapLoading: false
+            }, () => {
+                this.props.toggleMapLoading()
             })
         }
         )
     }
 
     filterEvents = () => {
-
         if (this.state.brushRange.length === 0) {
             let unitEvents = this.state.unitEventsTimeline.filter(event => this.state.selectedUnits.includes(event.unit))
             return unitEvents.filter(event => (this.state.selectedEventTypes.includes(event.event_type)))
@@ -209,136 +339,20 @@ class Provider extends Component {
 
     removeSelectedUnits = (original, remove) => {
         return original.filter(value => !remove.includes(value));
-    };
+    }
+
+    compareTime = (a, b) => {
+        if (a.timestamp < b.timestamp)
+            return -1;
+        if (a.timestamp > b.timestamp)
+            return 1;
+        return 0;
+    }
 
     render() {
         return (
             <Context.Provider value={{
                 state: this.state,
-
-                getMatchEntries: async () => {
-                    const response = await fetch('/api/matchentries', {
-                        method: 'GET',
-                        headers: {
-                            'Accept': 'application/json',
-                            'Content-Type': 'application/json'
-                        },
-                    });
-                    const body = await response.json();
-
-                    if (response.status !== 200) {
-                        throw Error(body.message)
-                    }
-                    let matches = [];
-                    body.forEach((match) => matches.push(match.file_name))
-                    matches.sort(function (a, b) {
-                        return a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' });
-                    });
-                    this.setState({
-                        matches: [...matches],
-                        currentMatch: matches[0]
-                    })
-                },
-
-                getMatchData: async (match) => {
-                    this.setState({
-                        mapLoading: true
-                    })
-                    const response = await fetch('/api/matches', {
-                        method: 'POST',
-                        headers: {
-                            'Accept': 'application/json',
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            matchId: match
-                        })
-                    });
-                    const body = await response.json();
-
-                    if (response.status !== 200) {
-                        throw Error(body.message)
-                    }
-                    return body;
-                },
-
-                loadMatchData: (data) => {
-                    let unitsAll = [];
-                    let groups = [];
-                    data[0].units.forEach((d) => {
-                        unitsAll.push(d.name)
-                    })
-                    data[0].groups.forEach((d) => {
-                        groups.push(d.name)
-                    })
-                    let eventsAllTypes = [];
-                    let eventsTimeline = [];
-                    let eventsTimelineObj = [];
-                    let eventsStatus = [];
-                    data[0].events.forEach((d) => {
-                        if (!eventsAllTypes.includes(d.event_type)) {
-                            eventsAllTypes.push(d.event_type)
-                        }
-                        if (d.timeline === true) {
-                            eventsTimeline.push(d.event_type)
-                            eventsTimelineObj.push(d)
-                        }
-                        if (d.status === true) {
-                            eventsStatus.push(d.event_type)
-                        }
-                    })
-                    this.setState({
-                        coordinateRange: {
-                            x: {
-                                min: data[0].coordinate_range.x.min,
-                                max: data[0].coordinate_range.x.max
-                            },
-                            y: {
-                                min: data[0].coordinate_range.y.min,
-                                max: data[0].coordinate_range.y.max
-                            }
-                        },
-                        groups: [...data[0].groups],
-                        red: [],
-                        blue: [],
-                        dire: [],
-                        radiant: [],
-                        loadSettings: data[0].load_settings,
-                        brushRange: [],
-                        events: {
-                            all: [...data[0].events],
-                            allTypes: [...eventsAllTypes],
-                            timeline: [...eventsTimeline],
-                            timelineObj: [...eventsTimelineObj],
-                            status: [...eventsStatus]
-                        },
-                        units: [...data[0].units],
-                        unitsAll: [...unitsAll],
-                        timestampRange: {
-                            start: data[0].timestamp_range.start,
-                            end: data[0].timestamp_range.end
-                        },
-                        matchId: data[0].match_id,
-                        mapSettings: {
-                            width: data[0].map.map_width,
-                            height: data[0].map.map_height
-                        },
-                        mapLoading: false
-                    }, () => {
-                        this.state.groups.forEach((d, i) => {
-                            data[0].units.forEach((e) => {
-                                if (e.group === d.name) {
-                                    this.setGroupState(d, e.name)
-                                }
-                            })
-                        })
-                        this.state.events.all.forEach((event) => {
-                            this.setIconState(event.event_type, event.icon)
-                        })
-                        this.state.events.all.forEach((event) => this.setTooltipsState(event.event_type, event.tooltip_context))
-                        this.getEvents().then(res => this.loadEvents(res))
-                    })
-                },
 
                 filterEvents: () => {
                     let unitEventsFiltered = this.filterEvents()

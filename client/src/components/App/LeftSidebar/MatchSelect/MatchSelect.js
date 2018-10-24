@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react';
-import { Context } from '../../../Provider.js';
+import { Context } from '../../Provider.js';
 
 import MatchOption from './MatchOption/MatchOption.js';
 
 class MatchSelect extends PureComponent {
-    
+
     static contextType = Context;
 
     handleChange = (e) => {

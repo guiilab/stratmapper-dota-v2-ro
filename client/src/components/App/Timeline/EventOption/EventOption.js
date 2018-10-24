@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Context } from '../../../Provider.js'
+import { Context } from '../../Provider.js'
 
 class EventOption extends Component {
 

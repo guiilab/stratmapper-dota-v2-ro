@@ -22,6 +22,8 @@ h3 {
 .app-container {
     position: relative;
     overflow: hidden;
+    width: 100%;
+    height: 100%;
 }
 
 .map-container {
