@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 
-import { Context } from './../Provider.js';
+// import { Context } from './../Provider.js';
 import AppTitle from './AppTitle/AppTitle.js'
 import MatchSelect from './MatchSelect/MatchSelect.js';
 import UnitSelect from './UnitSelect/UnitSelect.js';
+import TimestampIndicator from './TimestampIndicator/TimestampIndicator.js'
 
 class LeftSidebar extends Component {
 
@@ -15,6 +16,7 @@ class LeftSidebar extends Component {
                 <AppTitle />
                 <MatchSelect />
                 <UnitSelect />
+                <TimestampIndicator />
             </div>
         );
     }
@@ -22,4 +24,4 @@ class LeftSidebar extends Component {
 
 // LeftSidebar.contextType = Context;
 
-export default () => <LeftSidebar />;
+export default LeftSidebar;

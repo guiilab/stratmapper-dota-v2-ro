@@ -1,6 +1,5 @@
 import React, { Component, createContext } from 'react';
 import * as d3 from 'd3';
-import * as _ from 'lodash';
 
 export const Context = createContext();
 
@@ -44,7 +43,6 @@ class Provider extends Component {
         },
         units: null,
         unitsAll: null,
-        unitEventsFinal: null,
         groups: [],
         selectedUnits: [],
         selectedEventTypes: [],
@@ -265,10 +263,9 @@ class Provider extends Component {
             return unitEvents.filter(event => (this.state.selectedEventTypes.includes(event.event_type)))
         }
         else if (this.state.brushRange.length !== 0) {
-            let unitEventsFinal;
             let unitEventsBrushed = this.state.unitEventsTimeline.filter(event => (event.timestamp > this.state.brushRange[0]) && (event.timestamp < this.state.brushRange[1]))
             let unitEventsFiltered = unitEventsBrushed.filter(event => (this.state.selectedUnits.includes(event.unit)))
-            return unitEventsFinal = unitEventsFiltered.filter(event => (this.state.selectedEventTypes.includes(event.event_type)))
+            return unitEventsFiltered.filter(event => (this.state.selectedEventTypes.includes(event.event_type)))
         }
     }
 
@@ -294,7 +291,7 @@ class Provider extends Component {
     loadLabels = (data) => {
         this.setState({
             labels: [...data]
-        }, () => console.log(this.state.labels))
+        })
     }
 
     setGroupState = (d, unit) => {
@@ -381,7 +378,6 @@ class Provider extends Component {
                 },
 
                 addLabel: (label) => {
-                    let event_ids = [];
                     return fetch('api/add-label', {
                         method: 'POST',
                         headers: {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { Context } from '../../Provider.js';
-import * as d3 from 'd3';
+import { scaleLinear, axisBottom, select } from 'd3';
 
 class XAxis extends Component {
 
@@ -21,18 +21,18 @@ class XAxis extends Component {
     }
 
     renderAxis = () => {
-        const { zoomTransform } = this.props;
+        const { zoomTransform, timestampRange, width } = this.props;
 
-        const xScaleTime = d3.scaleLinear()
-            .domain([this.props.timestampRange.start, this.props.timestampRange.end])
-            .range([0, this.props.width])
+        const xScaleTime = scaleLinear()
+            .domain([timestampRange.start, timestampRange.end])
+            .range([0, width])
 
         if (zoomTransform) {
             xScaleTime.domain(zoomTransform.rescaleX(xScaleTime).domain());
         }
 
-        const axis = d3.axisBottom(xScaleTime)
-        d3.select(this.refs.xAxis)
+        const axis = axisBottom(xScaleTime)
+        select(this.refs.xAxis)
             .call(axis);
     }
 

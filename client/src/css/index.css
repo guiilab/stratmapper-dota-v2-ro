@@ -341,12 +341,12 @@ h3 {
 }
 
 .timestamp-container {
-    width: 200px;
+    width: 210px;
     height: 22px;
     position: absolute;
     border: 1px solid black;
-    right: 0px;
-    top: -33px;
+    right: -1px;
+    bottom: -34px;
     text-align: middle;
     background-color: lightgrey;
     line-height: 22px;
@@ -366,11 +366,19 @@ h3 {
     height: 250px;
 }
 
+.timeline-chart {
+    position: absolute;
+    height: 250px;
+    width: 85%;
+    left: 150px;
+    background-color: lightgrey;
+}
+
 .event-select-container {
-    float: left;
-    width: 12%;
-    min-width: 130px;
+    width: 150px;
     background-color: grey;
+    height: 250px;
+    position: absolute;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -411,13 +419,6 @@ h3 {
     top: -4px;
     height: 15px;
     color: white;
-}
-
-.timeline-chart {
-    position: relative;
-    float: right;
-    width: 88%;
-    background-color: lightgrey;
 }
 
 .drag {
