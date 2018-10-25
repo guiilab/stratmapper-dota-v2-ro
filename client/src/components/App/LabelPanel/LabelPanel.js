@@ -21,7 +21,6 @@ class LabelPanel extends Component {
     }
 
     render() {
-
         let width;
         let height;
         let opacity;

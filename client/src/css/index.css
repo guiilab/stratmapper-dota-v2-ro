@@ -325,7 +325,7 @@ h3 {
 
 .brush-button-container {
     background: var(--filler);
-    width: 100%;
+    width: 80%;
     position: absolute;
     top: -22px;
     left: -1px;
@@ -374,6 +374,13 @@ h3 {
     background-color: lightgrey;
 }
 
+.global-timeline-container {
+    height: 60px;
+    border: 1px solid black;
+    position: absolute;
+    top: -65px;
+}
+
 .event-select-container {
     width: 12%;
     min-width: 120px;
@@ -419,7 +426,7 @@ h3 {
 .x-axis-svg {
     position: absolute;
     width: 100%;
-    top: -20px;
+    top: -85px;
     height: 20px;
     color: white;
 }

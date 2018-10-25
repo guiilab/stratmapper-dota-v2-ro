@@ -8,6 +8,7 @@ import XAxis from './../XAxis/XAxis.js';
 import AxisLines from './../AxisLines/AxisLines.js';
 import Drag from './../Drag/Drag.js';
 import Brush from './../Brush/Brush.js';
+import GlobalTimeline from './GlobalTimeline/GlobalTimeline.js';
 
 class TimelineChart extends Component {
     constructor(props) {
@@ -99,9 +100,8 @@ class TimelineChart extends Component {
         return (
             // <div className="timeline-chart" onMouseDown={() => this.toggleClick()} onMouseUp={() => this.toggleClick()} onMouseMove={this.state.clicked ? (e) => this.drag(e) : null} ref={this.chart} style={heightStyle} onKeyDown={(e) => toggleBrushActive(e)} onKeyUp={(e) => toggleBrushActive(e)} tabIndex="0">
             <div className="timeline-chart" ref={this.chart} style={heightStyle} onKeyDown={(e) => toggleBrushActive(e)} onKeyUp={(e) => toggleBrushActive(e)} tabIndex="0">
-                {/* <Drag clicked={this.state.clicked} offsetX={this.state.offsetX} /> */}
                 <div className="x-axis-svg">
-                    <svg width={this.state.width} height={20}>
+                    <svg width={this.state.width} height="100%">
                         <XAxis
                             width={this.state.width}
                             zoomTransform={this.state.zoomTransform}
@@ -109,6 +109,9 @@ class TimelineChart extends Component {
                         />
                     </svg>
                 </div>
+                <GlobalTimeline width={this.state.width} />
+                {/* <Drag clicked={this.state.clicked} offsetX={this.state.offsetX} /> */}
+
                 <svg width="100%" height="100%" ref="svg" className="timeline-svg-scatter">
                     <AxisLines
                         events={events.timeline}
