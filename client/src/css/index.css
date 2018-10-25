@@ -360,7 +360,7 @@ h3 {
 
 .timeline-container {
     position: absolute;
-    bottom: 3%;
+    bottom: 0;
     width: 100%;
     border: black 1px solid;
     height: 250px;
@@ -416,10 +416,11 @@ h3 {
     border-right: 1px solid black;
 }
 
-.x-axis {
-    position: relative;
-    top: -4px;
-    height: 15px;
+.x-axis-svg {
+    position: absolute;
+    width: 100%;
+    top: -20px;
+    height: 20px;
     color: white;
 }
 

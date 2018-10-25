@@ -21,7 +21,7 @@ class Brush extends Component {
     renderBrush = () => {
         d3.select(this.refs.brush)
             .call(this.brush)
-            .call(this.brush.move, [0, 800])
+            .call(this.brush.move, [0, 200])
     }
 
     updateBrush = () => {

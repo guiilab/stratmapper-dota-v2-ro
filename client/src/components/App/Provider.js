@@ -9,6 +9,7 @@ class Provider extends Component {
         currentMatch: 'early-game',
         apiMatchId: 2500623971,
         brushRange: [],
+        brushActive: false,
         windowSettings: {
             width: null,
             height: null
@@ -36,7 +37,6 @@ class Provider extends Component {
             playButtonActive: false,
             playSpeed: 100
         },
-        mapLoading: true,
         events: {
             allTypes: [],
             categories: []
@@ -50,7 +50,6 @@ class Provider extends Component {
         tooltips: {},
         activeNode: null,
         statusEventsFilteredByUnit: {},
-        brushActive: false,
         minFactor: .93,
         maxFactor: 1.04,
         mapPaddingY: 120,
@@ -67,13 +66,13 @@ class Provider extends Component {
 
     componentDidUpdate(nextProps, nextState) {
         if (nextState.currentMatch !== this.state.currentMatch) {
+            console.log('match change')
             this.loadNewData()
         }
         if ((nextState.selectedUnits !== this.state.selectedUnits) || (nextState.selectedEventTypes !== this.state.selectedEventTypes || ((nextState.brushRange !== this.state.brushRange) && nextState.brushRange.length !== 0))) {
             let unitEventsFiltered = this.filterEvents()
             this.setState({
-                unitEventsFiltered: unitEventsFiltered,
-                mapLoading: false
+                unitEventsFiltered: unitEventsFiltered
             })
         }
         if ((nextState.brushRange !== this.state.brushRange) && nextState.brushRange.length !== 0) {
@@ -127,7 +126,6 @@ class Provider extends Component {
             })
         });
         const body = await response.json();
-
         if (response.status !== 200) {
             throw Error(body.message)
         }
@@ -490,7 +488,7 @@ class Provider extends Component {
                     this.setState({
                         brushActive: false,
                         currentMatch: e
-                    })
+                    }, () => this.props.toggleMapLoading())
                 },
 
                 getUnit: (unit) => {
