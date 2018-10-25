@@ -1,13 +1,20 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 
 import { scaleLinear } from 'd3';
 
 import { Context } from '../../Provider.js'
 
-class Scatterplot extends PureComponent {
+class Scatterplot extends Component {
     constructor(props) {
         super(props);
         this.renderScatterplot();
+    }
+
+    shouldComponentUpdate(nextProps) {
+        if ((nextProps.data !== this.props.data) || (nextProps.zoomTransform !== this.props.zoomTransform) || (nextProps.timestampRange !== this.props.timestampRange)) {
+            return true
+        }
+        return false
     }
 
     componentDidUpdate() {
@@ -27,8 +34,9 @@ class Scatterplot extends PureComponent {
     }
 
     render() {
-        const { data, events, yScaleTime, toggleActiveNode, getUnit } = this.props;
-        const { selectedUnits, selectedEventTypes } = this.props.state;
+        const { data, events, yScaleTime } = this.props;
+        const { toggleActiveNode, getUnit } = this.context;
+        const { selectedUnits, selectedEventTypes } = this.context.state;
 
         return (
             <g ref="scatterplot">
@@ -52,8 +60,6 @@ class Scatterplot extends PureComponent {
     }
 }
 
-export default (props) => (
-    <Context.Consumer>
-        {(context) => <Scatterplot {...context} {...props} />}
-    </Context.Consumer>
-);
+Scatterplot.contextType = Context;
+
+export default Scatterplot;

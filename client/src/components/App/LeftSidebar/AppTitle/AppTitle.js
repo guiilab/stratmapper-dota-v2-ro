@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const AppTitle = () => {
-    return (
-        <div className="app-title">
-            <h1>StratMapper</h1>
-        </div>
-    )
+class AppTitle extends Component {
+    render() {
+        return (
+            <div className="app-title" >
+                <h1>StratMapper</h1>
+            </div>
+        )
+    }
 }
 
 export default AppTitle;

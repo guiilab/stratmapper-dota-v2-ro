@@ -414,7 +414,17 @@ h3 {
 }
 
 .timeline-chart {
+    position: relative;
     float: right;
     width: 88%;
     background-color: lightgrey;
+}
+
+.drag {
+    width: 200px;
+    height: 100%;
+    position: absolute;
+    background-color: rgba(0, 0, 0, .2);
+    border: black solid 1px;
+    z-index: 1000;
 }

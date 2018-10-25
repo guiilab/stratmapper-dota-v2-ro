@@ -5,8 +5,15 @@ import * as d3 from 'd3';
 
 class XAxis extends Component {
 
-    componentDidMount(props) {
-        this.renderAxis(props)
+    componentDidMount() {
+        this.renderAxis()
+    }
+
+    shouldComponentUpdate(nextProps) {
+        if (nextProps.zoomTransform !== this.props.zoomTransform) {
+            return true
+        }
+        return false
     }
 
     componentWillUpdate(nextProps) {

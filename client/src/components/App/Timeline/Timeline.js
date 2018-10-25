@@ -6,7 +6,8 @@ import { Context } from '../Provider.js'
 import Scatterplot from './Scatterplot/Scatterplot.js';
 import XAxis from './XAxis/XAxis.js';
 import EventOption from './EventOption/EventOption.js';
-import AxisLines from './AxisLines/AxisLines.js'
+import AxisLines from './AxisLines/AxisLines.js';
+import Drag from './Drag/Drag.js';
 import Brush from './Brush/Brush.js';
 import BrushButton from './BrushButton/BrushButton.js'
 import TimestampIndicator from './TimestampIndicator/TimestampIndicator.js'
@@ -16,8 +17,11 @@ class Timeline extends PureComponent {
         super(props);
         this.chart = React.createRef()
         this.state = {
+            clicked: false,
+            mousePos: 0,
             height: null,
             width: null,
+            offsetX: 0,
             zoomTransform: null,
         }
     }
@@ -46,6 +50,18 @@ class Timeline extends PureComponent {
         })
         d3.select(this.refs.svg)
             .call(zoom)
+    }
+
+    toggleClick = () => {
+        this.setState({
+            clicked: !this.state.clicked
+        })
+    }
+
+    drag = (e) => {
+        this.setState({
+            offsetX: e.clientX
+        })
     }
 
     zoomed() {
@@ -84,13 +100,16 @@ class Timeline extends PureComponent {
                     <BrushButton />
                     {events.timelineObj.map((event) => <EventOption event={event} key={event.event_type} />)}
                 </div>
-                <div className="timeline-chart" ref={this.chart} style={heightStyle} onKeyDown={(e) => toggleBrushActive(e)} onKeyUp={(e) => toggleBrushActive(e)} tabIndex="0">
+                {/* <div className="timeline-chart" onMouseDown={() => this.toggleClick()} onMouseUp={() => this.toggleClick()} onMouseMove={this.state.clicked ? (e) => this.drag(e) : null} ref={this.chart} style={heightStyle} onKeyDown={(e) => toggleBrushActive(e)} onKeyUp={(e) => toggleBrushActive(e)} tabIndex="0"> */}
+                <div className="timeline-chart" onMouseDown={() => this.toggleClick()} onMouseUp={() => this.toggleClick()} onMouseMove={this.state.clicked ? (e) => this.drag(e) : null} ref={this.chart} style={heightStyle} onKeyDown={(e) => toggleBrushActive(e)} onKeyUp={(e) => toggleBrushActive(e)} tabIndex="0">
+                    <Drag clicked={this.state.clicked} offsetX={this.state.offsetX} />
                     <svg width="100%" height="100%" ref="svg" className="timeline-svg-scatter">
                         <AxisLines
                             events={events.timeline}
                             yScaleTime={yScaleTime}
                             width={width}
                         />
+
                         {brushActive ?
                             <Brush
                                 width={width}

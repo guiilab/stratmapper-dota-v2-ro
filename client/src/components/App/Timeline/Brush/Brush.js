@@ -4,23 +4,27 @@ import { Context } from '../../Provider.js';
 import * as d3 from 'd3';
 
 class Brush extends Component {
-    componentDidMount(props) {
-        this.renderBrush(props);
+    constructor(props) {
+        super(props)
+        this.brush = d3.brushX()
+            .on('brush', this.brushed)
     }
 
-    // shouldComponentUpdate(nextProps, nextState) {
-    //     if (nextProps.active === false) {
-    //         console.log('false?')
-    //         return false
-    //     }
-    //     return true
-    // }
-
-    componentWillUpdate(nextProps) {
+    componentDidMount() {
         this.renderBrush();
     }
 
+    componentWillUpdate(nextProps) {
+        this.updateBrush();
+    }
+
     renderBrush = () => {
+        d3.select(this.refs.brush)
+            .call(this.brush)
+            .call(this.brush.move, [0, 800])
+    }
+
+    updateBrush = () => {
         const brush = d3.brushX()
             .on('brush', this.brushed)
 
@@ -50,11 +54,8 @@ class Brush extends Component {
 
     render() {
         return (
-            <React.Fragment>
-                <div>hello</div>
-                <g ref="brush">
-                </g>
-            </React.Fragment>
+            <g ref="brush">
+            </g>
         )
     }
 }

@@ -24,7 +24,7 @@ class TooltipSidebar extends PureComponent {
         return (
             <div className="tooltipsidebar-container">
                 <div className="tooltipsidebar-inner-container">
-                    {activeNode ? tooltips[activeNode.event_type].map((element) => <TooltipElement event={activeNode} elementKey={element.key} elementLabel={element.label} key={Math.random()} />) : <div>(Hover Over Node to View Tooltip)</div>}
+                    {activeNode ? tooltips[activeNode.event_type].map((element) => <TooltipElement event={activeNode} elementKey={element.key} elementLabel={element.label} key={element.label} />) : <div>(Hover Over Node to View Tooltip)</div>}
                 </div>
             </div>
         );
