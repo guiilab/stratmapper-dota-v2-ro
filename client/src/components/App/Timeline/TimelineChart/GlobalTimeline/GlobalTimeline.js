@@ -11,6 +11,7 @@ class GlobalTimeline extends PureComponent {
 
         return (
             <div style={globalTimelineStyle} className="global-timeline-container">
+                <svg width="100%" height="100%"></svg>
             </div>
         );
     }

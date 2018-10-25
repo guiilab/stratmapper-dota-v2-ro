@@ -379,6 +379,7 @@ h3 {
     border: 1px solid black;
     position: absolute;
     top: -65px;
+    background-color: lightgrey;
 }
 
 .event-select-container {
@@ -426,7 +427,7 @@ h3 {
 .x-axis-svg {
     position: absolute;
     width: 100%;
-    top: -85px;
+    top: -83px;
     height: 20px;
     color: white;
 }
