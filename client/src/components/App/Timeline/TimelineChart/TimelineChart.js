@@ -13,6 +13,7 @@ class TimelineChart extends Component {
     constructor(props) {
         super(props);
         this.chart = React.createRef()
+        this.zoom = this.getZoom()
         this.state = {
             clicked: false,
             mousePos: 0,
@@ -24,35 +25,36 @@ class TimelineChart extends Component {
     }
 
     componentDidMount() {
-        const zoom = this.getZoom()
         this.setState({
             height: 250,
             width: this.chart.current.offsetWidth
         })
         select(this.refs.svg)
-            .call(zoom)
+            .call(this.zoom)
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
-        if (nextState.width !== this.state.width) {
-            return true;
-        }
-        if (nextState.zoomTransform !== this.state.zoomTransform) {
-            return true;
-        }
-        if (nextProps.state.brushActive !== this.props.state.brushActive) {
-            return true;
-        }
-        return false;
-    }
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     if (this.chart.current.offsetWidth !== this.state.width) {
+    //         return true;
+    //     }
+    //     if (nextState.zoomTransform !== this.state.zoomTransform) {
+    //         return true;
+    //     }
+    //     if (nextProps.state.brushActive !== this.props.state.brushActive) {
+    //         return true;
+    //     }
+    //     return false;
+    // }
 
     componentDidUpdate() {
-        const zoom = this.getZoom()
-        this.setState({
-            width: this.chart.current.offsetWidth
-        })
         select(this.refs.svg)
-            .call(zoom)
+            .call(this.zoom)
+        if (this.chart.current.offsetWidth !== this.state.width) {
+            this.setState({
+                width: this.chart.current.offsetWidth
+            })
+        }
+
     }
 
     getZoom = () => {
@@ -60,7 +62,7 @@ class TimelineChart extends Component {
 
         return zoom()
             .scaleExtent([.9, 15])
-            .translateExtent([[0, timestampRange.start], [this.state.width, timestampRange.end]])
+            // .translateExtent([[0, timestampRange.start], [this.chart.current.offsetWidth, timestampRange.end]])
             .on("zoom", this.zoomed.bind(this))
     }
 

@@ -367,18 +367,20 @@ h3 {
 }
 
 .timeline-chart {
-    position: absolute;
+    display: inline-block;
+    position: relative;
     height: 250px;
-    width: 85%;
-    left: 150px;
+    width: 88%;
     background-color: lightgrey;
 }
 
 .event-select-container {
-    width: 150px;
+    width: 12%;
+    min-width: 120px;
     background-color: grey;
     height: 250px;
-    position: absolute;
+    position: relative;
+    float: left;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -426,6 +428,7 @@ h3 {
     height: 100%;
     position: absolute;
     background-color: rgba(0, 0, 0, .2);
-    border: black solid 1px;
+    border-left: black solid 1px;
+    border-right: black solid 1px;
     z-index: 1000;
 }
