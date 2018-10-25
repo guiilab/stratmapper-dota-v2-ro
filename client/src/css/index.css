@@ -325,7 +325,7 @@ h3 {
 
 .brush-button-container {
     background: var(--filler);
-    width: 12%;
+    width: 100%;
     position: absolute;
     top: -22px;
     left: -1px;

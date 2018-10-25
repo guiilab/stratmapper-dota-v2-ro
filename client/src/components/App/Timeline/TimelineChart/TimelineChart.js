@@ -23,13 +23,6 @@ class TimelineChart extends Component {
         }
     }
 
-    getZoom = () => {
-        return zoom()
-            .scaleExtent([.9, 15])
-            .translateExtent([[0, this.props.state.timestampRange.start], [this.state.width, this.props.state.timestampRange.end]])
-            .on("zoom", this.zoomed.bind(this))
-    }
-
     componentDidMount() {
         const zoom = this.getZoom()
         this.setState({
@@ -40,13 +33,35 @@ class TimelineChart extends Component {
             .call(zoom)
     }
 
-    componentDidUpdate(nextProps, prevState) {
+    shouldComponentUpdate(nextProps, nextState) {
+        if (nextState.width !== this.state.width) {
+            return true;
+        }
+        if (nextState.zoomTransform !== this.state.zoomTransform) {
+            return true;
+        }
+        if (nextProps.state.brushActive !== this.props.state.brushActive) {
+            return true;
+        }
+        return false;
+    }
+
+    componentDidUpdate() {
         const zoom = this.getZoom()
         this.setState({
             width: this.chart.current.offsetWidth
         })
         select(this.refs.svg)
             .call(zoom)
+    }
+
+    getZoom = () => {
+        const { timestampRange } = this.props.state;
+
+        return zoom()
+            .scaleExtent([.9, 15])
+            .translateExtent([[0, timestampRange.start], [this.state.width, timestampRange.end]])
+            .on("zoom", this.zoomed.bind(this))
     }
 
     toggleClick = () => {
@@ -68,12 +83,15 @@ class TimelineChart extends Component {
     }
 
     render() {
-        const { zoomTransform, width } = this.state;
         const { events, timestampRange, timelineSettings, brushActive, unitEventsTimeline } = this.props.state;
         const { yScaleTime, toggleBrushActive } = this.props;
 
         const heightStyle = {
             height: timelineSettings.height
+        }
+
+        if (!this.state.width) {
+            return <div className="timeline-chart" ref={this.chart}></div>
         }
 
         return (
@@ -83,20 +101,20 @@ class TimelineChart extends Component {
                     <AxisLines
                         events={events.timeline}
                         yScaleTime={yScaleTime}
-                        width={width}
+                        width={this.state.width}
                     />
 
                     {brushActive ?
                         <Brush
-                            width={width}
+                            width={this.state.width}
                             timestampRange={timestampRange}
-                            zoomTransform={zoomTransform}
+                            zoomTransform={this.state.zoomTransform}
                         /> : <g>Empty</g>
                     }
                     <Scatterplot
                         data={unitEventsTimeline}
-                        width={width}
-                        zoomTransform={zoomTransform}
+                        width={this.state.width}
+                        zoomTransform={this.state.zoomTransform}
                         timestampRange={timestampRange}
                         events={events.timeline}
                         yScaleTime={yScaleTime}
@@ -105,8 +123,8 @@ class TimelineChart extends Component {
                 <div className="x-axis">
                     <svg width="100%" height={20}>
                         <XAxis
-                            width={width}
-                            zoomTransform={zoomTransform}
+                            width={this.state.width}
+                            zoomTransform={this.state.zoomTransform}
                             timestampRange={timestampRange}
                         />
                     </svg>
