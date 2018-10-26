@@ -436,12 +436,6 @@ h3 {
     color: white;
 }
 
-.drag {
-    width: 200px;
-    height: 100%;
+.brush-svg {
     position: absolute;
-    background-color: rgba(0, 0, 0, .2);
-    border-left: black solid 1px;
-    border-right: black solid 1px;
-    z-index: 1000;
 }

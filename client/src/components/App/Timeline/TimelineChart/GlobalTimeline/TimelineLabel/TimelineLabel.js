@@ -6,7 +6,7 @@ import { Context } from '../../../../Provider'
 class TimelineLabel extends Component {
     constructor(props) {
         super(props)
-        console.log(this.props.state.timestampRange)
+
         this.xScaleTime = scaleLinear()
             .domain([this.props.state.timestampRange.start, this.props.state.timestampRange.end])
             .range([0, this.props.width])
@@ -52,7 +52,8 @@ class TimelineLabel extends Component {
                 className="timeline-label"
                 style={timelineLabelStyle}
                 onMouseOver={() => this.toggleHover()}
-                onMouseOut={() => this.toggleHover()}>
+                onMouseOut={() => this.toggleHover()}
+            >
             </rect>
         );
     }

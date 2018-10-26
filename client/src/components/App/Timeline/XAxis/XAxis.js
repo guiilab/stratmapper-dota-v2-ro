@@ -37,7 +37,15 @@ class XAxis extends Component {
     }
 
     render() {
-        return <g transform="translate(0,18)" ref="xAxis" />
+
+        const { width } = this.props;
+        return (
+            <div className="x-axis-svg">
+                <svg width={width} height="100%">
+                    <g transform="translate(0,18)" ref="xAxis" />
+                </svg>
+            </div>
+        )
     }
 }
 

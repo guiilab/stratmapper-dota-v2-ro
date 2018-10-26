@@ -100,28 +100,27 @@ class TimelineChart extends Component {
         return (
             // <div className="timeline-chart" onMouseDown={() => this.toggleClick()} onMouseUp={() => this.toggleClick()} onMouseMove={this.state.clicked ? (e) => this.drag(e) : null} ref={this.chart} style={heightStyle} onKeyDown={(e) => toggleBrushActive(e)} onKeyUp={(e) => toggleBrushActive(e)} tabIndex="0">
             <div className="timeline-chart" ref={this.chart} style={heightStyle} onKeyDown={(e) => toggleBrushActive(e)} onKeyUp={(e) => toggleBrushActive(e)} tabIndex="0">
-                <div className="x-axis-svg">
-                    <svg width={this.state.width} height="100%">
-                        <XAxis
-                            width={this.state.width}
-                            zoomTransform={this.state.zoomTransform}
-                            timestampRange={timestampRange}
-                        />
-                    </svg>
-                </div>
+                <XAxis
+                    width={this.state.width}
+                    zoomTransform={this.state.zoomTransform}
+                    timestampRange={timestampRange}
+                />
                 <GlobalTimeline
                     width={this.state.width}
                     zoomTransform={this.state.zoomTransform}
                 />
-                {/* <Drag clicked={this.state.clicked} offsetX={this.state.offsetX} /> */}
-
+                <Drag
+                    updateBrushRange={this.props.updateBrushRange}
+                    chartWidth={this.state.width}
+                    timestampRange={timestampRange}
+                />
                 <svg width="100%" height="100%" ref="svg" className="timeline-svg-scatter">
+
                     <AxisLines
                         events={events.timeline}
                         yScaleTime={yScaleTime}
                         width={this.state.width}
                     />
-
                     {brushActive ?
                         <Brush
                             width={this.state.width}
