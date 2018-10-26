@@ -382,6 +382,10 @@ h3 {
     background-color: lightgrey;
 }
 
+.timeline-label {
+    transition: .1s;
+}
+
 .event-select-container {
     width: 12%;
     min-width: 120px;

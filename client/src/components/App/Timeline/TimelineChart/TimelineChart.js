@@ -109,7 +109,10 @@ class TimelineChart extends Component {
                         />
                     </svg>
                 </div>
-                <GlobalTimeline width={this.state.width} />
+                <GlobalTimeline
+                    width={this.state.width}
+                    zoomTransform={this.state.zoomTransform}
+                />
                 {/* <Drag clicked={this.state.clicked} offsetX={this.state.offsetX} /> */}
 
                 <svg width="100%" height="100%" ref="svg" className="timeline-svg-scatter">
