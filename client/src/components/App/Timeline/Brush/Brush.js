@@ -40,31 +40,26 @@ class Brush extends Component {
     }
 
     brushed = () => {
-        const { timestampRange, width, zoomTransform } = this.props;
+        const { timestampRange, chartWidth, zoomTransform } = this.props;
 
         const xScaleTime = scaleLinear()
             .domain([timestampRange.start, timestampRange.end])
-            .range([0, width])
+            .range([0, chartWidth])
 
-        let s = [xScaleTime(this.context.state.brushRange[0]), xScaleTime(this.context.state.brushRange[1])]
+        let s;
 
         if (event.selection) {
-            s = event.selection
+            s = event.selection;
+        } else {
+            s = [xScaleTime(this.context.state.brushRange[0]), xScaleTime(this.context.state.brushRange[1])];
         }
 
         if (zoomTransform) {
             const newXScale = zoomTransform.rescaleX(xScaleTime)
             this.context.updateBrushRange([newXScale.invert(s[0]), newXScale.invert(s[1])])
-        } else if (event.selection) {
-            s = event.selection
-            this.context.updateBrushRange([xScaleTime.invert(s[0]), xScaleTime.invert(s[1])])
         } else {
-            // let brushStart = this.xScaleTimeInvert(s[0])
-            // let brushEnd = this.xScaleTimeInvert(s[1])
-            // select(this.refs.brush)
-            //     .call(this.brush.move, [brushStart, brushEnd])
+            this.context.updateBrushRange([xScaleTime.invert(s[0]), xScaleTime.invert(s[1])])
         }
-
     }
 
     render() {

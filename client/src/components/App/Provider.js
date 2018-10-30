@@ -68,15 +68,15 @@ class Provider extends Component {
         if (nextState.currentMatch !== this.state.currentMatch) {
             this.loadNewData()
         }
-        // if ((nextState.selectedUnits !== this.state.selectedUnits) || (nextState.selectedEventTypes !== this.state.selectedEventTypes || ((nextState.brushRange !== this.state.brushRange) && nextState.brushRange.length !== 0))) {
-        //     let unitEventsFiltered = this.filterEvents()
-        //     this.setState({
-        //         unitEventsFiltered: unitEventsFiltered
-        //     })
-        // }
-        // if ((nextState.brushRange !== this.state.brushRange) && nextState.brushRange.length !== 0) {
-        //     this.filterEvents()
-        // }
+        if ((nextState.selectedUnits !== this.state.selectedUnits) || (nextState.selectedEventTypes !== this.state.selectedEventTypes || ((nextState.brushRange !== this.state.brushRange) && nextState.brushRange.length !== 0))) {
+            let unitEventsFiltered = this.filterEvents()
+            this.setState({
+                unitEventsFiltered: unitEventsFiltered
+            })
+        }
+        if ((nextState.brushRange !== this.state.brushRange) && nextState.brushRange.length !== 0) {
+            this.filterEvents()
+        }
 
     }
 
@@ -255,7 +255,6 @@ class Provider extends Component {
 
     filterEvents = () => {
         if (this.state.brushRange.length === 0) {
-            console.log(this.state)
             let unitEvents = this.state.unitEventsTimeline.filter(event => this.state.selectedUnits.includes(event.unit))
             return unitEvents.filter(event => (this.state.selectedEventTypes.includes(event.event_type)))
         }
@@ -459,7 +458,7 @@ class Provider extends Component {
                 updateBrushRange: (e) => {
                     this.setState({
                         brushRange: e
-                    })
+                    }, () => console.log('update brush range running', e))
                 },
 
                 toggleActiveNode: (node) => {
@@ -469,14 +468,10 @@ class Provider extends Component {
                 },
 
                 toggleBrushActive: (e) => {
-                    if (e.shiftKey) {
+                    if ((e.shiftKey) || (e === 'toggle')) {
+                        let brushRange = this.state.brushActive ? [] : [...this.state.brushRange];
                         this.setState({
-                            // brushRange: [],
-                            brushActive: !this.state.brushActive
-                        })
-                    }
-                    if (e === 'toggle') {
-                        this.setState({
+                            brushRange: brushRange,
                             brushActive: !this.state.brushActive
                         })
                     }
