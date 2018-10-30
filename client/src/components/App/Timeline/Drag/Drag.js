@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { scaleLinear, select } from 'd3';
+import { scaleLinear } from 'd3';
 
 // import { Context } from './../../Provider.js'
 

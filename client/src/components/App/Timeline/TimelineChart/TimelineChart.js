@@ -6,7 +6,7 @@ import { Context } from '../../Provider.js'
 import Scatterplot from './../Scatterplot/Scatterplot.js';
 import XAxis from './../XAxis/XAxis.js';
 import AxisLines from './../AxisLines/AxisLines.js';
-import Drag from './../Drag/Drag.js';
+// import Drag from './../Drag/Drag.js';
 import Brush from './../Brush/Brush.js';
 import GlobalTimeline from './GlobalTimeline/GlobalTimeline.js';
 
@@ -59,7 +59,7 @@ class TimelineChart extends PureComponent {
     }
 
     getZoom = () => {
-        const { timestampRange } = this.props.state;
+        // const { timestampRange } = this.props.state;
 
         return zoom()
             .scaleExtent([.9, 15])
@@ -100,7 +100,7 @@ class TimelineChart extends PureComponent {
         return (
             // <div className="timeline-chart" onMouseDown={() => this.toggleClick()} onMouseUp={() => this.toggleClick()} onMouseMove={this.state.clicked ? (e) => this.drag(e) : null} ref={this.chart} style={heightStyle} onKeyDown={(e) => toggleBrushActive(e)} onKeyUp={(e) => toggleBrushActive(e)} tabIndex="0">
             <div className="timeline-chart" ref={this.chart} style={heightStyle} onKeyDown={(e) => toggleBrushActive(e)} onKeyUp={(e) => toggleBrushActive(e)} tabIndex="0">
-                {/* <div className="timeline-chart" ref={this.chart} style={heightStyle} tabIndex="0"> */}
+
                 <XAxis
                     width={this.state.width}
                     zoomTransform={this.state.zoomTransform}
@@ -124,7 +124,7 @@ class TimelineChart extends PureComponent {
                     />
                     {brushActive ?
                         <Brush
-                            width={this.state.width}
+                            chartWidth={this.state.width}
                             timestampRange={timestampRange}
                             zoomTransform={this.state.zoomTransform}
                         /> : <g>Empty</g>

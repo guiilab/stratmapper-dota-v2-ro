@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 
 import { Context } from '../../Provider.js';
-import * as d3 from 'd3';
+import { scaleLinear, brushX, select, event } from 'd3';
 
 class Brush extends Component {
     constructor(props) {
         super(props)
-        this.brush = d3.brushX()
+        this.brush = brushX()
             .on('brush', this.brushed)
     }
 
@@ -14,40 +14,55 @@ class Brush extends Component {
         this.renderBrush();
     }
 
-    componentWillUpdate(nextProps) {
+    componentDidUpdate(nextProps) {
         this.updateBrush();
     }
 
+    xScaleTimeInvert = (x) => {
+        const { timestampRange, chartWidth } = this.props;
+        let scale = scaleLinear()
+            .domain([timestampRange.start, timestampRange.end])
+            .range([0, chartWidth])
+        return scale(x)
+    }
+
     renderBrush = () => {
-        d3.select(this.refs.brush)
+        let brushStart = this.xScaleTimeInvert(this.context.state.brushRange[0])
+        let brushEnd = this.xScaleTimeInvert(this.context.state.brushRange[1])
+        select(this.refs.brush)
             .call(this.brush)
-            .call(this.brush.move, [0, 200])
+            .call(this.brush.move, [brushStart, brushEnd])
     }
 
     updateBrush = () => {
-        const brush = d3.brushX()
-            .on('brush', this.brushed)
-
-        d3.select(this.refs.brush)
-            .call(brush)
+        select(this.refs.brush)
+            .call(this.brush)
     }
 
     brushed = () => {
-        let s = [100, 200];
-        const xScaleTime = d3.scaleLinear()
-            .domain([this.props.timestampRange.start, this.props.timestampRange.end])
-            .range([0, this.props.width])
+        const { timestampRange, width, zoomTransform } = this.props;
 
-        if (d3.event.selection) {
-            s = d3.event.selection
+        const xScaleTime = scaleLinear()
+            .domain([timestampRange.start, timestampRange.end])
+            .range([0, width])
+
+        let s = [xScaleTime(this.context.state.brushRange[0]), xScaleTime(this.context.state.brushRange[1])]
+
+        if (event.selection) {
+            s = event.selection
         }
 
-        if (this.props.zoomTransform) {
-            const newXScale = this.props.zoomTransform.rescaleX(xScaleTime)
-            this.props.updateBrushRange([newXScale.invert(s[0]), newXScale.invert(s[1])])
+        if (zoomTransform) {
+            const newXScale = zoomTransform.rescaleX(xScaleTime)
+            this.context.updateBrushRange([newXScale.invert(s[0]), newXScale.invert(s[1])])
+        } else if (event.selection) {
+            s = event.selection
+            this.context.updateBrushRange([xScaleTime.invert(s[0]), xScaleTime.invert(s[1])])
         } else {
-            this.props.updateBrushRange([xScaleTime.invert(s[0]), xScaleTime.invert(s[1])])
-
+            // let brushStart = this.xScaleTimeInvert(s[0])
+            // let brushEnd = this.xScaleTimeInvert(s[1])
+            // select(this.refs.brush)
+            //     .call(this.brush.move, [brushStart, brushEnd])
         }
 
     }
@@ -60,8 +75,6 @@ class Brush extends Component {
     }
 }
 
-export default (props) => (
-    <Context.Consumer>
-        {(context) => <Brush {...context} {...props} />}
-    </Context.Consumer>
-);
+Brush.contextType = Context;
+
+export default Brush;

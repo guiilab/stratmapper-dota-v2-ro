@@ -8,7 +8,7 @@ class Provider extends Component {
         matches: [],
         currentMatch: 'early-game',
         apiMatchId: 2500623971,
-        brushRange: [],
+        brushRange: [676, 690],
         brushActive: false,
         windowSettings: {
             width: null,
@@ -66,18 +66,17 @@ class Provider extends Component {
 
     componentDidUpdate(nextProps, nextState) {
         if (nextState.currentMatch !== this.state.currentMatch) {
-            console.log('match change')
             this.loadNewData()
         }
-        if ((nextState.selectedUnits !== this.state.selectedUnits) || (nextState.selectedEventTypes !== this.state.selectedEventTypes || ((nextState.brushRange !== this.state.brushRange) && nextState.brushRange.length !== 0))) {
-            let unitEventsFiltered = this.filterEvents()
-            this.setState({
-                unitEventsFiltered: unitEventsFiltered
-            })
-        }
-        if ((nextState.brushRange !== this.state.brushRange) && nextState.brushRange.length !== 0) {
-            this.filterEvents()
-        }
+        // if ((nextState.selectedUnits !== this.state.selectedUnits) || (nextState.selectedEventTypes !== this.state.selectedEventTypes || ((nextState.brushRange !== this.state.brushRange) && nextState.brushRange.length !== 0))) {
+        //     let unitEventsFiltered = this.filterEvents()
+        //     this.setState({
+        //         unitEventsFiltered: unitEventsFiltered
+        //     })
+        // }
+        // if ((nextState.brushRange !== this.state.brushRange) && nextState.brushRange.length !== 0) {
+        //     this.filterEvents()
+        // }
 
     }
 
@@ -174,7 +173,6 @@ class Provider extends Component {
             dire: [],
             radiant: [],
             loadSettings: data[0].load_settings,
-            brushRange: [],
             events: {
                 all: [...data[0].events],
                 allTypes: [...eventsAllTypes],
@@ -257,6 +255,7 @@ class Provider extends Component {
 
     filterEvents = () => {
         if (this.state.brushRange.length === 0) {
+            console.log(this.state)
             let unitEvents = this.state.unitEventsTimeline.filter(event => this.state.selectedUnits.includes(event.unit))
             return unitEvents.filter(event => (this.state.selectedEventTypes.includes(event.event_type)))
         }
@@ -349,12 +348,12 @@ class Provider extends Component {
             <Context.Provider value={{
                 state: this.state,
 
-                filterEvents: () => {
-                    let unitEventsFiltered = this.filterEvents()
-                    this.setState({
-                        unitEventsFiltered: unitEventsFiltered
-                    })
-                },
+                // filterEvents: () => {
+                //     let unitEventsFiltered = this.filterEvents()
+                //     this.setState({
+                //         unitEventsFiltered: unitEventsFiltered
+                //     })
+                // },
 
                 toggleSelectedEvent: (event) => {
                     if (this.state.selectedEventTypes.includes(event)) {
@@ -472,7 +471,7 @@ class Provider extends Component {
                 toggleBrushActive: (e) => {
                     if (e.shiftKey) {
                         this.setState({
-                            brushRange: [],
+                            // brushRange: [],
                             brushActive: !this.state.brushActive
                         })
                     }
