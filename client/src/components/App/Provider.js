@@ -8,7 +8,7 @@ class Provider extends Component {
         matches: [],
         currentMatch: 'early-game',
         apiMatchId: 2500623971,
-        brushRange: [676, 680],
+        brushRange: [],
         brushActive: false,
         windowSettings: {
             width: null,
@@ -458,7 +458,7 @@ class Provider extends Component {
                 updateBrushRange: (e) => {
                     this.setState({
                         brushRange: e
-                    }, () => console.log('update brush range running', e))
+                    })
                 },
 
                 toggleActiveNode: (node) => {

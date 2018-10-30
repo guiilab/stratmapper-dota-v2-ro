@@ -61,11 +61,11 @@ class TimelineLabel extends Component {
     render() {
         const { label } = this.props;
 
-        let posX = label.timestamp_range[0];
+        let labelPosX = label.timestamp_range[0];
         let diff = label.timestamp_range[1] - label.timestamp_range[0]
 
         let color;
-        color = this.state.hover || this.state.active ? 'green' : 'grey';
+        color = this.state.hover || this.state.active ? 'green' : 'rgba(0, 0, 0, .2)';
 
         const timelineLabelStyle = {
             fill: color,
@@ -74,10 +74,19 @@ class TimelineLabel extends Component {
 
         return (
             <g>
+                <text
+                    x={this.xScaleTime(labelPosX)}
+                    fontFamily="Verdana"
+                    fontSize="10"
+                    fill="grey"
+                    y="15"
+                >
+                    {label.behavior}
+                </text>
                 <rect
                     width={this.xScaleTimeInvert(diff)}
                     height="20"
-                    x={this.xScaleTime(posX)}
+                    x={this.xScaleTime(labelPosX)}
                     className="timeline-label"
                     style={timelineLabelStyle}
                     onClick={() => this.toggleActive()}
