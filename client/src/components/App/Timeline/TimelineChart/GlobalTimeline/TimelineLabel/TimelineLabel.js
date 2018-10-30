@@ -28,8 +28,9 @@ class TimelineLabel extends Component {
             active: !this.state.active
         }, () => {
             if (this.state.active) {
-                this.props.toggleBrushActive('toggle')
-                this.props.updateBrushRange([...this.props.label.timestamp_range])
+                this.props.toggleBrushActive('toggle', [...this.props.label.timestamp_range])
+            } else {
+                this.props.toggleBrushActive('toggle', [])
             }
         })
     }
@@ -48,7 +49,8 @@ class TimelineLabel extends Component {
 
     render() {
 
-        let color = this.state.hover ? 'green' : 'grey'
+        let color;
+        color = this.state.hover || this.state.active ? 'green' : 'grey';
         const timelineLabelStyle = {
             fill: color,
             pointerEvents: 'all'
