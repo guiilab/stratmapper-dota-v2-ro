@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { zoom, select, event } from 'd3';
 
 import { Context } from '../../Provider.js'
@@ -10,7 +10,7 @@ import Drag from './../Drag/Drag.js';
 import Brush from './../Brush/Brush.js';
 import GlobalTimeline from './GlobalTimeline/GlobalTimeline.js';
 
-class TimelineChart extends Component {
+class TimelineChart extends PureComponent {
     constructor(props) {
         super(props);
         this.chart = React.createRef()
@@ -100,6 +100,7 @@ class TimelineChart extends Component {
         return (
             // <div className="timeline-chart" onMouseDown={() => this.toggleClick()} onMouseUp={() => this.toggleClick()} onMouseMove={this.state.clicked ? (e) => this.drag(e) : null} ref={this.chart} style={heightStyle} onKeyDown={(e) => toggleBrushActive(e)} onKeyUp={(e) => toggleBrushActive(e)} tabIndex="0">
             <div className="timeline-chart" ref={this.chart} style={heightStyle} onKeyDown={(e) => toggleBrushActive(e)} onKeyUp={(e) => toggleBrushActive(e)} tabIndex="0">
+                {/* <div className="timeline-chart" ref={this.chart} style={heightStyle} tabIndex="0"> */}
                 <XAxis
                     width={this.state.width}
                     zoomTransform={this.state.zoomTransform}
@@ -109,11 +110,11 @@ class TimelineChart extends Component {
                     width={this.state.width}
                     zoomTransform={this.state.zoomTransform}
                 />
-                <Drag
+                {/* <Drag
                     updateBrushRange={this.props.updateBrushRange}
                     chartWidth={this.state.width}
                     timestampRange={timestampRange}
-                />
+                /> */}
                 <svg width="100%" height="100%" ref="svg" className="timeline-svg-scatter">
 
                     <AxisLines
