@@ -107,7 +107,7 @@ class TimelineChart extends PureComponent {
                     timestampRange={timestampRange}
                 />
                 <GlobalTimeline
-                    width={this.state.width}
+                    chartWidth={this.state.width}
                     zoomTransform={this.state.zoomTransform}
                 />
                 {/* <Drag

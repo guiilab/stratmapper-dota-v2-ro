@@ -8,7 +8,7 @@ class Provider extends Component {
         matches: [],
         currentMatch: 'early-game',
         apiMatchId: 2500623971,
-        brushRange: [676, 690],
+        brushRange: [676, 680],
         brushActive: false,
         windowSettings: {
             width: null,
@@ -467,9 +467,14 @@ class Provider extends Component {
                     })
                 },
 
-                toggleBrushActive: (e) => {
+                toggleBrushActive: (e, range) => {
                     if ((e.shiftKey) || (e === 'toggle')) {
-                        let brushRange = this.state.brushActive ? [] : [...this.state.brushRange];
+                        let brushRange;
+                        if (range) {
+                            brushRange = this.state.brushActive ? [] : [...range];
+                        } else {
+                            brushRange = this.state.brushActive ? [] : [...this.state.brushRange];
+                        }
                         this.setState({
                             brushRange: brushRange,
                             brushActive: !this.state.brushActive

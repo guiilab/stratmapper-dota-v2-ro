@@ -12,7 +12,6 @@ class TimelineLabel extends Component {
             .range([0, this.props.width])
     }
 
-
     state = {
         hover: false,
         active: false,
@@ -21,6 +20,17 @@ class TimelineLabel extends Component {
     toggleHover = () => {
         this.setState({
             hover: !this.state.hover
+        })
+    }
+
+    toggleActive = () => {
+        this.setState({
+            active: !this.state.active
+        }, () => {
+            if (this.state.active) {
+                this.props.toggleBrushActive('toggle')
+                this.props.updateBrushRange([...this.props.label.timestamp_range])
+            }
         })
     }
 
@@ -51,6 +61,7 @@ class TimelineLabel extends Component {
                 x={this.xScaleTime(660)}
                 className="timeline-label"
                 style={timelineLabelStyle}
+                onClick={() => this.toggleActive()}
                 onMouseOver={() => this.toggleHover()}
                 onMouseOut={() => this.toggleHover()}
             >
