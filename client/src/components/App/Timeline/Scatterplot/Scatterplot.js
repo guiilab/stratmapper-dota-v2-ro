@@ -37,7 +37,6 @@ class Scatterplot extends Component {
         const { data, events, yScaleTime } = this.props;
         const { toggleActiveNode, getUnit } = this.context;
         const { selectedUnits, selectedEventTypes } = this.context.state;
-
         return (
             <g ref="scatterplot">
                 {data.map((event) => {

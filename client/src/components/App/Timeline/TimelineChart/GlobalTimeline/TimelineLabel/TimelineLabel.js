@@ -6,15 +6,16 @@ import { Context } from '../../../../Provider'
 class TimelineLabel extends Component {
     constructor(props) {
         super(props)
-
-        this.xScaleTime = scaleLinear()
-            .domain([this.props.state.timestampRange.start, this.props.state.timestampRange.end])
-            .range([0, this.props.width])
+        this.renderTimelineLabels();
     }
 
     state = {
         hover: false,
         active: false,
+    }
+
+    componentDidUpdate() {
+        this.renderTimelineLabels();
     }
 
     toggleHover = () => {
@@ -35,39 +36,56 @@ class TimelineLabel extends Component {
         })
     }
 
-    componentDidUpdate() {
-        this.renderTimelineLabels();
-    }
-
     renderTimelineLabels = () => {
-        const { zoomTransform } = this.props;
+        const { zoomTransform, chartWidth } = this.props;
+        const { timestampRange } = this.props.state;
+
+        this.xScaleTime = scaleLinear()
+            .domain([timestampRange.start, timestampRange.end])
+            .range([0, chartWidth])
 
         if (zoomTransform) {
             this.xScaleTime.domain(zoomTransform.rescaleX(this.xScaleTime).domain());
         }
     }
 
+    xScaleTimeInvert = (x) => {
+        const { chartWidth } = this.props;
+        const { timestampRange } = this.props.state;
+        let scale = scaleLinear()
+            .domain([0, timestampRange.end - timestampRange.start])
+            .range([0, chartWidth])
+        return scale(x)
+    }
+
     render() {
+        const { label } = this.props;
+
+        let posX = label.timestamp_range[0];
+        let diff = label.timestamp_range[1] - label.timestamp_range[0]
 
         let color;
         color = this.state.hover || this.state.active ? 'green' : 'grey';
+
         const timelineLabelStyle = {
             fill: color,
             pointerEvents: 'all'
         }
 
         return (
-            <rect
-                width="100"
-                height="20"
-                x={this.xScaleTime(660)}
-                className="timeline-label"
-                style={timelineLabelStyle}
-                onClick={() => this.toggleActive()}
-                onMouseOver={() => this.toggleHover()}
-                onMouseOut={() => this.toggleHover()}
-            >
-            </rect>
+            <g>
+                <rect
+                    width={this.xScaleTimeInvert(diff)}
+                    height="20"
+                    x={this.xScaleTime(posX)}
+                    className="timeline-label"
+                    style={timelineLabelStyle}
+                    onClick={() => this.toggleActive()}
+                    onMouseOver={() => this.toggleHover()}
+                    onMouseOut={() => this.toggleHover()}
+                >
+                </rect>
+            </g>
         );
     }
 }
