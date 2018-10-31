@@ -25,15 +25,16 @@ class UnitOption extends Component {
         return null;
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
-        if (this.state.hover !== nextState.hover) {
-            return true;
-        } else if (nextState.active !== this.state.active) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     if (next)
+    //     if (this.state.hover !== nextState.hover) {
+    //         return true;
+    //     } else if (nextState.active !== this.state.active) {
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    // }
 
     toggleHover = () => {
         this.setState({
@@ -63,7 +64,14 @@ class UnitOption extends Component {
         }
 
         return (
-            <div className='unit-option' style={buttonStyle} key={unit} onMouseEnter={() => this.toggleHover()} onMouseLeave={() => this.toggleHover()} onClick={() => { this.toggleActive(); toggleSelectedUnit(unit); }} >{formatFirstString(unit)}</div>
+            <div
+                className='unit-option'
+                style={buttonStyle}
+                key={unit}
+                onMouseEnter={() => this.toggleHover()}
+                onMouseLeave={() => this.toggleHover()}
+                onClick={() => { this.toggleActive(); toggleSelectedUnit(unit); }} >{formatFirstString(unit)}
+            </div>
         )
     }
 }

@@ -14,6 +14,16 @@ class TimelineLabel extends Component {
         active: false,
     }
 
+    // static getDerivedStateFromProps(nextProps) {
+    //     if (nextProps.brushRange[0] !== this.props.label.timestamp_range[0]) {
+    //         this.props.toggleLabelActive('toggle', [])
+    //         return {
+    //             active: false
+    //         };
+    //     }
+    //     return null;
+    // }
+
     componentDidUpdate() {
         this.renderTimelineLabels();
     }
@@ -25,13 +35,14 @@ class TimelineLabel extends Component {
     }
 
     toggleActive = () => {
+        const { label } = this.props;
         this.setState({
             active: !this.state.active
         }, () => {
             if (this.state.active) {
-                this.props.toggleBrushActive('toggle', [...this.props.label.timestamp_range])
+                this.props.toggleLabelActive('toggle', [...label.timestamp_range], [...label.units], [...label.events])
             } else {
-                this.props.toggleBrushActive('toggle', [])
+                this.props.toggleLabelActive('toggle', [], [...this.props.state.units], [...this.props.state.events.timeline])
             }
         })
     }

@@ -74,10 +74,6 @@ class Provider extends Component {
                 unitEventsFiltered: unitEventsFiltered
             })
         }
-        if ((nextState.brushRange !== this.state.brushRange) && nextState.brushRange.length !== 0) {
-            this.filterEvents()
-        }
-
     }
 
     componentWillUnmount() {
@@ -347,13 +343,6 @@ class Provider extends Component {
             <Context.Provider value={{
                 state: this.state,
 
-                // filterEvents: () => {
-                //     let unitEventsFiltered = this.filterEvents()
-                //     this.setState({
-                //         unitEventsFiltered: unitEventsFiltered
-                //     })
-                // },
-
                 toggleSelectedEvent: (event) => {
                     if (this.state.selectedEventTypes.includes(event)) {
                         const array = [...this.state.selectedEventTypes];
@@ -456,6 +445,7 @@ class Provider extends Component {
                 },
 
                 updateBrushRange: (e) => {
+                    console.log(e)
                     this.setState({
                         brushRange: e
                     })
@@ -469,17 +459,22 @@ class Provider extends Component {
 
                 toggleBrushActive: (e, range) => {
                     if ((e.shiftKey) || (e === 'toggle')) {
-                        let brushRange;
-                        if (range) {
-                            brushRange = this.state.brushActive ? [] : [...range];
-                        } else {
-                            brushRange = this.state.brushActive ? [] : [...this.state.brushRange];
-                        }
+                        let brushRange = this.state.brushActive ? [] : [...this.state.brushRange];
                         this.setState({
                             brushRange: brushRange,
                             brushActive: !this.state.brushActive
                         })
                     }
+                },
+
+                toggleLabelActive: (e, range, units, events) => {
+                    let brushRange = this.state.brushActive ? [] : [...range];
+                    this.setState({
+                        brushRange: brushRange,
+                        brushActive: !this.state.brushActive,
+                        selectedUnits: [...units],
+                        selectedEventTypes: [...events]
+                    })
                 },
 
                 //disable brush before match changes to destroy map data

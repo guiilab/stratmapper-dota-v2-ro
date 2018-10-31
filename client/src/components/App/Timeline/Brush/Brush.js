@@ -57,7 +57,7 @@ class Brush extends Component {
         if (zoomTransform) {
             const newXScale = zoomTransform.rescaleX(xScaleTime)
             this.context.updateBrushRange([newXScale.invert(s[0]), newXScale.invert(s[1])])
-        } else {
+        } else if (!(isNaN(s[0]))) {
             this.context.updateBrushRange([xScaleTime.invert(s[0]), xScaleTime.invert(s[1])])
         }
     }
