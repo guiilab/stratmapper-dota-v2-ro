@@ -503,6 +503,15 @@ class Provider extends Component {
                     string = string.charAt(0).toUpperCase() + string.slice(1);
                     return string;
                 },
+
+                formatItemList(array) {
+                    array.forEach((a, i) => {
+                        array[i] = a.replace(/item_/g, "").replace(/_/g, " ")
+                    })
+                    array = array.join(', ')
+                    // string = string.replace(/item/g, "")
+                    return array
+                }
             }
             } >
                 {this.props.children}

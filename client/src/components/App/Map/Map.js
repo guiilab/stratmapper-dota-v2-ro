@@ -74,7 +74,6 @@ class Map extends Component {
             )
         }
         if (unitEventsFiltered) {
-            console.log(brushRange.length)
             return (
                 <div className="map-container" style={mapContainerStyle} >
                     <svg className="map-svg" ref="mapsvg" style={mapSvgStyle} >

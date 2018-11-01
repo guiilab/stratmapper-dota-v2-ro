@@ -28,7 +28,7 @@ class LabelPanel extends Component {
         let color;
 
         this.state.isOpen ? width = '400px' : width = '30px';
-        this.state.isOpen ? height = '170px' : height = '170px';
+        this.state.isOpen ? height = '170px' : height = '100px';
         this.state.isOpen ? opacity = 100 : opacity = 0;
         this.state.isOpen ? angle = '0deg' : angle = '270deg';
         this.state.isOpen ? color = 'coral' : color = 'green'
