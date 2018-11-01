@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
 import { Context } from '../../../../Provider.js';
 
-class UnitOption extends Component {
+class UnitOption extends PureComponent {
     state = {
         hover: false,
         active: false,
@@ -18,23 +18,13 @@ class UnitOption extends Component {
             };
         }
         if (!nextProps.state.selectedUnits.includes(nextProps.unit)) {
+
             return {
                 active: false
             };
         }
         return null;
     }
-
-    // shouldComponentUpdate(nextProps, nextState) {
-    //     if (next)
-    //     if (this.state.hover !== nextState.hover) {
-    //         return true;
-    //     } else if (nextState.active !== this.state.active) {
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-    // }
 
     toggleHover = () => {
         this.setState({
@@ -54,13 +44,20 @@ class UnitOption extends Component {
         let buttonStyle;
         let unitObject = getUnit(unit);
 
-        if (this.state.hover || this.state.active) {
+        if (this.state.hover) {
             buttonStyle = {
-                backgroundColor: unitObject.color
+                boxShadow: "0px 0px 1px black",
+                backgroundColor: unitObject.color,
             }
-
-        } else {
-            buttonStyle = { backgroundColor: "grey" }
+        } else if (this.state.active) {
+            buttonStyle = {
+                backgroundColor: unitObject.color,
+            }
+        }
+        else {
+            buttonStyle = {
+                backgroundColor: "grey"
+            }
         }
 
         return (

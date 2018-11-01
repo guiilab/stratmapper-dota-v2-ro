@@ -282,10 +282,16 @@ h3 {
     padding: .5rem;
 }
 
+.tooltip-divider {
+    border-bottom: 1px grey solid;
+    margin: .5rem auto;
+    width: 80%;
+}
+
 .tooltip-element-wrapper, .node-context-element-wrapper {
-    padding: .4rem;
+    padding: .3rem;
     width: 250px;
-    font-size: .8rem;
+    font-size: .9rem;
     text-align: left;
 }
 
@@ -399,6 +405,7 @@ h3 {
 
 .timeline-label {
     transition: .1s;
+    cursor: pointer;
 }
 
 .event-select-container {

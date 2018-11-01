@@ -3,7 +3,7 @@ import React, { PureComponent } from 'react';
 import { Context } from '../../Provider.js'
 
 import BrushButton from './../BrushButton/BrushButton.js';
-import EventOption from './../EventOption/EventOption.js';
+import EventOption from './EventOption/EventOption.js';
 
 class EventSelect extends PureComponent {
     render() {

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 import { Context } from '../Provider.js';
 import AddLabel from './AddLabel/AddLabel.js';
-import Label from './Label/Label.js';
 
 class LabelPanel extends Component {
 
@@ -42,9 +41,6 @@ class LabelPanel extends Component {
         }
         let closeButtonStyle = {
             backgroundColor: color
-        }
-        let labelContainerStyle = {
-            opacity: opacity
         }
         if (!this.props.state.labels) {
             return <div>loading</div>

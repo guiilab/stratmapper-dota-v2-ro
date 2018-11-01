@@ -28,6 +28,7 @@ class TooltipSidebar extends PureComponent {
                             elementLabel={element.label}
                             key={element.label} />)
                     )}
+                    <div className="tooltip-divider"></div>
                     {Object.keys(activeNode.node_context).map((element) => (
                         <NodeContextElement
                             event={activeNode}

@@ -1,12 +1,10 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import includes from 'lodash';
 
 import { Context } from '../../../Provider.js';
 import UnitOption from './UnitOption/UnitOption.js';
 
-class GroupOption extends Component {
-
-    static contextType = Context;
+class GroupOption extends PureComponent {
 
     state = {
         active: false,
@@ -22,15 +20,15 @@ class GroupOption extends Component {
         return null;
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
-        if (this.state.hover !== nextState.hover) {
-            return true;
-        } else if (nextState.active !== this.state.active) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     if (this.state.hover !== nextState.hover) {
+    //         return true;
+    //     } else if (nextState.active !== this.state.active) {
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    // }
 
     toggleHover = () => {
         this.setState({
@@ -50,26 +48,35 @@ class GroupOption extends Component {
 
         let buttonStyle;
 
-        if (this.state.hover || this.state.active) {
+        if (this.state.hover) {
+            buttonStyle = {
+                boxShadow: "0px 0px 1px black",
+                backgroundColor: group.color,
+                fontWeight: 700
+            }
+        } else if (this.state.active) {
             buttonStyle = {
                 backgroundColor: group.color,
-                fontWeight: 700,
+                fontWeight: 700
             }
-        } else {
-            buttonStyle = { backgroundColor: "grey" }
+        }
+        else {
+            buttonStyle = {
+                backgroundColor: "grey"
+            }
         }
 
         return (
             <div className="unit-selection">
                 <div className='group-option' style={buttonStyle} key={group.name} onMouseOver={() => this.toggleHover()} onMouseLeave={() => this.toggleHover()} onClick={() => { this.toggleActive(); toggleGroup(groupUnits) }} >{formatFirstString(group.name)}</div>
-                <React.Fragment>
-                    {groupUnits.map(function (unit) {
-                        return <UnitOption unit={unit} key={unit} />
-                    })}
-                </React.Fragment>
+                {groupUnits.map(function (unit) {
+                    return <UnitOption unit={unit} key={unit} />
+                })}
             </div>
         );
     }
 }
+
+GroupOption.contextType = Context;
 
 export default GroupOption;

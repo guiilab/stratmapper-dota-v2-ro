@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Context } from '../../Provider.js'
+import { Context } from '../../../Provider.js'
 
 class EventOption extends Component {
 
@@ -10,6 +10,11 @@ class EventOption extends Component {
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
+        if (nextProps.selectedEventTypes.includes(nextProps.event.event_type)) {
+            return {
+                active: true
+            };
+        }
         if (!nextProps.selectedEventTypes.includes(nextProps.event.event_type)) {
             return {
                 active: false
@@ -18,15 +23,15 @@ class EventOption extends Component {
         return null;
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
-        if (nextState.active !== this.state.active) {
-            return true;
-        } else if (nextState.hover !== this.state.hover) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     if (nextState.active !== this.state.active) {
+    //         return true;
+    //     } else if (nextState.hover !== this.state.hover) {
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    // }
 
     toggleHover = () => {
         this.setState({
