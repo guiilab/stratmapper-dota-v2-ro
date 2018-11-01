@@ -482,8 +482,8 @@ class Provider extends Component {
                             })
                         })
                     } else {
-                        console.log('hello')
                         this.setState({
+                            brushRange: [],
                             brushActive: !this.state.brushActive,
                             selectedUnits: [...this.state.unitsAll],
                             selectedEventTypes: [...this.state.events.timeline]
