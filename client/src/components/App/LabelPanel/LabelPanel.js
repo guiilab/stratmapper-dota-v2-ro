@@ -28,7 +28,7 @@ class LabelPanel extends Component {
         let color;
 
         this.state.isOpen ? width = '400px' : width = '30px';
-        this.state.isOpen ? height = '200px' : height = '120px';
+        this.state.isOpen ? height = '170px' : height = '170px';
         this.state.isOpen ? opacity = 100 : opacity = 0;
         this.state.isOpen ? angle = '0deg' : angle = '270deg';
         this.state.isOpen ? color = 'coral' : color = 'green'
@@ -53,7 +53,7 @@ class LabelPanel extends Component {
             <div style={labelPanelStyle} className="label-panel" onClick={this.state.isOpen ? null : () => this.toggleOpen()}>
                 {this.state.isOpen ? null : <div style={labelHeaderStyle} className="label-header">Labels</div>}
                 <AddLabel isOpen={this.state.isOpen} opacity={opacity} />
-                <div style={closeButtonStyle} className="close-button" onClick={() => this.toggleOpen()}>{this.state.isOpen ? 'Close' : 'Open'}</div>
+                <div style={closeButtonStyle} className="close-button" onClick={() => this.toggleOpen()}>{this.state.isOpen ? 'x' : '+'}</div>
             </div >
         )
     }
