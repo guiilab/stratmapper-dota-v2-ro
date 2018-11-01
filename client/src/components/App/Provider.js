@@ -49,6 +49,7 @@ class Provider extends Component {
         icons: {},
         tooltips: {},
         activeNode: null,
+        activeLabel: null,
         statusEventsFilteredByUnit: {},
         minFactor: .93,
         maxFactor: 1.04,
@@ -446,7 +447,6 @@ class Provider extends Component {
                 },
 
                 updateBrushRange: (e) => {
-                    console.log(e)
                     this.setState({
                         brushRange: e
                     })
@@ -468,14 +468,15 @@ class Provider extends Component {
                     }
                 },
 
-                toggleLabelActive: (e, range, units, events) => {
+                toggleLabelActive: (e, range, units, events, labelId) => {
                     let brushRange = this.state.brushActive ? [] : [...range];
                     this.setState({
                         brushRange: brushRange,
                         brushActive: !this.state.brushActive,
                         selectedUnits: [...units],
-                        selectedEventTypes: [...events]
-                    })
+                        selectedEventTypes: [...events],
+                        activeLabel: labelId
+                    }, () => console.log(this.state.activeLabel))
                 },
 
                 //disable brush before match changes to destroy map data

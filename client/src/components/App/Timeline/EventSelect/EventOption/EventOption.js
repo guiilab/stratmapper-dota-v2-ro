@@ -23,16 +23,6 @@ class EventOption extends Component {
         return null;
     }
 
-    // shouldComponentUpdate(nextProps, nextState) {
-    //     if (nextState.active !== this.state.active) {
-    //         return true;
-    //     } else if (nextState.hover !== this.state.hover) {
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-    // }
-
     toggleHover = () => {
         this.setState({
             hover: !this.state.hover

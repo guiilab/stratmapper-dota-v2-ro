@@ -6,23 +6,29 @@ import { Context } from '../../../../Provider'
 class TimelineLabel extends Component {
     constructor(props) {
         super(props)
+        this.state = {
+            labelId: this.props.label.id,
+            hover: false,
+            active: false,
+        }
         this.renderTimelineLabels();
     }
 
-    state = {
-        hover: false,
-        active: false,
+    static getDerivedStateFromProps(nextProps, nextState) {
+        if (nextProps.state.activeLabel === null) {
+            return null
+        }
+        if (nextProps.state.activeLabel !== nextState.labelId) {
+            return {
+                active: false
+            }
+        }
+        return null;
     }
 
-    // static getDerivedStateFromProps(nextProps) {
-    //     if (nextProps.brushRange[0] !== this.props.label.timestamp_range[0]) {
-    //         this.props.toggleLabelActive('toggle', [])
-    //         return {
-    //             active: false
-    //         };
-    //     }
-    //     return null;
-    // }
+    componentDidMount() {
+        console.log(this.state.labelId)
+    }
 
     componentDidUpdate() {
         this.renderTimelineLabels();
@@ -39,10 +45,11 @@ class TimelineLabel extends Component {
         this.setState({
             active: !this.state.active
         }, () => {
+            console.log(`${label.behavior} is ${this.state.active}`)
             if (this.state.active) {
-                this.props.toggleLabelActive('toggle', [...label.timestamp_range], [...label.units], [...label.events])
+                this.props.toggleLabelActive('toggle', [...label.timestamp_range], [...label.units], [...label.events], label.id)
             } else {
-                this.props.toggleLabelActive('toggle', [], [...this.props.state.unitsAll], [...this.props.state.events.timeline])
+                this.props.toggleLabelActive('toggle', [], [...this.props.state.unitsAll], [...this.props.state.events.timeline], null)
             }
         })
     }
