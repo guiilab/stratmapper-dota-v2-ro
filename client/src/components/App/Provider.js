@@ -468,15 +468,26 @@ class Provider extends Component {
                     }
                 },
 
-                toggleLabelActive: (e, range, units, events, labelId) => {
-                    let brushRange = this.state.brushActive ? [] : [...range];
-                    this.setState({
-                        brushRange: brushRange,
-                        brushActive: !this.state.brushActive,
-                        selectedUnits: [...units],
-                        selectedEventTypes: [...events],
-                        activeLabel: labelId
-                    }, () => console.log(this.state.activeLabel))
+                changeLabel: (label) => {
+                    if (label !== null) {
+                        this.setState({
+                            activeLabel: label.id
+                        }, () => {
+                            this.setState({
+                                brushRange: [Math.round(label.timestamp_range[0]), Math.round(label.timestamp_range[1])],
+                                brushActive: !this.state.brushActive,
+                                selectedUnits: [...label.units],
+                                selectedEventTypes: [...label.events],
+                                activeLabel: label.id
+                            })
+                        })
+                    } else {
+                        this.setState({
+                            brushActive: !this.state.brushActive,
+                            selectedUnits: [this.state.unitsAll],
+                            selectedEventTypes: [...this.state.events.timeline]
+                        })
+                    }
                 },
 
                 //disable brush before match changes to destroy map data

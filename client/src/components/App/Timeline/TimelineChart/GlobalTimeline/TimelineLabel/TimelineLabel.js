@@ -14,17 +14,17 @@ class TimelineLabel extends Component {
         this.renderTimelineLabels();
     }
 
-    static getDerivedStateFromProps(nextProps, nextState) {
-        if (nextProps.state.activeLabel === null) {
-            return null
-        }
-        if (nextProps.state.activeLabel !== nextState.labelId) {
-            return {
-                active: false
-            }
-        }
-        return null;
-    }
+    // static getDerivedStateFromProps(nextProps, nextState) {
+    //     if (nextProps.state.activeLabel === null) {
+    //         return null
+    //     }
+    //     if (nextProps.state.activeLabel !== nextState.labelId) {
+    //         return {
+    //             active: false
+    //         }
+    //     }
+    //     return null;
+    // }
 
     componentDidMount() {
         console.log(this.state.labelId)
@@ -45,11 +45,10 @@ class TimelineLabel extends Component {
         this.setState({
             active: !this.state.active
         }, () => {
-            console.log(`${label.behavior} is ${this.state.active}`)
             if (this.state.active) {
-                this.props.toggleLabelActive('toggle', [...label.timestamp_range], [...label.units], [...label.events], label.id)
+                this.props.changeLabel(label)
             } else {
-                this.props.toggleLabelActive('toggle', [], [...this.props.state.unitsAll], [...this.props.state.events.timeline], null)
+                this.props.changeLabel(null)
             }
         })
     }
