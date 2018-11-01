@@ -373,6 +373,7 @@ class Provider extends Component {
                             id: Math.floor(Math.random() * 1000000000),
                             behavior: label.behavior,
                             author: 'andy',
+                            timestamp_range: [...this.state.brushRange],
                             description: label.description,
                             events: this.state.selectedEventTypes,
                             units: this.state.selectedUnits,
