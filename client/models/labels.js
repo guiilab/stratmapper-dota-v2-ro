@@ -9,11 +9,11 @@ var LabelSchema = new Schema({
     },
     behavior: {
         type: String,
-        required: true
+        required: false
     },
     author: {
         type: String,
-        required: true
+        required: false
     },
     description: {
         type: String,
