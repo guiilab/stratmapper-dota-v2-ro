@@ -115,7 +115,7 @@ class TimelineChart extends PureComponent {
                     chartWidth={this.state.width}
                     timestampRange={timestampRange}
                 /> */}
-                <svg width="100%" height="100%" ref="svg" className="timeline-svg-scatter">
+                <svg width="100%" height="100%" ref="svg" className="timeline-svg-scatter" pointerEvents="none">
 
                     <AxisLines
                         events={events.timeline}
