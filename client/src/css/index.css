@@ -388,7 +388,7 @@ h3 {
 .global-timeline-container {
     height: 30px;
     border: 1px solid black;
-    border-bottom: 3px solid black;
+    border-bottom: 3px solid grey;
     position: absolute;
     top: -34px;
     background-color: lightgrey;

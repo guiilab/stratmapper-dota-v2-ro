@@ -54,9 +54,22 @@ class TimelineLabel extends Component {
         }
     }
 
+    rescaleX2 = (x) => {
+        let { zoomTransform } = this.props;
+        let range = x.range().map(zoomTransform.invertX, zoomTransform);
+        let domain = range.map(x.invert, x);
+        console.log(`Domain: ${domain}`)
+        console.log(`Range: ${range}`)
+        return x.copy().domain(domain);
+    }
+
     renderTimelineLabels = () => {
-        const { zoomTransform, chartWidth } = this.props;
+        const { zoomTransform, chartWidth, label } = this.props;
         const { timestampRange } = this.props.state;
+
+        this.xScaleTimeInvert = scaleLinear()
+            .domain([0, timestampRange.end - timestampRange.start])
+            .range([0, chartWidth])
 
         this.xScaleTime = scaleLinear()
             .domain([timestampRange.start, timestampRange.end])
@@ -64,22 +77,15 @@ class TimelineLabel extends Component {
 
         if (zoomTransform) {
             this.xScaleTime.domain(zoomTransform.rescaleX(this.xScaleTime).domain());
+            // this.xScaleTimeInvert.domain(zoomTransform.rescaleX(this.xScaleTimeInvert).domain());
         }
     }
 
-    xScaleTimeInvert = (x) => {
-        const { chartWidth } = this.props;
-        const { timestampRange } = this.props.state;
-        let scale = scaleLinear()
-            .domain([0, timestampRange.end - timestampRange.start])
-            .range([0, chartWidth])
-        return scale(x)
-    }
-
     render() {
-        const { label } = this.props;
+        const { label, zoomTransform } = this.props;
 
         let labelPosX = label.timestamp_range[0];
+
         let diff = label.timestamp_range[1] - label.timestamp_range[0]
 
         let color;
@@ -90,7 +96,7 @@ class TimelineLabel extends Component {
                 <rect
                     description={label.description}
                     id={label.id}
-                    width={this.xScaleTimeInvert(diff)}
+                    width={zoomTransform ? this.xScaleTimeInvert(diff * zoomTransform.k) : this.xScaleTimeInvert(diff)}
                     height="30"
                     y={0}
                     x={this.xScaleTime(labelPosX)}
