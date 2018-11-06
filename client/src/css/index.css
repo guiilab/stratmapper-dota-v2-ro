@@ -164,17 +164,6 @@ h3 {
     margin: .5rem 0;
 }
 
-.label-delete {
-    position: absolute;
-    right: 3px;
-    top: 3px;
-    border: 1px solid black;
-    padding: .1rem .3rem;
-    background-color: red;
-    font-size: .8rem;
-    cursor: pointer;
-}
-
 .close-button {
     position: absolute;
     text-align: center;
@@ -397,11 +386,35 @@ h3 {
 }
 
 .global-timeline-container {
-    height: 60px;
+    height: 30px;
     border: 1px solid black;
+    border-bottom: 3px solid black;
     position: absolute;
-    top: -65px;
+    top: -34px;
     background-color: lightgrey;
+}
+
+.context-menu-container {
+    position: absolute;
+    max-width: 400px;
+    max-height: 200px;
+    border: black solid 1px;
+    background-color: grey;
+    bottom: 35px;
+    padding: 1rem;
+    overflow: normal;
+    transition: visibility 0s, opacity 0.1s linear;
+}
+
+.label-delete {
+    position: relative;
+    display: inline-block;
+    margin-top: 1rem;
+    border: 1px solid black;
+    padding: .1rem .3rem;
+    background-color: red;
+    font-size: .8rem;
+    cursor: pointer;
 }
 
 .timeline-label {
@@ -454,7 +467,7 @@ h3 {
 .x-axis-svg {
     position: absolute;
     width: 100%;
-    top: -83px;
+    top: -52px;
     height: 20px;
     color: white;
 }

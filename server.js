@@ -111,10 +111,6 @@ app.post('/api/delete-label', function (req, res) {
         }).remove().exec()
 })
 
-setInterval(function () {
-    http.get("https://polar-forest-80084.herokuapp.com/");
-}, 1740000);
-
 if (process.env.NODE_ENV === 'production') {
 
     // Serve any static files

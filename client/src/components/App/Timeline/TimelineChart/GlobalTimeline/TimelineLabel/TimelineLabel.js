@@ -9,7 +9,7 @@ class TimelineLabel extends Component {
         this.state = {
             labelId: this.props.label.id,
             hover: false,
-            active: false,
+            active: false
         }
         this.renderTimelineLabels();
     }
@@ -26,10 +26,6 @@ class TimelineLabel extends Component {
     //     return null;
     // }
 
-    componentDidMount() {
-        console.log(this.state.labelId)
-    }
-
     componentDidUpdate() {
         this.renderTimelineLabels();
     }
@@ -40,17 +36,22 @@ class TimelineLabel extends Component {
         })
     }
 
-    toggleActive = () => {
-        const { label } = this.props;
-        this.setState({
-            active: !this.state.active
-        }, () => {
-            if (this.state.active) {
-                this.props.changeLabel(label)
-            } else {
-                this.props.changeLabel(null)
-            }
-        })
+    handleClick = (e) => {
+        e.preventDefault()
+        const { label, toggleContextMenu } = this.props;
+        if (e.nativeEvent.which === 1) {
+            this.setState({
+                active: !this.state.active
+            }, () => {
+                if (this.state.active) {
+                    this.props.changeLabel(label)
+                } else {
+                    this.props.changeLabel(null)
+                }
+            })
+        } else if (e.nativeEvent.which === 3) {
+            toggleContextMenu(e)
+        }
     }
 
     renderTimelineLabels = () => {
@@ -87,14 +88,17 @@ class TimelineLabel extends Component {
         return (
             <g>
                 <rect
+                    description={label.description}
+                    id={label.id}
                     width={this.xScaleTimeInvert(diff)}
-                    height="20"
-                    y={5}
+                    height="30"
+                    y={0}
                     x={this.xScaleTime(labelPosX)}
                     className="timeline-label"
                     fill='grey'
                     pointerEvents='all'
-                    onClick={() => this.toggleActive()}
+                    onClick={(e) => this.handleClick(e)}
+                    onContextMenu={(e) => this.handleClick(e)}
                     onMouseOver={() => this.toggleHover()}
                     onMouseOut={() => this.toggleHover()}
                     stroke={color}
@@ -104,9 +108,9 @@ class TimelineLabel extends Component {
                 <text
                     x={this.xScaleTime(labelPosX) + 10}
                     fontFamily="Verdana"
-                    fontSize="10"
+                    fontSize="12"
                     fill="white"
-                    y="17"
+                    y="20"
                     pointerEvents="none"
                 >
                     {label.behavior}
