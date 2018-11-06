@@ -80,9 +80,7 @@ app.post('/api/events', function (req, res) {
 
 app.post('/api/labels', function (req, res) {
     return LabelModel
-        .find({
-            author: req.body.author
-        })
+        .find()
         .exec(function (err, label) {
             return res.send(label)
         })
@@ -93,7 +91,7 @@ app.post('/api/add-label', function (req, res) {
         .create({
             id: req.body.id,
             behavior: req.body.behavior,
-            author: 'andy',
+            author: req.body.author,
             description: req.body.description,
             timestamp_range: req.body.timestamp_range,
             events: req.body.events,

@@ -34,10 +34,12 @@ class AddLabel extends Component {
                 <textarea className="label-input textarea" data-label="description" placeholder="Description" value={this.state.description} onChange={(e) => this.handleChange(e)} />
                 <div
                     className="add-label-button"
-                    onClick={() => {
-                        this.props.addLabel(this.state)
-                        this.clearData()
-                    }
+                    onClick={(() => {
+                        let response = this.props.addLabel(this.state)
+                        if (response !== 'failure') {
+                            this.clearData()
+                        }
+                    })
                     }>Add Label</div>
             </div>
         )

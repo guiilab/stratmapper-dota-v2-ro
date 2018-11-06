@@ -269,9 +269,9 @@ class Provider extends Component {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
-                author: 'andy'
-            })
+            // body: JSON.stringify({
+            //     author: 'andy'
+            // })
         });
         const body = await response.json();
 
@@ -364,6 +364,15 @@ class Provider extends Component {
                 },
 
                 addLabel: (label) => {
+                    if (this.state.brushRange.length === 0) {
+                        alert('Please make a brush selection.')
+                        return 'failure';
+                    } else if (!((label.behavior) && (label.author) && (label.description))) {
+                        alert('Please fill in all fields.')
+                        return 'failure';
+                    }
+                    let event_ids = [];
+                    this.state.unitEventsFiltered.forEach((event) => event_ids.push(event.node_id))
                     return fetch('api/add-label', {
                         method: 'POST',
                         headers: {
@@ -373,12 +382,12 @@ class Provider extends Component {
                         body: JSON.stringify({
                             id: Math.floor(Math.random() * 1000000000),
                             behavior: label.behavior,
-                            author: 'andy',
+                            author: label.author,
                             timestamp_range: [...this.state.brushRange],
                             description: label.description,
                             events: this.state.selectedEventTypes,
                             units: this.state.selectedUnits,
-                            event_ids: [1, 2, 3, 4, 5, 6]
+                            event_ids: event_ids
                         })
                     }).then(this.getLabels().then(res => this.loadLabels(res)))
                 },

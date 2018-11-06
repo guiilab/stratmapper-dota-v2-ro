@@ -16,7 +16,7 @@ class GlobalTimeline extends PureComponent {
             contextPosX: e.target.getAttribute('x'),
             description: e.target.getAttribute('description'),
             id: e.target.getAttribute('id')
-        }, () => console.log(this.state.label))
+        })
     }
 
     render() {

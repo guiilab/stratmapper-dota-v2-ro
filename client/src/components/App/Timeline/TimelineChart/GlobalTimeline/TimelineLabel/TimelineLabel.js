@@ -14,18 +14,6 @@ class TimelineLabel extends Component {
         this.renderTimelineLabels();
     }
 
-    // static getDerivedStateFromProps(nextProps, nextState) {
-    //     if (nextProps.state.activeLabel === null) {
-    //         return null
-    //     }
-    //     if (nextProps.state.activeLabel !== nextState.labelId) {
-    //         return {
-    //             active: false
-    //         }
-    //     }
-    //     return null;
-    // }
-
     componentDidUpdate() {
         this.renderTimelineLabels();
     }
@@ -54,15 +42,6 @@ class TimelineLabel extends Component {
         }
     }
 
-    rescaleX2 = (x) => {
-        let { zoomTransform } = this.props;
-        let range = x.range().map(zoomTransform.invertX, zoomTransform);
-        let domain = range.map(x.invert, x);
-        console.log(`Domain: ${domain}`)
-        console.log(`Range: ${range}`)
-        return x.copy().domain(domain);
-    }
-
     renderTimelineLabels = () => {
         const { zoomTransform, chartWidth, label } = this.props;
         const { timestampRange } = this.props.state;
@@ -85,7 +64,6 @@ class TimelineLabel extends Component {
         const { label, zoomTransform } = this.props;
 
         let labelPosX = label.timestamp_range[0];
-
         let diff = label.timestamp_range[1] - label.timestamp_range[0]
 
         let color;
