@@ -25,9 +25,12 @@ class TimelineLabel extends Component {
     }
 
     handleClick = (e) => {
-        e.preventDefault()
+        e.preventDefault();
+        e.stopPropagation();
         const { label, toggleContextMenu } = this.props;
-        if (e.nativeEvent.which === 1) {
+        if (e.ctrlKey) {
+            toggleContextMenu(e)
+        } else if (e.nativeEvent.which === 1) {
             this.setState({
                 active: !this.state.active
             }, () => {
@@ -73,6 +76,7 @@ class TimelineLabel extends Component {
             <g>
                 <rect
                     description={label.description}
+                    author={label.author}
                     id={label.id}
                     width={zoomTransform ? this.xScaleTimeInvert(diff * zoomTransform.k) : this.xScaleTimeInvert(diff)}
                     height="30"
@@ -97,7 +101,7 @@ class TimelineLabel extends Component {
                     y="20"
                     pointerEvents="none"
                 >
-                    {label.behavior}
+                    {label.title}
                 </text>
             </g>
         );

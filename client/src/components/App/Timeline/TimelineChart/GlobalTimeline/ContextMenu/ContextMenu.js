@@ -25,6 +25,7 @@ class ContextMenu extends PureComponent {
     }
 
     render() {
+        const { toggleContextMenu } = this.props;
 
         let visibility = this.props.active ? 'visible' : 'hidden';
         let opacity = this.props.active ? '1' : '0';
@@ -37,7 +38,9 @@ class ContextMenu extends PureComponent {
         }
         return (
             <div style={contextMenuStyle} className="context-menu-container">
+                <div onClick={toggleContextMenu} className="label-close-button">X</div>
                 <div>{this.props.description}</div>
+                <div>{this.props.author}</div>
                 <div onClick={this.handleClick} className="label-delete">Delete</div>
             </div>
         );

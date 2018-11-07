@@ -7,7 +7,7 @@ var LabelSchema = new Schema({
         type: String,
         required: true
     },
-    behavior: {
+    title: {
         type: String,
         required: false
     },

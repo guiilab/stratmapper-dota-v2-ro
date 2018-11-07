@@ -12,7 +12,7 @@ class Label extends Component {
 
         return (
             <div style={labelStyle} className="label">
-                <div className="label-title">{label.behavior}</div>
+                <div className="label-title">{label.title}</div>
                 <div className="label-description">{label.description}</div>
                 <div className="label-delete" onClick={() => this.props.deleteLabel(label.id)}>Delete</div>
             </div>

@@ -90,7 +90,7 @@ app.post('/api/add-label', function (req, res) {
     LabelModel
         .create({
             id: req.body.id,
-            behavior: req.body.behavior,
+            title: req.body.title,
             author: req.body.author,
             description: req.body.description,
             timestamp_range: req.body.timestamp_range,

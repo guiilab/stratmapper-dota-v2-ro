@@ -11,12 +11,19 @@ class GlobalTimeline extends PureComponent {
     }
 
     toggleContextMenu = (e) => {
-        this.setState({
-            contextMenuActive: !this.state.contextMenuActive,
-            contextPosX: e.target.getAttribute('x'),
-            description: e.target.getAttribute('description'),
-            id: e.target.getAttribute('id')
-        })
+        if (!this.state.contextMenuActive) {
+            this.setState({
+                contextMenuActive: true,
+                contextPosX: e.target.getAttribute('x'),
+                description: e.target.getAttribute('description'),
+                id: e.target.getAttribute('id'),
+                author: e.target.getAttribute('author')
+            })
+        } else {
+            this.setState({
+                contextMenuActive: false
+            })
+        }
     }
 
     render() {
@@ -33,7 +40,9 @@ class GlobalTimeline extends PureComponent {
                     active={this.state.contextMenuActive}
                     posX={`${this.state.contextPosX}px`}
                     description={this.state.description}
+                    author={this.state.author}
                     id={this.state.id}
+                    toggleContextMenu={this.toggleContextMenu}
                 />
                 <svg width="100%" height="100%">
                     {labels ? labels.map((label) => {
