@@ -79,9 +79,8 @@ app.post('/api/events', function (req, res) {
 })
 
 app.post('/api/labels', function (req, res) {
-    return LabelModel
-        .find()
-        .exec(function (err, label) {
+    LabelModel
+        .find({}, function (err, label) {
             return res.send(label)
         })
 })
@@ -97,16 +96,20 @@ app.post('/api/add-label', function (req, res) {
             events: req.body.events,
             units: req.body.units,
             event_ids: [1, 2, 3, 4, 5, 6]
-        }, function (err) {
+        }, function (err, label) {
             if (err) return handleError(err)
+            return res.send(label)
         })
 })
 
 app.post('/api/delete-label', function (req, res) {
     LabelModel
-        .find({
+        .deleteOne({
             id: req.body.id
-        }).remove().exec()
+        }, function (err, label) {
+            if (err) return handleError(err);
+            return res.send(label)
+        })
 })
 
 if (process.env.NODE_ENV === 'production') {

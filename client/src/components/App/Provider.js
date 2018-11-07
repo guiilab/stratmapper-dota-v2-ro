@@ -269,22 +269,15 @@ class Provider extends Component {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            // body: JSON.stringify({
-            //     author: 'andy'
-            // })
         });
         const body = await response.json();
 
         if (response.status !== 200) {
             throw Error(body.message)
         }
-        return body
-    }
-
-    loadLabels = (data) => {
         this.setState({
-            labels: [...data]
-        })
+            labels: [...body]
+        }, () => console.log(this.state.labels))
     }
 
     setGroupState = (d, unit) => {
@@ -360,7 +353,7 @@ class Provider extends Component {
                 },
 
                 getLoadLabels: () => {
-                    this.getLabels().then(res => this.loadLabels(res))
+                    this.getLabels()
                 },
 
                 addLabel: (label) => {
@@ -373,7 +366,8 @@ class Provider extends Component {
                     }
                     let event_ids = [];
                     this.state.unitEventsFiltered.forEach((event) => event_ids.push(event.node_id))
-                    return fetch('api/add-label', {
+
+                    fetch('api/add-label', {
                         method: 'POST',
                         headers: {
                             'Accept': 'application/json',
@@ -389,20 +383,9 @@ class Provider extends Component {
                             units: this.state.selectedUnits,
                             event_ids: event_ids
                         })
-                    }).then(this.getLabels().then(res => this.loadLabels(res)))
-                },
+                    })
 
-                deleteLabel: (id) => {
-                    return fetch('api/delete-label', {
-                        method: 'POST',
-                        headers: {
-                            'Accept': 'application/json',
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            id: id
-                        })
-                    }).then(this.getLabels().then(res => this.loadLabels(res)))
+                    this.getLabels()
                 },
 
                 toggleSelectedUnit: (unit) => {

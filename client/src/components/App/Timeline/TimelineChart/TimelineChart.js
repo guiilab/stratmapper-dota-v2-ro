@@ -6,7 +6,6 @@ import { Context } from '../../Provider.js'
 import Scatterplot from './../Scatterplot/Scatterplot.js';
 import XAxis from './../XAxis/XAxis.js';
 import AxisLines from './../AxisLines/AxisLines.js';
-// import Drag from './../Drag/Drag.js';
 import Brush from './../Brush/Brush.js';
 import GlobalTimeline from './GlobalTimeline/GlobalTimeline.js';
 
@@ -98,7 +97,6 @@ class TimelineChart extends PureComponent {
         }
 
         return (
-            // <div className="timeline-chart" onMouseDown={() => this.toggleClick()} onMouseUp={() => this.toggleClick()} onMouseMove={this.state.clicked ? (e) => this.drag(e) : null} ref={this.chart} style={heightStyle} onKeyDown={(e) => toggleBrushActive(e)} onKeyUp={(e) => toggleBrushActive(e)} tabIndex="0">
             <div className="timeline-chart" ref={this.chart} style={heightStyle} onKeyDown={(e) => toggleBrushActive(e)} onKeyUp={(e) => toggleBrushActive(e)} tabIndex="0">
 
                 <XAxis
@@ -110,11 +108,6 @@ class TimelineChart extends PureComponent {
                     chartWidth={this.state.width}
                     zoomTransform={this.state.zoomTransform}
                 />
-                {/* <Drag
-                    updateBrushRange={this.props.updateBrushRange}
-                    chartWidth={this.state.width}
-                    timestampRange={timestampRange}
-                /> */}
                 <svg width="100%" height="100%" ref="svg" className="timeline-svg-scatter">
 
                     <AxisLines
