@@ -17,7 +17,8 @@ class GlobalTimeline extends PureComponent {
                 contextPosX: e.target.getAttribute('x'),
                 description: e.target.getAttribute('description'),
                 id: e.target.getAttribute('id'),
-                author: e.target.getAttribute('author')
+                author: e.target.getAttribute('author'),
+                title: e.target.getAttribute('title')
             })
         } else {
             this.setState({
@@ -37,6 +38,7 @@ class GlobalTimeline extends PureComponent {
         return (
             <div style={globalTimelineStyle} className="global-timeline-container">
                 <ContextMenu
+                    title={this.state.title}
                     active={this.state.contextMenuActive}
                     posX={`${this.state.contextPosX}px`}
                     description={this.state.description}

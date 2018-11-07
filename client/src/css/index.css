@@ -159,7 +159,6 @@ h3 {
 .label-description {
     display: block;
     font-size: .8rem;
-    max-height: 50px;
     overflow: auto;
     margin: .5rem 0;
 }
@@ -397,24 +396,32 @@ h3 {
 .context-menu-container {
     position: absolute;
     max-width: 400px;
-    max-height: 200px;
+    max-height: 300px;
     border: black solid 1px;
     background-color: grey;
     bottom: 35px;
-    padding: 1rem;
-    overflow: normal;
+    padding: .7rem;
     transition: visibility 0s, opacity 0.1s linear;
 }
 
-.label-delete {
-    position: relative;
+.label-delete, .label-close-button {
+    position: absolute;
     display: inline-block;
-    margin-top: 1rem;
     border: 1px solid black;
     padding: .1rem .3rem;
-    background-color: red;
     font-size: .8rem;
+    top: -20px;
     cursor: pointer;
+}
+
+.label-delete {
+    background-color: red;
+    right: 43px;
+}
+
+.label-close-button {
+    right: -1px;
+    background-color: coral;
 }
 
 .timeline-label {
@@ -422,17 +429,20 @@ h3 {
     cursor: pointer;
 }
 
-.label-close-button {
-    padding: .3rem;
-    background-color: coral;
-    text-align: center;
-    position: absolute;
-    width: 15px;
-    right: -26px;
-    top: -1px;
-    border: 1px solid black;
-    pointer-events: all;
-    cursor: pointer;
+.label-title-container {
+    margin: 0;
+}
+
+.label-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    display: inline-block;
+    margin-right: .5rem;
+}
+
+.label-author {
+    font-style: italic;
+    display: inline-block;
 }
 
 .event-select-container {

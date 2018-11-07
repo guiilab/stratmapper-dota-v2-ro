@@ -38,10 +38,14 @@ class ContextMenu extends PureComponent {
         }
         return (
             <div style={contextMenuStyle} className="context-menu-container">
-                <div onClick={toggleContextMenu} className="label-close-button">X</div>
-                <div>{this.props.description}</div>
-                <div>{this.props.author}</div>
+                <div onClick={toggleContextMenu} className="label-close-button">Close</div>
                 <div onClick={this.handleClick} className="label-delete">Delete</div>
+                <div className="label-title-container">
+                    <div className="label-title">{this.props.title}</div>
+                    <div className="label-author">{this.props.author}</div>
+                </div>
+                <div className="label-description">{this.props.description}</div>
+
             </div>
         );
     }

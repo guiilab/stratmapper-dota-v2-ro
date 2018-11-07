@@ -75,6 +75,7 @@ class TimelineLabel extends Component {
         return (
             <g>
                 <rect
+                    title={label.title}
                     description={label.description}
                     author={label.author}
                     id={label.id}

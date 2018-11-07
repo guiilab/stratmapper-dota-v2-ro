@@ -367,7 +367,7 @@ class Provider extends Component {
                     if (this.state.brushRange.length === 0) {
                         alert('Please make a brush selection.')
                         return 'failure';
-                    } else if (!((label.behavior) && (label.author) && (label.description))) {
+                    } else if (!((label.title) && (label.author) && (label.description))) {
                         alert('Please fill in all fields.')
                         return 'failure';
                     }
@@ -381,7 +381,7 @@ class Provider extends Component {
                         },
                         body: JSON.stringify({
                             id: Math.floor(Math.random() * 1000000000),
-                            behavior: label.behavior,
+                            title: label.title,
                             author: label.author,
                             timestamp_range: [...this.state.brushRange],
                             description: label.description,
