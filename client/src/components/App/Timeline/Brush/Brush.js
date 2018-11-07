@@ -14,27 +14,35 @@ class Brush extends Component {
         this.renderBrush();
     }
 
-    componentDidUpdate(nextProps) {
+    componentDidUpdate() {
         this.updateBrush();
     }
 
-    xScaleTimeInvert = (x) => {
+    renderBrush = () => {
         const { timestampRange, chartWidth } = this.props;
-        let scale = scaleLinear()
+        let brushStart;
+        let brushEnd;
+
+        this.xScaleTime = scaleLinear()
             .domain([timestampRange.start, timestampRange.end])
             .range([0, chartWidth])
-        return scale(x)
-    }
 
-    renderBrush = () => {
         if (this.context.state.brushRange.length === 0) {
-            this.context.updateBrushRange([200, 400])
+            brushStart = timestampRange.start;
+            brushEnd = timestampRange.start + (timestampRange.end - timestampRange.start);
+            select(this.refs.brush)
+                .call(this.brush)
+                .call(this.brush.move, [brushStart, brushEnd])
+            // this.context.updateBrushRange([brushStart, brushEnd])
+
+        } else {
+            brushStart = this.xScaleTime(this.context.state.brushRange[0])
+            brushEnd = this.xScaleTime(this.context.state.brushRange[1])
+            select(this.refs.brush)
+                .call(this.brush)
+                .call(this.brush.move, [brushStart, brushEnd])
+            // this.context.updateBrushRange([brushStart, brushEnd])
         }
-        let brushStart = this.xScaleTimeInvert(this.context.state.brushRange[0])
-        let brushEnd = this.xScaleTimeInvert(this.context.state.brushRange[1])
-        select(this.refs.brush)
-            .call(this.brush)
-            .call(this.brush.move, [brushStart, brushEnd])
     }
 
     updateBrush = () => {
@@ -43,26 +51,22 @@ class Brush extends Component {
     }
 
     brushed = () => {
-        const { timestampRange, chartWidth, zoomTransform } = this.props;
-
-        const xScaleTime = scaleLinear()
-            .domain([timestampRange.start, timestampRange.end])
-            .range([0, chartWidth])
+        const { zoomTransform } = this.props;
 
         let s;
 
         if (event.selection) {
             s = event.selection;
         } else {
-            s = [xScaleTime(this.context.state.brushRange[0]), xScaleTime(this.context.state.brushRange[1])];
+            s = [this.xScaleTime(this.context.state.brushRange[0]), this.xScaleTime(this.context.state.brushRange[1])];
         }
 
         if (zoomTransform) {
-            console.log(zoomTransform)
-            const newXScale = zoomTransform.rescaleX(xScaleTime)
+            console.log('zoom')
+            const newXScale = zoomTransform.rescaleX(this.xScaleTime)
             this.context.updateBrushRange([newXScale.invert(s[0]), newXScale.invert(s[1])])
         } else if (!(isNaN(s[0]))) {
-            this.context.updateBrushRange([xScaleTime.invert(s[0]), xScaleTime.invert(s[1])])
+            this.context.updateBrushRange([this.xScaleTime.invert(s[0]), this.xScaleTime.invert(s[1])])
         }
     }
 
