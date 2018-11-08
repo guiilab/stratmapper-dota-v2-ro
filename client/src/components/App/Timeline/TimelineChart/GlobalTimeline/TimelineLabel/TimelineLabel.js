@@ -14,15 +14,6 @@ class TimelineLabel extends Component {
         this.renderTimelineLabels();
     }
 
-    static getDerivedStateFromProps(nextProps, prevState) {
-        if (nextProps.state.activeLabel === prevState.labelId) {
-            return {
-                active: true
-            }
-        }
-        return null
-    }
-
     componentDidUpdate() {
         this.renderTimelineLabels();
     }
@@ -36,6 +27,12 @@ class TimelineLabel extends Component {
     handleClick = (e) => {
         e.preventDefault();
         e.stopPropagation();
+        const isAnotherLabelActive = this.checkActiveLabel()
+        if (isAnotherLabelActive) {
+            alert('Please deactivate current label before selecting another one.')
+            return
+        }
+
         const { label, toggleContextMenu } = this.props;
         if (e.ctrlKey) {
             toggleContextMenu(e)
@@ -54,8 +51,17 @@ class TimelineLabel extends Component {
         }
     }
 
+    checkActiveLabel = () => {
+        const { activeLabel } = this.props.state;
+        if ((activeLabel) && (activeLabel !== this.state.labelId)) {
+            return true
+        } else {
+            return false
+        }
+    }
+
     renderTimelineLabels = () => {
-        const { zoomTransform, chartWidth, label } = this.props;
+        const { zoomTransform, chartWidth } = this.props;
         const { timestampRange } = this.props.state;
 
         this.xScaleTimeInvert = scaleLinear()

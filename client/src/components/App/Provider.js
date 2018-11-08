@@ -258,7 +258,7 @@ class Provider extends Component {
         return unitEventsFiltered.filter(event => (this.state.selectedEventTypes.includes(event.event_type)))
     }
 
-    getLabels = async () => {
+    getLabels = async (id) => {
         const response = await fetch('/api/labels', {
             method: 'POST',
             headers: {
@@ -274,14 +274,16 @@ class Provider extends Component {
         if (response.status !== 200) {
             throw Error(body.message)
         }
-
-        return body
-    }
-
-    loadLabels = (data) => {
-        this.setState({
-            labels: [...data]
-        })
+        if (id) {
+            this.setState({
+                activeLabel: id,
+                labels: [...body]
+            })
+        } else {
+            this.setState({
+                labels: [...body]
+            })
+        }
     }
 
     setGroupState = (d, unit) => {
@@ -357,7 +359,7 @@ class Provider extends Component {
                 },
 
                 getLoadLabels: () => {
-                    this.getLabels().then(res => this.loadLabels(res))
+                    this.getLabels()
                 },
 
                 addLabel: (label) => {
@@ -387,11 +389,7 @@ class Provider extends Component {
                             units: this.state.selectedUnits,
                             event_ids: event_ids
                         })
-                    })
-                        .then(this.getLabels())
-                        .then(() => this.setState({
-                            activeLabel: id
-                        }))
+                    }).then(this.getLabels(id))
                 },
 
                 toggleSelectedUnit: (unit) => {
@@ -464,7 +462,6 @@ class Provider extends Component {
                 toggleBrushActive: (e, range) => {
                     if ((e.shiftKey) || (e === 'toggle')) {
                         if (range) {
-                            let brushRange = range
                             this.setState({
                                 brushRange: range,
                                 brushActive: !this.state.brushActive
@@ -493,6 +490,7 @@ class Provider extends Component {
                         })
                     } else {
                         this.setState({
+                            activeLabel: null,
                             brushRange: [],
                             brushActive: false,
                             selectedUnits: [...this.state.unitsAll],

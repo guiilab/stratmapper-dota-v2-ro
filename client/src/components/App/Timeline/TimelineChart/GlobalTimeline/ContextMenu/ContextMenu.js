@@ -4,7 +4,7 @@ import { Context } from '../../../../Provider.js'
 
 class ContextMenu extends PureComponent {
 
-    handleClick = (e) => {
+    handleClick = () => {
         const response = window.confirm('Are you sure you want to delete this label?')
         if (response === true) {
             this.deleteLabel(this.props.id)
@@ -21,7 +21,7 @@ class ContextMenu extends PureComponent {
             body: JSON.stringify({
                 id: id
             })
-        }).then((res) => {
+        }).then(() => {
             this.context.getLoadLabels()
             this.context.changeLabel(null)
             this.props.toggleContextMenu()

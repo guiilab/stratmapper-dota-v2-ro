@@ -55,7 +55,7 @@ class Map extends PureComponent {
 
     render() {
         const { xScale, yScale } = this.props;
-        const { brushRange, selectedUnits, icons, brushActive, windowSettings, unitEventsFiltered, mapLoading } = this.props.state;
+        const { brushRange, selectedUnits, icons, windowSettings, unitEventsFiltered } = this.props.state;
 
         const mapContainerStyle = {
             width: windowSettings.width,
