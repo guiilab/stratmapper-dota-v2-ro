@@ -446,9 +446,10 @@ h3 {
 }
 
 .event-select-container {
-    width: 12%;
-    min-width: 120px;
+    width: 11.9%;
+    min-width: 120px !important;
     background-color: grey;
+    border-right: 1px solid black;
     height: 250px;
     position: relative;
     float: left;
