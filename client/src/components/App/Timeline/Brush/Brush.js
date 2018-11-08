@@ -14,8 +14,12 @@ class Brush extends Component {
         this.renderBrush();
     }
 
-    componentDidUpdate() {
-        this.updateBrush();
+    componentDidUpdate(nextProps) {
+        if (!this.props.zoomTransform) {
+            this.updateBrush();
+        } else if (nextProps.zoomTransform !== this.props.zoomTransform) {
+            this.renderBrush()
+        }
     }
 
     renderBrush = () => {
@@ -65,6 +69,7 @@ class Brush extends Component {
         } else {
             this.context.updateBrushRange([this.xScaleTime.invert(s[0]), this.xScaleTime.invert(s[1])])
         }
+        // this.context.updateBrushRange([this.xScaleTime.invert(s[0]), this.xScaleTime.invert(s[1])])
     }
 
     render() {
