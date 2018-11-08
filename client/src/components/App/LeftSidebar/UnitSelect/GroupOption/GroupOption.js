@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import includes from 'lodash';
 
 import { Context } from '../../../Provider.js';
 import UnitOption from './UnitOption/UnitOption.js';
