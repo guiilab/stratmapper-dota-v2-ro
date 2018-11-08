@@ -23,6 +23,8 @@ class ContextMenu extends PureComponent {
             })
         }).then((res) => {
             this.context.getLoadLabels()
+            this.context.changeLabel(null)
+            this.props.toggleContextMenu()
         })
     }
 

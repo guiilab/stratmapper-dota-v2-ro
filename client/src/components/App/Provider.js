@@ -389,19 +389,6 @@ class Provider extends Component {
                     }).then(this.getLabels().then(res => this.loadLabels(res)))
                 },
 
-                deleteLabel: async (id) => {
-                    return await fetch('api/delete-label', {
-                        method: 'POST',
-                        headers: {
-                            'Accept': 'application/json',
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            id: id
-                        })
-                    }).then(this.getLabels().then(res => this.loadLabels(res)))
-                },
-
                 toggleSelectedUnit: (unit) => {
                     if (this.state.selectedUnits.includes(unit)) {
                         const array = [...this.state.selectedUnits];
@@ -469,11 +456,20 @@ class Provider extends Component {
                     })
                 },
 
-                toggleBrushActive: (e) => {
+                toggleBrushActive: (e, range) => {
                     if ((e.shiftKey) || (e === 'toggle')) {
-                        this.setState({
-                            brushActive: !this.state.brushActive
-                        })
+                        if (range) {
+                            let brushRange = range
+                            this.setState({
+                                brushRange: range,
+                                brushActive: !this.state.brushActive
+                            })
+                        } else {
+                            this.setState({
+                                brushActive: !this.state.brushActive
+                            })
+                        }
+
                     }
                 },
 
