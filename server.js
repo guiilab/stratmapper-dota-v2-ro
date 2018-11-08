@@ -81,8 +81,12 @@ app.post('/api/events', function (req, res) {
 app.post('/api/labels', function (req, res) {
     return LabelModel
         .find()
-        .exec(function (err, label) {
-            return res.send(label)
+        .exec()
+        .then((labels) => {
+            res.send(labels)
+        })
+        .catch((err) => {
+            console.log(err)
         })
 })
 

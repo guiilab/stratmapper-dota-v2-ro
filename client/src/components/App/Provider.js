@@ -61,7 +61,6 @@ class Provider extends Component {
     componentDidMount() {
         this.updateWindowDimensions();
         window.addEventListener("resize", this.updateWindowDimensions);
-
         this.getMatchEntries().then(this.loadNewData())
     }
 
@@ -69,11 +68,14 @@ class Provider extends Component {
         if (nextState.currentMatch !== this.state.currentMatch) {
             this.loadNewData()
         }
-        if ((nextState.selectedUnits !== this.state.selectedUnits) || (nextState.selectedEventTypes !== this.state.selectedEventTypes || ((nextState.brushRange !== this.state.brushRange) && nextState.brushRange.length !== 0))) {
-            let unitEventsFiltered = this.filterEvents()
-            this.setState({
-                unitEventsFiltered: unitEventsFiltered
-            })
+
+        if (nextState.brushRange.length !== 0) {
+            if ((nextState.selectedUnits !== this.state.selectedUnits) || (nextState.selectedEventTypes !== this.state.selectedEventTypes)) {
+                let unitEventsFiltered = this.filterEvents()
+                this.setState({
+                    unitEventsFiltered: unitEventsFiltered
+                })
+            }
         }
     }
 
@@ -240,7 +242,7 @@ class Provider extends Component {
             selectedEventTypes: [...this.state.loadSettings.selected_events]
         }, () => {
             this.state.selectedUnits.forEach((unit) => this.setFilteredEventsByUnit(unit, this.state.unitEventsAll))
-            let unitEventsFiltered = this.filterEvents()
+            let unitEventsFiltered = 0
             this.setState({
                 unitEventsFiltered: unitEventsFiltered,
             }, () => {
@@ -251,15 +253,17 @@ class Provider extends Component {
     }
 
     filterEvents = () => {
-        if (this.state.brushRange.length === 0) {
-            let unitEvents = this.state.unitEventsTimeline.filter(event => this.state.selectedUnits.includes(event.unit))
-            return unitEvents.filter(event => (this.state.selectedEventTypes.includes(event.event_type)))
-        }
-        else if (this.state.brushRange.length !== 0) {
-            let unitEventsBrushed = this.state.unitEventsTimeline.filter(event => (event.timestamp > this.state.brushRange[0]) && (event.timestamp < this.state.brushRange[1]))
+        console.log('filter events ran')
+        // if (this.state.brushRange.length === 0) {
+        //     let unitEvents = this.state.unitEventsTimeline.filter(event => this.state.selectedUnits.includes(event.unit))
+        //     return unitEvents.filter(event => (this.state.selectedEventTypes.includes(event.event_type)))
+        // }
+        if (this.state.brushRange.length !== 0) {
+            let unitEventsBrushed = this.state.unitEventsTimeline.filter((e) => (e.timestamp > this.state.brushRange[0]) && (e.timestamp < this.state.brushRange[1]))
             let unitEventsFiltered = unitEventsBrushed.filter(event => (this.state.selectedUnits.includes(event.unit)))
             return unitEventsFiltered.filter(event => (this.state.selectedEventTypes.includes(event.event_type)))
         }
+
     }
 
     getLabels = async () => {
@@ -278,6 +282,7 @@ class Provider extends Component {
         if (response.status !== 200) {
             throw Error(body.message)
         }
+
         return body
     }
 
@@ -392,8 +397,8 @@ class Provider extends Component {
                     }).then(this.getLabels().then(res => this.loadLabels(res)))
                 },
 
-                deleteLabel: (id) => {
-                    return fetch('api/delete-label', {
+                deleteLabel: async (id) => {
+                    return await fetch('api/delete-label', {
                         method: 'POST',
                         headers: {
                             'Accept': 'application/json',
@@ -470,9 +475,16 @@ class Provider extends Component {
                 toggleBrushActive: (e, range) => {
                     if ((e.shiftKey) || (e === 'toggle')) {
                         let brushRange = this.state.brushActive ? [] : [...this.state.brushRange];
+                        console.log(this.state.brushRange)
                         this.setState({
                             brushRange: brushRange,
                             brushActive: !this.state.brushActive
+                        }, () => {
+                            let unitEventsFiltered = this.state.brushActive ? this.filterEvents() : 0
+                            console.log(unitEventsFiltered)
+                            this.setState({
+                                unitEventsFiltered: unitEventsFiltered
+                            })
                         })
                     }
                 },

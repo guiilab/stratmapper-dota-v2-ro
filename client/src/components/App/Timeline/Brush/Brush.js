@@ -61,13 +61,13 @@ class Brush extends Component {
             s = [this.xScaleTime(this.context.state.brushRange[0]), this.xScaleTime(this.context.state.brushRange[1])];
         }
 
-        if (zoomTransform) {
-            console.log('zoom')
-            const newXScale = zoomTransform.rescaleX(this.xScaleTime)
-            this.context.updateBrushRange([newXScale.invert(s[0]), newXScale.invert(s[1])])
-        } else if (!(isNaN(s[0]))) {
-            this.context.updateBrushRange([this.xScaleTime.invert(s[0]), this.xScaleTime.invert(s[1])])
-        }
+        // if (zoomTransform) {
+        //     console.log('zoom')
+        //     const newXScale = zoomTransform.rescaleX(this.xScaleTime)
+        //     this.context.updateBrushRange([newXScale.invert(s[0]), newXScale.invert(s[1])])
+        // } else if (!(isNaN(s[0]))) {
+        //     this.context.updateBrushRange([this.xScaleTime.invert(s[0]), this.xScaleTime.invert(s[1])])
+        // }
     }
 
     render() {
