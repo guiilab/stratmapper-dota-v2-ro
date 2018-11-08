@@ -61,7 +61,6 @@ class Provider extends Component {
     componentDidMount() {
         this.updateWindowDimensions();
         window.addEventListener("resize", this.updateWindowDimensions);
-
         this.getMatchEntries().then(this.loadNewData())
     }
 
@@ -69,11 +68,14 @@ class Provider extends Component {
         if (nextState.currentMatch !== this.state.currentMatch) {
             this.loadNewData()
         }
-        if ((nextState.selectedUnits !== this.state.selectedUnits) || (nextState.selectedEventTypes !== this.state.selectedEventTypes || ((nextState.brushRange !== this.state.brushRange) && nextState.brushRange.length !== 0))) {
-            let unitEventsFiltered = this.filterEvents()
-            this.setState({
-                unitEventsFiltered: unitEventsFiltered
-            })
+
+        if (nextState.brushRange.length !== 0) {
+            if ((nextState.selectedUnits !== this.state.selectedUnits) || (nextState.selectedEventTypes !== this.state.selectedEventTypes)) {
+                let unitEventsFiltered = this.filterEvents()
+                this.setState({
+                    unitEventsFiltered: unitEventsFiltered
+                })
+            }
         }
     }
 
@@ -240,7 +242,7 @@ class Provider extends Component {
             selectedEventTypes: [...this.state.loadSettings.selected_events]
         }, () => {
             this.state.selectedUnits.forEach((unit) => this.setFilteredEventsByUnit(unit, this.state.unitEventsAll))
-            let unitEventsFiltered = this.filterEvents()
+            let unitEventsFiltered = 0
             this.setState({
                 unitEventsFiltered: unitEventsFiltered,
             }, () => {
@@ -251,15 +253,17 @@ class Provider extends Component {
     }
 
     filterEvents = () => {
-        if (this.state.brushRange.length === 0) {
-            let unitEvents = this.state.unitEventsTimeline.filter(event => this.state.selectedUnits.includes(event.unit))
-            return unitEvents.filter(event => (this.state.selectedEventTypes.includes(event.event_type)))
-        }
-        else if (this.state.brushRange.length !== 0) {
-            let unitEventsBrushed = this.state.unitEventsTimeline.filter(event => (event.timestamp > this.state.brushRange[0]) && (event.timestamp < this.state.brushRange[1]))
+        console.log('filter events ran')
+        // if (this.state.brushRange.length === 0) {
+        //     let unitEvents = this.state.unitEventsTimeline.filter(event => this.state.selectedUnits.includes(event.unit))
+        //     return unitEvents.filter(event => (this.state.selectedEventTypes.includes(event.event_type)))
+        // }
+        if (this.state.brushRange.length !== 0) {
+            let unitEventsBrushed = this.state.unitEventsTimeline.filter((e) => (e.timestamp > this.state.brushRange[0]) && (e.timestamp < this.state.brushRange[1]))
             let unitEventsFiltered = unitEventsBrushed.filter(event => (this.state.selectedUnits.includes(event.unit)))
             return unitEventsFiltered.filter(event => (this.state.selectedEventTypes.includes(event.event_type)))
         }
+
     }
 
     getLabels = async () => {
@@ -269,15 +273,23 @@ class Provider extends Component {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
+            // body: JSON.stringify({
+            //     author: 'andy'
+            // })
         });
         const body = await response.json();
 
         if (response.status !== 200) {
             throw Error(body.message)
         }
+
+        return body
+    }
+
+    loadLabels = (data) => {
         this.setState({
-            labels: [...body]
-        }, () => console.log(this.state.labels))
+            labels: [...data]
+        })
     }
 
     setGroupState = (d, unit) => {
@@ -353,7 +365,7 @@ class Provider extends Component {
                 },
 
                 getLoadLabels: () => {
-                    this.getLabels()
+                    this.getLabels().then(res => this.loadLabels(res))
                 },
 
                 addLabel: (label) => {
@@ -366,8 +378,7 @@ class Provider extends Component {
                     }
                     let event_ids = [];
                     this.state.unitEventsFiltered.forEach((event) => event_ids.push(event.node_id))
-
-                    fetch('api/add-label', {
+                    return fetch('api/add-label', {
                         method: 'POST',
                         headers: {
                             'Accept': 'application/json',
@@ -383,9 +394,20 @@ class Provider extends Component {
                             units: this.state.selectedUnits,
                             event_ids: event_ids
                         })
-                    })
+                    }).then(this.getLabels().then(res => this.loadLabels(res)))
+                },
 
-                    this.getLabels()
+                deleteLabel: async (id) => {
+                    return await fetch('api/delete-label', {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            id: id
+                        })
+                    }).then(this.getLabels().then(res => this.loadLabels(res)))
                 },
 
                 toggleSelectedUnit: (unit) => {
@@ -456,6 +478,11 @@ class Provider extends Component {
                         this.setState({
                             brushRange: brushRange,
                             brushActive: !this.state.brushActive
+                        }, () => {
+                            let unitEventsFiltered = this.state.brushActive ? this.filterEvents() : 0
+                            this.setState({
+                                unitEventsFiltered: unitEventsFiltered
+                            })
                         })
                     }
                 },

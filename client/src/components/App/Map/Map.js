@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
 import * as d3 from 'd3';
 
@@ -7,7 +7,7 @@ import EventIcon from './EventIcon/EventIcon.js';
 import UnitLine from './UnitLine/UnitLine.js'
 import Background from '../../../img/dotamini2.png';
 
-class Map extends Component {
+class Map extends PureComponent {
     constructor(props) {
         super(props)
 
@@ -55,7 +55,7 @@ class Map extends Component {
 
     render() {
         const { xScale, yScale } = this.props;
-        const { brushRange, selectedUnits, icons, brushActive, windowSettings, unitEventsFiltered } = this.props.state;
+        const { brushRange, selectedUnits, icons, brushActive, windowSettings, unitEventsFiltered, mapLoading } = this.props.state;
 
         const mapContainerStyle = {
             width: windowSettings.width,
@@ -68,53 +68,46 @@ class Map extends Component {
             height: windowSettings.width,
         }
 
-        if (!unitEventsFiltered) {
-            return (
-                <div>Loading</div>
-            )
-        }
-        if (unitEventsFiltered) {
-            return (
-                <div className="map-container" style={mapContainerStyle} >
-                    <svg className="map-svg" ref="mapsvg" style={mapSvgStyle} >
-                        <g transform={this.state.zoomTransform}>
-                            <defs>
-                                <pattern id="bg" width={1} height={1}>
-                                    <image href={Background} width={windowSettings.width} height={windowSettings.width}></image>
-                                </pattern>
-                            </defs>
-                            <rect width={windowSettings.width} height={windowSettings.width} fill="url(#bg)"></rect>
-                            {brushActive ? selectedUnits.map(unit => {
-                                return (
-                                    <UnitLine
-                                        zoomTransform={this.state.zoomTransformScaled}
-                                        unit={unit}
-                                        key={unit}
-                                    />
-                                )
-                            }) : <g>empty</g>
-                            }
-                            {brushRange.length !== 0 ? unitEventsFiltered.map(event => {
-                                return (
-                                    <EventIcon
-                                        zoomTransform={this.state.zoomTransformScaled}
-                                        x={xScale(event.posX)}
-                                        y={yScale(event.posY)}
-                                        d={icons[event.event_type]}
-                                        unit={event.unit}
-                                        event={event}
-                                        key={event.node_id} />
-                                )
-                            }) : <g>empty</g>
-                            }
-                        </g>
-                    </svg>
-                    <div className="map-controls">
-                        <div className="map-center-button" onClick={() => this.centerMap()}>Center</div>
-                    </div>
-                </div >
-            );
-        }
+        return (
+            <div className="map-container" style={mapContainerStyle} >
+                <svg className="map-svg" ref="mapsvg" style={mapSvgStyle} >
+                    <g transform={this.state.zoomTransform}>
+                        <defs>
+                            <pattern id="bg" width={1} height={1}>
+                                <image href={Background} width={windowSettings.width} height={windowSettings.width}></image>
+                            </pattern>
+                        </defs>
+                        <rect width={windowSettings.width} height={windowSettings.width} fill="url(#bg)"></rect>
+                        {brushActive ? selectedUnits.map(unit => {
+                            return (
+                                <UnitLine
+                                    zoomTransform={this.state.zoomTransformScaled}
+                                    unit={unit}
+                                    key={unit}
+                                />
+                            )
+                        }) : <g>empty</g>
+                        }
+                        {unitEventsFiltered !== 0 ? unitEventsFiltered.map(event => {
+                            return (
+                                <EventIcon
+                                    zoomTransform={this.state.zoomTransformScaled}
+                                    x={xScale(event.posX)}
+                                    y={yScale(event.posY)}
+                                    d={icons[event.event_type]}
+                                    unit={event.unit}
+                                    event={event}
+                                    key={event.node_id} />
+                            )
+                        }) : <g>empty</g>
+                        }
+                    </g>
+                </svg>
+                <div className="map-controls">
+                    <div className="map-center-button" onClick={() => this.centerMap()}>Center</div>
+                </div>
+            </div >
+        );
     }
 }
 
