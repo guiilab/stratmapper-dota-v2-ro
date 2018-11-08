@@ -265,9 +265,9 @@ class Provider extends Component {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            // body: JSON.stringify({
-            //     author: 'andy'
-            // })
+            body: JSON.stringify({
+                match: this.state.currentMatch
+            })
         });
         const body = await response.json();
 
@@ -369,6 +369,9 @@ class Provider extends Component {
                     } else if (!((label.title) && (label.author) && (label.description))) {
                         alert('Please fill in all fields.')
                         return 'failure';
+                    } else if (this.state.activeLabel) {
+                        alert('Please deactivate current label before adding a new one.')
+                        return 'failure';
                     }
                     let event_ids = [];
                     this.state.unitEventsFiltered.forEach((event) => event_ids.push(event.node_id))
@@ -385,6 +388,7 @@ class Provider extends Component {
                             author: label.author,
                             timestamp_range: [...this.state.brushRange],
                             description: label.description,
+                            match: this.state.currentMatch,
                             events: this.state.selectedEventTypes,
                             units: this.state.selectedUnits,
                             event_ids: event_ids

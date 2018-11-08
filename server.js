@@ -80,7 +80,7 @@ app.post('/api/events', function (req, res) {
 
 app.post('/api/labels', function (req, res) {
     LabelModel
-        .find({}, function (err, label) {
+        .find({ match: req.body.match }, function (err, label) {
             return res.send(label)
         })
 })
@@ -91,11 +91,12 @@ app.post('/api/add-label', function (req, res) {
             id: req.body.id,
             title: req.body.title,
             author: req.body.author,
-            description: req.body.description,
             timestamp_range: req.body.timestamp_range,
+            description: req.body.description,
+            match: req.body.match,
             events: req.body.events,
             units: req.body.units,
-            event_ids: [1, 2, 3, 4, 5, 6]
+            event_ids: req.body.event_ids
         }, function (err, label) {
             if (err) return handleError(err)
             return res.send(label)

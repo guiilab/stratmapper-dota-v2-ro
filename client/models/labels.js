@@ -15,6 +15,10 @@ var LabelSchema = new Schema({
         type: String,
         required: false
     },
+    match: {
+        type: String,
+        required: true
+    },
     description: {
         type: String,
         required: true
