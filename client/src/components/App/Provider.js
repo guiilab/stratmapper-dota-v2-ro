@@ -370,6 +370,7 @@ class Provider extends Component {
                     }
                     let event_ids = [];
                     this.state.unitEventsFiltered.forEach((event) => event_ids.push(event.node_id))
+                    let id = Math.floor(Math.random() * 1000000000)
                     return fetch('api/add-label', {
                         method: 'POST',
                         headers: {
@@ -377,7 +378,7 @@ class Provider extends Component {
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({
-                            id: Math.floor(Math.random() * 1000000000),
+                            id: id,
                             title: label.title,
                             author: label.author,
                             timestamp_range: [...this.state.brushRange],
@@ -386,7 +387,11 @@ class Provider extends Component {
                             units: this.state.selectedUnits,
                             event_ids: event_ids
                         })
-                    }).then(this.getLabels().then(res => this.loadLabels(res)))
+                    })
+                        .then(this.getLabels())
+                        .then(() => this.setState({
+                            activeLabel: id
+                        }))
                 },
 
                 toggleSelectedUnit: (unit) => {
@@ -489,7 +494,7 @@ class Provider extends Component {
                     } else {
                         this.setState({
                             brushRange: [],
-                            brushActive: !this.state.brushActive,
+                            brushActive: false,
                             selectedUnits: [...this.state.unitsAll],
                             selectedEventTypes: [...this.state.events.timeline]
                         })

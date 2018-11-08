@@ -14,6 +14,15 @@ class TimelineLabel extends Component {
         this.renderTimelineLabels();
     }
 
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (nextProps.state.activeLabel === prevState.labelId) {
+            return {
+                active: true
+            }
+        }
+        return null
+    }
+
     componentDidUpdate() {
         this.renderTimelineLabels();
     }
