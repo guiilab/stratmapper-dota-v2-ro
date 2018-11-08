@@ -12,7 +12,6 @@ class ContextMenu extends PureComponent {
     }
 
     deleteLabel = (id) => {
-        console.log('delete label')
         return fetch('/api/delete-label', {
             method: 'POST',
             headers: {
@@ -23,7 +22,6 @@ class ContextMenu extends PureComponent {
                 id: id
             })
         }).then((res) => {
-            console.log(res)
             this.context.getLoadLabels()
         })
     }

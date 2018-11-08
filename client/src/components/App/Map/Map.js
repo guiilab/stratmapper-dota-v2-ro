@@ -78,7 +78,7 @@ class Map extends PureComponent {
                             </pattern>
                         </defs>
                         <rect width={windowSettings.width} height={windowSettings.width} fill="url(#bg)"></rect>
-                        {brushActive ? selectedUnits.map(unit => {
+                        {brushRange.length !== 0 ? selectedUnits.map(unit => {
                             return (
                                 <UnitLine
                                     zoomTransform={this.state.zoomTransformScaled}
@@ -88,7 +88,7 @@ class Map extends PureComponent {
                             )
                         }) : <g>empty</g>
                         }
-                        {unitEventsFiltered !== 0 ? unitEventsFiltered.map(event => {
+                        {unitEventsFiltered ? unitEventsFiltered.map(event => {
                             return (
                                 <EventIcon
                                     zoomTransform={this.state.zoomTransformScaled}

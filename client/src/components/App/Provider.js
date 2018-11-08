@@ -253,17 +253,9 @@ class Provider extends Component {
     }
 
     filterEvents = () => {
-        console.log('filter events ran')
-        // if (this.state.brushRange.length === 0) {
-        //     let unitEvents = this.state.unitEventsTimeline.filter(event => this.state.selectedUnits.includes(event.unit))
-        //     return unitEvents.filter(event => (this.state.selectedEventTypes.includes(event.event_type)))
-        // }
-        if (this.state.brushRange.length !== 0) {
-            let unitEventsBrushed = this.state.unitEventsTimeline.filter((e) => (e.timestamp > this.state.brushRange[0]) && (e.timestamp < this.state.brushRange[1]))
-            let unitEventsFiltered = unitEventsBrushed.filter(event => (this.state.selectedUnits.includes(event.unit)))
-            return unitEventsFiltered.filter(event => (this.state.selectedEventTypes.includes(event.event_type)))
-        }
-
+        let unitEventsBrushed = this.state.unitEventsTimeline.filter((e) => (e.timestamp > this.state.brushRange[0]) && (e.timestamp < this.state.brushRange[1]))
+        let unitEventsFiltered = unitEventsBrushed.filter(event => (this.state.selectedUnits.includes(event.unit)))
+        return unitEventsFiltered.filter(event => (this.state.selectedEventTypes.includes(event.event_type)))
     }
 
     getLabels = async () => {
@@ -463,6 +455,11 @@ class Provider extends Component {
                 updateBrushRange: (e) => {
                     this.setState({
                         brushRange: e
+                    }, () => {
+                        let unitEventsFiltered = this.filterEvents()
+                        this.setState({
+                            unitEventsFiltered: unitEventsFiltered
+                        })
                     })
                 },
 
@@ -472,17 +469,10 @@ class Provider extends Component {
                     })
                 },
 
-                toggleBrushActive: (e, range) => {
+                toggleBrushActive: (e) => {
                     if ((e.shiftKey) || (e === 'toggle')) {
-                        let brushRange = this.state.brushActive ? [] : [...this.state.brushRange];
                         this.setState({
-                            brushRange: brushRange,
                             brushActive: !this.state.brushActive
-                        }, () => {
-                            let unitEventsFiltered = this.state.brushActive ? this.filterEvents() : 0
-                            this.setState({
-                                unitEventsFiltered: unitEventsFiltered
-                            })
                         })
                     }
                 },
