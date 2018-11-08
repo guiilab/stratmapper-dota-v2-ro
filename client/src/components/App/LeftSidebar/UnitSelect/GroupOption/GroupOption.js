@@ -1,34 +1,15 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import includes from 'lodash';
 
 import { Context } from '../../../Provider.js';
 import UnitOption from './UnitOption/UnitOption.js';
 
-class GroupOption extends PureComponent {
+class GroupOption extends Component {
 
     state = {
-        active: false,
+        active: true,
         hover: false
     }
-
-    static getDerivedStateFromProps(nextProps) {
-        if (includes(nextProps.selectedUnits, ...nextProps.groupUnits)) {
-            return {
-                active: true
-            };
-        }
-        return null;
-    }
-
-    // shouldComponentUpdate(nextProps, nextState) {
-    //     if (this.state.hover !== nextState.hover) {
-    //         return true;
-    //     } else if (nextState.active !== this.state.active) {
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-    // }
 
     toggleHover = () => {
         this.setState({
