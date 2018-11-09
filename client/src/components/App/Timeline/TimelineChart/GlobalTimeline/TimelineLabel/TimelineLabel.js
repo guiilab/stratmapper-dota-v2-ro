@@ -81,10 +81,12 @@ class TimelineLabel extends Component {
         const { label, zoomTransform } = this.props;
 
         let labelPosX = label.timestamp_range[0];
-        let diff = label.timestamp_range[1] - label.timestamp_range[0]
+        let diff = (label.timestamp_range[1] - label.timestamp_range[0])
 
         let color;
-        color = this.state.hover || this.state.active ? 'coral' : 'darkgrey';
+        let opacity;
+        color = this.state.active || this.state.hover ? 'green' : 'grey';
+        opacity = this.state.hover ? '.6' : '.8'
 
         return (
             <g>
@@ -98,14 +100,13 @@ class TimelineLabel extends Component {
                     y={0}
                     x={this.xScaleTime(labelPosX)}
                     className="timeline-label"
-                    fill='grey'
+                    fill={color}
                     pointerEvents='all'
                     onClick={(e) => this.handleClick(e)}
                     onContextMenu={(e) => this.handleClick(e)}
                     onMouseOver={() => this.toggleHover()}
                     onMouseOut={() => this.toggleHover()}
-                    stroke={color}
-                    strokeWidth="2px"
+                    opacity={opacity}
                 >
                 </rect>
                 <text

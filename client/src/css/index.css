@@ -385,6 +385,7 @@ h3 {
 }
 
 .global-timeline-container {
+    width: 99.9%;
     height: 30px;
     border: 1px solid black;
     border-bottom: 3px solid grey;
@@ -446,10 +447,9 @@ h3 {
 }
 
 .event-select-container {
-    width: 11.9%;
+    width: 12%;
     min-width: 120px !important;
     background-color: grey;
-    border-right: 1px solid black;
     height: 250px;
     position: relative;
     float: left;
