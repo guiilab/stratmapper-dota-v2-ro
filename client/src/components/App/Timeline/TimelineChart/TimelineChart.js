@@ -117,6 +117,7 @@ class TimelineChart extends PureComponent {
                     />
                     {brushActive ?
                         <Brush
+                            activeLabel={this.props.state.activeLabel}
                             chartWidth={this.state.width}
                             timestampRange={timestampRange}
                             zoomTransform={this.state.zoomTransform}

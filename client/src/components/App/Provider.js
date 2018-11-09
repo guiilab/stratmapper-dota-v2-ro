@@ -489,7 +489,7 @@ class Provider extends Component {
                         }, () => {
                             this.setState({
                                 brushRange: [Math.round(label.timestamp_range[0]), Math.round(label.timestamp_range[1])],
-                                brushActive: !this.state.brushActive,
+                                brushActive: true,
                                 selectedUnits: [...label.units],
                                 selectedEventTypes: [...label.events],
                                 activeLabel: label.id

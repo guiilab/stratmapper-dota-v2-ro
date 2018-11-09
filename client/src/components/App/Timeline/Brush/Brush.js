@@ -15,11 +15,18 @@ class Brush extends Component {
     }
 
     componentDidUpdate(nextProps) {
+        if (nextProps.activeLabel !== this.props.activeLabel) {
+            setTimeout(function () {
+                this.renderBrush()
+            }.bind(this), 10)
+
+        }
         if (!this.props.zoomTransform) {
             this.updateBrush();
         } else if (nextProps.zoomTransform !== this.props.zoomTransform) {
             this.renderBrush()
         }
+
     }
 
     renderBrush = () => {
@@ -44,6 +51,8 @@ class Brush extends Component {
         }
         select(this.refs.brush)
             .call(this.brush)
+            .transition()
+            // .duration(1000)
             .call(this.brush.move, [brushStart, brushEnd])
     }
 
@@ -69,7 +78,6 @@ class Brush extends Component {
         } else {
             this.context.updateBrushRange([this.xScaleTime.invert(s[0]), this.xScaleTime.invert(s[1])])
         }
-        // this.context.updateBrushRange([this.xScaleTime.invert(s[0]), this.xScaleTime.invert(s[1])])
     }
 
     render() {

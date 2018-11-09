@@ -25,6 +25,7 @@ class TimelineLabel extends Component {
     }
 
     handleClick = (e) => {
+        const { label, toggleContextMenu } = this.props;
         e.preventDefault();
         e.stopPropagation();
         const isAnotherLabelActive = this.checkActiveLabel()
@@ -33,7 +34,6 @@ class TimelineLabel extends Component {
             return
         }
 
-        const { label, toggleContextMenu } = this.props;
         if (e.ctrlKey) {
             toggleContextMenu(e)
         } else if (e.nativeEvent.which === 1) {

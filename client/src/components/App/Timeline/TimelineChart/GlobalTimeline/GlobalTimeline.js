@@ -38,8 +38,6 @@ class GlobalTimeline extends Component {
         const globalTimelineStyle = {
             width: chartWidth
         }
-        console.log('labels object:')
-        console.dir(labels)
 
         return (
             <div style={globalTimelineStyle} className="global-timeline-container">
