@@ -85,7 +85,7 @@ h3 {
     border: black 1px solid;
     border-right: none;
     position: absolute;
-    bottom: 350px;
+    bottom: 320px;
     right: 0;
     transition: var(--slow-trans);
     padding: 1rem;

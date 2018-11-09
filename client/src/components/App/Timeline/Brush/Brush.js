@@ -52,7 +52,6 @@ class Brush extends Component {
         select(this.refs.brush)
             .call(this.brush)
             .transition()
-            // .duration(1000)
             .call(this.brush.move, [brushStart, brushEnd])
     }
 
