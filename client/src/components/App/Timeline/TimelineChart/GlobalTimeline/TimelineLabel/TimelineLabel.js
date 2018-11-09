@@ -96,7 +96,7 @@ class TimelineLabel extends Component {
                     author={label.author}
                     id={label.id}
                     width={zoomTransform ? this.xScaleTimeInvert(diff * zoomTransform.k) : this.xScaleTimeInvert(diff)}
-                    height="30"
+                    height={30}
                     y={0}
                     x={this.xScaleTime(labelPosX)}
                     className="timeline-label"

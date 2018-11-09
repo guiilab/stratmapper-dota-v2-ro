@@ -85,7 +85,7 @@ h3 {
     border: black 1px solid;
     border-right: none;
     position: absolute;
-    bottom: 320px;
+    bottom: 350px;
     right: 0;
     transition: var(--slow-trans);
     padding: 1rem;
@@ -385,13 +385,13 @@ h3 {
 }
 
 .global-timeline-container {
-    width: 99.9%;
     height: 30px;
     border: 1px solid black;
     border-bottom: 3px solid grey;
     position: absolute;
     top: -34px;
     background-color: lightgrey;
+    pointer-events: all;
 }
 
 .context-menu-container {

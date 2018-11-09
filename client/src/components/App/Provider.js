@@ -506,6 +506,15 @@ class Provider extends Component {
                     }
                 },
 
+                shuffleLabels: (e) => {
+                    if (e.which === 32) {
+                        let reversedLabels = this.state.labels.reverse()
+                        this.setState({
+                            labels: reversedLabels
+                        })
+                    }
+                },
+
                 //disable brush before match changes to destroy map data
                 setCurrentMatch: (e) => {
                     this.setState({

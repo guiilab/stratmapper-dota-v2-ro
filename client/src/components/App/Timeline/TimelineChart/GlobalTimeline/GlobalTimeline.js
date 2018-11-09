@@ -33,6 +33,7 @@ class GlobalTimeline extends Component {
 
     render() {
         const { chartWidth, zoomTransform } = this.props;
+        const { shuffleLabels } = this.context;
         const { labels } = this.context.state;
 
         const globalTimelineStyle = {
@@ -40,7 +41,8 @@ class GlobalTimeline extends Component {
         }
 
         return (
-            <div style={globalTimelineStyle} className="global-timeline-container">
+            // <div style={globalTimelineStyle} className="global-timeline-container" onKeyDown={(e) => shuffleLabels(e)} onKeyUp={(e) => shuffleLabels(e)}>
+            <div style={globalTimelineStyle} className="global-timeline-container" onKeyDown={(e) => shuffleLabels(e)} tabIndex="0">
                 <ContextMenu
                     title={this.state.title}
                     active={this.state.contextMenuActive}
@@ -63,7 +65,7 @@ class GlobalTimeline extends Component {
                         )
                     }) : null}
                 </svg>
-            </div>
+            </div >
         );
     }
 }
