@@ -33,19 +33,6 @@ class TimelineChart extends PureComponent {
             .call(this.zoom)
     }
 
-    // shouldComponentUpdate(nextProps, nextState) {
-    //     if (this.chart.current.offsetWidth !== this.state.width) {
-    //         return true;
-    //     }
-    //     if (nextState.zoomTransform !== this.state.zoomTransform) {
-    //         return true;
-    //     }
-    //     if (nextProps.state.brushActive !== this.props.state.brushActive) {
-    //         return true;
-    //     }
-    //     return false;
-    // }
-
     componentDidUpdate() {
         select(this.refs.svg)
             .call(this.zoom)
@@ -58,10 +45,8 @@ class TimelineChart extends PureComponent {
     }
 
     getZoom = () => {
-        // const { timestampRange } = this.props.state;
-
         return zoom()
-            .scaleExtent([.9, 15])
+            .scaleExtent([1, 15])
             // .translateExtent([[0, timestampRange.start], [this.chart.current.offsetWidth, timestampRange.end]])
             .on("zoom", this.zoomed.bind(this))
     }
@@ -69,12 +54,6 @@ class TimelineChart extends PureComponent {
     toggleClick = () => {
         this.setState({
             clicked: !this.state.clicked
-        })
-    }
-
-    drag = (e) => {
-        this.setState({
-            offsetX: e.clientX
         })
     }
 

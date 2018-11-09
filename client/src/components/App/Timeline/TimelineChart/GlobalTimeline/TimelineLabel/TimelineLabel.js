@@ -74,7 +74,6 @@ class TimelineLabel extends Component {
 
         if (zoomTransform) {
             this.xScaleTime.domain(zoomTransform.rescaleX(this.xScaleTime).domain());
-            // this.xScaleTimeInvert.domain(zoomTransform.rescaleX(this.xScaleTimeInvert).domain());
         }
     }
 
