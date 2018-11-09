@@ -107,6 +107,8 @@ class TimelineLabel extends Component {
                     onMouseOver={() => this.toggleHover()}
                     onMouseOut={() => this.toggleHover()}
                     opacity={opacity}
+                    stroke="black"
+                    strokeWidth="1px"
                 >
                 </rect>
                 <text
