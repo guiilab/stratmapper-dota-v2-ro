@@ -270,24 +270,23 @@ class Provider extends Component {
             })
         });
         const body = await response.json();
-        console.log(body)
 
         if (response.status !== 200) {
             throw Error(body.message)
         }
-        this.setState({
-            labels: [...body]
-        })
+        // console.log(`This is the first time the body runs: ${body}`)
+        // this.setState({
+        //     labels: [...body]
+        // }, () => console.log(`This is the second time body runs: ${this.state.labels}`))
         // if (id) {
         //     this.setState({
         //         activeLabel: id,
         //         labels: [...body]
         //     })
         // } else {
-        //     this.setState({
-        //         labels: [...body]
-        //     })
-        // }
+        this.setState({
+            labels: [...body]
+        })
     }
 
     setGroupState = (d, unit) => {
@@ -397,7 +396,7 @@ class Provider extends Component {
                             units: this.state.selectedUnits,
                             event_ids: event_ids
                         })
-                    }).then(this.getLabels(id))
+                    }).then(() => new Promise((resolve) => setTimeout(resolve, 350))).then(res => this.getLabels())
                 },
 
                 toggleSelectedUnit: (unit) => {

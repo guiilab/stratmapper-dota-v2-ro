@@ -79,9 +79,9 @@ app.post('/api/events', function (req, res) {
 })
 
 app.post('/api/labels', function (req, res) {
-    console.log(req.body)
     LabelModel
-        .find({ match: req.body.match }, function (err, label) {
+        .find({ match: req.body.match })
+        .exec(function (err, label) {
             return res.send(label)
         })
 })
