@@ -9,10 +9,6 @@ class LabelPanel extends Component {
         isOpen: false
     }
 
-    componentDidMount() {
-        this.props.getLoadLabels()
-    }
-
     toggleOpen = () => {
         this.setState({
             isOpen: !this.state.isOpen

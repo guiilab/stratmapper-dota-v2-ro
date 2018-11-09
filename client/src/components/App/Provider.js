@@ -258,7 +258,7 @@ class Provider extends Component {
         return unitEventsFiltered.filter(event => (this.state.selectedEventTypes.includes(event.event_type)))
     }
 
-    getLabels = async (id) => {
+    getLabels = async () => {
         const response = await fetch('/api/labels', {
             method: 'POST',
             headers: {
@@ -270,20 +270,24 @@ class Provider extends Component {
             })
         });
         const body = await response.json();
+        console.log(body)
 
         if (response.status !== 200) {
             throw Error(body.message)
         }
-        if (id) {
-            this.setState({
-                activeLabel: id,
-                labels: [...body]
-            })
-        } else {
-            this.setState({
-                labels: [...body]
-            })
-        }
+        this.setState({
+            labels: [...body]
+        })
+        // if (id) {
+        //     this.setState({
+        //         activeLabel: id,
+        //         labels: [...body]
+        //     })
+        // } else {
+        //     this.setState({
+        //         labels: [...body]
+        //     })
+        // }
     }
 
     setGroupState = (d, unit) => {

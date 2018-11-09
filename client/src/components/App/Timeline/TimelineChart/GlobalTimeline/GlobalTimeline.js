@@ -10,6 +10,10 @@ class GlobalTimeline extends Component {
         contextMenuActive: false
     }
 
+    componentDidMount() {
+        this.context.getLoadLabels()
+    }
+
     toggleContextMenu = (e) => {
         if (!this.state.contextMenuActive) {
             this.setState({
