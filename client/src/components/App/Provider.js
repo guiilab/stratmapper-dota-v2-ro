@@ -529,9 +529,22 @@ class Provider extends Component {
                     }
                 },
 
-                getMousePosition: (e) => {
+                setTooltipPosition: (e) => {
+                    let x = e.screenX;
+                    let y = e.screenY;
+                    if ((x + 300) > this.state.windowSettings.width) {
+                        console.log('1')
+                        x -= 315;
+                    } else {
+                        x += 15
+                    }
+                    if (Math.abs(y) < 300) {
+                        y -= 95
+                    } else {
+                        y -= 415
+                    }
                     this.setState({
-                        tooltipPosition: [e.screenX + 10, e.screenY - 400]
+                        tooltipPosition: [x, y]
                     })
                 },
 

@@ -37,18 +37,13 @@ class EventIcon extends PureComponent {
     }
 
     render() {
-        const { d, event, unit, toggleActiveNode, zoomTransform, x, y, getUnit } = this.props;
+        const { d, event, unit, toggleActiveNode, zoomTransform, x, y, getUnit, setTooltipPosition } = this.props;
         const { selectedUnits } = this.props.state;
 
         let unitObject = getUnit(unit)
 
         return (
             <React.Fragment>
-                {/* <foreignObject x="-375" y="-20">
-                    <ReactTooltip id="tooltip" place="bottom">
-                        {tooltips[event.event_type].map((element) => <TooltipElement event={event} elementKey={element.key} elementLabel={element.label} key={Math.random()} />)}
-                    </ReactTooltip>
-                </foreignObject> */}
                 <path
                     style={{ zIndex: this.state.zIndex }}
                     data-tip
@@ -56,13 +51,11 @@ class EventIcon extends PureComponent {
                     className="icon"
                     d={d}
                     display={selectedUnits.includes(unit) ? 'inherit' : 'none'}
-                    // transform={zoomTransform ? `translate(${x}, ${y}), scale(${zoomTransform})` : `translate(${x}, ${y}), scale(.06)`}
-                    //causing some icons to grow,NaN trailing garbage
                     transform={zoomTransform ? `translate(${x}, ${y}) scale(${zoomTransform}) translate(-160, -160)` : `translate(${x}, ${y}) scale(.06) translate(-160, -160)`}
                     fill={this.state.color ? this.state.color : unitObject.color}
                     stroke="black"
                     strokeWidth={10}
-                    onMouseEnter={() => toggleActiveNode(event)}
+                    onMouseOver={(e) => { toggleActiveNode(event); setTooltipPosition(e) }}
                     onMouseLeave={() => toggleActiveNode(null)}
                 />
             </React.Fragment>
