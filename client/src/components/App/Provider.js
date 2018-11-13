@@ -529,6 +529,12 @@ class Provider extends Component {
                     }
                 },
 
+                getMousePosition: (e) => {
+                    this.setState({
+                        tooltipPosition: [e.screenX + 10, e.screenY - 400]
+                    })
+                },
+
                 //disable brush before match changes to destroy map data
                 setCurrentMatch: (e) => {
                     this.setState({

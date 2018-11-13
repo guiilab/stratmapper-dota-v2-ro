@@ -7,6 +7,7 @@ import LeftSidebar from './LeftSidebar/LeftSidebar.js';
 import TooltipSidebar from './TooltipSidebar/TooltipSidebar.js';
 import LabelPanel from './LabelPanel/LabelPanel.js';
 import Timeline from './Timeline/Timeline.js';
+import Tooltip from './Tooltip/Tooltip.js';
 
 class App extends PureComponent {
 
@@ -31,6 +32,7 @@ class App extends PureComponent {
                             <TooltipSidebar />
                             <LabelPanel />
                             <Timeline />
+                            <Tooltip />
                         </React.Fragment>
                     }
                 </Provider>
