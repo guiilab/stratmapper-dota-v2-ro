@@ -5,7 +5,7 @@ import * as d3 from 'd3';
 import { Context } from '../Provider.js'
 import EventIcon from './EventIcon/EventIcon.js';
 import UnitLine from './UnitLine/UnitLine.js'
-import Background from '../../../img/dotamini2.png';
+import Background from '../../../img/dotamini3.jpg';
 
 class Map extends PureComponent {
     constructor(props) {
@@ -22,6 +22,7 @@ class Map extends PureComponent {
     }
 
     componentDidMount() {
+        this.centerMap()
         d3.select(this.refs.mapsvg)
             .call(this.zoom)
     }
@@ -39,11 +40,14 @@ class Map extends PureComponent {
     }
 
     centerMap() {
+        let zoomIdentity = d3.zoomIdentity
+        zoomIdentity.k = .5
+        zoomIdentity.x = this.props.state.mapSettings.width / 2
         d3.select(this.refs.mapsvg)
             .transition()
             .duration(200)
             .ease(d3.easeLinear)
-            .call(this.zoom.transform, d3.zoomIdentity)
+            .call(this.zoom.transform, zoomIdentity)
     }
 
     zoomScaleIcon(num) {
