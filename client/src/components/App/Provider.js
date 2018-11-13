@@ -515,6 +515,20 @@ class Provider extends Component {
                     }
                 },
 
+                soloEvent: (event) => {
+                    if (event === 'toggle') {
+                        this.setState({
+                            selectedEventTypes: this.state.events.timeline
+                        })
+                    } else {
+                        let selectedEventArray = []
+                        selectedEventArray.push(event)
+                        this.setState({
+                            selectedEventTypes: selectedEventArray
+                        })
+                    }
+                },
+
                 //disable brush before match changes to destroy map data
                 setCurrentMatch: (e) => {
                     this.setState({

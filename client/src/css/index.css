@@ -460,25 +460,28 @@ h3 {
 }
 
 .event-option-container {
-    margin: auto;
-    display: flex;
-    justify-content: space-around;
-    flex-direction: row;
+    border-bottom: solid black 1px;
+}
+
+.event-controls {
+    display: inline-block;
+    float: right;
+    margin-right: .5rem;
 }
 
 .event-option {
+    float: left;
     display: inline-block;
-    font-size: .5rem;
-    border: 1px solid black;
-    width: 120px;
-    cursor: pointer;
+    font-size: .8rem;
     padding: .2rem;
+    margin-left: 1rem;
 }
 
-.solo-button {
+.mute-button, .solo-button {
     display: inline-block;
+    width: 20px;
+    height: 20px;
     border: 1px solid black;
-    font-size: .5rem;
     margin-right: .3rem;
     cursor: pointer;
 }
