@@ -78,7 +78,6 @@ class Brush extends Component {
         }
 
         if (zoomTransform) {
-            console.log(s)
             const newXScale = zoomTransform.rescaleX(this.xScaleTime)
             this.context.updateBrushRange([newXScale.invert(s[0]), newXScale.invert(s[1])])
         }

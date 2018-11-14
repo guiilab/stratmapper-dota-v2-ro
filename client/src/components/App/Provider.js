@@ -550,6 +550,7 @@ class Provider extends Component {
                 //disable brush before match changes to destroy map data
                 setCurrentMatch: (e) => {
                     this.setState({
+                        activeLabel: null,
                         currentMatch: e
                     }, () => this.props.toggleMapLoading())
                 },

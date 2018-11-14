@@ -40,7 +40,7 @@ class MuteButton extends Component {
 
         let buttonStyle;
         if (this.state.hover) {
-            buttonStyle = { backgroundColor: 'white' }
+            buttonStyle = { backgroundColor: '#da8888' }
         } else if (this.state.active) {
             buttonStyle = { backgroundColor: 'indianred' }
         }

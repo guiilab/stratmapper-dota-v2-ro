@@ -39,10 +39,11 @@ class SoloButton extends Component {
 
         let buttonStyle;
         if (this.state.hover) {
-            buttonStyle = { backgroundColor: 'white' }
+            buttonStyle = { backgroundColor: '#ffe973' }
         } else if (this.state.active) {
             buttonStyle = { backgroundColor: 'gold' }
         }
+
         return (
             <div
                 style={buttonStyle}
