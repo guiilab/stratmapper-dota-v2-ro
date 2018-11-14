@@ -65,7 +65,7 @@ class TimelineChart extends PureComponent {
 
     render() {
         const { events, timestampRange, timelineSettings, brushActive, unitEventsTimeline, activeLabel } = this.context.state;
-        const { yScaleTime, toggleBrushActive } = this.context;
+        const { yScaleTime } = this.context;
 
         const heightStyle = {
             height: timelineSettings.height
@@ -76,7 +76,7 @@ class TimelineChart extends PureComponent {
         }
 
         return (
-            <div className="timeline-chart" ref={this.chart} style={heightStyle} onKeyDown={(e) => toggleBrushActive(e)} onKeyUp={(e) => toggleBrushActive(e)} tabIndex="0">
+            <div className="timeline-chart" ref={this.chart} style={heightStyle} >
 
                 <XAxis
                     width={this.state.width}

@@ -450,6 +450,7 @@ class Provider extends Component {
                 },
 
                 updateBrushRange: (e) => {
+                    console.log(e)
                     this.setState({
                         brushRange: e
                     }, () => {
@@ -466,21 +467,21 @@ class Provider extends Component {
                     })
                 },
 
-                toggleBrushActive: (e, range) => {
-                    if ((e.shiftKey) || (e === 'toggle')) {
-                        if (range) {
-                            this.setState({
-                                brushRange: range,
-                                brushActive: !this.state.brushActive
-                            })
-                        } else {
-                            this.setState({
-                                brushActive: !this.state.brushActive
-                            })
-                        }
+                // toggleBrushActive: (e, range) => {
+                //     if ((e.shiftKey) || (e === 'toggle')) {
+                //         if (range) {
+                //             this.setState({
+                //                 brushRange: range,
+                //                 brushActive: !this.state.brushActive
+                //             })
+                //         } else {
+                //             this.setState({
+                //                 brushActive: !this.state.brushActive
+                //             })
+                //         }
 
-                    }
-                },
+                //     }
+                // },
 
                 changeLabel: (label) => {
                     if (label !== null) {

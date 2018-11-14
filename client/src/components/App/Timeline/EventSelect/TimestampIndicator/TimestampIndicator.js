@@ -1,17 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class TimestampIndicator extends Component {
-    render() {
-        const { brushRange } = this.props;
-
-        return (
-            <div className="timestamp-container" >
-                <span className="timestamp-font">Brush Selection: </span>
-                <span>{brushRange[0] ? Math.round(brushRange[0]).toString() : 0}, </span>
-                <span>{brushRange[1] ? Math.round(brushRange[1]).toString() : 0}</span>
-            </div>
-        )
-    }
+const TimestampIndicator = (props) => {
+    return (
+        <div className="timestamp-container" >
+            <span className="timestamp-font">Brush Selection: </span>
+            <span>{props.brushRange[0] ? Math.round(props.brushRange[0]).toString() : 0}, </span>
+            <span>{props.brushRange[1] ? Math.round(props.brushRange[1]).toString() : 0}</span>
+        </div>
+    )
 }
 
 export default TimestampIndicator
