@@ -473,6 +473,7 @@ h3 {
     display: inline-block;
     float: right;
     margin-right: .5rem;
+    padding: .1rem;
 }
 
 .event-option {
@@ -485,11 +486,12 @@ h3 {
 
 .mute-button, .solo-button {
     display: inline-block;
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     border: 1px solid black;
     margin-right: .3rem;
     cursor: pointer;
+    background-color: lightgrey;
 }
 
 .y-axis {
@@ -512,7 +514,6 @@ h3 {
 .tooltip-container {
     position: absolute;
     width: 300px;
-    height: 300px;
     border: 1px black solid;
     background-color: white;
     transition: var(--fast-trans);

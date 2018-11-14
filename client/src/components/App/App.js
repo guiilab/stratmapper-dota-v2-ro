@@ -4,7 +4,6 @@ import Provider from './Provider.js';
 import LoadingIcon from './LoadingIcon/LoadingIcon.js';
 import Map from './Map/Map.js';
 import LeftSidebar from './LeftSidebar/LeftSidebar.js';
-import TooltipSidebar from './TooltipSidebar/TooltipSidebar.js';
 import LabelPanel from './LabelPanel/LabelPanel.js';
 import Timeline from './Timeline/Timeline.js';
 import Tooltip from './Tooltip/Tooltip.js';
@@ -29,7 +28,6 @@ class App extends PureComponent {
                         <React.Fragment>
                             <Map />
                             <LeftSidebar />
-                            <TooltipSidebar />
                             <LabelPanel />
                             <Timeline />
                             <Tooltip />

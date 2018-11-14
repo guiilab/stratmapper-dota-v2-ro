@@ -81,7 +81,7 @@ class TimelineLabel extends Component {
         const { label, zoomTransform } = this.props;
 
         let labelPosX = label.timestamp_range[0];
-        let diff = (label.timestamp_range[1] - label.timestamp_range[0])
+        let diff = (Math.round(label.timestamp_range[1]) - Math.round(label.timestamp_range[0]))
 
         let color;
         let opacity;

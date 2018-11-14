@@ -23,6 +23,8 @@ class Scatterplot extends Component {
 
     renderScatterplot() {
         const { width, zoomTransform, timestampRange } = this.props;
+        timestampRange.start = Math.round(timestampRange.start)
+        timestampRange.end = Math.round(timestampRange.end)
 
         this.xScaleTime = scaleLinear()
             .domain([timestampRange.start, timestampRange.end])
@@ -50,7 +52,7 @@ class Scatterplot extends Component {
                         strokeWidth={1}
                         key={event.node_id}
                         onMouseOver={(e) => { toggleActiveNode(event); setTooltipPosition(e) }}
-                    // onMouseOut={() => toggleActiveNode(null)}
+                        onMouseOut={() => toggleActiveNode(null)}
                     />
                 })
                 }
