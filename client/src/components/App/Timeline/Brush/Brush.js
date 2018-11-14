@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { Context } from '../../Provider.js';
-import { scaleLinear, brushX, select, event } from 'd3';
+import { scaleLinear, brushX, select, event, remove } from 'd3';
 
 class Brush extends Component {
     constructor(props) {
@@ -22,9 +22,13 @@ class Brush extends Component {
 
         }
         if (!this.props.zoomTransform) {
-            this.updateBrush();
+            setTimeout(function () {
+                this.updateBrush()
+            }.bind(this), 10)
         } else if (nextProps.zoomTransform !== this.props.zoomTransform) {
-            this.renderBrush()
+            setTimeout(function () {
+                this.renderBrush()
+            }.bind(this), 10)
         }
     }
 
@@ -45,12 +49,10 @@ class Brush extends Component {
         let brushEnd;
 
         if (zoomTransform) {
-            console.log('renderBrush - zoomTransform')
             const newXScaleTime = zoomTransform.rescaleX(this.xScaleTime)
             brushStart = newXScaleTime(this.context.state.brushRange[0])
             brushEnd = newXScaleTime(this.context.state.brushRange[1])
         } else {
-            console.log('renderBrush - else')
             brushStart = this.xScaleTime(this.context.state.brushRange[0])
             brushEnd = this.xScaleTime(this.context.state.brushRange[1])
         }
@@ -61,7 +63,6 @@ class Brush extends Component {
     }
 
     updateBrush = () => {
-        console.log('update brush ran')
         select(this.refs.brush)
             .call(this.brush)
     }
@@ -71,21 +72,17 @@ class Brush extends Component {
 
         let s;
         if (event.selection) {
-            console.log('brushed - event.selection')
             s = event.selection;
         } else {
-            console.log('brushed - else')
             s = [this.context.state.brushRange[0], this.context.state.brushRange[1]];
         }
 
         if (zoomTransform) {
-            console.log('brushed - zoomtransform')
             console.log(s)
             const newXScale = zoomTransform.rescaleX(this.xScaleTime)
             this.context.updateBrushRange([newXScale.invert(s[0]), newXScale.invert(s[1])])
         }
         else {
-            console.log('brushed - else')
             this.context.updateBrushRange([this.xScaleTime.invert(s[0]), this.xScaleTime.invert(s[1])])
         }
     }

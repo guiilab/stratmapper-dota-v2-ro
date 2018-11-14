@@ -76,8 +76,7 @@ class TimelineChart extends PureComponent {
         }
 
         return (
-            <div className="timeline-chart" ref={this.chart} style={heightStyle} >
-
+            <div className="timeline-chart" ref={this.chart} style={heightStyle}>
                 <XAxis
                     width={this.state.width}
                     zoomTransform={this.state.zoomTransform}
@@ -88,7 +87,6 @@ class TimelineChart extends PureComponent {
                     zoomTransform={this.state.zoomTransform}
                 />
                 <svg width="100%" height="100%" ref="svg" className="timeline-svg-scatter">
-
                     <AxisLines
                         events={events.timeline}
                         yScaleTime={yScaleTime}
