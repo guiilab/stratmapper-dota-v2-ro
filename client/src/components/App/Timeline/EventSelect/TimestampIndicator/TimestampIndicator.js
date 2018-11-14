@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 
-import { Context } from '../../Provider.js'
 class TimestampIndicator extends Component {
-
     render() {
-        const { brushRange } = this.props.state;
+        const { brushRange } = this.props;
 
         return (
             <div className="timestamp-container" >
@@ -16,8 +14,4 @@ class TimestampIndicator extends Component {
     }
 }
 
-export default () => (
-    <Context.Consumer>
-        {(context) => <TimestampIndicator {...context} />}
-    </Context.Consumer>
-);
+export default TimestampIndicator
