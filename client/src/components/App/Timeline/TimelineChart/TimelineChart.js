@@ -13,7 +13,6 @@ class TimelineChart extends PureComponent {
     constructor(props) {
         super(props);
         this.chart = React.createRef()
-        this.zoom = this.getZoom()
         this.state = {
             clicked: false,
             mousePos: 0,
@@ -25,6 +24,7 @@ class TimelineChart extends PureComponent {
     }
 
     componentDidMount() {
+        this.zoom = this.getZoom()
         this.setState({
             height: 250,
             width: this.chart.current.offsetWidth
@@ -41,13 +41,13 @@ class TimelineChart extends PureComponent {
                 width: this.chart.current.offsetWidth
             })
         }
-
     }
 
     getZoom = () => {
+        const { timestampRange } = this.context.state;
         return zoom()
             .scaleExtent([1, 15])
-            // .translateExtent([[0, timestampRange.start], [this.chart.current.offsetWidth, timestampRange.end]])
+            .translateExtent([[0, timestampRange.start], [this.chart.current.offsetWidth, timestampRange.end]])
             .on("zoom", this.zoomed.bind(this))
     }
 
@@ -64,8 +64,8 @@ class TimelineChart extends PureComponent {
     }
 
     render() {
-        const { events, timestampRange, timelineSettings, brushActive, unitEventsTimeline } = this.props.state;
-        const { yScaleTime, toggleBrushActive } = this.props;
+        const { events, timestampRange, timelineSettings, brushActive, unitEventsTimeline, activeLabel } = this.context.state;
+        const { yScaleTime, toggleBrushActive } = this.context;
 
         const heightStyle = {
             height: timelineSettings.height
@@ -96,7 +96,7 @@ class TimelineChart extends PureComponent {
                     />
                     {brushActive ?
                         <Brush
-                            activeLabel={this.props.state.activeLabel}
+                            activeLabel={activeLabel}
                             chartWidth={this.state.width}
                             timestampRange={timestampRange}
                             zoomTransform={this.state.zoomTransform}
@@ -116,8 +116,6 @@ class TimelineChart extends PureComponent {
     }
 }
 
-export default () => (
-    <Context.Consumer>
-        {(context) => <TimelineChart {...context} />}
-    </Context.Consumer>
-);
+TimelineChart.contextType = Context;
+
+export default TimelineChart;
