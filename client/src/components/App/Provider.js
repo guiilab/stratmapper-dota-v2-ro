@@ -450,7 +450,6 @@ class Provider extends Component {
                 },
 
                 updateBrushRange: (e) => {
-                    console.log(e)
                     this.setState({
                         brushRange: e
                     }, () => {
