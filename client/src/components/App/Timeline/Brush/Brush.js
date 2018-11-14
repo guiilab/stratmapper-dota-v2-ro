@@ -38,9 +38,10 @@ class Brush extends Component {
             .domain([timestampRange.start, timestampRange.end])
             .range([0, chartWidth])
 
-        if (this.context.state.brushRange.length === 0) {
+        if (!this.context.state.brushRange[0]) {
             brushStart = timestampRange.start;
             brushEnd = timestampRange.start + (timestampRange.end - timestampRange.start);
+            this.context.updateBrushRange([brushStart, brushEnd])
         } else if (zoomTransform) {
             const newXScaleTime = zoomTransform.rescaleX(this.xScaleTime)
             brushStart = newXScaleTime(this.context.state.brushRange[0])
@@ -74,7 +75,8 @@ class Brush extends Component {
             const newXScale = zoomTransform.rescaleX(this.xScaleTime)
             this.context.updateBrushRange([newXScale.invert(s[0]), newXScale.invert(s[1])])
 
-        } else {
+        }
+        else {
             this.context.updateBrushRange([this.xScaleTime.invert(s[0]), this.xScaleTime.invert(s[1])])
         }
     }

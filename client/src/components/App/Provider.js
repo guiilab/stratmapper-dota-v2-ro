@@ -9,7 +9,7 @@ class Provider extends Component {
         currentMatch: 'early-game',
         apiMatchId: 2500623971,
         brushRange: [],
-        brushActive: false,
+        brushActive: true,
         windowSettings: {
             width: null,
             height: null
@@ -550,7 +550,6 @@ class Provider extends Component {
                 //disable brush before match changes to destroy map data
                 setCurrentMatch: (e) => {
                     this.setState({
-                        brushActive: false,
                         currentMatch: e
                     }, () => this.props.toggleMapLoading())
                 },
