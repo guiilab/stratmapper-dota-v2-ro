@@ -15,8 +15,12 @@ class UnitLine extends PureComponent {
         dataBrushed.forEach((d, i) => {
             if (d.event_type === 'death') {
                 dataSplitIndices.push(['death', i])
-            } else if (d.event_type === 'tp_scroll') {
+            }
+            if ((d.event_type === 'tp_scroll')) {
                 dataSplitIndices.push(['tp_scroll', i])
+            }
+            if ((d.event_type === 'tp_scroll_end')) {
+                dataSplitIndices.push(['unit-line', i])
             }
         })
 
@@ -44,19 +48,35 @@ class UnitLine extends PureComponent {
         if (!unitLine) {
             return <div>Loading</div>
         }
+        console.log(dataSplit)
         return (
             <React.Fragment>
                 {dataSplit.map((line, index) => {
+                    let lastNode;
+                    if (line[1].length !== 0) {
+                        lastNode = line[1].pop()
+                    }
+                    console.log(lastNode)
                     return (
-                        <path
-                            d={unitLine(line[1])}
-                            fill="none"
-                            className={line[0]}
-                            stroke={unitObject.color}
-                            strokeWidth={zoomTransform < .022 ? .5 : 1}
-                            strokeDasharray={line[0] === 'unit-line' ? 0 : 4}
-                            key={index}
-                        />
+                        <g>
+                            <circle
+                                cx={lastNode ? xScale(lastNode.posX) : null}
+                                cy={lastNode ? yScale(lastNode.posY) : null}
+                                r={lastNode ? '10' : '0'}
+                                stroke='black'
+                                strokeWidth="1"
+                                fill={unitObject.color}
+                            />
+                            <path
+                                d={unitLine(line[1])}
+                                fill="none"
+                                className={line[0]}
+                                stroke={unitObject.color}
+                                strokeWidth={zoomTransform < .022 ? .5 : 1}
+                                strokeDasharray={line[0] === 'unit-line' ? 0 : 4}
+                                key={index}
+                            />
+                        </g>
                     )
                 })
                 }
