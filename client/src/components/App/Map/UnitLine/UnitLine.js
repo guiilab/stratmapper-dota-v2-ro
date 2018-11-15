@@ -22,8 +22,7 @@ class UnitLine extends PureComponent {
 
         if (dataSplitIndices.length !== 0) {
             dataSplitIndices.forEach((d) => {
-                let splice = dataBrushed.splice([d[1]])
-                dataSplit.push([d[0], splice])
+                dataSplit.push([d[0], dataBrushed.splice([d[1]])])
             })
             dataSplit.push(['unit-line', dataBrushed])
         } else {
@@ -56,19 +55,12 @@ class UnitLine extends PureComponent {
                             stroke={unitObject.color}
                             strokeWidth={zoomTransform < .022 ? .5 : 1}
                             strokeDasharray={line[0] === 'unit-line' ? 0 : 4}
-                            key={line[1][0].id}
+                            key={line[1][0].node_id}
                         />
                     )
                 })
                 }
             </React.Fragment>
-            // <path
-            //     d={unitLine(dataBrushed)}
-            //     fill="none"
-            //     stroke={unitObject.color}
-            //     strokeWidth={zoomTransform < .022 ? .5 : 1}
-            //     key={Math.round()}
-            // />
         )
     }
 }
