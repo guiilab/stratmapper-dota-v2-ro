@@ -46,7 +46,7 @@ class UnitLine extends PureComponent {
         }
         return (
             <React.Fragment>
-                {dataSplit.map(line => {
+                {dataSplit.map((line, index) => {
                     return (
                         <path
                             d={unitLine(line[1])}
@@ -55,7 +55,7 @@ class UnitLine extends PureComponent {
                             stroke={unitObject.color}
                             strokeWidth={zoomTransform < .022 ? .5 : 1}
                             strokeDasharray={line[0] === 'unit-line' ? 0 : 4}
-                            key={line[1][0].node_id}
+                            key={index}
                         />
                     )
                 })
