@@ -9,7 +9,27 @@ class UnitLine extends PureComponent {
         const { xScale, yScale, unit, zoomTransform, getUnit } = this.props;
         const { brushRange, statusEventsFilteredByUnit } = this.props.state;
 
+        let dataSplit = [];
+        let dataSplitIndices = [];
         let dataBrushed = statusEventsFilteredByUnit[unit].filter(event => (event.timestamp > brushRange[0]) && (event.timestamp < brushRange[1]))
+        dataBrushed.forEach((d, i) => {
+            if (d.event_type === 'death') {
+                dataSplitIndices.push(['death', i])
+            } else if (d.event_type === 'tp_scroll') {
+                dataSplitIndices.push(['tp_scroll', i])
+            }
+        })
+
+        if (dataSplitIndices.length !== 0) {
+            dataSplitIndices.forEach((d) => {
+                let splice = dataBrushed.splice([d[1]])
+                dataSplit.push([d[0], splice])
+            })
+            dataSplit.push(['unit-line', dataBrushed])
+        } else {
+            dataSplit.push(['unit-line', dataBrushed])
+        }
+
         let unitObject = getUnit(unit)
 
         const unitLine = line()
@@ -26,27 +46,29 @@ class UnitLine extends PureComponent {
             return <div>Loading</div>
         }
         return (
-            // <React.Fragment>
-            //     {dataBrushed.map(unit => {
-            //         return (
-            //             <path
-            //                 d={unitLine(unit)}
-            //                 fill="none"
-            //                 stroke={unitObject.color}
-            //                 strokeWidth={zoomTransform < .022 ? .5 : 1}
-            //                 key={Math.round()}
-            //             />
-            //         )
-            //     })
-            //     }
-            // </React.Fragment>
-            <path
-                d={unitLine(dataBrushed)}
-                fill="none"
-                stroke={unitObject.color}
-                strokeWidth={zoomTransform < .022 ? .5 : 1}
-                key={Math.round()}
-            />
+            <React.Fragment>
+                {dataSplit.map(line => {
+                    return (
+                        <path
+                            d={unitLine(line[1])}
+                            fill="none"
+                            className={line[0]}
+                            stroke={unitObject.color}
+                            strokeWidth={zoomTransform < .022 ? .5 : 1}
+                            strokeDasharray={line[0] === 'unit-line' ? 0 : 4}
+                            key={line[1][0].id}
+                        />
+                    )
+                })
+                }
+            </React.Fragment>
+            // <path
+            //     d={unitLine(dataBrushed)}
+            //     fill="none"
+            //     stroke={unitObject.color}
+            //     strokeWidth={zoomTransform < .022 ? .5 : 1}
+            //     key={Math.round()}
+            // />
         )
     }
 }

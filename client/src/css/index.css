@@ -39,6 +39,10 @@ h3 {
     position: relative;
 }
 
+/* .death {
+    display: none;
+} */
+
 .loading-icon-container {
     position: absolute;
     top: 50%;
