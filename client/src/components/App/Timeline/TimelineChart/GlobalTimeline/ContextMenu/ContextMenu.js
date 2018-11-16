@@ -7,7 +7,7 @@ class ContextMenu extends PureComponent {
         super(props)
         this.contextContainer = React.createRef()
         this.state = {
-            width: 0,
+            width: null,
             edit: false,
             title: '',
             author: '',
@@ -35,14 +35,19 @@ class ContextMenu extends PureComponent {
     }
 
     editClick = () => {
-        this.setState({
-            width: this.contextContainer.current.offsetWidth,
-        }, () => {
+        if (this.state.edit) {
             this.setState({
-                edit: !this.state.edit
+                edit: false
             })
-        })
-
+        } else {
+            this.setState({
+                width: this.contextContainer.current.offsetWidth
+            }, () => {
+                this.setState({
+                    edit: true
+                })
+            })
+        }
     }
 
     deleteLabel = (id) => {

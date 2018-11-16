@@ -56,7 +56,7 @@ class UnitLine extends PureComponent {
                 {dataSplit.map((line, index) => {
                     let lastNode;
                     if (line[1].length !== 0) {
-                        lastNode = line[1].pop()
+                        lastNode = line[1].slice(-1)[0]
                     }
                     return (
                         <g key={index}>
