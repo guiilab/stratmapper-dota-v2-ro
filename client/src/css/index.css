@@ -3,7 +3,7 @@ html, body, #root {
     width: 100%;
     margin: 0;
     font-family: sans-serif;
-    box-sizing: border-box;
+    box-sizing: border-box !important;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
@@ -123,23 +123,24 @@ h3 {
     margin-bottom: 2rem;
 }
 
-.label-input, .add-label-button {
+.label-input, .add-label-button, .edit-label-input {
     border: none;
     outline: none;
     height: 15px;
     margin: .2rem 0;
     padding: .3rem;
+    transition: .5s;
 }
 
 .textarea {
     resize: none;
     height: 60px;
+    width: 98%;
 }
 
-.add-label-button {
+.add-label-button, .edit-label-button {
     width: 60px;
-    background-color: rgb(140, 140, 140);
-    ;
+    background-color: rgb(216, 216, 216);
     color: white;
     font-size: .8rem;
     border: grey 1px solid;
@@ -148,6 +149,10 @@ h3 {
 
 .add-label-button:hover {
     background-color: rgb(110, 110, 110);
+}
+
+.edit-label-button {
+    background-color: rgb(209, 209, 209);
 }
 
 .label {
@@ -403,6 +408,13 @@ h3 {
     pointer-events: all;
 }
 
+.hover-border {
+    position: absolute;
+    height: 10px;
+    width: 100%;
+    border: red 1px solid;
+}
+
 .context-menu-container {
     position: absolute;
     max-width: 400px;
@@ -414,7 +426,7 @@ h3 {
     transition: visibility 0s, opacity 0.1s linear;
 }
 
-.label-delete, .label-close-button {
+.label-delete, .label-close-button, .label-edit {
     position: absolute;
     display: inline-block;
     border: 1px solid black;
@@ -432,6 +444,11 @@ h3 {
 .label-close-button {
     right: -1px;
     background-color: coral;
+}
+
+.label-edit {
+    right: 91px;
+    background-color: green;
 }
 
 .timeline-label {

@@ -41,9 +41,13 @@ class GlobalTimeline extends Component {
         }
 
         return (
-            // <div style={globalTimelineStyle} className="global-timeline-container" onKeyDown={(e) => shuffleLabels(e)} onKeyUp={(e) => shuffleLabels(e)}>
-            <div style={globalTimelineStyle} className="global-timeline-container" onKeyDown={(e) => shuffleLabels(e)} tabIndex="0">
-                <ContextMenu
+            <div
+                style={globalTimelineStyle}
+                className="global-timeline-container"
+                onKeyDown={(e) => shuffleLabels(e)}
+                tabIndex="0"
+            >
+                {this.state.contextMenuActive ? <ContextMenu
                     title={this.state.title}
                     active={this.state.contextMenuActive}
                     posX={`${this.state.contextPosX}px`}
@@ -51,8 +55,8 @@ class GlobalTimeline extends Component {
                     author={this.state.author}
                     id={this.state.id}
                     toggleContextMenu={this.toggleContextMenu}
-                />
-                <svg width="100%" height="100%">
+                /> : null}
+                <svg width="100%" height="100%" pointerEvents="none">
                     {labels ? labels.map((label) => {
                         return (
                             <TimelineLabel
@@ -65,6 +69,7 @@ class GlobalTimeline extends Component {
                         )
                     }) : null}
                 </svg>
+                <div className="hover-border" onMouseOver={this.state.contextMenuActive ? () => this.toggleContextMenu() : null}></div>
             </div >
         );
     }

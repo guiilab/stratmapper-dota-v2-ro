@@ -18,10 +18,13 @@ class TimelineLabel extends Component {
         this.renderTimelineLabels();
     }
 
-    toggleHover = () => {
+    toggleHover = (e) => {
         this.setState({
             hover: !this.state.hover
         })
+        if (!this.state.hover) {
+            this.props.toggleContextMenu(e)
+        }
     }
 
     handleClick = (e) => {
@@ -104,7 +107,7 @@ class TimelineLabel extends Component {
                     pointerEvents='all'
                     onClick={(e) => this.handleClick(e)}
                     onContextMenu={(e) => this.handleClick(e)}
-                    onMouseOver={() => this.toggleHover()}
+                    onMouseOver={(e) => this.toggleHover(e)}
                     onMouseOut={() => this.toggleHover()}
                     opacity={opacity}
                     stroke="black"

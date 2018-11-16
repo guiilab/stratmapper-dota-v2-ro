@@ -20,6 +20,7 @@ class TimelineChart extends PureComponent {
             width: null,
             offsetX: 0,
             zoomTransform: null,
+            hover: false
         }
     }
 
@@ -57,6 +58,12 @@ class TimelineChart extends PureComponent {
         })
     }
 
+    toggleHover = () => {
+        this.setState({
+            hover: !this.state.hover
+        })
+    }
+
     zoomed() {
         this.setState({
             zoomTransform: event.transform
@@ -76,7 +83,7 @@ class TimelineChart extends PureComponent {
         }
 
         return (
-            <div className="timeline-chart" ref={this.chart} style={heightStyle}>
+            <div className="timeline-chart" ref={this.chart} style={heightStyle} onMouseOver={() => this.toggleHover()}>
                 <XAxis
                     width={this.state.width}
                     zoomTransform={this.state.zoomTransform}
@@ -85,6 +92,7 @@ class TimelineChart extends PureComponent {
                 <GlobalTimeline
                     chartWidth={this.state.width}
                     zoomTransform={this.state.zoomTransform}
+                    chartHover={this.state.hover}
                 />
                 <svg width="100%" height="100%" ref="svg" className="timeline-svg-scatter">
                     <AxisLines

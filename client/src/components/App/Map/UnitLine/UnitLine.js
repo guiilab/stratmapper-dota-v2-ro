@@ -16,6 +16,9 @@ class UnitLine extends PureComponent {
             if (d.event_type === 'death') {
                 dataSplitIndices.push(['death', i])
             }
+            if (d.event_type === 'respawned') {
+                dataSplitIndices.push(['unit-line', i])
+            }
             if ((d.event_type === 'tp_scroll')) {
                 dataSplitIndices.push(['tp_scroll', i])
             }
@@ -48,7 +51,6 @@ class UnitLine extends PureComponent {
         if (!unitLine) {
             return <div>Loading</div>
         }
-        console.log(dataSplit)
         return (
             <React.Fragment>
                 {dataSplit.map((line, index) => {
@@ -56,7 +58,6 @@ class UnitLine extends PureComponent {
                     if (line[1].length !== 0) {
                         lastNode = line[1].pop()
                     }
-                    console.log(lastNode)
                     return (
                         <g>
                             <circle
