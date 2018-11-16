@@ -17,7 +17,6 @@ class ContextMenu extends PureComponent {
 
     componentDidMount() {
         this.setState({
-            width: this.contextContainer.current.offsetWidth,
             title: this.props.title,
             author: this.props.author,
             description: this.props.description
@@ -25,7 +24,7 @@ class ContextMenu extends PureComponent {
     }
 
     handleChange = (e) => {
-        this.setState({ [e.target.getAttribute('data-label')]: e.target.value });
+        this.setState({ [e.target.getAttribute('edit-data-label')]: e.target.value });
     }
 
     deleteClick = () => {
@@ -37,8 +36,13 @@ class ContextMenu extends PureComponent {
 
     editClick = () => {
         this.setState({
-            edit: !this.state.edit
+            width: this.contextContainer.current.offsetWidth,
+        }, () => {
+            this.setState({
+                edit: !this.state.edit
+            })
         })
+
     }
 
     deleteLabel = (id) => {
@@ -108,13 +112,13 @@ class ContextMenu extends PureComponent {
                     <div onClick={this.editClick} className="label-edit">Edit</div>
                     <div className="label-title-container">
                         <div className="label-title">
-                            <input className="edit-label-input" data-label="title" placeholder="Title" type="text" maxLength={20} value={this.state.title} onChange={(e) => this.handleChange(e)} />
+                            <input className="edit-label-input" edit-data-label="title" placeholder="Title" type="text" maxLength={20} value={this.state.title} onChange={(e) => this.handleChange(e)} />
                         </div>
                         <div className="label-author">
-                            <input className="edit-label-input" data-label="author" placeholder="Author Name" type="text" value={this.state.author} onChange={(e) => this.handleChange(e)} />
+                            <input className="edit-label-input" edit-data-label="author" placeholder="Author Name" type="text" value={this.state.author} onChange={(e) => this.handleChange(e)} />
                         </div>
                     </div>
-                    <textarea className="edit-label-input textarea" data-label="description" placeholder="Description" value={this.state.description} onChange={(e) => this.handleChange(e)} />
+                    <textarea className="edit-label-input textarea-edit" edit-data-label="description" placeholder="Description" value={this.state.description} onChange={(e) => this.handleChange(e)} />
                     <div
                         className="edit-label-button"
                         onClick={() => this.editLabel(this.state)}

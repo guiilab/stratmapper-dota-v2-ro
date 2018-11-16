@@ -132,9 +132,12 @@ h3 {
     transition: .5s;
 }
 
-.textarea {
+.textarea-edit, .textarea {
     resize: none;
     height: 60px;
+}
+
+.textarea-edit {
     width: 98%;
 }
 
@@ -412,7 +415,6 @@ h3 {
     position: absolute;
     height: 10px;
     width: 100%;
-    border: red 1px solid;
 }
 
 .context-menu-container {

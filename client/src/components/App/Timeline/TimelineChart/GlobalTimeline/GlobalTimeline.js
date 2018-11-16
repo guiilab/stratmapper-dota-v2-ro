@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
 import { Context } from '../../../Provider.js'
 import TimelineLabel from './TimelineLabel/TimelineLabel.js';
 import ContextMenu from './ContextMenu/ContextMenu.js';
 
-class GlobalTimeline extends Component {
+class GlobalTimeline extends PureComponent {
 
     state = {
         contextMenuActive: false
