@@ -58,6 +58,28 @@ class ContextMenu extends PureComponent {
         })
     }
 
+    editLabel = (state) => {
+        return fetch('/api/edit-label', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id: this.props.id,
+                title: state.title,
+                author: state.author,
+                description: state.description
+            })
+        }).then(() => {
+            this.context.getLoadLabels()
+            this.context.changeLabel(null)
+            this.setState({
+                edit: false
+            })
+        })
+    }
+
     render() {
         const { toggleContextMenu } = this.props;
 
@@ -106,10 +128,10 @@ class ContextMenu extends PureComponent {
                 <div onClick={this.deleteClick} className="label-delete">Delete</div>
                 <div onClick={this.editClick} className="label-edit">Edit</div>
                 <div className="label-title-container">
-                    <div className="label-title">{this.props.title}</div>
-                    <div className="label-author">{this.props.author}</div>
+                    <div className="label-title">{this.state.title}</div>
+                    <div className="label-author">{this.state.author}</div>
                 </div>
-                <div className="label-description">{this.props.description}</div>
+                <div className="label-description">{this.state.description}</div>
 
             </div>
         );

@@ -114,6 +114,25 @@ app.post('/api/delete-label', function (req, res) {
         })
 })
 
+app.post('/api/edit-label', function (req, res) {
+    LabelModel
+        .findOne({
+            id: req.body.id
+        }, function (err, label) {
+            console.log(label)
+            if (err) return handleError(err);
+            label.set({
+                title: req.body.title,
+                author: req.body.author,
+                description: req.body.description
+            });
+            label.save(function (err, updatedLabel) {
+                if (err) return handleError(err);
+                return res.send(updatedLabel)
+            })
+        })
+})
+
 if (process.env.NODE_ENV === 'production') {
 
     // Serve any static files

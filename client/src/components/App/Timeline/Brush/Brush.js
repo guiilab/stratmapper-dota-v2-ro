@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { Context } from '../../Provider.js';
-import { scaleLinear, brushX, select, event, remove } from 'd3';
+import { scaleLinear, brushX, select, event } from 'd3';
 
 class Brush extends Component {
     constructor(props) {

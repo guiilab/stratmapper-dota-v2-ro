@@ -59,7 +59,7 @@ class UnitLine extends PureComponent {
                         lastNode = line[1].pop()
                     }
                     return (
-                        <g>
+                        <g key={index}>
                             <circle
                                 cx={lastNode ? xScale(lastNode.posX) : null}
                                 cy={lastNode ? yScale(lastNode.posY) : null}
