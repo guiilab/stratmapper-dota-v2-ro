@@ -498,8 +498,6 @@ class Provider extends Component {
                     } else {
                         this.setState({
                             activeLabel: null,
-                            brushRange: [],
-                            brushActive: false,
                             selectedUnits: [...this.state.unitsAll],
                             selectedEventTypes: [...this.state.events.timeline]
                         })

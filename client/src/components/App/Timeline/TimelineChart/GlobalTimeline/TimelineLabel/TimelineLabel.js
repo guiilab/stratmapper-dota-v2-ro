@@ -14,32 +14,47 @@ class TimelineLabel extends Component {
         this.renderTimelineLabels();
     }
 
-    componentDidUpdate() {
-        this.renderTimelineLabels();
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (nextProps.activeLabel) {
+            if (nextProps.activeLabel !== prevState.labelId) {
+                return {
+                    active: false
+                }
+            }
+        }
+        return null
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        const { zoomTransform } = this.props;
+        const { timestampRange } = this.props.state;
+        if ((zoomTransform !== prevProps.zoomTransform) || (timestampRange !== prevProps.state.timestampRange)) {
+            console.log('updated')
+            this.renderTimelineLabels();
+        }
     }
 
     toggleHover = (e) => {
         this.setState({
             hover: !this.state.hover
         })
-        if (!this.state.hover) {
-            this.props.toggleContextMenu(e)
-        }
+        this.props.toggleContextMenu(e)
+        // if (!this.state.hover) {
+        //     this.props.toggleContextMenu(e)
+        // }
     }
 
     handleClick = (e) => {
-        const { label, toggleContextMenu } = this.props;
+        const { label, activeLabel } = this.props;
         e.preventDefault();
         e.stopPropagation();
-        const isAnotherLabelActive = this.checkActiveLabel()
-        if (isAnotherLabelActive) {
-            alert('Please deactivate current label before selecting another one.')
-            return
-        }
-
-        if (e.ctrlKey) {
-            toggleContextMenu(e)
-        } else if (e.nativeEvent.which === 1) {
+        if (activeLabel !== this.state.labelId) {
+            this.setState({
+                active: true
+            }, () => {
+                this.props.changeLabel(label)
+            })
+        } else {
             this.setState({
                 active: !this.state.active
             }, () => {
@@ -49,8 +64,6 @@ class TimelineLabel extends Component {
                     this.props.changeLabel(null)
                 }
             })
-        } else if (e.nativeEvent.which === 3) {
-            toggleContextMenu(e)
         }
     }
 

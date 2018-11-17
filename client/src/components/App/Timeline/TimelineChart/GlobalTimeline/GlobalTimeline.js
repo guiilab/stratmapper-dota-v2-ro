@@ -34,7 +34,7 @@ class GlobalTimeline extends PureComponent {
     render() {
         const { chartWidth, zoomTransform } = this.props;
         const { shuffleLabels } = this.context;
-        const { labels } = this.context.state;
+        const { labels, activeLabel } = this.context.state;
 
         const globalTimelineStyle = {
             width: chartWidth
@@ -60,6 +60,7 @@ class GlobalTimeline extends PureComponent {
                     {labels ? labels.map((label) => {
                         return (
                             <TimelineLabel
+                                activeLabel={activeLabel}
                                 label={label}
                                 zoomTransform={zoomTransform}
                                 chartWidth={chartWidth}
