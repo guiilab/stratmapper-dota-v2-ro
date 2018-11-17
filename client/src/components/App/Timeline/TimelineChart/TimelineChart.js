@@ -30,7 +30,6 @@ class TimelineChart extends PureComponent {
             height: 250,
             width: this.chart.current.offsetWidth
         })
-        console.log(this.zoom)
         select(this.refs.svg)
             .call(this.zoom)
     }
@@ -40,6 +39,9 @@ class TimelineChart extends PureComponent {
             select(this.refs.svg)
                 .call(this.zoom)
                 .on("mousedown.zoom", null)
+        } else {
+            select(this.refs.svg)
+                .call(this.zoom)
         }
         if (this.chart.current.offsetWidth !== this.state.width) {
             this.setState({

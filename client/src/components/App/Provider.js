@@ -489,7 +489,6 @@ class Provider extends Component {
                 },
 
                 shuffleLabels: (e) => {
-                    console.log(e)
                     if (e.which === 32) {
                         let reversedLabels = this.state.labels.reverse()
                         this.setState({
