@@ -171,8 +171,10 @@ h3 {
 }
 
 .add-label-button, .edit-label-button {
+    text-align: center;
     width: 60px;
-    background-color: rgb(216, 216, 216);
+    background-color: rgb(131, 131, 131);
+    border: black 1px solid;
     color: white;
     font-size: .8rem;
     border: grey 1px solid;
@@ -184,7 +186,13 @@ h3 {
 }
 
 .edit-label-button {
-    background-color: rgb(209, 209, 209);
+    background-color: rgb(212, 211, 211);
+    color: black;
+    padding: .2rem;
+}
+
+.edit-label-button:hover {
+    background-color: rgb(194, 192, 192);
 }
 
 .label {

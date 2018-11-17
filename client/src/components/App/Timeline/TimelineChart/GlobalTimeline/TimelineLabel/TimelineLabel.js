@@ -93,7 +93,7 @@ class TimelineLabel extends Component {
     }
 
     render() {
-        const { label, zoomTransform } = this.props;
+        const { label, zoomTransform, shuffleLabels } = this.props;
 
         let labelPosX = label.timestamp_range[0];
         let diff = (Math.round(label.timestamp_range[1]) - Math.round(label.timestamp_range[0]))

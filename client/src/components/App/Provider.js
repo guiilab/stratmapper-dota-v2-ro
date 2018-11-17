@@ -466,22 +466,6 @@ class Provider extends Component {
                     })
                 },
 
-                // toggleBrushActive: (e, range) => {
-                //     if ((e.shiftKey) || (e === 'toggle')) {
-                //         if (range) {
-                //             this.setState({
-                //                 brushRange: range,
-                //                 brushActive: !this.state.brushActive
-                //             })
-                //         } else {
-                //             this.setState({
-                //                 brushActive: !this.state.brushActive
-                //             })
-                //         }
-
-                //     }
-                // },
-
                 changeLabel: (label) => {
                     if (label !== null) {
                         this.setState({
@@ -505,6 +489,7 @@ class Provider extends Component {
                 },
 
                 shuffleLabels: (e) => {
+                    console.log(e)
                     if (e.which === 32) {
                         let reversedLabels = this.state.labels.reverse()
                         this.setState({

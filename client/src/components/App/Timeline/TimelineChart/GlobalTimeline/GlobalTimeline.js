@@ -5,9 +5,12 @@ import TimelineLabel from './TimelineLabel/TimelineLabel.js';
 import ContextMenu from './ContextMenu/ContextMenu.js';
 
 class GlobalTimeline extends PureComponent {
-
-    state = {
-        contextMenuActive: false
+    constructor() {
+        super()
+        this.globalTimeline = React.createRef()
+        this.state = {
+            contextMenuActive: false
+        }
     }
 
     componentDidMount() {
@@ -44,7 +47,9 @@ class GlobalTimeline extends PureComponent {
             <div
                 style={globalTimelineStyle}
                 className="global-timeline-container"
+                ref={(gt) => { this.globalTimeline = gt; }}
                 onKeyDown={(e) => shuffleLabels(e)}
+                onMouseOver={() => this.globalTimeline.focus()}
                 tabIndex="0"
             >
                 {this.state.contextMenuActive ? <ContextMenu
