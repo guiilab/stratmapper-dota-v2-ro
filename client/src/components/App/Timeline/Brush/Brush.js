@@ -21,15 +21,8 @@ class Brush extends Component {
             }.bind(this), 10)
 
         }
-        if (!this.props.zoomTransform) {
-            setTimeout(function () {
-                this.updateBrush()
-            }.bind(this), 10)
-        } else if (nextProps.zoomTransform !== this.props.zoomTransform) {
-            setTimeout(function () {
-                this.renderBrush()
-            }.bind(this), 10)
-        }
+        this.updateBrush()
+
     }
 
     initBrush = async () => {
@@ -44,19 +37,8 @@ class Brush extends Component {
     }
 
     renderBrush = () => {
-        const { zoomTransform } = this.props;
-        let brushStart;
-        let brushEnd;
-        let newXScaleTime
-
-        if (zoomTransform) {
-            newXScaleTime = zoomTransform.rescaleX(this.xScaleTime);
-            brushStart = newXScaleTime(this.context.state.brushRange[0]);
-            brushEnd = newXScaleTime(this.context.state.brushRange[1]);
-        } else {
-            brushStart = this.xScaleTime(this.context.state.brushRange[0]);
-            brushEnd = this.xScaleTime(this.context.state.brushRange[1]);
-        }
+        let brushStart = this.xScaleTime(this.context.state.brushRange[0]);
+        let brushEnd = this.xScaleTime(this.context.state.brushRange[1]);
         select(this.refs.brush)
             .call(this.brush)
             .transition()
@@ -64,6 +46,16 @@ class Brush extends Component {
     }
 
     updateBrush = () => {
+        let { zoomTransform } = this.props;
+        if (zoomTransform) {
+            let newXScaleTime = zoomTransform.rescaleX(this.xScaleTime);
+            let brushStart = newXScaleTime(this.context.state.brushRange[0]);
+            let brushEnd = newXScaleTime(this.context.state.brushRange[1]);
+            select(this.refs.brush)
+                .call(this.brush)
+                .transition()
+                .call(this.brush.move, [brushStart, brushEnd])
+        }
         select(this.refs.brush)
             .call(this.brush)
     }
@@ -71,7 +63,8 @@ class Brush extends Component {
     brushed = () => {
         const { zoomTransform } = this.props;
 
-        let s;
+        let s = [this.context.state.brushRange[0], this.context.state.brushRange[1]];
+
         if (event.selection) {
             s = event.selection;
         } else {
