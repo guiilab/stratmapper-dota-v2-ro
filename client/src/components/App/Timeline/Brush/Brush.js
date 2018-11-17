@@ -47,14 +47,15 @@ class Brush extends Component {
         const { zoomTransform } = this.props;
         let brushStart;
         let brushEnd;
+        let newXScaleTime
 
         if (zoomTransform) {
-            const newXScaleTime = zoomTransform.rescaleX(this.xScaleTime)
-            brushStart = newXScaleTime(this.context.state.brushRange[0])
-            brushEnd = newXScaleTime(this.context.state.brushRange[1])
+            newXScaleTime = zoomTransform.rescaleX(this.xScaleTime);
+            brushStart = newXScaleTime(this.context.state.brushRange[0]);
+            brushEnd = newXScaleTime(this.context.state.brushRange[1]);
         } else {
-            brushStart = this.xScaleTime(this.context.state.brushRange[0])
-            brushEnd = this.xScaleTime(this.context.state.brushRange[1])
+            brushStart = this.xScaleTime(this.context.state.brushRange[0]);
+            brushEnd = this.xScaleTime(this.context.state.brushRange[1]);
         }
         select(this.refs.brush)
             .call(this.brush)

@@ -29,7 +29,6 @@ class TimelineLabel extends Component {
         const { zoomTransform } = this.props;
         const { timestampRange } = this.props.state;
         if ((zoomTransform !== prevProps.zoomTransform) || (timestampRange !== prevProps.state.timestampRange)) {
-            console.log('updated')
             this.renderTimelineLabels();
         }
     }
