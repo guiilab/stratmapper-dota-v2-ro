@@ -90,7 +90,7 @@ class ContextMenu extends PureComponent {
     }
 
     render() {
-        const { toggleContextMenu } = this.props;
+        const { disableContextMenu } = this.props;
 
         let visibility = this.props.active ? 'visible' : 'hidden';
         let opacity = this.props.active ? '1' : '0';
@@ -112,9 +112,11 @@ class ContextMenu extends PureComponent {
         if (this.state.edit) {
             return (
                 <div style={contextMenuStyleEdit} className="context-menu-container">
-                    <div onClick={toggleContextMenu} className="label-close-button">Close</div>
-                    <div onClick={this.deleteClick} className="label-delete">Delete</div>
-                    <div onClick={this.editClick} className="label-edit">Edit</div>
+                    <div className="label-controls">
+                        <div onClick={this.editClick} className="label-edit">Edit</div>
+                        <div onClick={this.deleteClick} className="label-delete">Delete</div>
+                        <div onClick={disableContextMenu} className="label-close-button">Close</div>
+                    </div>
                     <div className="label-title-container">
                         <div className="label-title">
                             <input className="edit-label-input" edit-data-label="title" placeholder="Title" type="text" maxLength={20} value={this.state.title} onChange={(e) => this.handleChange(e)} />
@@ -133,9 +135,11 @@ class ContextMenu extends PureComponent {
         }
         return (
             <div style={contextMenuStyle} className="context-menu-container" ref={this.contextContainer}>
-                <div onClick={toggleContextMenu} className="label-close-button">Close</div>
-                <div onClick={this.deleteClick} className="label-delete">Delete</div>
-                <div onClick={this.editClick} className="label-edit">Edit</div>
+                <div className="label-controls">
+                    <div onClick={this.editClick} className="label-edit">Edit</div>
+                    <div onClick={this.deleteClick} className="label-delete">Delete</div>
+                    <div onClick={disableContextMenu} className="label-close-button">Close</div>
+                </div>
                 <div className="label-title-container">
                     <div className="label-title">{this.state.title}</div>
                     <div className="label-author">{this.state.author}</div>

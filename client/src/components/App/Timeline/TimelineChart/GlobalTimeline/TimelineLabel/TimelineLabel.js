@@ -38,10 +38,9 @@ class TimelineLabel extends Component {
         this.setState({
             hover: !this.state.hover
         })
-        this.props.toggleContextMenu(e)
-        // if (!this.state.hover) {
-        //     this.props.toggleContextMenu(e)
-        // }
+        if (!this.state.hover) {
+            this.props.activateContextMenu(e)
+        }
     }
 
     handleClick = (e) => {

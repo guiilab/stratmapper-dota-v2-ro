@@ -107,6 +107,35 @@ h3 {
     transition: var(--fast-trans);
 }
 
+.label-controls {
+    position: absolute;
+    top: -20px;
+    right: 1px;
+    width: 125px;
+    height: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.label-delete, .label-close-button, .label-edit {
+    border: 1px solid black;
+    padding: .1rem .3rem;
+    font-size: .8rem;
+    cursor: pointer;
+}
+
+.label-delete {
+    background-color: red;
+}
+
+.label-close-button {
+    background-color: coral;
+}
+
+.label-edit {
+    background-color: green;
+}
+
 .label-header {
     position: absolute;
     font-size: 1.5rem;
@@ -426,31 +455,6 @@ h3 {
     bottom: 35px;
     padding: .7rem;
     transition: visibility 0s, opacity 0.1s linear;
-}
-
-.label-delete, .label-close-button, .label-edit {
-    position: absolute;
-    display: inline-block;
-    border: 1px solid black;
-    padding: .1rem .3rem;
-    font-size: .8rem;
-    top: -20px;
-    cursor: pointer;
-}
-
-.label-delete {
-    background-color: red;
-    right: 43px;
-}
-
-.label-close-button {
-    right: -1px;
-    background-color: coral;
-}
-
-.label-edit {
-    right: 91px;
-    background-color: green;
 }
 
 .timeline-label {

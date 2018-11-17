@@ -14,21 +14,21 @@ class GlobalTimeline extends PureComponent {
         this.context.getLoadLabels()
     }
 
-    toggleContextMenu = (e) => {
-        if (!this.state.contextMenuActive) {
-            this.setState({
-                contextMenuActive: true,
-                contextPosX: e.target.getAttribute('x'),
-                description: e.target.getAttribute('description'),
-                id: e.target.getAttribute('id'),
-                author: e.target.getAttribute('author'),
-                title: e.target.getAttribute('title')
-            })
-        } else {
-            this.setState({
-                contextMenuActive: false
-            })
-        }
+    activateContextMenu = (e) => {
+        this.setState({
+            contextMenuActive: true,
+            contextPosX: e.target.getAttribute('x'),
+            description: e.target.getAttribute('description'),
+            id: e.target.getAttribute('id'),
+            author: e.target.getAttribute('author'),
+            title: e.target.getAttribute('title')
+        })
+    }
+
+    disableContextMenu = () => {
+        this.setState({
+            contextMenuActive: false
+        })
     }
 
     render() {
@@ -54,7 +54,7 @@ class GlobalTimeline extends PureComponent {
                     description={this.state.description}
                     author={this.state.author}
                     id={this.state.id}
-                    toggleContextMenu={this.toggleContextMenu}
+                    disableContextMenu={this.disableContextMenu}
                 /> : null}
                 <svg width="100%" height="100%" pointerEvents="none">
                     {labels ? labels.map((label) => {
@@ -64,13 +64,14 @@ class GlobalTimeline extends PureComponent {
                                 label={label}
                                 zoomTransform={zoomTransform}
                                 chartWidth={chartWidth}
-                                toggleContextMenu={this.toggleContextMenu}
+                                activateContextMenu={this.activateContextMenu}
+                                disableContextMenu={this.disableContextMenu}
                                 key={label.description}
                             />
                         )
                     }) : null}
                 </svg>
-                <div className="hover-border" onMouseOver={this.state.contextMenuActive ? () => this.toggleContextMenu() : null}></div>
+                <div className="hover-border" onMouseOver={() => this.disableContextMenu()}></div>
             </div >
         );
     }
