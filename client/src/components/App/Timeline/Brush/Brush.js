@@ -22,13 +22,13 @@ class Brush extends Component {
 
         }
         if (!this.props.zoomTransform) {
-            setTimeout(function () {
-                this.updateBrush()
-            }.bind(this), 10)
+            // setTimeout(function () {
+            this.updateBrush()
+            // }.bind(this), 10)
         } else if (nextProps.zoomTransform !== this.props.zoomTransform) {
-            setTimeout(function () {
-                this.renderBrush()
-            }.bind(this), 10)
+            // setTimeout(function () {
+            this.renderBrush()
+            // }.bind(this), 10)
         }
     }
 
