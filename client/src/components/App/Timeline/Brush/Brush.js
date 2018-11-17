@@ -21,7 +21,10 @@ class Brush extends Component {
             }.bind(this), 10)
 
         }
-        this.updateBrush()
+
+        setTimeout(function () {
+            this.updateBrush()
+        }.bind(this), 50)
 
     }
 
@@ -55,19 +58,21 @@ class Brush extends Component {
                 .call(this.brush)
                 .transition()
                 .call(this.brush.move, [brushStart, brushEnd])
+        } else {
+            select(this.refs.brush)
+                .call(this.brush)
         }
-        select(this.refs.brush)
-            .call(this.brush)
     }
 
     brushed = () => {
         const { zoomTransform } = this.props;
 
-        let s = [this.context.state.brushRange[0], this.context.state.brushRange[1]];
+        let s;
 
         if (event.selection) {
             s = event.selection;
         } else {
+            console.log('else')
             s = [this.context.state.brushRange[0], this.context.state.brushRange[1]];
         }
 
