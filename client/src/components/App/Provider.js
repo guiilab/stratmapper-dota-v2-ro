@@ -55,7 +55,8 @@ class Provider extends Component {
         maxFactor: 1.04,
         mapPaddingY: 120,
         mapPaddingX: 80,
-        labels: null
+        labels: null,
+        labelSearch: null
     };
 
     componentDidMount() {
@@ -545,6 +546,24 @@ class Provider extends Component {
                         }
                     })
                     return unitObject
+                },
+
+                searchLabels: (content) => {
+                    let searchArray = [];
+                    for (let i in content) {
+                        if (content[i] !== '') {
+                            searchArray.push(content[i])
+                        }
+                    }
+                    if (searchArray.length === 0) {
+                        this.setState({
+                            labelSearch: null
+                        })
+                    } else {
+                        this.setState({
+                            labelSearch: searchArray
+                        })
+                    }
                 },
 
                 formatFirstString(string) {

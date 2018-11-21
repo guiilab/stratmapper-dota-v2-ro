@@ -6,8 +6,9 @@ import { scaleLinear, brushX, select, event } from 'd3';
 class Brush extends Component {
     constructor(props) {
         super(props)
-        this.brush = brushX()
-            .on('brush', this.brushed)
+        this.state = {
+            clicked: false
+        }
     }
 
     componentDidMount() {
@@ -22,17 +23,15 @@ class Brush extends Component {
 
         }
         if (!this.props.zoomTransform) {
-            // setTimeout(function () {
             this.updateBrush()
-            // }.bind(this), 10)
         } else if (nextProps.zoomTransform !== this.props.zoomTransform) {
-            // setTimeout(function () {
             this.renderBrush()
-            // }.bind(this), 10)
         }
     }
 
     initBrush = async () => {
+        this.brush = brushX()
+            .on('brush', this.brushed)
         const { timestampRange, chartWidth } = this.props;
         this.xScaleTime = scaleLinear()
             .domain([timestampRange.start, timestampRange.end])
@@ -70,17 +69,17 @@ class Brush extends Component {
 
     brushed = () => {
         const { zoomTransform } = this.props;
-
         let s;
-
         if (event.selection) {
             s = event.selection;
         } else {
             s = [this.context.state.brushRange[0], this.context.state.brushRange[1]];
         }
-
         if (!zoomTransform) {
             this.context.updateBrushRange([this.xScaleTime.invert(s[0]), this.xScaleTime.invert(s[1])])
+        } else if (event.sourceEvent) {
+            let newXScaleTime = zoomTransform.rescaleX(this.xScaleTime);
+            this.context.updateBrushRange([newXScaleTime.invert(s[0]), newXScaleTime.invert(s[1])])
         }
     }
 

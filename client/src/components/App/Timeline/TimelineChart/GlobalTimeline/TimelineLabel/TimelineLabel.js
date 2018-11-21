@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { scaleLinear } from 'd3';
+import { includes, transform } from 'lodash';
 
-import { Context } from '../../../../Provider'
+import { Context } from '../../../../Provider';
 
 class TimelineLabel extends Component {
     constructor(props) {
@@ -9,12 +10,33 @@ class TimelineLabel extends Component {
         this.state = {
             labelId: this.props.label.id,
             hover: false,
-            active: false
+            active: false,
+            highlight: false
         }
         this.renderTimelineLabels();
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
+        let searchArray = [];
+        if (nextProps.state.labelSearch) {
+            nextProps.state.labelSearch.forEach((d) => {
+                if (includes(nextProps.label, d)) {
+                    searchArray.push(true)
+                } else {
+                    searchArray.push(false)
+                }
+            })
+            if (!searchArray.includes(false)) {
+                return {
+                    highlight: true
+                }
+            } else {
+                return {
+                    highlight: false
+                }
+            }
+        }
+        console.log(searchArray)
         if (nextProps.activeLabel) {
             if (nextProps.activeLabel !== prevState.labelId) {
                 return {
@@ -24,6 +46,7 @@ class TimelineLabel extends Component {
         }
         return null
     }
+
 
     componentDidUpdate(prevProps, prevState) {
         const { zoomTransform } = this.props;
@@ -53,6 +76,7 @@ class TimelineLabel extends Component {
                 this.props.changeLabel(label)
             })
         } else {
+            console.log(this.state.active)
             this.setState({
                 active: !this.state.active
             }, () => {
@@ -74,6 +98,19 @@ class TimelineLabel extends Component {
         }
     }
 
+
+    getLabelColor = () => {
+        if (this.state.active) {
+            return 'green'
+        } else if (this.state.hover) {
+            return 'green'
+        } else if (this.state.highlight) {
+            return 'coral'
+        } else {
+            return 'grey'
+        }
+    }
+
     renderTimelineLabels = () => {
         const { zoomTransform, chartWidth } = this.props;
         const { timestampRange } = this.props.state;
@@ -92,14 +129,14 @@ class TimelineLabel extends Component {
     }
 
     render() {
-        const { label, zoomTransform, shuffleLabels } = this.props;
+        const { label, zoomTransform } = this.props;
 
         let labelPosX = label.timestamp_range[0];
         let diff = (Math.round(label.timestamp_range[1]) - Math.round(label.timestamp_range[0]))
 
         let color;
         let opacity;
-        color = this.state.active || this.state.hover ? 'green' : 'grey';
+        color = this.getLabelColor()
         opacity = this.state.hover ? '.6' : '.8'
 
         return (

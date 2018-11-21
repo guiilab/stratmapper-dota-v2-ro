@@ -32,15 +32,21 @@ class AddLabel extends Component {
                 <input className="label-input" data-label="title" placeholder="Title" type="text" maxLength={20} value={this.state.title} onChange={(e) => this.handleChange(e)} />
                 <input className="label-input" data-label="author" placeholder="Author Name" type="text" value={this.state.author} onChange={(e) => this.handleChange(e)} />
                 <textarea className="label-input textarea" data-label="description" placeholder="Description" value={this.state.description} onChange={(e) => this.handleChange(e)} />
-                <div
-                    className="add-label-button"
-                    onClick={(() => {
-                        let response = this.props.addLabel(this.state)
-                        if (response !== 'failure') {
-                            this.clearData()
-                        }
-                    })
-                    }>Add Label</div>
+                <div className="label-buttons">
+                    <div
+                        className="add-label-button"
+                        onClick={(() => {
+                            let response = this.props.addLabel(this.state)
+                            if (response !== 'failure') {
+                                this.clearData()
+                            }
+                        })
+                        }>Add Label</div>
+                    <div
+                        className="search-labels-button"
+                        onClick={(() => this.props.searchLabels(this.state))
+                        }>Search Labels</div>
+                </div>
             </div>
         )
     }

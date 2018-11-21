@@ -152,7 +152,7 @@ h3 {
     margin-bottom: 2rem;
 }
 
-.label-input, .add-label-button, .edit-label-input {
+.label-input, .add-label-button, .edit-label-input, .search-labels-button {
     border: none;
     outline: none;
     height: 15px;
@@ -170,9 +170,10 @@ h3 {
     width: 98%;
 }
 
-.add-label-button, .edit-label-button {
+.edit-label-button {
     text-align: center;
     width: 60px;
+    height: 20px;
     background-color: rgb(131, 131, 131);
     border: black 1px solid;
     color: white;
@@ -181,7 +182,27 @@ h3 {
     cursor: pointer;
 }
 
-.add-label-button:hover {
+.add-label-button, .search-labels-button {
+    text-align: center;
+    width: 60px;
+    height: 20px;
+    background-color: rgb(131, 131, 131);
+    border: black 1px solid;
+    color: white;
+    font-size: .8rem;
+    border: grey 1px solid;
+    cursor: pointer;
+    display: inline-block;
+    line-height: 20px;
+}
+
+.search-labels-button {
+    width: 100px;
+    float: right;
+    background-color: grey;
+}
+
+.add-label-button:hover, .search-labels-button:hover {
     background-color: rgb(110, 110, 110);
 }
 
@@ -420,6 +441,8 @@ h3 {
     width: 100%;
     border: black 1px solid;
     height: 250px;
+    white-space: nowrap;
+    min-width: 1200px;
 }
 
 .timeline-chart {
@@ -427,6 +450,7 @@ h3 {
     position: relative;
     height: 250px;
     width: 88%;
+    min-width: 1100px;
     background-color: lightgrey;
 }
 
@@ -463,6 +487,7 @@ h3 {
     bottom: 35px;
     padding: .7rem;
     transition: visibility 0s, opacity 0.1s linear;
+    white-space: normal;
 }
 
 .timeline-label {
@@ -488,7 +513,7 @@ h3 {
 
 .event-select-container {
     width: 12%;
-    min-width: 120px !important;
+    min-width: 160px !important;
     background-color: grey;
     height: 250px;
     position: relative;
@@ -506,16 +531,15 @@ h3 {
 .event-controls {
     display: inline-block;
     float: right;
-    margin-right: .5rem;
     padding: .1rem;
 }
 
 .event-option {
     float: left;
     display: inline-block;
-    font-size: .8rem;
+    font-size: .7rem;
     padding: .2rem;
-    margin-left: 1rem;
+    margin-left: 0rem;
 }
 
 .mute-button, .solo-button {
