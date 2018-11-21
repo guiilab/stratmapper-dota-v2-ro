@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { scaleLinear } from 'd3';
-import { includes, transform } from 'lodash';
 
 import { Context } from '../../../../Provider';
 
@@ -19,8 +18,11 @@ class TimelineLabel extends Component {
     static getDerivedStateFromProps(nextProps, prevState) {
         let searchArray = [];
         if (nextProps.state.labelSearch) {
+            let title = nextProps.label['title'].toLowerCase()
+            let author = nextProps.label['author'].toLowerCase()
+            let description = nextProps.label['description'].toLowerCase()
             nextProps.state.labelSearch.forEach((d) => {
-                if (includes(nextProps.label, d)) {
+                if ((title.indexOf(d) > -1) || (author.indexOf(d) > -1) || (description.indexOf(d) > -1)) {
                     searchArray.push(true)
                 } else {
                     searchArray.push(false)
@@ -36,7 +38,6 @@ class TimelineLabel extends Component {
                 }
             }
         }
-        console.log(searchArray)
         if (nextProps.activeLabel) {
             if (nextProps.activeLabel !== prevState.labelId) {
                 return {
