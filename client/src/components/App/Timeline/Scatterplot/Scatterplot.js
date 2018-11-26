@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-
 import { scaleLinear } from 'd3';
 
-import { Context } from '../../Provider.js'
+import { Context } from '../../Provider.js';
+import EventIcon from '../../Map/EventIcon/EventIcon.js';
 
 class Scatterplot extends Component {
     constructor(props) {
@@ -37,23 +37,20 @@ class Scatterplot extends Component {
 
     render() {
         const { data, events, yScaleTime } = this.props;
-        const { toggleActiveNode, getUnit, setTooltipPosition } = this.context;
-        const { selectedUnits, selectedEventTypes } = this.context.state;
+        const { icons } = this.context.state;
         return (
             <g ref="scatterplot">
                 {data.map((event) => {
-                    let unitObject = getUnit(event.unit)
-                    return <circle
-                        cx={this.xScaleTime(event.timestamp)}
-                        cy={yScaleTime(events.indexOf(event.event_type))}
-                        r={4}
-                        fill={(selectedUnits.includes(event.unit) && (selectedEventTypes.includes(event.event_type))) ? unitObject.color : 'grey'}
-                        stroke="black"
-                        strokeWidth={1}
-                        key={event.node_id}
-                        onMouseOver={(e) => { toggleActiveNode(event); setTooltipPosition(e) }}
-                        onMouseOut={() => toggleActiveNode(null)}
-                    />
+                    return (
+                        <EventIcon
+                            zoomTransform={.04}
+                            x={this.xScaleTime(event.timestamp)}
+                            y={yScaleTime(events.indexOf(event.event_type))}
+                            d={icons[event.event_type]}
+                            unit={event.unit}
+                            event={event}
+                            key={event.node_id} />
+                    )
                 })
                 }
             </g>

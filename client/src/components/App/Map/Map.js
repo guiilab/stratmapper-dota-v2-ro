@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 
-import * as d3 from 'd3';
+// import * as d3 from 'd3';
+import { zoom, select, event, scaleLog, easeLinear, zoomIdentity } from 'd3'
 
 import { Context } from '../Provider.js'
 import EventIcon from './EventIcon/EventIcon.js';
@@ -16,42 +17,42 @@ class Map extends PureComponent {
             zoomTransform: null
         }
 
-        this.zoom = d3.zoom()
+        this.zoom = zoom()
             .scaleExtent([.4, 10])
             .on("zoom", this.zoomed.bind(this))
     }
 
     componentDidMount() {
         this.centerMap()
-        d3.select(this.refs.mapsvg)
+        select(this.refs.mapsvg)
             .call(this.zoom)
     }
 
     componentDidUpdate(nextProps, prevState) {
-        d3.select(this.refs.mapsvg)
+        select(this.refs.mapsvg)
             .call(this.zoom)
     }
 
     zoomed() {
         this.setState({
-            zoomTransformScaled: this.zoomScaleIcon(d3.event.transform.k),
-            zoomTransform: d3.event.transform
+            zoomTransformScaled: this.zoomScaleIcon(event.transform.k),
+            zoomTransform: event.transform
         });
     }
 
     centerMap() {
-        let zoomIdentity = d3.zoomIdentity
-        zoomIdentity.k = .5
-        zoomIdentity.x = this.props.state.mapSettings.width / 2
-        d3.select(this.refs.mapsvg)
+        let zoomID = zoomIdentity
+        zoomID.k = .5
+        zoomID.x = this.props.state.mapSettings.width / 2
+        select(this.refs.mapsvg)
             .transition()
             .duration(200)
-            .ease(d3.easeLinear)
-            .call(this.zoom.transform, zoomIdentity)
+            .ease(easeLinear)
+            .call(this.zoom.transform, zoomID)
     }
 
     zoomScaleIcon(num) {
-        const scale = d3.scaleLog()
+        const scale = scaleLog()
             .domain([.4, 10])
             .range([.08, .01])
         return scale(num)
