@@ -36,8 +36,9 @@ class Scatterplot extends Component {
     }
 
     render() {
-        const { data, events, yScaleTime } = this.props;
-        const { icons } = this.context.state;
+        const { data, events, yScaleTime, unit } = this.props;
+        const { icons, selectedUnits, selectedEventTypes } = this.context.state;
+
         return (
             <g ref="scatterplot">
                 {data.map((event) => {
@@ -49,7 +50,7 @@ class Scatterplot extends Component {
                             d={icons[event.event_type]}
                             unit={event.unit}
                             event={event}
-
+                            fill={(selectedUnits.includes(event.unit) && (selectedEventTypes.includes(event.event_type))) ? null : 'grey'}
                             key={event.node_id} />
                     )
                 })
