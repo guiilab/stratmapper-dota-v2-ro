@@ -490,10 +490,11 @@ class Provider extends Component {
                 },
 
                 shuffleLabels: (e) => {
+                    let array = this.state.labels;
                     if (e.which === 32) {
-                        let reversedLabels = this.state.labels.reverse()
+                        array.sort(() => .5 - Math.random())
                         this.setState({
-                            labels: reversedLabels
+                            labels: array
                         })
                     }
                 },
