@@ -32,15 +32,11 @@ class Provider extends Component {
             }
         },
         matchId: null,
-        play: {
-            playhead: 0,
-            playButtonActive: false,
-            playSpeed: 100
-        },
         events: {
             allTypes: [],
             categories: []
         },
+        playing: false,
         units: null,
         unitsAll: null,
         groups: [],
@@ -342,6 +338,12 @@ class Provider extends Component {
         return 0;
     }
 
+    tick = () => {
+        this.setState({
+            brushRange: [this.state.brushRange[0] + 1, this.state.brushRange[1] + 1]
+        }, () => console.log('tick'))
+    }
+
     render() {
         return (
             <Context.Provider value={{
@@ -489,10 +491,20 @@ class Provider extends Component {
                 },
 
                 playback: () => {
-                    console.log(this.state.brushRange)
                     this.setState({
-                        brushRange: [this.state.brushRange[0] + 10, this.state.brushRange[1] + 10]
-                    }, () => console.log(this.state.brushRange))
+                        playing: !this.state.playing
+                    }, () => {
+                        // if (this.state.playing) {
+                        //     this.interval = setInterval(() => this.tick(), 10);
+                        // }
+                        setTimeout(function () {
+                            this.setState(prevState => {
+                                return {
+                                    brushRange: [prevState.brushRange[0] + 1, prevState.brushRange[1] + 1]
+                                }
+                            })
+                        }.bind(this), 300)
+                    })
                 },
 
                 shuffleLabels: (e) => {

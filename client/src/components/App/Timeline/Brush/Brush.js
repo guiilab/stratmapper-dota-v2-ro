@@ -22,14 +22,14 @@ class Brush extends Component {
             }.bind(this), 10)
 
         }
-        if (!this.props.zoomTransform) {
-            this.updateBrush()
-        } else if (nextProps.zoomTransform !== this.props.zoomTransform) {
-            this.renderBrush()
-        } else if (nextProps.brushRange[0] !== this.props.brushRange[0]) {
+        if (nextProps.brushRange[0] !== this.props.brushRange[0]) {
             setTimeout(function () {
                 this.renderBrush()
             }.bind(this), 10)
+        } else if (!this.props.zoomTransform) {
+            this.updateBrush()
+        } else if (nextProps.zoomTransform !== this.props.zoomTransform) {
+            this.renderBrush()
         }
     }
 

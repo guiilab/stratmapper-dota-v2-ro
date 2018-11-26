@@ -105,6 +105,7 @@ class TimelineChart extends PureComponent {
                             chartWidth={this.state.width}
                             timestampRange={timestampRange}
                             zoomTransform={this.state.zoomTransform}
+                            brushRange={this.context.state.brushRange}
                         /> : <g>Empty</g>
                     }
                     <Scatterplot
