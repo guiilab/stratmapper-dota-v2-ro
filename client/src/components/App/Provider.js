@@ -474,7 +474,6 @@ class Provider extends Component {
                         }, () => {
                             this.setState({
                                 brushRange: [Math.round(label.timestamp_range[0]), Math.round(label.timestamp_range[1])],
-                                brushActive: true,
                                 selectedUnits: [...label.units],
                                 selectedEventTypes: [...label.events],
                                 activeLabel: label.id
@@ -487,6 +486,13 @@ class Provider extends Component {
                             selectedEventTypes: [...this.state.events.timeline]
                         })
                     }
+                },
+
+                playback: () => {
+                    console.log(this.state.brushRange)
+                    this.setState({
+                        brushRange: [this.state.brushRange[0] + 10, this.state.brushRange[1] + 10]
+                    }, () => console.log(this.state.brushRange))
                 },
 
                 shuffleLabels: (e) => {

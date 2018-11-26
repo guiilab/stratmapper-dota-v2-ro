@@ -77,7 +77,6 @@ class TimelineLabel extends Component {
                 this.props.changeLabel(label)
             })
         } else {
-            console.log(this.state.active)
             this.setState({
                 active: !this.state.active
             }, () => {
