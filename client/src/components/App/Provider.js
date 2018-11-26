@@ -339,8 +339,10 @@ class Provider extends Component {
     }
 
     tick = () => {
-        this.setState({
-            brushRange: [this.state.brushRange[0] + 1, this.state.brushRange[1] + 1]
+        this.setState(prevState => {
+            return {
+                brushRange: [prevState.brushRange[0] + 1, prevState.brushRange[1] + 1]
+            }
         }, () => console.log('tick'))
     }
 
@@ -494,16 +496,11 @@ class Provider extends Component {
                     this.setState({
                         playing: !this.state.playing
                     }, () => {
-                        // if (this.state.playing) {
-                        //     this.interval = setInterval(() => this.tick(), 10);
-                        // }
-                        setTimeout(function () {
-                            this.setState(prevState => {
-                                return {
-                                    brushRange: [prevState.brushRange[0] + 1, prevState.brushRange[1] + 1]
-                                }
-                            })
-                        }.bind(this), 300)
+                        if (this.state.playing) {
+                            this.interval = setInterval(() => this.tick(), 200);
+                        } else {
+                            clearInterval(this.interval)
+                        }
                     })
                 },
 
