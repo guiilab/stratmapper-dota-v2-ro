@@ -16,20 +16,22 @@ class Brush extends Component {
     }
 
     componentDidUpdate(nextProps) {
+        console.log(this.context.state.brushRange)
+        console.log(this.props.timestampRange)
         if (nextProps.activeLabel !== this.props.activeLabel) {
             setTimeout(function () {
                 this.renderBrush()
             }.bind(this), 10)
 
         }
-        if (nextProps.brushRange[0] !== this.props.brushRange[0]) {
-            setTimeout(function () {
-                this.renderBrush()
-            }.bind(this), 10)
-        } else if (!this.props.zoomTransform) {
+        if (!this.props.zoomTransform) {
             this.updateBrush()
         } else if (nextProps.zoomTransform !== this.props.zoomTransform) {
             this.renderBrush()
+        } else if (nextProps.brushRange[0] !== this.props.brushRange[0]) {
+            setTimeout(function () {
+                this.renderBrush()
+            }.bind(this), 90)
         }
     }
 
