@@ -49,6 +49,7 @@ class Scatterplot extends Component {
                             d={icons[event.event_type]}
                             unit={event.unit}
                             event={event}
+
                             key={event.node_id} />
                     )
                 })

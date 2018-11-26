@@ -30,6 +30,20 @@ class EventIcon extends PureComponent {
         return null
     }
 
+    getIconColor = () => {
+        const { fill, getUnit, unit } = this.props
+        let unitObject = getUnit(unit)
+        if (fill) {
+            return fill
+        } else if (this.state.color) {
+            return this.state.color
+        } else if (unitObject) {
+            return unitObject.color
+        } else {
+            return 'grey'
+        }
+    }
+
     render() {
         const { d, event, unit, toggleActiveNode, zoomTransform, x, y, getUnit, setTooltipPosition } = this.props;
         const { selectedUnits } = this.props.state;
@@ -42,7 +56,7 @@ class EventIcon extends PureComponent {
                 d={d}
                 display={selectedUnits.includes(unit) ? 'inherit' : 'none'}
                 transform={zoomTransform ? `translate(${x}, ${y}) scale(${zoomTransform}) translate(-160, -160)` : `translate(${x}, ${y}) scale(.06) translate(-160, -160)`}
-                fill={this.state.color ? this.state.color : unitObject.color}
+                fill={this.getIconColor()}
                 stroke="black"
                 strokeWidth={10}
                 onMouseOver={(e) => { toggleActiveNode(event); setTooltipPosition(e) }}
