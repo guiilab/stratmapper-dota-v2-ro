@@ -335,9 +335,7 @@ class Provider extends Component {
                 return {
                     brushRange: [prevState.brushRange[0] + this.state.playbackSpeed, prevState.brushRange[1] + this.state.playbackSpeed]
                 }
-            }, () => this.setState({
-                playing: false
-            }))
+            }, () => this.stopPlaying())
         } else if (e === 'forward') {
             this.setState(prevState => {
                 return {
@@ -349,10 +347,14 @@ class Provider extends Component {
                 return {
                     brushRange: [prevState.brushRange[0] - this.state.playbackSpeed, prevState.brushRange[1] - this.state.playbackSpeed]
                 }
-            }, () => this.setState({
-                playing: false
-            }))
+            }, () => this.stopPlaying())
         }
+    }
+
+    stopPlaying = () => {
+        this.setState({
+            playing: false
+        })
     }
 
     render() {
@@ -515,6 +517,10 @@ class Provider extends Component {
                             clearInterval(this.interval)
                         }
                     })
+                },
+
+                stopPlayback: () => {
+                    this.stopPlaying()
                 },
 
                 playbackSpeed: (e) => {

@@ -4,12 +4,6 @@ import { Context } from '../../Provider.js';
 import { scaleLinear, brushX, select, event } from 'd3';
 
 class Brush extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            clicked: false
-        }
-    }
 
     componentDidMount() {
         this.initBrush().then(res => this.renderBrush());
@@ -88,8 +82,7 @@ class Brush extends Component {
 
     render() {
         return (
-            <g ref="brush">
-            </g>
+            <g ref="brush" />
         )
     }
 }

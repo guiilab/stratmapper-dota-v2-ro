@@ -77,9 +77,11 @@ class TimelineLabel extends Component {
     }
 
     handleClick = (e) => {
-        const { label, activeLabel } = this.props;
+        const { label, activeLabel, stopPlayback } = this.props;
+        const { playing } = this.props.state;
         e.preventDefault();
         e.stopPropagation();
+        stopPlayback()
         if (this.state.active) {
             this.setState({
                 active: false,
