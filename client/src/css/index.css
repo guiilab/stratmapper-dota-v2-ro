@@ -420,9 +420,10 @@ h3 {
     width: 100%;
     height: 30px;
     position: absolute;
-    left: 0px;
-    top: -63px;
-    background-color: lightgreen;
+    left: -1px;
+    top: -65px;
+    background-color: rgb(226, 226, 226);
+    border: black solid 1px;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -432,8 +433,13 @@ h3 {
     cursor: pointer;
 }
 
-.play-pause:hover, .minus:hover, .plus:hover {
-    color: grey;
+.step-backward, .step-forward, .play-pause {
+    margin: 0 .4rem;
+    display: inline-block;
+}
+
+.play-pause:hover, .minus:hover, .plus:hover, .step-backward:hover, .step-forward:hover {
+    color: grey !important;
 }
 
 .minus {
