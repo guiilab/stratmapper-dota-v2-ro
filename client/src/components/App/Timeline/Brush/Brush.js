@@ -21,7 +21,7 @@ class Brush extends Component {
                 this.renderBrush()
             }.bind(this), 10)
         }
-        if (this.context.state.playing) {
+        if (prevProps.brushRange[0] !== this.props.brushRange[0] && (this.context.state.playing)) {
             this.renderBrush()
         } else if (!this.props.zoomTransform) {
             this.updateBrush()
