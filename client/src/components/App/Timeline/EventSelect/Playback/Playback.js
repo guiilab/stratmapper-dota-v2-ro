@@ -25,13 +25,13 @@ class Playback extends PureComponent {
         return (
             <div className="playback-container">
                 <div className="play-pause-container">
-                    <FontAwesomeIcon icon={faStepBackward} style={playingStyle} className="step-backward" onClick={playing ? null : () => playback('backward')} />
+                    <FontAwesomeIcon icon={faStepBackward} style={playingStyle} className="step-backward" onClick={playing ? null : () => playback('stepbackward')} />
                     <div className="play-pause" onClick={() => this.context.playback()}>
                         {this.context.state.playing ?
                             <FontAwesomeIcon icon={faPause} className='fa-lg' />
                             : <FontAwesomeIcon icon={faPlay} className='fa-lg' />}
                     </div>
-                    <FontAwesomeIcon icon={faStepForward} style={playingStyle} className="step-forward" onClick={playing ? null : () => playback('forward')} />
+                    <FontAwesomeIcon icon={faStepForward} style={playingStyle} className="step-forward" onClick={playing ? null : () => playback('stepforward')} />
                 </div>
                 <div className="speed">
                     <FontAwesomeIcon icon={faMinus} className="minus" onClick={() => playbackSpeed('minus')} />

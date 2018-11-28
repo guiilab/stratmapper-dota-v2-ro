@@ -330,18 +330,28 @@ class Provider extends Component {
     }
 
     tick = (e) => {
-        if (e === 'forward') {
+        if (e === 'stepforward') {
+            this.setState(prevState => {
+                return {
+                    brushRange: [prevState.brushRange[0] + this.state.playbackSpeed, prevState.brushRange[1] + this.state.playbackSpeed]
+                }
+            }, () => this.setState({
+                playing: false
+            }))
+        } else if (e === 'forward') {
             this.setState(prevState => {
                 return {
                     brushRange: [prevState.brushRange[0] + this.state.playbackSpeed, prevState.brushRange[1] + this.state.playbackSpeed]
                 }
             })
-        } else if (e === 'backward') {
+        } else if (e === 'stepbackward') {
             this.setState(prevState => {
                 return {
                     brushRange: [prevState.brushRange[0] - this.state.playbackSpeed, prevState.brushRange[1] - this.state.playbackSpeed]
                 }
-            })
+            }, () => this.setState({
+                playing: false
+            }))
         }
     }
 
@@ -492,21 +502,19 @@ class Provider extends Component {
                 },
 
                 playback: (e) => {
-                    if (e === 'forward') {
-                        this.tick('forward')
-                    } else if (e === 'backward') {
-                        this.tick('backward')
-                    } else {
-                        this.setState({
-                            playing: !this.state.playing
-                        }, () => {
-                            if (this.state.playing) {
-                                this.interval = setInterval(() => this.tick('forward'), 250);
-                            } else {
-                                clearInterval(this.interval)
-                            }
-                        })
-                    }
+                    this.setState({
+                        playing: !this.state.playing
+                    }, () => {
+                        if (e === 'stepforward') {
+                            this.tick('stepforward')
+                        } else if (e === 'stepbackward') {
+                            this.tick('stepbackward')
+                        } else if (this.state.playing) {
+                            this.interval = setInterval(() => this.tick('forward'), 250);
+                        } else {
+                            clearInterval(this.interval)
+                        }
+                    })
                 },
 
                 playbackSpeed: (e) => {
