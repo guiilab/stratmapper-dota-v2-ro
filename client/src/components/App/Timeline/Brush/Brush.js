@@ -21,10 +21,8 @@ class Brush extends Component {
                 this.renderBrush()
             }.bind(this), 10)
         }
-        if (prevProps.brushRange[0] !== this.props.brushRange[0] && (this.context.state.playing)) {
-            setTimeout(function () {
-                this.renderBrush()
-            }.bind(this), 900)
+        if ((prevProps.brushRange[0] !== this.props.brushRange[0]) && (this.context.state.playing)) {
+            this.renderBrush()
         } else if (!this.props.zoomTransform) {
             this.updateBrush()
         } else if (prevProps.zoomTransform !== this.props.zoomTransform) {
@@ -62,7 +60,6 @@ class Brush extends Component {
         select(this.refs.brush)
             .call(this.brush)
             .transition()
-            .duration(100)
             .call(this.brush.move, [brushStart, brushEnd])
     }
 
@@ -79,7 +76,9 @@ class Brush extends Component {
         } else {
             s = [this.context.state.brushRange[0], this.context.state.brushRange[1]];
         }
-        if (!zoomTransform) {
+        if (this.context.state.playing) {
+            return
+        } else if (!zoomTransform) {
             this.context.updateBrushRange([this.xScaleTime.invert(s[0]), this.xScaleTime.invert(s[1])])
         } else if (event.sourceEvent) {
             let newXScaleTime = zoomTransform.rescaleX(this.xScaleTime);

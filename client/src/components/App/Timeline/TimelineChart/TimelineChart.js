@@ -81,7 +81,6 @@ class TimelineChart extends PureComponent {
         if (!this.state.width) {
             return <div className="timeline-chart" ref={this.chart}></div>
         }
-
         return (
             <div className="timeline-chart" ref={this.chart} style={heightStyle} >
                 <XAxis

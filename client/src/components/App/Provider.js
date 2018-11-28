@@ -341,9 +341,9 @@ class Provider extends Component {
     tick = () => {
         this.setState(prevState => {
             return {
-                brushRange: [prevState.brushRange[0] + 10, prevState.brushRange[1] + 10]
+                brushRange: [prevState.brushRange[0] + 2, prevState.brushRange[1] + 2]
             }
-        }, () => console.log('tick'))
+        })
     }
 
     render() {
@@ -456,7 +456,7 @@ class Provider extends Component {
 
                 updateBrushRange: (e) => {
                     this.setState({
-                        brushRange: e
+                        brushRange: [Math.round(e[0]), Math.round(e[1])]
                     }, () => {
                         let unitEventsFiltered = this.filterEvents()
                         this.setState({
@@ -497,7 +497,7 @@ class Provider extends Component {
                         playing: !this.state.playing
                     }, () => {
                         if (this.state.playing) {
-                            this.interval = setInterval(() => this.tick(), 1000);
+                            this.interval = setInterval(() => this.tick(), 250);
                         } else {
                             clearInterval(this.interval)
                         }
