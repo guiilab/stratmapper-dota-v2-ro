@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlay, faPause, faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 
-import { Context } from '../../../Provider.js'
+import { Context } from '../../../Provider.js';
 
 class Playback extends PureComponent {
 
@@ -8,11 +10,13 @@ class Playback extends PureComponent {
         return (
             <div className="playback-container">
                 <div className="play-pause" onClick={() => this.context.playback()}>
-                    <div className="play-pause-container">
-                        {this.context.state.playing ?
-                            <div className="pause-button">||</div>
-                            : <div className="play-button"></div>}
-                    </div>
+                    {this.context.state.playing ?
+                        <FontAwesomeIcon icon={faPause} />
+                        : <FontAwesomeIcon icon={faPlay} />}
+                </div>
+                <div className="speed">
+                    <FontAwesomeIcon icon={faMinus} className="minus" onClick={() => this.context.playbackSpeed('minus')} />
+                    <FontAwesomeIcon icon={faPlus} className="plus" onClick={() => this.context.playbackSpeed('plus')} />
                 </div>
             </div>
         );

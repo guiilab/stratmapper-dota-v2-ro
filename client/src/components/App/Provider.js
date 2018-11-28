@@ -37,6 +37,7 @@ class Provider extends Component {
             categories: []
         },
         playing: false,
+        playbackSpeed: 1,
         units: null,
         unitsAll: null,
         groups: [],
@@ -271,16 +272,6 @@ class Provider extends Component {
         if (response.status !== 200) {
             throw Error(body.message)
         }
-        // console.log(`This is the first time the body runs: ${body}`)
-        // this.setState({
-        //     labels: [...body]
-        // }, () => console.log(`This is the second time body runs: ${this.state.labels}`))
-        // if (id) {
-        //     this.setState({
-        //         activeLabel: id,
-        //         labels: [...body]
-        //     })
-        // } else {
         this.setState({
             labels: [...body]
         })
@@ -341,7 +332,7 @@ class Provider extends Component {
     tick = () => {
         this.setState(prevState => {
             return {
-                brushRange: [prevState.brushRange[0] + 2, prevState.brushRange[1] + 2]
+                brushRange: [prevState.brushRange[0] + this.state.playbackSpeed, prevState.brushRange[1] + this.state.playbackSpeed]
             }
         })
     }
@@ -502,6 +493,18 @@ class Provider extends Component {
                             clearInterval(this.interval)
                         }
                     })
+                },
+
+                playbackSpeed: (e) => {
+                    if (e === 'plus') {
+                        this.setState(prevState => ({
+                            playbackSpeed: prevState.playbackSpeed + .25
+                        }))
+                    } else if (e === 'minus') {
+                        this.setState(prevState => ({
+                            playbackSpeed: prevState.playbackSpeed - .25
+                        }))
+                    }
                 },
 
                 shuffleLabels: (e) => {

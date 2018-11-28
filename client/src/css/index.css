@@ -423,29 +423,21 @@ h3 {
     left: 0px;
     top: -63px;
     background-color: lightgreen;
-    text-align: middle;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 }
 
-.play-pause-container {
-    border: black 1px solid;
-    background-color: grey;
-    width: 20px;
-    height: 20px;
-    margin: auto;
-    text-align: center;
+.playback-container * {
+    cursor: pointer;
 }
 
-.play-button {
-    position: relative;
-    left: 5px;
-    border-style: solid;
-    border-width: .6em 0 .6em 1em;
-    border-color: transparent transparent transparent #000;
+.play-pause:hover, .minus:hover, .plus:hover {
+    color: grey;
 }
 
-.pause-button {
-    font-weight: 900;
-    font-size: 1.2rem;
+.minus {
+    margin-right: .5rem;
 }
 
 .timestamp-container {
