@@ -22,7 +22,9 @@ class Brush extends Component {
             }.bind(this), 10)
         }
         if (prevProps.brushRange[0] !== this.props.brushRange[0] && (this.context.state.playing)) {
-            this.renderBrush()
+            setTimeout(function () {
+                this.renderBrush()
+            }.bind(this), 10)
         } else if (!this.props.zoomTransform) {
             this.updateBrush()
         } else if (prevProps.zoomTransform !== this.props.zoomTransform) {
@@ -60,6 +62,7 @@ class Brush extends Component {
         select(this.refs.brush)
             .call(this.brush)
             .transition()
+            .duration(100)
             .call(this.brush.move, [brushStart, brushEnd])
     }
 
