@@ -10,7 +10,8 @@ class TimelineLabel extends Component {
             labelId: this.props.label.id,
             hover: false,
             active: false,
-            highlight: false
+            highlight: false,
+            clicked: false
         }
         this.renderTimelineLabels();
     }
@@ -44,6 +45,15 @@ class TimelineLabel extends Component {
                     active: false
                 }
             }
+            else if ((nextProps.activeLabel === prevState.labelId) && (!prevState.clicked)) {
+                return {
+                    active: true
+                }
+            } else {
+                return {
+                    active: false
+                }
+            }
         }
         return null
     }
@@ -70,16 +80,26 @@ class TimelineLabel extends Component {
         const { label, activeLabel } = this.props;
         e.preventDefault();
         e.stopPropagation();
-        if (activeLabel !== this.state.labelId) {
+        if (this.state.active) {
             this.setState({
-                active: true
+                active: false,
+                clicked: true
+            }, () => {
+                this.props.changeLabel(null)
+            })
+        } else if (activeLabel !== this.state.labelId) {
+            this.setState({
+                active: !this.state.active,
+                clicked: !this.state.clicked
             }, () => {
                 this.props.changeLabel(label)
             })
         } else {
             this.setState({
-                active: !this.state.active
+                active: !this.state.active,
+                clicked: !this.state.clicked
             }, () => {
+                console.log(this.state.active)
                 if (this.state.active) {
                     this.props.changeLabel(label)
                 } else {

@@ -36,7 +36,7 @@ class Scatterplot extends Component {
     }
 
     render() {
-        const { data, events, yScaleTime, unit } = this.props;
+        const { data, events, yScaleTime } = this.props;
         const { icons, selectedUnits, selectedEventTypes } = this.context.state;
 
         return (

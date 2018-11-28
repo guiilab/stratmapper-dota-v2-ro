@@ -16,8 +16,6 @@ class Brush extends Component {
     }
 
     componentDidUpdate(nextProps) {
-        console.log(this.context.state.brushRange)
-        console.log(this.props.timestampRange)
         if (nextProps.activeLabel !== this.props.activeLabel) {
             setTimeout(function () {
                 this.renderBrush()
