@@ -15,18 +15,17 @@ class Brush extends Component {
         this.initBrush().then(res => this.renderBrush());
     }
 
-    componentDidUpdate(nextProps) {
-        if (nextProps.activeLabel !== this.props.activeLabel) {
+    componentDidUpdate(prevProps) {
+        if (prevProps.activeLabel !== this.props.activeLabel) {
             setTimeout(function () {
                 this.renderBrush()
             }.bind(this), 10)
-
         }
-        if (!this.props.zoomTransform) {
-            this.updateBrush()
-        } else if (nextProps.zoomTransform !== this.props.zoomTransform) {
+        if (this.context.state.playing) {
             this.renderBrush()
-        } else if (nextProps.brushRange[0] !== this.props.brushRange[0]) {
+        } else if (!this.props.zoomTransform) {
+            this.updateBrush()
+        } else if (prevProps.zoomTransform !== this.props.zoomTransform) {
             this.renderBrush()
         }
     }
