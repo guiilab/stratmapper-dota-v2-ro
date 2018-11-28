@@ -522,6 +522,7 @@ class Provider extends Component {
                 stopPlayback: () => {
                     this.stopPlaying()
                     clearInterval(this.interval)
+                    return 'clear'
                 },
 
                 playbackSpeed: (e) => {

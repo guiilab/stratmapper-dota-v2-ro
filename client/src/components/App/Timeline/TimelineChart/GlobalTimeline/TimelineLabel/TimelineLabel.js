@@ -77,11 +77,9 @@ class TimelineLabel extends Component {
     }
 
     handleClick = (e) => {
-        const { label, activeLabel, stopPlayback } = this.props;
-        const { playing } = this.props.state;
+        const { label, activeLabel } = this.props;
         e.preventDefault();
         e.stopPropagation();
-        stopPlayback()
         if (this.state.active) {
             this.setState({
                 active: false,
@@ -176,7 +174,6 @@ class TimelineLabel extends Component {
                     fill={color}
                     pointerEvents='all'
                     onClick={(e) => this.handleClick(e)}
-                    onContextMenu={(e) => this.handleClick(e)}
                     onMouseOver={(e) => this.toggleHover(e)}
                     onMouseOut={() => this.toggleHover()}
                     opacity={opacity}
