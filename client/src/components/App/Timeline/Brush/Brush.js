@@ -27,9 +27,7 @@ class Brush extends Component {
         } else if (nextProps.zoomTransform !== this.props.zoomTransform) {
             this.renderBrush()
         } else if (nextProps.brushRange[0] !== this.props.brushRange[0]) {
-            setTimeout(function () {
-                this.renderBrush()
-            }.bind(this), 90)
+            this.renderBrush()
         }
     }
 

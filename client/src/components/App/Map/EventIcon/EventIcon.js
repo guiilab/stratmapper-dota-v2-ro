@@ -45,7 +45,7 @@ class EventIcon extends PureComponent {
     }
 
     render() {
-        const { d, event, unit, toggleActiveNode, zoomTransform, x, y, getUnit, setTooltipPosition } = this.props;
+        const { d, event, unit, toggleActiveNode, zoomTransform, x, y, setTooltipPosition } = this.props;
         const { selectedUnits } = this.props.state;
 
         return (
