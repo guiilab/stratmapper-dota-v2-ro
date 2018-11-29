@@ -41,6 +41,9 @@ class Provider extends Component {
     loadNewData = () => {
         this.getMatchData(this.state.currentMatch)
             .then(res => this.loadMatchData(res))
+            .then(res => this.getEvents())
+            .then(res => this.loadEvents(res))
+            .then(res => this.props.toggleMapLoading())
     }
 
     getMatchEntries = async () => {
@@ -65,7 +68,6 @@ class Provider extends Component {
             matches: [...matches],
             currentMatch: matches[0]
         })
-        return
     }
 
     getMatchData = async (match) => {
@@ -169,8 +171,6 @@ class Provider extends Component {
             tooltips: tooltips,
             units: [...data[0].units],
             unitsAll: [...unitsAll]
-        }, () => {
-            this.getEvents().then(res => this.loadEvents(res))
         })
     }
 
@@ -210,10 +210,7 @@ class Provider extends Component {
             selectedEventTypes: [...this.state.loadSettings.selected_events],
             statusEventsFilteredByUnit: statusEventsFilteredByUnit,
             unitEventsFiltered: 0
-        }, () => {
-            this.props.toggleMapLoading()
-        }
-        )
+        })
     }
 
     filterEvents = () => {
@@ -462,10 +459,12 @@ class Provider extends Component {
                 stopPlayback: () => {
                     this.stopPlaying()
                     clearInterval(this.interval)
-                    return 'clear'
                 },
 
                 playbackSpeed: (e) => {
+                    if (Math.abs(this.state.playbackSpeed) >= 2) {
+                        return
+                    }
                     if (e === 'plus') {
                         this.setState(prevState => ({
                             playbackSpeed: prevState.playbackSpeed + .25
@@ -525,8 +524,8 @@ class Provider extends Component {
                         activeLabel: null,
                         currentMatch: e
                     }, () => {
-                        this.loadNewData();
                         this.props.toggleMapLoading()
+                        this.loadNewData();
                     })
                 },
 
