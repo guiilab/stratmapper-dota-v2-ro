@@ -5,7 +5,7 @@ export const Context = createContext();
 
 class Provider extends Component {
     state = {
-        currentMatch: 'early-game',
+        currentMatch: '',
         brushRange: [],
         windowSettings: {
             width: null,
@@ -22,7 +22,7 @@ class Provider extends Component {
     componentDidMount() {
         this.updateWindowDimensions();
         window.addEventListener("resize", this.updateWindowDimensions);
-        this.getMatchEntries().then(this.loadNewData())
+        this.getMatchEntries().then(res => this.loadNewData())
     }
 
     componentDidUpdate(nextProps, nextState) {
@@ -67,6 +67,8 @@ class Provider extends Component {
         this.setState({
             matches: [...matches],
             currentMatch: matches[0]
+        }, () => {
+            return ''
         })
     }
 
