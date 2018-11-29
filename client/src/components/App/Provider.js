@@ -26,9 +26,6 @@ class Provider extends Component {
     }
 
     componentDidUpdate(nextProps, nextState) {
-        // if ((nextState.currentMatch !== this.state.currentMatch) && (this.state.currentMatch === null)) {
-        //     this.loadNewData()
-        // }
         if ((nextState.selectedUnits !== this.state.selectedUnits) || (nextState.selectedEventTypes !== this.state.selectedEventTypes)) {
             let unitEventsFiltered = this.filterEvents()
             this.setState({
