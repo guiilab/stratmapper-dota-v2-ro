@@ -199,7 +199,7 @@ h3 {
 .search-labels-button {
     width: 100px;
     float: right;
-    background-color: grey;
+    background-color: rgb(43, 80, 199);
 }
 
 .add-label-button:hover, .search-labels-button:hover {
