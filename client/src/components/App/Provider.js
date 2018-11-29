@@ -5,30 +5,30 @@ export const Context = createContext();
 
 class Provider extends Component {
     state = {
-        currentMatch: '',
+        activeNode: null,
+        activeLabel: null,
         brushRange: [],
+        currentMatch: null,
+        mapPaddingY: 120,
+        mapPaddingX: 80,
+        playing: false,
+        playbackSpeed: 1,
         windowSettings: {
             width: null,
             height: null
         },
-        playing: false,
-        playbackSpeed: 1,
-        activeNode: null,
-        activeLabel: null,
-        mapPaddingY: 120,
-        mapPaddingX: 80,
     };
 
     componentDidMount() {
         this.updateWindowDimensions();
         window.addEventListener("resize", this.updateWindowDimensions);
-        this.getMatchEntries().then(res => this.loadNewData())
+        this.getMatchEntries().then(() => this.loadNewData())
     }
 
     componentDidUpdate(nextProps, nextState) {
-        if (nextState.currentMatch !== this.state.currentMatch) {
-            this.loadNewData()
-        }
+        // if ((nextState.currentMatch !== this.state.currentMatch) && (this.state.currentMatch === null)) {
+        //     this.loadNewData()
+        // }
         if ((nextState.selectedUnits !== this.state.selectedUnits) || (nextState.selectedEventTypes !== this.state.selectedEventTypes)) {
             let unitEventsFiltered = this.filterEvents()
             this.setState({
@@ -67,9 +67,8 @@ class Provider extends Component {
         this.setState({
             matches: [...matches],
             currentMatch: matches[0]
-        }, () => {
-            return ''
         })
+        return
     }
 
     getMatchData = async (match) => {
@@ -528,7 +527,10 @@ class Provider extends Component {
                     this.setState({
                         activeLabel: null,
                         currentMatch: e
-                    }, () => this.props.toggleMapLoading())
+                    }, () => {
+                        this.loadNewData();
+                        this.props.toggleMapLoading()
+                    })
                 },
 
                 getUnit: (unit) => {
