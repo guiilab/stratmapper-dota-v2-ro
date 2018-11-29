@@ -17,8 +17,6 @@ class Provider extends Component {
         activeLabel: null,
         mapPaddingY: 120,
         mapPaddingX: 80,
-        labels: null,
-        labelSearch: null
     };
 
     componentDidMount() {
@@ -28,7 +26,6 @@ class Provider extends Component {
     }
 
     componentDidUpdate(nextProps, nextState) {
-        console.count()
         if (nextState.currentMatch !== this.state.currentMatch) {
             this.loadNewData()
         }
@@ -248,47 +245,6 @@ class Provider extends Component {
         })
     }
 
-    setGroupState = (d, unit) => {
-        if (!this.state[d.name]) {
-            this.setState({
-                [d.name]: []
-            }, () => {
-                this.setState(prevState => ({
-                    [d.name]: [...prevState[d.name], unit]
-                }))
-            })
-        } else {
-            this.setState(prevState => ({
-                [d.name]: [...prevState[d.name], unit]
-            }))
-        }
-    }
-
-    setIconState = (event, icon) => {
-        this.setState(prevState => ({
-            icons: { ...prevState.icons, [event]: icon },
-        }))
-    }
-
-    setUnitState = (event, icon) => {
-        this.setState(prevState => ({
-            units: { ...prevState.units, [event]: icon },
-        }))
-    }
-
-    setFilteredEventsByUnit = (unit, events) => {
-        let filteredEvents = events.filter((event) => event.unit === unit)
-        this.setState(prevState => ({
-            statusEventsFilteredByUnit: { ...prevState.statusEventsFilteredByUnit, [unit]: [...filteredEvents] },
-        }))
-    }
-
-    setTooltipsState = (event, array) => {
-        this.setState(prevState => ({
-            tooltips: { ...prevState.tooltips, [event]: array },
-        }))
-    }
-
     updateWindowDimensions = () => {
         this.setState({
             windowSettings: {
@@ -311,6 +267,11 @@ class Provider extends Component {
     }
 
     tick = (e) => {
+        const { brushRange, timestampRange } = this.state;
+        if ((brushRange[0] <= timestampRange.start) || (brushRange[1] >= timestampRange.end)) {
+            this.stopPlaying()
+            return
+        }
         if (e === 'stepforward') {
             this.setState(prevState => {
                 return {

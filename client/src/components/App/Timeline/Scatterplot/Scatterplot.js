@@ -10,13 +10,6 @@ class Scatterplot extends Component {
         this.renderScatterplot();
     }
 
-    shouldComponentUpdate(nextProps) {
-        if ((nextProps.data !== this.props.data) || (nextProps.zoomTransform !== this.props.zoomTransform) || (nextProps.timestampRange !== this.props.timestampRange)) {
-            return true
-        }
-        return false
-    }
-
     componentDidUpdate() {
         this.renderScatterplot();
     }
