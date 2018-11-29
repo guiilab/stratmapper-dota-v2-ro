@@ -6,8 +6,6 @@ import GroupOption from './GroupOption/GroupOption.js';
 
 class UnitSelect extends Component {
 
-    static contextType = Context;
-
     render() {
         const { groups } = this.context.state;
 
@@ -19,12 +17,14 @@ class UnitSelect extends Component {
                             group={group}
                             key={group.name}
                             selectedUnits={this.context.state.selectedUnits}
-                            groupUnits={[...this.context.state[group.name]]}
+                            groupUnits={[...group.units]}
                         />)
                 })}
             </div>
         );
     }
 }
+
+UnitSelect.contextType = Context;
 
 export default UnitSelect;

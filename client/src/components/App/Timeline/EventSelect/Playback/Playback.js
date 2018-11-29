@@ -34,6 +34,7 @@ class Playback extends PureComponent {
                     <FontAwesomeIcon icon={faStepForward} style={playingStyle} className="step-forward" onClick={playing ? null : () => playback('stepforward')} />
                 </div>
                 <div className="speed">
+                    <span className="speed-label">Speed:</span>
                     <FontAwesomeIcon icon={faMinus} className="minus" onClick={() => playbackSpeed('minus')} />
                     <FontAwesomeIcon icon={faPlus} className="plus" onClick={() => playbackSpeed('plus')} />
                 </div>

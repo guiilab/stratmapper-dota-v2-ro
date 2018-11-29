@@ -71,7 +71,7 @@ class TimelineChart extends PureComponent {
     }
 
     render() {
-        const { events, timestampRange, timelineSettings, brushActive, unitEventsTimeline, activeLabel } = this.context.state;
+        const { events, timestampRange, timelineSettings, unitEventsTimeline, activeLabel } = this.context.state;
         const { yScaleTime } = this.context;
 
         const heightStyle = {
@@ -98,15 +98,13 @@ class TimelineChart extends PureComponent {
                         yScaleTime={yScaleTime}
                         width={this.state.width}
                     />
-                    {brushActive ?
-                        <Brush
-                            activeLabel={activeLabel}
-                            chartWidth={this.state.width}
-                            timestampRange={timestampRange}
-                            zoomTransform={this.state.zoomTransform}
-                            brushRange={this.context.state.brushRange}
-                        /> : <g>Empty</g>
-                    }
+                    <Brush
+                        activeLabel={activeLabel}
+                        chartWidth={this.state.width}
+                        timestampRange={timestampRange}
+                        zoomTransform={this.state.zoomTransform}
+                        brushRange={this.context.state.brushRange}
+                    />
                     <Scatterplot
                         data={unitEventsTimeline}
                         width={this.state.width}
