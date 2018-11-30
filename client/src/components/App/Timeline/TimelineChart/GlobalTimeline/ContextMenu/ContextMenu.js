@@ -109,9 +109,14 @@ class ContextMenu extends PureComponent {
             width: this.state.width
         }
 
+        let disableMenuStyle = {
+            width: this.state.width + 100,
+            height: 200
+        }
+
         if (this.state.edit) {
             return (
-                <div style={contextMenuStyleEdit} className="context-menu-container">
+                <div style={contextMenuStyleEdit} className="context-menu-container" onMouseLeave={() => this.props.disableContextMenu()}>
                     <div className="label-controls">
                         <div onClick={this.editClick} className="label-edit">Edit</div>
                         <div onClick={this.deleteClick} className="label-delete">Delete</div>
@@ -134,7 +139,7 @@ class ContextMenu extends PureComponent {
             )
         }
         return (
-            <div style={contextMenuStyle} className="context-menu-container" ref={this.contextContainer}>
+            <div style={contextMenuStyle} className="context-menu-container" ref={this.contextContainer} onMouseLeave={() => this.props.disableContextMenu()}>
                 <div className="label-controls">
                     <div onClick={this.editClick} className="label-edit">Edit</div>
                     <div onClick={this.deleteClick} className="label-delete">Delete</div>
@@ -145,7 +150,6 @@ class ContextMenu extends PureComponent {
                     <div className="label-author">{this.state.author}</div>
                 </div>
                 <div className="label-description">{this.state.description}</div>
-
             </div>
         );
     }

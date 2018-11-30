@@ -76,7 +76,7 @@ class GlobalTimeline extends PureComponent {
                         )
                     }) : null}
                 </svg>
-                <div className="hover-border" onMouseOver={() => this.disableContextMenu()}></div>
+                <div className="context-disable" onMouseEnter={() => this.disableContextMenu()}></div>
             </div >
         );
     }
