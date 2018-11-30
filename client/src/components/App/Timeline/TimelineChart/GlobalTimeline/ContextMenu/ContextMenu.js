@@ -120,7 +120,6 @@ class ContextMenu extends PureComponent {
                     <div className="label-controls">
                         <div onClick={this.editClick} className="label-edit">Edit</div>
                         <div onClick={this.deleteClick} className="label-delete">Delete</div>
-                        <div onClick={disableContextMenu} className="label-close-button">Close</div>
                     </div>
                     <div className="label-title-container">
                         <div className="label-title">
@@ -143,7 +142,6 @@ class ContextMenu extends PureComponent {
                 <div className="label-controls">
                     <div onClick={this.editClick} className="label-edit">Edit</div>
                     <div onClick={this.deleteClick} className="label-delete">Delete</div>
-                    <div onClick={disableContextMenu} className="label-close-button">Close</div>
                 </div>
                 <div className="label-title-container">
                     <div className="label-title">{this.state.title}</div>

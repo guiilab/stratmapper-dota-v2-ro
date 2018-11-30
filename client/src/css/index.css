@@ -111,13 +111,13 @@ h3 {
     position: absolute;
     top: -20px;
     right: 1px;
-    width: 125px;
+    width: 80px;
     height: 20px;
     display: flex;
     justify-content: space-between;
 }
 
-.label-delete, .label-close-button, .label-edit {
+.label-delete, .label-edit {
     border: 1px solid black;
     padding: .1rem .3rem;
     font-size: .8rem;
@@ -126,10 +126,6 @@ h3 {
 
 .label-delete {
     background-color: red;
-}
-
-.label-close-button {
-    background-color: coral;
 }
 
 .label-edit {
@@ -517,7 +513,7 @@ h3 {
     max-width: 400px;
     max-height: 300px;
     border: black solid 1px;
-    background-color: grey;
+    background-color: lightgrey;
     bottom: 35px;
     padding: .7rem;
     transition: visibility 0s, opacity 0.1s linear;
