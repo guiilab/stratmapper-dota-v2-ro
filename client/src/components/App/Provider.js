@@ -420,7 +420,7 @@ class Provider extends Component {
                 },
 
                 changeLabel: (label) => {
-                    if (label !== null) {
+                    if (label) {
                         this.setState({
                             activeLabel: label.id
                         }, () => {

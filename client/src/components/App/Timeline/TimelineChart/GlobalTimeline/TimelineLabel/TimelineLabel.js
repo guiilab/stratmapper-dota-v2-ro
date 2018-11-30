@@ -10,8 +10,7 @@ class TimelineLabel extends Component {
             labelId: this.props.label.id,
             hover: false,
             active: false,
-            highlight: false,
-            clicked: false
+            highlight: false
         }
         this.renderTimelineLabels();
     }
@@ -39,25 +38,17 @@ class TimelineLabel extends Component {
                 }
             }
         }
-        if (nextProps.activeLabel) {
-            if (nextProps.activeLabel !== prevState.labelId) {
-                return {
-                    active: false
-                }
+        if (nextProps.activeLabel === prevState.labelId) {
+            return {
+                active: true
             }
-            else if ((nextProps.activeLabel === prevState.labelId) && (!prevState.clicked)) {
-                return {
-                    active: true
-                }
-            } else {
-                return {
-                    active: false
-                }
+        } else if (nextProps.activeLabel !== prevState.labelId) {
+            return {
+                active: false
             }
         }
         return null
     }
-
 
     componentDidUpdate(prevProps, prevState) {
         const { zoomTransform } = this.props;
@@ -77,47 +68,15 @@ class TimelineLabel extends Component {
     }
 
     handleClick = (e) => {
-        const { label, activeLabel } = this.props;
+        const { label } = this.props;
         e.preventDefault();
         e.stopPropagation();
-        if (this.state.active) {
-            this.setState({
-                active: false,
-                clicked: true
-            }, () => {
-                this.props.changeLabel(null)
-            })
-        } else if (activeLabel !== this.state.labelId) {
-            this.setState({
-                active: !this.state.active,
-                clicked: !this.state.clicked
-            }, () => {
-                this.props.changeLabel(label)
-            })
+        if (!this.state.active) {
+            this.props.changeLabel(label)
         } else {
-            this.setState({
-                active: !this.state.active,
-                clicked: !this.state.clicked
-            }, () => {
-                console.log(this.state.active)
-                if (this.state.active) {
-                    this.props.changeLabel(label)
-                } else {
-                    this.props.changeLabel(null)
-                }
-            })
+            this.props.changeLabel()
         }
     }
-
-    checkActiveLabel = () => {
-        const { activeLabel } = this.props.state;
-        if ((activeLabel) && (activeLabel !== this.state.labelId)) {
-            return true
-        } else {
-            return false
-        }
-    }
-
 
     getLabelColor = () => {
         if (this.state.active) {
