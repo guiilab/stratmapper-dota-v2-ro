@@ -109,11 +109,6 @@ class ContextMenu extends PureComponent {
             width: this.state.width
         }
 
-        let disableMenuStyle = {
-            width: this.state.width + 100,
-            height: 200
-        }
-
         if (this.state.edit) {
             return (
                 <div style={contextMenuStyleEdit} className="context-menu-container" onMouseLeave={() => this.props.disableContextMenu()}>

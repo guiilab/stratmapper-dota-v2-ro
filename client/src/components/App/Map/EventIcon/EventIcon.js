@@ -57,7 +57,7 @@ class EventIcon extends PureComponent {
                 fill={this.getIconColor()}
                 stroke="black"
                 strokeWidth={10}
-                onMouseOver={(e) => { toggleActiveNode(event); setTooltipPosition(e) }}
+                onMouseOver={(e) => { toggleActiveNode(event); setTooltipPosition(e, event) }}
                 onMouseLeave={() => toggleActiveNode(null)}
             />
         );
