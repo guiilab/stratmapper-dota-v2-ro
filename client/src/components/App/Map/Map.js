@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 
-// import * as d3 from 'd3';
 import { zoom, select, event, scaleLog, easeLinear, zoomIdentity } from 'd3'
 
 import { Context } from '../Provider.js'
