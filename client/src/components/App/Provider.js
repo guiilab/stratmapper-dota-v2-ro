@@ -135,6 +135,8 @@ class Provider extends Component {
         data[0].events.forEach((event) => {
             tooltips[event.event_type] = event.tooltip_context
         })
+        let playbackRatio = (data[0].timestamp_range.end - data[0].timestamp_range.start) * .01
+
         this.setState({
             coordinateRange: {
                 x: {
@@ -161,6 +163,7 @@ class Provider extends Component {
                 height: data[0].map.map_height
             },
             matchId: data[0].match_id,
+            playbackRatio: playbackRatio,
             timelineSettings: {
                 height: timelineHeight
             },
@@ -201,7 +204,8 @@ class Provider extends Component {
         let statusEventsFilteredByUnit = {};
         this.state.loadSettings.selected_units.forEach((unit) => {
             let filteredEvents = data.filter(event => event.unit === unit);
-            statusEventsFilteredByUnit[unit] = filteredEvents;
+            let statusEventsFiltered = filteredEvents.filter(event => this.state.events.status.includes(event.event_type))
+            statusEventsFilteredByUnit[unit] = statusEventsFiltered;
         })
         this.setState({
             unitEventsAll: [...data],
@@ -262,7 +266,7 @@ class Provider extends Component {
     }
 
     tick = (e) => {
-        const { brushRange, timestampRange } = this.state;
+        const { brushRange, timestampRange, playbackSpeed, playbackRatio } = this.state;
         if ((brushRange[0] <= timestampRange.start) || (brushRange[1] >= timestampRange.end)) {
             this.stopPlaying()
             return
@@ -270,19 +274,19 @@ class Provider extends Component {
         if (e === 'stepforward') {
             this.setState(prevState => {
                 return {
-                    brushRange: [prevState.brushRange[0] + this.state.playbackSpeed, prevState.brushRange[1] + this.state.playbackSpeed]
+                    brushRange: [prevState.brushRange[0] + (playbackSpeed * playbackRatio), prevState.brushRange[1] + (playbackSpeed * playbackRatio)]
                 }
             }, () => this.stopPlaying())
         } else if (e === 'forward') {
             this.setState(prevState => {
                 return {
-                    brushRange: [prevState.brushRange[0] + this.state.playbackSpeed, prevState.brushRange[1] + this.state.playbackSpeed]
+                    brushRange: [prevState.brushRange[0] + (playbackSpeed * playbackRatio), prevState.brushRange[1] + (playbackSpeed * playbackRatio)]
                 }
             })
         } else if (e === 'stepbackward') {
             this.setState(prevState => {
                 return {
-                    brushRange: [prevState.brushRange[0] - this.state.playbackSpeed, prevState.brushRange[1] - this.state.playbackSpeed]
+                    brushRange: [prevState.brushRange[0] - (playbackSpeed * playbackRatio), prevState.brushRange[1] - (playbackSpeed * playbackRatio)]
                 }
             }, () => this.stopPlaying())
         }

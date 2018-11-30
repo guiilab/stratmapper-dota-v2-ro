@@ -60,14 +60,14 @@ class UnitLine extends PureComponent {
                     }
                     return (
                         <g key={index}>
-                            <circle
-                                cx={lastNode ? xScale(lastNode.posX) : null}
-                                cy={lastNode ? yScale(lastNode.posY) : null}
-                                r={lastNode ? '10' : '0'}
+                            {lastNode ? <circle
+                                cx={xScale(lastNode.posX)}
+                                cy={yScale(lastNode.posY)}
+                                r='10'
                                 stroke='black'
                                 strokeWidth="1"
                                 fill={unitObject.color}
-                            />
+                            /> : null}
                             <path
                                 d={unitLine(line[1])}
                                 fill="none"
