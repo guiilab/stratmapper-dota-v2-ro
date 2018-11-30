@@ -36,14 +36,14 @@ class Tooltip extends Component {
                             elementLabel={element.label}
                             key={element.label} />)
                     )}
-                    <div className="tooltip-divider"></div>
-                    {Object.keys(activeNode.node_context).map((element) => (
+                    {activeNode.node_context ? `<div className="tooltip-divider"></div>` : null}
+                    {activeNode.node_context ? Object.keys(activeNode.node_context).map((element) => (
                         <NodeContextElement
                             event={activeNode}
                             element={element}
                             key={element}
                         />
-                    ))}
+                    )) : null}
                 </div>
             </div>
         );

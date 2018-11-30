@@ -501,7 +501,13 @@ class Provider extends Component {
                 },
 
                 setTooltipPosition: (e, event) => {
-                    let tooltipElements = (this.state.tooltips[event.event_type].length + Object.keys(event.node_context).length)
+                    let tooltipElements;
+                    if (event.node_context) {
+                        tooltipElements = (this.state.tooltips[event.event_type].length + Object.keys(event.node_context).length)
+                    } else {
+                        tooltipElements = this.state.tooltips[event.event_type].length
+                    }
+                    let tooltipHeight = tooltipElements * 28
                     let x = e.screenX;
                     let y = e.screenY;
                     if ((x + 300) > this.state.windowSettings.width) {
@@ -509,12 +515,10 @@ class Provider extends Component {
                     } else {
                         x += 15
                     }
-                    if ((Math.abs(y) + (tooltipElements * 28)) < (this.state.windowSettings.height)) {
-                        console.log(1)
-                        y -= tooltipElements * 6
+                    if ((Math.abs(y) + (tooltipHeight)) < (this.state.windowSettings.height)) {
+                        y -= tooltipHeight * .5
                     } else {
-                        console.log(2)
-                        y -= tooltipElements * 35
+                        y -= tooltipHeight * 1.6
                     }
                     this.setState({
                         tooltipPosition: [x, y]
