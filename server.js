@@ -2,11 +2,14 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const http = require('http')
 
+// Initialize express
 const app = express();
+
+// Set port
 const port = process.env.PORT || 5000;
 
+// Initialize Mongoose models
 const createEventModel = require('./client/models/dynamicEvents.js');
 const MatchModel = require('./client/models/matches.js');
 const LabelModel = require('./client/models/labels.js');
@@ -18,10 +21,12 @@ app.use(bodyParser.urlencoded({
     limit: '500mb',
     extended: true
 }));
+
 app.use(bodyParser.json({
     limit: '500mb'
 }));
 
+// URL for database
 const mongoUrl = 'mongodb://admin:M4pTh3W0rld@ds121373.mlab.com:21373/stratmap_dota_dev'
 
 mongoose.Promise = global.Promise;
@@ -133,6 +138,7 @@ app.post('/api/edit-label', function (req, res) {
         })
 })
 
+// If production environment, make build from client
 if (process.env.NODE_ENV === 'production') {
 
     // Serve any static files
@@ -144,4 +150,5 @@ if (process.env.NODE_ENV === 'production') {
     });
 
 }
+
 app.listen(port, () => console.log(`Listening on port ${port}`));

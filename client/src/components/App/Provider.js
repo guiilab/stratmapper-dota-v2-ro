@@ -1,6 +1,7 @@
 import React, { Component, createContext } from 'react';
 import * as d3 from 'd3';
 
+// Initialize context object for application state management
 export const Context = createContext();
 
 class Provider extends Component {
@@ -19,12 +20,14 @@ class Provider extends Component {
         },
     };
 
+    // On mount get match entries, load data, and initialize event listeners for window size update
     componentDidMount() {
         this.updateWindowDimensions();
         window.addEventListener("resize", this.updateWindowDimensions);
         this.getMatchEntries().then(() => this.loadNewData())
     }
 
+    // If state change, filter events for map and timeline rendering
     componentDidUpdate(nextProps, nextState) {
         if ((nextState.selectedUnits !== this.state.selectedUnits) || (nextState.selectedEventTypes !== this.state.selectedEventTypes)) {
             let unitEventsFiltered = this.filterEvents()
@@ -38,6 +41,7 @@ class Provider extends Component {
         window.removeEventListener("resize", this.updateWindowDimensions);
     }
 
+    // Promise chain to laod data
     loadNewData = () => {
         this.getMatchData(this.state.currentMatch)
             .then(res => this.loadMatchData(res))
@@ -46,6 +50,7 @@ class Provider extends Component {
             .then(res => this.props.toggleMapLoading())
     }
 
+    // Get all available matches from database
     getMatchEntries = async () => {
         const response = await fetch('/api/matchentries', {
             method: 'GET',
@@ -61,15 +66,18 @@ class Provider extends Component {
         }
         let matches = [];
         body.forEach((match) => matches.push(match.file_name))
+        // Alphabetize and sort match titles
         matches.sort(function (a, b) {
             return a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' });
         });
+        // Add matches to state and set current match to first in list
         this.setState({
             matches: [...matches],
             currentMatch: matches[0]
         })
     }
 
+    // Retrieve match data for first in list
     getMatchData = async (match) => {
         const response = await fetch('/api/matches', {
             method: 'POST',
@@ -88,12 +96,15 @@ class Provider extends Component {
         return body;
     }
 
+    // Format and load match data into state
     loadMatchData = (data) => {
         let unitsAll = [];
         let groups = [];
+        // Get all units in data
         data[0].units.forEach((d) => {
             unitsAll.push(d.name)
         })
+        // Get all groups in data
         data[0].groups.forEach((d) => {
             groups.push(d.name)
         })
@@ -117,7 +128,7 @@ class Provider extends Component {
         data[0].groups.forEach((d, i) => {
             d.units = []
         })
-        //make group object for group state
+        // Make group object for group state
         data[0].groups.forEach((d, i) => {
             data[0].units.forEach((e) => {
                 if (e.group === d.name) {
@@ -125,18 +136,19 @@ class Provider extends Component {
                 }
             })
         })
-        // make icon object for icon state
+        // Make icon object for icon state
         let icons = {}
         data[0].events.forEach((event) => {
             icons[event.event_type] = event.icon
         })
-        // make tooltips object for tooltip state
+        // Make tooltips object for tooltip state
         let tooltips = {}
         data[0].events.forEach((event) => {
             tooltips[event.event_type] = event.tooltip_context
         })
         let playbackRatio = (data[0].timestamp_range.end - data[0].timestamp_range.start) * .01
 
+        // Set state with formatted data
         this.setState({
             coordinateRange: {
                 x: {
@@ -177,6 +189,7 @@ class Provider extends Component {
         })
     }
 
+    // After match data is formatted and loaded, get event data
     getEvents = async () => {
         const response = await fetch('/api/events', {
             method: 'POST',
@@ -199,6 +212,7 @@ class Provider extends Component {
         return body.sort(this.compareTime)
     }
 
+    // Load event data after retrieval
     loadEvents = (data) => {
         let unitEventsTimeline = data.filter(d => this.state.events.timeline.includes(d.event_type))
         let statusEventsFilteredByUnit = {};
@@ -217,12 +231,14 @@ class Provider extends Component {
         })
     }
 
+    // Filter event data based on user selection, function runs on each selection
     filterEvents = () => {
         let unitEventsBrushed = this.state.unitEventsTimeline.filter((e) => (e.timestamp > this.state.brushRange[0]) && (e.timestamp < this.state.brushRange[1]))
         let unitEventsFiltered = unitEventsBrushed.filter(event => (this.state.selectedUnits.includes(event.unit)))
         return unitEventsFiltered.filter(event => (this.state.selectedEventTypes.includes(event.event_type)))
     }
 
+    // Retrieves labels from database and loads into state
     getLabels = async () => {
         const response = await fetch('/api/labels', {
             method: 'POST',
@@ -244,6 +260,7 @@ class Provider extends Component {
         })
     }
 
+    // On window resize, resize applicaiton
     updateWindowDimensions = () => {
         this.setState({
             windowSettings: {
@@ -253,10 +270,12 @@ class Provider extends Component {
         })
     }
 
+    // Filter selected units state based on user input
     removeSelectedUnits = (original, remove) => {
         return original.filter(value => !remove.includes(value));
     }
 
+    // Sort events based on timestamp
     compareTime = (a, b) => {
         if (a.timestamp < b.timestamp)
             return -1;
@@ -265,6 +284,7 @@ class Provider extends Component {
         return 0;
     }
 
+    // d3 tick pattern for updating
     tick = (e) => {
         const { brushRange, timestampRange, playbackSpeed, playbackRatio } = this.state;
         if ((brushRange[0] <= timestampRange.start) || (brushRange[1] >= timestampRange.end)) {
@@ -292,6 +312,7 @@ class Provider extends Component {
         }
     }
 
+    // Stop playback
     stopPlaying = () => {
         this.setState({
             playing: false
@@ -300,9 +321,12 @@ class Provider extends Component {
 
     render() {
         return (
+            // Context object
+            // Functions in context are available throughout the application
             <Context.Provider value={{
                 state: this.state,
 
+                // Removes/adds selected event, based on user input
                 toggleSelectedEvent: (event) => {
                     if (this.state.selectedEventTypes.includes(event)) {
                         const array = [...this.state.selectedEventTypes];
@@ -318,10 +342,12 @@ class Provider extends Component {
                     }
                 },
 
+                // Redirect function, making getLabels available throughout application
                 getLoadLabels: () => {
                     this.getLabels()
                 },
 
+                // AddLabel, used by Label Panel
                 addLabel: (label) => {
                     if (this.state.brushRange.length === 0) {
                         alert('Please make a brush selection.')
@@ -356,6 +382,7 @@ class Provider extends Component {
                     }).then(() => new Promise((resolve) => setTimeout(resolve, 350))).then(res => this.getLabels())
                 },
 
+                // Removes/adds selected unit, based on user input
                 toggleSelectedUnit: (unit) => {
                     if (this.state.selectedUnits.includes(unit)) {
                         const array = [...this.state.selectedUnits];
@@ -371,6 +398,8 @@ class Provider extends Component {
                     }
                 },
 
+                // Removes/adds selected groups, based on user input
+                // Child units are also removed/added
                 toggleGroup: (groupUnits) => {
                     let newUnits = groupUnits.filter(unit => !this.state.selectedUnits.includes(unit))
                     if (newUnits.length === 0) {
@@ -385,6 +414,8 @@ class Provider extends Component {
                     }
                 },
 
+                // d3 for scaling x values in the map
+                // Maps x coordinates to window size
                 xScale: (x) => {
                     const scale = d3.scaleLinear()
                         .domain([this.state.coordinateRange.x.min, this.state.coordinateRange.x.max])
@@ -392,6 +423,8 @@ class Provider extends Component {
                     return scale(x)
                 },
 
+                // d3 for scaling y values in the map
+                // Maps y coordinates to window size
                 yScale: (y) => {
                     const scale = d3.scaleLinear()
                         .domain([this.state.coordinateRange.y.min, this.state.coordinateRange.y.max])
@@ -399,6 +432,8 @@ class Provider extends Component {
                     return scale(y)
                 },
 
+                // d3 for scaling y values in the timeline
+                // Maps y coordinates to timeline settings
                 yScaleTime: (y) => {
                     const scale = d3.scaleLinear()
                         .domain([0, this.state.events.timeline.length - 1])
@@ -406,6 +441,7 @@ class Provider extends Component {
                     return scale(y)
                 },
 
+                // On brush change, updates brush settings and filters events accordingly
                 updateBrushRange: (e) => {
                     this.setState({
                         brushRange: [Math.round(e[0]), Math.round(e[1])]
@@ -417,12 +453,14 @@ class Provider extends Component {
                     })
                 },
 
+                // User selected node is activated in state
                 toggleActiveNode: (node) => {
                     this.setState({
                         activeNode: node
                     })
                 },
 
+                // On click, selects label and activates in state
                 changeLabel: (label) => {
                     if (label) {
                         this.setState({
@@ -444,6 +482,7 @@ class Provider extends Component {
                     }
                 },
 
+                // State change for playback controls
                 playback: (e) => {
                     this.setState({
                         playing: !this.state.playing
@@ -460,11 +499,13 @@ class Provider extends Component {
                     })
                 },
 
+                // Stops playback
                 stopPlayback: () => {
                     this.stopPlaying()
                     clearInterval(this.interval)
                 },
 
+                // Sets playback speed, based on user input
                 playbackSpeed: (e) => {
                     if (Math.abs(this.state.playbackSpeed) >= 2) {
                         return
@@ -480,6 +521,7 @@ class Provider extends Component {
                     }
                 },
 
+                // Reorders label data, relayering and rerendering them in the SVG
                 shuffleLabels: (e) => {
                     let array = this.state.labels;
                     if (e.which === 32) {
@@ -490,6 +532,7 @@ class Provider extends Component {
                     }
                 },
 
+                // Mutes all other events, based on user input
                 soloEvent: (event) => {
                     if (event === 'toggle') {
                         this.setState({
@@ -504,6 +547,9 @@ class Provider extends Component {
                     }
                 },
 
+                // Sets the position of the tooltip, based on window size
+                // Specific to amount of tooltip information
+                // TODO rewrite to be dynamic to the incoming data
                 setTooltipPosition: (e, event) => {
                     let tooltipElements;
                     if (event.node_context) {
@@ -540,6 +586,7 @@ class Provider extends Component {
                     })
                 },
 
+                // Get the activate unit data object
                 getUnit: (unit) => {
                     let unitObject;
                     this.state.units.forEach((d) => {
@@ -550,6 +597,7 @@ class Provider extends Component {
                     return unitObject
                 },
 
+                // Search through label data and set it in state
                 searchLabels: (content) => {
                     let searchArray = [];
                     for (let i in content) {
@@ -568,6 +616,7 @@ class Provider extends Component {
                     }
                 },
 
+                // Formats strings
                 formatFirstString(string) {
                     string = string.replace(/_/g, " ")
                     string = string.replace(/npcdota/g, "")
@@ -576,6 +625,7 @@ class Provider extends Component {
                     return string;
                 },
 
+                // Formats items
                 formatItemList(array) {
                     array.forEach((a, i) => {
                         array[i] = a.replace(/item_/g, "").replace(/_/g, " ")
