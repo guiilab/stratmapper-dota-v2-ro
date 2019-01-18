@@ -23,7 +23,7 @@ cd ..
 yarn start
 ```
 
-### File Structure
+### Files
 
 StratMapper is a React Application with a Node backend, which connects to a MongoDB instance on MLab. It uses D3.js as its primary visualization library and the React Context API for application state management. All of the components can be found in the [components](/client/src/components) folder. The Node server uses Express.js for routing and Mongoose.js for database and model management.
 
