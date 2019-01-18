@@ -5,6 +5,7 @@ import { Context } from '../../Provider.js';
 import EventIcon from '../../Map/EventIcon/EventIcon.js';
 
 class Scatterplot extends Component {
+    // User constructor to bind renderScatterplot
     constructor(props) {
         super(props);
         this.renderScatterplot();
@@ -19,10 +20,12 @@ class Scatterplot extends Component {
         timestampRange.start = Math.round(timestampRange.start)
         timestampRange.end = Math.round(timestampRange.end)
 
+        // Scale the x axis, mapping time to width
         this.xScaleTime = scaleLinear()
             .domain([timestampRange.start, timestampRange.end])
             .range([0, width])
 
+        // Rescale xScale if d3 zoomtransform
         if (zoomTransform) {
             this.xScaleTime.domain(zoomTransform.rescaleX(this.xScaleTime).domain());
         }
@@ -53,6 +56,7 @@ class Scatterplot extends Component {
     }
 }
 
+// Enable access to context in component
 Scatterplot.contextType = Context;
 
 export default Scatterplot;

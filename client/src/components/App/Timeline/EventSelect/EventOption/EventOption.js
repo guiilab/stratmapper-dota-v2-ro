@@ -5,7 +5,7 @@ import MuteButton from './MuteButton/MuteButton.js'
 import SoloButton from './SoloButton/SoloButton.js'
 
 class EventOption extends Component {
-
+    // Each event option represens a different event type, as set in match file 
     state = {
         active: false,
         hover: false
@@ -43,6 +43,7 @@ class EventOption extends Component {
     }
 }
 
+// Passes context and props to the component, which renders itself
 export default (props) => (
     <Context.Consumer>
         {(context) => <EventOption event={props.event} selectedEventTypes={context.state.selectedEventTypes} />}

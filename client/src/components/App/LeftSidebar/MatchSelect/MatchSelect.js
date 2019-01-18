@@ -5,6 +5,7 @@ import MatchOption from './MatchOption/MatchOption.js';
 
 class MatchSelect extends PureComponent {
 
+    // Enables access to context in component
     static contextType = Context;
 
     handleChange = (e) => {

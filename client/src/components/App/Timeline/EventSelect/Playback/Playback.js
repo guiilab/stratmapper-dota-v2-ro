@@ -5,11 +5,13 @@ import { faPlay, faPause, faPlus, faMinus, faStepForward, faStepBackward } from 
 import { Context } from '../../../Provider.js';
 
 class Playback extends PureComponent {
+    // Playback controls at top left of timeline
 
     render() {
         const { playback, playbackSpeed } = this.context;
         const { playing } = this.context.state;
 
+        // Conditional styling based on whether playback is enabled
         let pointerEvents;
         let color;
         let cursor;
@@ -43,6 +45,7 @@ class Playback extends PureComponent {
     }
 }
 
+// Enables access to context in component
 Playback.contextType = Context;
 
 export default Playback;

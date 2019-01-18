@@ -19,7 +19,7 @@ class Label extends Component {
         )
     }
 }
-
+// Passes context and props to the component, which renders itself
 export default (props) => (
     <Context.Consumer>
         {(context) => <Label {...context} {...props} />}

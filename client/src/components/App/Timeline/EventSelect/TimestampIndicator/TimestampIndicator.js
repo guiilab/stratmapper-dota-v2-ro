@@ -1,6 +1,7 @@
 import React from 'react';
 
 const TimestampIndicator = (props) => {
+    // Shows timestamps at top left of timeline
     return (
         <div className="timestamp-container" >
             <span className="timestamp-font">Brush Selection: </span>

@@ -3,6 +3,7 @@ import React, { PureComponent } from 'react';
 import { Context } from '../../../../Provider.js'
 
 class ContextMenu extends PureComponent {
+    // User constructor to create a ref for selection purposes
     constructor(props) {
         super(props)
         this.contextContainer = React.createRef()
@@ -23,10 +24,12 @@ class ContextMenu extends PureComponent {
         })
     }
 
+    // Select context menu based on user selection
     handleChange = (e) => {
         this.setState({ [e.target.getAttribute('edit-data-label')]: e.target.value });
     }
 
+    // Confirm delete
     deleteClick = () => {
         const response = window.confirm('Are you sure you want to delete this label?')
         if (response === true) {
@@ -34,6 +37,7 @@ class ContextMenu extends PureComponent {
         }
     }
 
+    // Adjust styling for label when editing
     editClick = () => {
         if (this.state.edit) {
             this.setState({
@@ -50,6 +54,7 @@ class ContextMenu extends PureComponent {
         }
     }
 
+    // Delete label from database, rerender accordingly
     deleteLabel = (id) => {
         return fetch('/api/delete-label', {
             method: 'POST',
@@ -67,6 +72,7 @@ class ContextMenu extends PureComponent {
         })
     }
 
+    // Edit label data in database, rerender accordingly
     editLabel = (state) => {
         return fetch('/api/edit-label', {
             method: 'POST',
@@ -92,6 +98,7 @@ class ContextMenu extends PureComponent {
     render() {
         const { disableContextMenu } = this.props;
 
+        // Conditional styling, based on activity and positioning
         let visibility = this.props.active ? 'visible' : 'hidden';
         let opacity = this.props.active ? '1' : '0';
         let posX = this.props.posX ? this.props.posX : '0px';
@@ -109,6 +116,7 @@ class ContextMenu extends PureComponent {
             width: this.state.width
         }
 
+        // Conditional rendering if in edit mode
         if (this.state.edit) {
             return (
                 <div style={contextMenuStyleEdit} className="context-menu-container" onMouseLeave={() => this.props.disableContextMenu()}>
@@ -133,6 +141,7 @@ class ContextMenu extends PureComponent {
                 </div>
             )
         }
+        // Standard rendering
         return (
             <div style={contextMenuStyle} className="context-menu-container" ref={this.contextContainer} onMouseLeave={() => this.props.disableContextMenu()}>
                 <div className="label-controls">
@@ -150,6 +159,7 @@ class ContextMenu extends PureComponent {
     }
 }
 
+// Enables access to context in component
 ContextMenu.contextType = Context;
 
 export default ContextMenu;

@@ -8,6 +8,7 @@ import UnitLine from './UnitLine/UnitLine.js'
 import Background from '../../../img/dotamini3.jpg';
 
 class Map extends PureComponent {
+    // Use constructor to bind zoom function on load
     constructor(props) {
         super(props)
 
@@ -15,23 +16,26 @@ class Map extends PureComponent {
             zoomTransformScaled: .06,
             zoomTransform: null
         }
-
         this.zoom = zoom()
+            // Sets zoom extent, adjust for more or less zoom functionality
             .scaleExtent([.4, 10])
             .on("zoom", this.zoomed.bind(this))
     }
 
+    // Center the map, based on screen size
     componentDidMount() {
         this.centerMap()
         select(this.refs.mapsvg)
             .call(this.zoom)
     }
 
+    // On update call zoom
     componentDidUpdate(nextProps, prevState) {
         select(this.refs.mapsvg)
             .call(this.zoom)
     }
 
+    // set state with d3 zoomtransform on zoom
     zoomed() {
         this.setState({
             zoomTransformScaled: this.zoomScaleIcon(event.transform.k),
@@ -39,6 +43,7 @@ class Map extends PureComponent {
         });
     }
 
+    // Center the map, based on screen size
     centerMap() {
         let zoomID = zoomIdentity
         zoomID.k = .5
@@ -50,6 +55,7 @@ class Map extends PureComponent {
             .call(this.zoom.transform, zoomID)
     }
 
+    // The zoom scale for the icons on the map
     zoomScaleIcon(num) {
         const scale = scaleLog()
             .domain([.4, 10])
@@ -76,12 +82,14 @@ class Map extends PureComponent {
             <div className="map-container" style={mapContainerStyle} >
                 <svg className="map-svg" ref="mapsvg" style={mapSvgStyle} >
                     <g transform={this.state.zoomTransform}>
+                        {/* Use defs and pattern for background image mapping in SVG */}
                         <defs>
                             <pattern id="bg" width={1} height={1}>
                                 <image href={Background} width={windowSettings.width} height={windowSettings.width}></image>
                             </pattern>
                         </defs>
                         <rect width={windowSettings.width} height={windowSettings.width} fill="url(#bg)"></rect>
+                        {/* Add unit lines paths for each unit, based on brush length */}
                         {brushRange.length !== 0 ? selectedUnits.map(unit => {
                             return (
                                 <UnitLine
@@ -92,6 +100,7 @@ class Map extends PureComponent {
                             )
                         }) : <g>empty</g>
                         }
+                        {/* Add event icons to the map, based on filtered events */}
                         {unitEventsFiltered ? unitEventsFiltered.map(event => {
                             return (
                                 <EventIcon
@@ -108,6 +117,7 @@ class Map extends PureComponent {
                     </g>
                 </svg>
                 <div className="map-controls">
+                    {/* Center the map */}
                     <div className="map-center-button" onClick={() => this.centerMap()}>Center</div>
                 </div>
             </div >
@@ -115,6 +125,7 @@ class Map extends PureComponent {
     }
 }
 
+// Passes context and props to the component, which renders itself
 export default () => (
     <Context.Consumer>
         {(context) => <Map {...context} />}

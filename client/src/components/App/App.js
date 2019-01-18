@@ -20,6 +20,8 @@ class App extends PureComponent {
         })
     }
 
+    // Conditional rendering, based on mapLoading
+
     render() {
         return (
             <div className="app-container">

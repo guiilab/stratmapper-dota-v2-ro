@@ -9,6 +9,7 @@ class UnitLine extends PureComponent {
         const { xScale, yScale, unit, zoomTransform, getUnit } = this.props;
         const { brushRange, statusEventsFilteredByUnit } = this.props.state;
 
+        // Split data based on conditional events to differentiate teleports from respawns, etc.
         let dataSplit = [];
         let dataSplitIndices = [];
         let dataBrushed = statusEventsFilteredByUnit[unit].filter(event => (event.timestamp > brushRange[0]) && (event.timestamp < brushRange[1]))
@@ -36,10 +37,13 @@ class UnitLine extends PureComponent {
             dataSplit.push(['unit-line', dataBrushed])
         }
 
+        // Get unit object from context, which includes unit data
         let unitObject = getUnit(unit)
 
+        // Instantiate unitline from d3 line
         const unitLine = line()
 
+        // Map x andy data to unitline
         unitLine
             .x(function (d, i) {
                 return xScale(d.posX)
@@ -48,11 +52,13 @@ class UnitLine extends PureComponent {
                 return yScale(d.posY)
             })
 
+        // Conditional rendering if not unitline
         if (!unitLine) {
             return <div>Loading</div>
         }
         return (
             <React.Fragment>
+                {/* Based on split data, remove final node to become unit circle/icon indicator */}
                 {dataSplit.map((line, index) => {
                     let lastNode;
                     if (line[1].length !== 0) {
@@ -60,6 +66,7 @@ class UnitLine extends PureComponent {
                     }
                     return (
                         <g key={index}>
+                            {/* Unit circle icon/indicator */}
                             {lastNode ? <circle
                                 cx={xScale(lastNode.posX)}
                                 cy={yScale(lastNode.posY)}
@@ -86,7 +93,7 @@ class UnitLine extends PureComponent {
     }
 }
 
-
+// Passes context and props to the component, which renders itself
 export default (props) => (
     <Context.Consumer>
         {(context) => <UnitLine {...context} {...props} />}

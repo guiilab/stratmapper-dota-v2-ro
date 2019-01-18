@@ -8,7 +8,7 @@ class MuteButton extends Component {
         active: false,
         hover: false
     }
-
+    // If selected, state updates based on props
     static getDerivedStateFromProps(nextProps, prevState) {
         if (nextProps.selectedEventTypes.includes(nextProps.event)) {
             return {
@@ -38,6 +38,7 @@ class MuteButton extends Component {
     render() {
         const { event, toggleSelectedEvent } = this.props;
 
+        // Conditional styling based on hover and active state
         let buttonStyle;
         if (this.state.hover) {
             buttonStyle = { backgroundColor: '#da8888' }
@@ -56,6 +57,7 @@ class MuteButton extends Component {
     }
 }
 
+// Passes context and props to the component, which renders itself
 export default (props) => (
     <Context.Consumer>
         {(context) => <MuteButton event={props.event} toggleSelectedEvent={context.toggleSelectedEvent} selectedEventTypes={context.state.selectedEventTypes} />}

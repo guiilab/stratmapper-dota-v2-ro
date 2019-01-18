@@ -10,6 +10,7 @@ import Brush from './../Brush/Brush.js';
 import GlobalTimeline from './GlobalTimeline/GlobalTimeline.js';
 
 class TimelineChart extends PureComponent {
+    // User constructor to create a ref for sizing purposes
     constructor(props) {
         super(props);
         this.chart = React.createRef()
@@ -24,6 +25,7 @@ class TimelineChart extends PureComponent {
         }
     }
 
+    // On mount get zoom, chartwidth, and call zoom
     componentDidMount() {
         this.zoom = this.getZoom()
         this.setState({
@@ -34,6 +36,7 @@ class TimelineChart extends PureComponent {
             .call(this.zoom)
     }
 
+    // On update change zoom, size, disable mouse zoom if no zoom
     componentDidUpdate() {
         if (this.state.zoomTransform === null) {
             select(this.refs.svg)
@@ -58,6 +61,7 @@ class TimelineChart extends PureComponent {
             .on("zoom", this.zoomed.bind(this))
     }
 
+
     toggleClick = () => {
         this.setState({
             clicked: !this.state.clicked
@@ -78,6 +82,7 @@ class TimelineChart extends PureComponent {
             height: timelineSettings.height
         }
 
+        // Conditional rendering if not width
         if (!this.state.width) {
             return <div className="timeline-chart" ref={this.chart}></div>
         }
@@ -88,16 +93,19 @@ class TimelineChart extends PureComponent {
                     zoomTransform={this.state.zoomTransform}
                     timestampRange={timestampRange}
                 />
+                {/* Holds labels above standard timeline */}
                 <GlobalTimeline
                     chartWidth={this.state.width}
                     zoomTransform={this.state.zoomTransform}
                 />
                 <svg width="100%" height="100%" ref="svg" className="timeline-svg-scatter">
+                    {/* Lines across standard timeline, d3 method */}
                     <AxisLines
                         events={events.timeline}
                         yScaleTime={yScaleTime}
                         width={this.state.width}
                     />
+                    {/* Brush for brush selection in timeline */}
                     <Brush
                         activeLabel={activeLabel}
                         chartWidth={this.state.width}
@@ -105,6 +113,7 @@ class TimelineChart extends PureComponent {
                         zoomTransform={this.state.zoomTransform}
                         brushRange={this.context.state.brushRange}
                     />
+                    {/* Scatterplot of event icons in timeline */}
                     <Scatterplot
                         data={unitEventsTimeline}
                         width={this.state.width}
@@ -119,6 +128,7 @@ class TimelineChart extends PureComponent {
     }
 }
 
+// Enables access to context in component
 TimelineChart.contextType = Context;
 
 export default TimelineChart;

@@ -12,6 +12,7 @@ class EventIcon extends PureComponent {
         }
     }
 
+    // If unit is corresponding selected, highlight icon in map
     static getDerivedStateFromProps(nextProps, nextState) {
         if (nextProps.state.activeNode) {
             if (nextProps.state.activeNode.node_id === nextProps.event.node_id) {
@@ -30,6 +31,7 @@ class EventIcon extends PureComponent {
         return null
     }
 
+    // Get icon color from unit object retrieved from context
     getIconColor = () => {
         const { fill, getUnit, unit } = this.props
         let unitObject = getUnit(unit)
@@ -63,6 +65,8 @@ class EventIcon extends PureComponent {
         );
     }
 }
+
+// Passes context and props to the component, which renders itself
 export default (props) => (
     <Context.Consumer>
         {(context) => <EventIcon {...context} {...props} />}

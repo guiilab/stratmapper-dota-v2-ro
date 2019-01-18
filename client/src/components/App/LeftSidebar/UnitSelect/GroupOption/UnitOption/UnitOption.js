@@ -11,6 +11,7 @@ class UnitOption extends PureComponent {
         unit: null
     }
 
+    // If unit is selected in context, unit is activated here
     static getDerivedStateFromProps(nextProps, prevState) {
         if (nextProps.state.selectedUnits.includes(nextProps.unit)) {
             return {
@@ -41,7 +42,10 @@ class UnitOption extends PureComponent {
     render() {
         const { unit, toggleSelectedUnit, getUnit, formatFirstString } = this.props;
 
+        // Conditional button style, based on hover and active state
         let buttonStyle;
+
+        // Get unitobject data from context
         let unitObject = getUnit(unit);
 
         if (this.state.hover) {
@@ -73,6 +77,7 @@ class UnitOption extends PureComponent {
     }
 }
 
+// Passes context and props to the component, which renders itself
 export default (props) => (
     <Context.Consumer>
         {(context) => <UnitOption {...context} {...props} />}

@@ -5,6 +5,7 @@ import TimelineLabel from './TimelineLabel/TimelineLabel.js';
 import ContextMenu from './ContextMenu/ContextMenu.js';
 
 class GlobalTimeline extends PureComponent {
+    // User constructor to create a ref for sizing purposes
     constructor() {
         super()
         this.globalTimeline = React.createRef()
@@ -17,6 +18,7 @@ class GlobalTimeline extends PureComponent {
         this.context.getLoadLabels()
     }
 
+    // Context menu activates on hover, showing pertinent information
     activateContextMenu = (e) => {
         this.setState({
             contextMenuActive: true,
@@ -52,6 +54,7 @@ class GlobalTimeline extends PureComponent {
                 onMouseOver={() => this.globalTimeline.focus()}
                 tabIndex="0"
             >
+                {/* Conditional render of contextmenu based on active state */}
                 {this.state.contextMenuActive ? <ContextMenu
                     title={this.state.title}
                     active={this.state.contextMenuActive}
@@ -62,6 +65,7 @@ class GlobalTimeline extends PureComponent {
                     disableContextMenu={this.disableContextMenu}
                 /> : null}
                 <svg width="100%" height="100%" pointerEvents="none">
+                    {/* Render timeline labels based on label data */}
                     {labels ? labels.map((label) => {
                         return (
                             <TimelineLabel
@@ -82,6 +86,7 @@ class GlobalTimeline extends PureComponent {
     }
 }
 
+// Enables access to context in component
 GlobalTimeline.contextType = Context;
 
 export default GlobalTimeline;

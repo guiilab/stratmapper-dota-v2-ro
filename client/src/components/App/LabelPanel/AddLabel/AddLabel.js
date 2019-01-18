@@ -10,10 +10,12 @@ class AddLabel extends Component {
         description: ''
     }
 
+    // Get label from selection and set it in state
     handleChange = (e) => {
         this.setState({ [e.target.getAttribute('data-label')]: e.target.value });
     }
 
+    // Clears all component state data
     clearData = () => {
         this.setState({
             title: '',
@@ -52,6 +54,7 @@ class AddLabel extends Component {
     }
 }
 
+// Passes context and props to the component, which renders itself
 export default (props) => (
     <Context.Consumer>
         {(context) => <AddLabel {...context} {...props} />}

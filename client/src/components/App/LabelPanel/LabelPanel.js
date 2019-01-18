@@ -9,6 +9,7 @@ class LabelPanel extends Component {
         isOpen: false
     }
 
+    // Sets open state for the panel
     toggleOpen = () => {
         this.setState({
             isOpen: !this.state.isOpen
@@ -22,6 +23,7 @@ class LabelPanel extends Component {
         let angle;
         let color;
 
+        // Conditional style properties, based on open state
         this.state.isOpen ? width = '400px' : width = '30px';
         this.state.isOpen ? height = '170px' : height = '100px';
         this.state.isOpen ? opacity = 100 : opacity = 0;
@@ -38,6 +40,7 @@ class LabelPanel extends Component {
         let closeButtonStyle = {
             backgroundColor: color
         }
+        // Conditional rendering, based on existence of label data
         if (!this.props.state.labels) {
             return <div>loading</div>
         }
@@ -51,6 +54,7 @@ class LabelPanel extends Component {
     }
 }
 
+// Passes context to the component, which renders itself
 export default () => (
     <Context.Consumer>
         {(context) => <LabelPanel {...context} />}

@@ -10,6 +10,7 @@ class GroupOption extends Component {
         hover: false
     }
 
+    // If all units are active, group is active and vice versa
     static getDerivedStateFromProps(nextProps) {
         const isSuperset = nextProps.groupUnits.every(function (val) { return nextProps.selectedUnits.indexOf(val) >= 0; });
         if (isSuperset) {
@@ -41,6 +42,7 @@ class GroupOption extends Component {
 
         let buttonStyle;
 
+        // Conditional styling, based on hover and active states
         if (this.state.hover) {
             buttonStyle = {
                 boxShadow: "0px 0px 1px black",
@@ -59,6 +61,7 @@ class GroupOption extends Component {
             }
         }
 
+        // Renders UnitOptions for each groupUnit in GroupUnits data
         return (
             <div className="unit-selection">
                 <div className='group-option' style={buttonStyle} key={group.name} onMouseOver={() => this.toggleHover()} onMouseLeave={() => this.toggleHover()} onClick={() => { this.toggleActive(); toggleGroup(groupUnits) }} >{formatFirstString(group.name)}</div>
@@ -70,6 +73,7 @@ class GroupOption extends Component {
     }
 }
 
+// Enables access to context in component
 GroupOption.contextType = Context;
 
 export default GroupOption;

@@ -6,6 +6,7 @@ import TimelineChart from './TimelineChart/TimelineChart.js';
 
 class Timeline extends PureComponent {
 
+    // Timelinec component, simple container
     render() {
 
         const { timelineSettings } = this.context.state;
@@ -23,6 +24,7 @@ class Timeline extends PureComponent {
     }
 }
 
+// Enables access to context in component
 Timeline.contextType = Context
 
 export default Timeline;

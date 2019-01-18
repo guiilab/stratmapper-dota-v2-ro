@@ -6,6 +6,7 @@ import UnitSelect from './UnitSelect/UnitSelect.js';
 
 class LeftSidebar extends Component {
 
+    // Left sidebar of the application, simple container
     render() {
         return (
             <div className="left-sidebar">
