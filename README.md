@@ -31,7 +31,7 @@ StratMapper is a React Application with a Node backend, which connects to a Mong
 
 To visualize a match of a certain game, StratMapper needs two data files stored in the database: (i) match file and (ii) event file. The match file acts as a configuration file for the game level and tells the application the type of game, map information, units included, types of event primitives, and information pertinent to calibrating the visualization system. The event file is a list of primitive events in the respective match associated with the units, and is essentially a reformation of the match replays that StratMapper uses efficiently to visualize the gameplay.
 
-Both are stored in a MongoDB instance on MLab. To update this endpoint, edit the mongourl in [Server.js](server.js).
+Both are stored in a MongoDB instance on MLab. To update this endpoint, edit the mongourl in [server.js](server.js).
 
 ### License
 This software is patented and owned by [Truong-Huy D. Nguyen](https://github.com/truonghuy), [Magy Seif El-Nasr](https://camd.northeastern.edu/faculty/magy-seif-el-nasr/), [Andy Bryant](https://github.com/andymbryant), and [Northeastern University](https://www.khoury.northeastern.edu/).
