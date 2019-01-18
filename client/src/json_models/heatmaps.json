@@ -1,9 +1,0 @@
-{
-    "user_id": 123456,
-    "match_id": 123456,
-    "heatmap_id": 123456,
-    "selected_groups": "string",
-    "selected_units": 123456,
-    "selected_node_ids": [],
-    "operator": null
-}
