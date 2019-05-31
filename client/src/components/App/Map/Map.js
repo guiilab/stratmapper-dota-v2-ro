@@ -47,7 +47,7 @@ class Map extends PureComponent {
     centerMap() {
         let zoomID = zoomIdentity
         zoomID.k = .5
-        zoomID.x = this.props.state.mapSettings.width
+        zoomID.x = this.props.state.mapSettings.width / 2
         select(this.refs.mapsvg)
             .transition()
             .duration(200)

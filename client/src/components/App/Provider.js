@@ -1,5 +1,5 @@
 import React, { Component, createContext } from 'react';
-import * as d3 from 'd3';
+import { scaleLinear } from 'd3';
 
 // Initialize context object for application state management
 export const Context = createContext();
@@ -146,7 +146,7 @@ class Provider extends Component {
         data[0].events.forEach((event) => {
             tooltips[event.event_type] = event.tooltip_context
         })
-        let playbackRatio = (data[0].timestamp_range.end - data[0].timestamp_range.start) * .01
+        let playbackRatio = (data[0].timestamp_range.end - data[0].timestamp_range.start) * .006
 
         // Set state with formatted data
         this.setState({
@@ -417,7 +417,7 @@ class Provider extends Component {
                 // d3 for scaling x values in the map
                 // Maps x coordinates to window size
                 xScale: (x) => {
-                    const scale = d3.scaleLinear()
+                    const scale = scaleLinear()
                         .domain([this.state.coordinateRange.x.min, this.state.coordinateRange.x.max])
                         .range([this.state.mapPaddingX, this.state.windowSettings.width - this.state.mapPaddingX])
                     return scale(x)
@@ -426,7 +426,7 @@ class Provider extends Component {
                 // d3 for scaling y values in the map
                 // Maps y coordinates to window size
                 yScale: (y) => {
-                    const scale = d3.scaleLinear()
+                    const scale = scaleLinear()
                         .domain([this.state.coordinateRange.y.min, this.state.coordinateRange.y.max])
                         .range([this.state.windowSettings.width - this.state.mapPaddingY, this.state.mapPaddingY])
                     return scale(y)
@@ -435,7 +435,7 @@ class Provider extends Component {
                 // d3 for scaling y values in the timeline
                 // Maps y coordinates to timeline settings
                 yScaleTime: (y) => {
-                    const scale = d3.scaleLinear()
+                    const scale = scaleLinear()
                         .domain([0, this.state.events.timeline.length - 1])
                         .range([14, this.state.timelineSettings.height - 12])
                     return scale(y)
@@ -566,9 +566,9 @@ class Provider extends Component {
                         x += 15
                     }
                     if ((Math.abs(y) + (tooltipHeight)) < (this.state.windowSettings.height)) {
-                        y -= tooltipHeight * .5
+                        y -= tooltipHeight * .2
                     } else {
-                        y -= tooltipHeight * 1.6
+                        y -= tooltipHeight * 1.2
                     }
                     this.setState({
                         tooltipPosition: [x, y]
