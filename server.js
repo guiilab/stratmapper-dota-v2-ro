@@ -85,7 +85,7 @@ app.post('/api/events', function (req, res) {
 
 app.post('/api/labels', function (req, res) {
     LabelModel
-        .find({ match: req.body.match })
+        .find({ match: req.body.match, author: 'Jimmy' })
         .exec(function (err, label) {
             return res.send(label)
         })
@@ -124,7 +124,6 @@ app.post('/api/edit-label', function (req, res) {
         .findOne({
             id: req.body.id
         }, function (err, label) {
-            console.log(label)
             if (err) return handleError(err);
             label.set({
                 title: req.body.title,
