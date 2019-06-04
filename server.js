@@ -85,7 +85,7 @@ app.post('/api/events', function (req, res) {
 
 app.post('/api/labels', function (req, res) {
     LabelModel
-        .find({ match: req.body.match, author: 'Jimmy' })
+        .find({ match: req.body.match, author: 'Jimmy2' })
         .exec(function (err, label) {
             return res.send(label)
         })
