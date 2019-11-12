@@ -84,8 +84,16 @@ app.post('/api/events', function (req, res) {
 })
 
 app.post('/api/labels', function (req, res) {
+    let startDate = new Date(2016, 11, 10)
+    let endDate = new Date(2019, 11, 25)
+    let query = {
+        match: req.body.match,
+        // created: { $gte: startDate, $lt: endDate }
+        _id: { $gte: "5dcae9b95770681080758a63" }
+    }
     LabelModel
-        .find({ match: req.body.match, author: 'Jimmy2' })
+        .find(query)
+        // .find({ match: req.body.match })
         .exec(function (err, label) {
             return res.send(label)
         })
