@@ -10,6 +10,8 @@ class Provider extends Component {
         activeLabel: null,
         brushRange: [],
         currentMatch: null,
+        authors: ['ericak', 'jimmyt'],
+        currentAuthor: 'ericak',
         mapPaddingY: 120,
         mapPaddingX: 80,
         playing: false,
@@ -247,7 +249,8 @@ class Provider extends Component {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                match: this.state.currentMatch
+                match: this.state.currentMatch,
+                author: this.state.currentAuthor
             })
         });
         const body = await response.json();
@@ -580,6 +583,15 @@ class Provider extends Component {
                     this.setState({
                         activeLabel: null,
                         currentMatch: e
+                    }, () => {
+                        this.props.toggleMapLoading()
+                        this.loadNewData();
+                    })
+                },
+
+                setCurrentAuthor: (e) => {
+                    this.setState({
+                        currentAuthor: e
                     }, () => {
                         this.props.toggleMapLoading()
                         this.loadNewData();

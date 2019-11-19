@@ -84,10 +84,9 @@ app.post('/api/events', function (req, res) {
 })
 
 app.post('/api/labels', function (req, res) {
-    let startDate = new Date(2016, 11, 10)
-    let endDate = new Date(2019, 11, 25)
     let query = {
         match: req.body.match,
+        author: req.body.author,
         // created: { $gte: startDate, $lt: endDate }
         _id: { $gte: "5dcae9b95770681080758a63" }
     }
