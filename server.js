@@ -3,7 +3,6 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
-const urls = require('./urls')
 
 // Initialize express
 const app = express();
@@ -30,7 +29,8 @@ app.use(bodyParser.json({
 }));
 
 // URL for database
-const mongoUrl = urls.mongoUrl()
+const mongoPass = process.env.MONGO_PASS
+const mongoUrl = `mongodb://admin:${mongoPass}@ds121373.mlab.com:21373/stratmap_dota_dev`
 
 mongoose.Promise = global.Promise;
 mongoose.connect(mongoUrl, {
