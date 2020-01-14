@@ -29,8 +29,7 @@ app.use(bodyParser.json({
 }));
 
 // URL for database
-// const mongoPass = process.env.MONGO_PASS
-const mongoPass = 'M4pTh3W0rld'
+const mongoPass = process.env.MONGO_PASS
 const mongoUrl = `mongodb://admin:${mongoPass}@ds121373.mlab.com:21373/stratmap_dota_dev`
 
 mongoose.Promise = global.Promise;
