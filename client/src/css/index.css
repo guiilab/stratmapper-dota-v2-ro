@@ -108,7 +108,7 @@ h3 {
 .label-controls {
     position: absolute;
     top: -20px;
-    right: 0px;
+    right: 1px;
     width: 125px;
     height: 20px;
     display: flex;
