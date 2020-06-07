@@ -30,6 +30,7 @@ app.use(bodyParser.json({
 
 // URL for database
 const mongoPass = process.env.MONGO_PASS
+// const mongoUrl = `mongodb://admin:M4pTh3W0rld@ds121373.mlab.com:21373/stratmap_dota_dev`
 const mongoUrl = `mongodb://admin:${mongoPass}@ds121373.mlab.com:21373/stratmap_dota_dev`
 
 mongoose.Promise = global.Promise;
@@ -89,10 +90,11 @@ app.post('/api/events', function (req, res) {
 app.post('/api/labels', function (req, res) {
   let query = {
     match: req.body.match,
-    author: req.body.author,
+    // author: req.body.author,
     // created: { $gte: startDate, $lt: endDate }
-    _id: { $gte: "5dcae9b95770681080758a63" }
+    // _id: { $gte: "5dcae9b95770681080758a63" }
   }
+  console.log(req.body.match)
   LabelModel
     .find(query)
     // .find({ match: req.body.match })

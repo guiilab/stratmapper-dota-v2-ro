@@ -35,6 +35,6 @@ var LabelSchema = new Schema({
     type: Array,
     required: false
   }
-}, { strict: false });
+}, { strict: false, collection: 'labels_dota_prod' });
 
-module.exports = mongoose.model('Label', LabelSchema, 'labels_dota_prod');
+module.exports = mongoose.model('Label', LabelSchema);
