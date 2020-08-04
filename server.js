@@ -8,6 +8,11 @@ const helmet = require('helmet');
 const app = express();
 app.use(helmet())
 
+// Load env variables for dev
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
+
 // Set port
 const port = process.env.PORT || 5000;
 
@@ -29,9 +34,10 @@ app.use(bodyParser.json({
 }));
 
 // URL for database
+const mongoUser = process.env.MONGO_USER
 const mongoPass = process.env.MONGO_PASS
-// const mongoUrl = `mongodb://admin:M4pTh3W0rld@ds121373.mlab.com:21373/stratmap_dota_dev`
-const mongoUrl = `mongodb://admin:${mongoPass}@ds121373.mlab.com:21373/stratmap_dota_dev`
+console.log(mongoPass)
+const mongoUrl = `mongodb://${mongoUser}:${mongoPass}@ds121373.mlab.com:21373/stratmap_dota_dev`
 
 mongoose.Promise = global.Promise;
 mongoose.connect(mongoUrl, {
@@ -94,7 +100,6 @@ app.post('/api/labels', function (req, res) {
     // created: { $gte: startDate, $lt: endDate }
     // _id: { $gte: "5dcae9b95770681080758a63" }
   }
-  console.log(req.body.match)
   LabelModel
     .find(query)
     // .find({ match: req.body.match })
