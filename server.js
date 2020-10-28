@@ -36,7 +36,7 @@ app.use(bodyParser.json({
 // URL for database
 const mongoUser = process.env.MONGO_USER
 const mongoPass = process.env.MONGO_PASS
-console.log(mongoPass)
+
 const mongoUrl = `mongodb://${mongoUser}:${mongoPass}@ds121373.mlab.com:21373/stratmap_dota_dev`
 
 mongoose.Promise = global.Promise;
@@ -102,7 +102,6 @@ app.post('/api/labels', function (req, res) {
   }
   LabelModel
     .find(query)
-    // .find({ match: req.body.match })
     .exec(function (err, label) {
       return res.send(label)
     })

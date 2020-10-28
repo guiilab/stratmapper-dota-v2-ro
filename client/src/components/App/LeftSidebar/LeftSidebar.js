@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import AppTitle from './AppTitle/AppTitle.js'
 import MatchSelect from './MatchSelect/MatchSelect.js';
-import LabelSelect from './LabelSelect/LabelSelect.js';
+// import LabelSelect from './LabelSelect/LabelSelect.js';
 import UnitSelect from './UnitSelect/UnitSelect.js';
 
 class LeftSidebar extends Component {
