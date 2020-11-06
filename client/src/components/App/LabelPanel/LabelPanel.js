@@ -50,7 +50,7 @@ class LabelPanel extends Component {
         {this.state.isOpen ? null : <div style={labelHeaderStyle} className="label-header">Labels</div>}
         <AddLabel isOpen={this.state.isOpen} opacity={opacity} />
         <div style={closeButtonStyle} className="close-button" onClick={() => this.toggleOpen()}>{this.state.isOpen ? 'x' : '+'}</div>
-        {/* <div style={closeButtonStyle} className="close-button" onClick={() => alert('Labeling is disabled in this version of Stratmapper.')}>X</div> */}
+        <div style={closeButtonStyle} className="close-button" onClick={() => alert('Labeling is disabled in this version of Stratmapper.')}>X</div>
       </div >
     )
   }
