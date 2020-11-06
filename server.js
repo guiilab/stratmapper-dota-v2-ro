@@ -37,7 +37,7 @@ app.use(bodyParser.json({
 const mongoUser = process.env.MONGO_USER
 const mongoPass = process.env.MONGO_PASS
 
-const mongoUrl = `mongodb://${mongoUser}:${mongoPass}@ds121373.mlab.com:21373/stratmap_dota_dev`
+const mongoUrl = `mongodb+srv://${mongoUser}:${mongoPass}@production.wj9pq.mongodb.net/stratmap_dota_dev?retryWrites=true&w=majority`
 
 mongoose.Promise = global.Promise;
 mongoose.connect(mongoUrl, {
